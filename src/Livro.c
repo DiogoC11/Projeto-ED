@@ -11,6 +11,11 @@ LIVRO *CriarLivro(int _id, char *_nome, char *_area)
     P->ID = _id;
     return P;
 }
+LIVRO PedirDadosLivro(){
+    printf("\nCriar Livro: ");
+    printf("\nNome do Livro: ")
+    printf("\nArea")
+}
 void MostrarLivro(LIVRO *P)
 {
     printf("\tPESSOA: ID: %d [%s] [%s]\n", P->ID, P->NOME, P->AREA);

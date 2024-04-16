@@ -49,53 +49,53 @@ cmake_ninja_workdir = C$:/Users/admin/Desktop/ED/Exem_Projeto/cmake-build-debug/
 
 build cmake_object_order_depends_target_Exem_Projeto: phony || CMakeFiles/Exem_Projeto.dir
 
-build CMakeFiles/Exem_Projeto.dir/main.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/main.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\main.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/main.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/main.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\main.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
-build CMakeFiles/Exem_Projeto.dir/Biblioteca.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/Biblioteca.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\Biblioteca.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/Biblioteca.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
-build CMakeFiles/Exem_Projeto.dir/Hashing.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/Hashing.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\Hashing.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/Hashing.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/Hashing.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\Hashing.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
-build CMakeFiles/Exem_Projeto.dir/Lista.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/Lista.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\Lista.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/Lista.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/Lista.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\Lista.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
-build CMakeFiles/Exem_Projeto.dir/Livro.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/Livro.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\Livro.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/Livro.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\Livro.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
-build CMakeFiles/Exem_Projeto.dir/Pessoa.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/Pessoa.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\Pessoa.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/Pessoa.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
-build CMakeFiles/Exem_Projeto.dir/Requisicao.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/Requisicao.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\Requisicao.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/Requisicao.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
-build CMakeFiles/Exem_Projeto.dir/Uteis.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/Uteis.c || cmake_object_order_depends_target_Exem_Projeto
-  DEP_FILE = CMakeFiles\Exem_Projeto.dir\Uteis.c.obj.d
+build CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj: C_COMPILER__Exem_Projeto_unscanned_Debug C$:/Users/admin/Desktop/ED/Exem_Projeto/src/Uteis.c || cmake_object_order_depends_target_Exem_Projeto
+  DEP_FILE = CMakeFiles\Exem_Projeto.dir\src\Uteis.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exem_Projeto.dir\src
 
 
 # =============================================================================
@@ -105,7 +105,7 @@ build CMakeFiles/Exem_Projeto.dir/Uteis.c.obj: C_COMPILER__Exem_Projeto_unscanne
 #############################################
 # Link the executable Exem_Projeto.exe
 
-build Exem_Projeto.exe: C_EXECUTABLE_LINKER__Exem_Projeto_Debug CMakeFiles/Exem_Projeto.dir/main.c.obj CMakeFiles/Exem_Projeto.dir/Biblioteca.c.obj CMakeFiles/Exem_Projeto.dir/Hashing.c.obj CMakeFiles/Exem_Projeto.dir/Lista.c.obj CMakeFiles/Exem_Projeto.dir/Livro.c.obj CMakeFiles/Exem_Projeto.dir/Pessoa.c.obj CMakeFiles/Exem_Projeto.dir/Requisicao.c.obj CMakeFiles/Exem_Projeto.dir/Uteis.c.obj
+build Exem_Projeto.exe: C_EXECUTABLE_LINKER__Exem_Projeto_Debug CMakeFiles/Exem_Projeto.dir/src/main.c.obj CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj CMakeFiles/Exem_Projeto.dir/src/Hashing.c.obj CMakeFiles/Exem_Projeto.dir/src/Lista.c.obj CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Exem_Projeto.dir
