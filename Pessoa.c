@@ -11,7 +11,7 @@
  *
  */
 
-//ababa
+
 PESSOA *CriarPessoa(int _id, char *_nome, char *_categoria)
 {
     PESSOA *P = (PESSOA *)malloc(sizeof(PESSOA));
