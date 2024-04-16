@@ -5,6 +5,8 @@
 #include "Hashing.h"
 #include "Biblioteca.h"
 
+//olaaaaaaaaa
+
 extern int LerInteiro(char *txt);
 //-----------------------------------------
 void Exemplo_Hashing()
