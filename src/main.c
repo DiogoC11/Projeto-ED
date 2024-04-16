@@ -5,6 +5,8 @@
 #include "Hashing.h"
 #include "Biblioteca.h"
 
+//olaaaaaaaaa
+
 extern int LerInteiro(char *txt);
 //-----------------------------------------
 void Exemplo_Hashing()
@@ -37,10 +39,10 @@ int Menu()
 
 int main()
 {
-    printf("Projecto-Biblioteca-Versao-Base!\n");
+    /*printf("Projecto-Biblioteca-Versao-Base!\n");
     //Exemplo_Hashing();
     BIBLIOTECA *Bib;
-    Bib = CriarBiblioteca("Biblioteca-ESTGV", "log.txt");
+    Bib = CriarBiblioteca("Biblioteca-ESTGV", "../data/log.txt");
     int OP;
     do
     {
@@ -56,4 +58,6 @@ int main()
     }while (OP != 0);
     DestruirBiblioteca(Bib);
     return EXIT_SUCCESS; // ou EXIT_FAILURE
+     */
+
 }
