@@ -1,0 +1,12 @@
+Entrei em LoadFicheiroBiblioteca na data Thu Apr 11 14:16:33 2024
+
+Entrei em ShowBiblioteca na data Thu Apr 11 14:16:34 2024
+
+Entrei em DestruirBiblioteca na data Thu Apr 11 14:16:35 2024
+
+Entrei em LoadFicheiroBiblioteca na data Thu Apr 11 14:16:45 2024
+
+Entrei em ShowBiblioteca na data Thu Apr 11 14:16:45 2024
+
+Entrei em DestruirBiblioteca na data Thu Apr 11 14:16:46 2024
+

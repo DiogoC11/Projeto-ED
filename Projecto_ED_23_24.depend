@@ -1,0 +1,68 @@
+# depslib dependency file v1.0
+1712825557 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\lista.c
+	"Lista.h"
+
+1712825508 c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\lista.h
+	<stdio.h>
+	<stdlib.h>
+	"Pessoa.h"
+
+1712767571 c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\pessoa.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1712837605 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Lista.h"
+	"Hashing.h"
+	"Biblioteca.h"
+
+1712824956 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\pessoa.c
+	"Pessoa.h"
+
+1708605683 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\uteis.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+
+1712767477 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\hashing.c
+	"Hashing.h"
+
+1712767899 c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\hashing.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Lista.h"
+
+1712841368 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\biblioteca.c
+	"Biblioteca.h"
+
+1712830252 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\livro.c
+	"Livro.h"
+
+1712830714 c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\livro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1712840923 c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\biblioteca.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Livro.h"
+	"Lista.h"
+	"Hashing.h"
+
+1712837605 source:c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\requisicao.c
+	"Requisicao.h"
+
+1712837605 c:\users\fmorgado\onedrive\ambiente de trabalho\projecto_ed_23_24\requisicao.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Pessoa.h"
+	"Livro.h"
+
