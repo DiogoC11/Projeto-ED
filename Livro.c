@@ -21,12 +21,36 @@ void DestruirLivro(LIVRO *P)
     free (P->AREA);
     free (P);
 }
-void ListarLivros(LIVRO *P, int numLivros)
-{
+ListaLivro *criarLista(){
+    ListaLivro *L = (ListaLivro *) malloc(sizeof (ListaLivro));
+    if (!L) return NULL;
+    L->num_Livros = 0;
+    L->Inicio = NULL;
+    return L;
+}
+
+Elemento *criar_elemento(LIVRO *L){
+    Elemento *e = (Elemento * ) malloc(sizeof (Elemento));
+    if(!e) return NULL;
+    e->livro = L;
+    e->proximo = NULL;
+    return e;
+}
+
+void *AdicionarLivro(ListaLivro *L,Elemento *E){
+    if(!L) return NULL;
+    if(!E) return NULL;
+    E->proximo = L->Inicio;
+    L->Inicio = E;
+    L->num_Livros++;
+}
+
+void ListarLivros(ListaLivro *L){
     printf("Lista de Livros:\n");
-    for (int i = 0; i < numLivros; i++)
-    {
+    Elemento *E = L->Inicio;
+    for (int i = 0; i < L->num_Livros; i++){
         printf("Livro %d:\n", i + 1);
-        MostrarLivro(&P[i]);
+        MostrarLivro(E->livro);
+        E = E->proximo;
     }
 }
