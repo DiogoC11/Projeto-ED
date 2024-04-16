@@ -21,3 +21,12 @@ void DestruirLivro(LIVRO *P)
     free (P->AREA);
     free (P);
 }
+void ListarLivros(LIVRO *P, int numLivros)
+{
+    printf("Lista de Livros:\n");
+    for (int i = 0; i < numLivros; i++)
+    {
+        printf("Livro %d:\n", i + 1);
+        MostrarLivro(&P[i]);
+    }
+}

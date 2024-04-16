@@ -16,9 +16,13 @@ typedef struct
 LIVRO *CriarLivro(int _id, char *_nome, char *_area);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
+void ListarLivros(LIVRO *P, int numLivros);
 //listar livros;
 //pesquisar por isbn;
 //livro mais recente;
+
+
+
 //livro mais requisitado;
 //area mais requisitada;
 //area com mais livros;
