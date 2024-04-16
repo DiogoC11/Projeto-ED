@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Biblioteca.h"
 
 
 typedef struct
 {
     char *NOME;
+    char ISBN;
     int ID;
     char *AREA;
 }LIVRO;
@@ -30,7 +30,9 @@ void DestruirLivro(LIVRO *P);
 ListaLivro *criarLista();
 Elemento *criar_elemento(LIVRO *L);
 void *AdicionarLivro(ListaLivro *L,Elemento *E);
-void ListarLivros(ListaLivro *L)
+void ListarLivros(ListaLivro *L);
+LIVRO *PesquisarLivroPorISBN(LIVRO *P, int numLivros, char *isbn);
+//listar livros;
 //pesquisar por isbn;
 //livro mais recente;
 

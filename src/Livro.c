@@ -54,3 +54,11 @@ void ListarLivros(ListaLivro *L){
         E = E->proximo;
     }
 }
+LIVRO *PesquisarLivroPorISBN(LIVRO *P, int numLivros, char *isbn) {
+    for (int i = 0; i < numLivros; i++) {
+        if (strcmp(&P[i].ISBN, isbn) == 0) {
+            return &P[i];
+        }
+    }
+    return NULL;
+}

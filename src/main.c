@@ -40,7 +40,7 @@ int main()
     printf("Projecto-Biblioteca-Versao-Base!\n");
     //Exemplo_Hashing();
     BIBLIOTECA *Bib;
-    Bib = CriarBiblioteca("Biblioteca-ESTGV", "log.txt");
+    Bib = CriarBiblioteca("Biblioteca-ESTGV", "../data/log.txt");
     int OP;
     do
     {
