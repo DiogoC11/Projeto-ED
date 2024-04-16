@@ -9,6 +9,7 @@
 typedef struct
 {
     char *NOME;
+    char ISBN;
     int ID;
     char *AREA;
 }LIVRO;
@@ -17,6 +18,7 @@ LIVRO *CriarLivro(int _id, char *_nome, char *_area);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 void ListarLivros(LIVRO *P, int numLivros);
+LIVRO *PesquisarLivroPorISBN(LIVRO *P, int numLivros, char *isbn);
 //listar livros;
 //pesquisar por isbn;
 //livro mais recente;
