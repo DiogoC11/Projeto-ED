@@ -12,6 +12,7 @@ typedef struct
     char ISBN;
     int ID;
     char *AREA;
+    int anoPublicacao;
 }LIVRO;
 
 typedef struct elemento{
@@ -24,7 +25,7 @@ typedef struct{
     Elemento *Inicio;
 }ListaLivro, *ptLista;
 
-LIVRO *CriarLivro(int _id, char *_nome, char *_area);
+LIVRO *CriarLivro(int _id, char *_nome, char *_area, int _anoPublicacao);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 ListaLivro *criarLista();
@@ -32,6 +33,9 @@ Elemento *criar_elemento(LIVRO *L);
 void *AdicionarLivro(ListaLivro *L,Elemento *E);
 void ListarLivros(ListaLivro *L);
 LIVRO *PesquisarLivroPorISBN(LIVRO *P, int numLivros, char *isbn);
+LIVRO *LivroMaisRecente(ListaLivro *L);
+//---------------------------------------------------------------------------------------
+
 //listar livros;
 //pesquisar por isbn;
 //livro mais recente;
