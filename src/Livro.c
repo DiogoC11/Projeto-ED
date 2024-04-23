@@ -83,3 +83,4 @@ LIVRO *LivroMaisRecente(ListaLivro *L) {
     }
     return maisRecente;
 }
+.
