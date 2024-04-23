@@ -34,6 +34,11 @@ REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisico
     return NULL; //se nao encontrar nng com o nome especifico vai retornar NULL
 }
 
+
+//  Determinar a idade máxima de todos os requisitantes;
+
+
+
 void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRequisicoes, int tamanhoLista) {
     printf("Requisicões do requisitante %s:\n", requisitante->NOME);
     for (int i = 0; i < tamanhoLista; i++) {
