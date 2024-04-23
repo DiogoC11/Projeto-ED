@@ -1,5 +1,6 @@
 
 
+#include <stdbool.h>
 #include "Requisicao.h"
 
 
@@ -44,6 +45,38 @@ void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRe
     for (int i = 0; i < tamanhoLista; i++) {
         if (listaRequisicoes[i]->Ptr_Req == requisitante) {
             MostrarRequisicao(listaRequisicoes[i]);
+        }
+    }
+}
+
+
+bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
+    for (int i = 0; i < tamanhoListaRequisicoes; i++) {
+        if (listaRequisicoes[i]->Ptr_Req == pessoa) {
+            return true; // se essa pessoa tiver alguma requisição retorna true
+        }
+    }
+    return false; // senao retorna false
+}
+
+// Listar pessoas SEM requisição
+void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
+    printf("Pessoas sem nenhuma requisicao:\n");
+
+    for (int i = 0; i < tamanhoListaPessoas; i++) {
+        if (!PessoaTemRequisicao(listaPessoas[i], listaRequisicoes, tamanhoListaRequisicoes)) {
+            MostrarPessoa(listaPessoas[i]);
+        }
+    }
+}
+
+//Listar pessoas COM requisições
+void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
+    printf("Pessoas com alguma requisicao:\n");
+
+    for (int i = 0; i < tamanhoListaPessoas; i++) {
+        if (PessoaTemRequisicao(listaPessoas[i], listaRequisicoes, tamanhoListaRequisicoes)) {
+            MostrarPessoa(listaPessoas[i]);
         }
     }
 }
