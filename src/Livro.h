@@ -26,14 +26,14 @@ typedef struct{
 }ListaLivro, *ptLista;
 
 LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
-LIVRO *PedirDadosLivro();
+LIVRO *PedirDadosLivro(ListaLivro *L);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 ListaLivro *criarLista();
 Elemento *criar_elemento(LIVRO *L);
 void *AdicionarLivro(ListaLivro *L,Elemento *E);
 void ListarLivros(ListaLivro *L);
-LIVRO *PesquisarLivroPorISBN(LIVRO *P, int numLivros, char *isbn);
+LIVRO *PesquisarLivroPorISBN(ListaLivro *L, char *isbn);
 LIVRO *LivroMaisRecente(ListaLivro *L);
 //---------------------------------------------------------------------------------------
 
