@@ -28,7 +28,7 @@ extern int LerInteiro(char *txt);
 }*/
 int Menu()
 {
-    printf("1- Adicionar Livro\n");
+    printf("\n1- Adicionar Livro\n");
     printf("2- Listar Livros\n");
     printf("3- Pesquisar Livro por ISBN\n");
     printf("4- Encontrar Livro Mais Recente\n");
@@ -56,17 +56,17 @@ int main()
                 Elemento *novoElemento = criar_elemento(novoLivro);
                 MostrarLivro(novoLivro);
                 AdicionarLivro(listaLivros,novoElemento);
-            }
                 break;
+            }
             case 2: {
                 ListarLivros(listaLivros);
                 break;
             }
             case 3: {
-                char ISBN [20];
-                printf("Digite o ISBN do livro a pesquisar: ");
+                char ISBN [50];
+                printf("\nDigite o ISBN do livro a pesquisar: ");
                 scanf("%19s", ISBN);
-                LIVRO *livroEncontrado = PesquisarLivroPorISBN((LIVRO *) listaLivros->Inicio, listaLivros->num_Livros, ISBN);
+                LIVRO *livroEncontrado = PesquisarLivroPorISBN(listaLivros,ISBN);
                 if (livroEncontrado != NULL) {
                     MostrarLivro(livroEncontrado);
                 } else {
@@ -93,6 +93,7 @@ int main()
         }
 
     } while (OP != 0);
+    printf("\nA sair da biblioteca...");
     // Liberar memória alocada para a lista de livros
     Elemento *e = listaLivros->Inicio;
     while (e != NULL) {

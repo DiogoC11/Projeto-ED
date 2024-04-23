@@ -33,7 +33,7 @@ ListaLivro *criarLista();
 Elemento *criar_elemento(LIVRO *L);
 void *AdicionarLivro(ListaLivro *L,Elemento *E);
 void ListarLivros(ListaLivro *L);
-LIVRO *PesquisarLivroPorISBN(LIVRO *P, int numLivros, char *isbn);
+LIVRO *PesquisarLivroPorISBN(ListaLivro *L, char *isbn);
 LIVRO *LivroMaisRecente(ListaLivro *L);
 //---------------------------------------------------------------------------------------
 

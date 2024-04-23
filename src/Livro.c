@@ -16,24 +16,35 @@ LIVRO *CriarLivro( char *_ISBN, char *_nome, char *_area, int _anoPublicacao, ch
     return P;
 }
 LIVRO *PedirDadosLivro(){
-    char nome[50],area[50],ISBN[50],autor[50];
+    char nome[50], area[50], ISBN[50], autor[50], temp[100];
     int anoPublicacao;
+    fflush(stdin);
     printf("\nCriar Livro: ");
     printf("\nTitulo do Livro: ");
-    scanf("%s",nome);
+    fgets(temp, sizeof(temp), stdin);
+    sscanf(temp, "%[^\n]", nome);
+
     printf("\nArea do Livro: ");
-    scanf("%s",area);
+    fgets(temp, sizeof(temp), stdin);
+    sscanf(temp, "%[^\n]", area);
+
     printf("\nAno de Publicacao: ");
-    scanf("%d",&anoPublicacao);
+    fgets(temp, sizeof(temp), stdin);
+    sscanf(temp, "%d", &anoPublicacao);
+
     printf("\nISBN: ");
-    scanf("%s",ISBN);
+    fgets(temp, sizeof(temp), stdin);
+    sscanf(temp, "%49[^\n]", ISBN);
+
     printf("\nAutor do Livro: ");
-    scanf("%s",autor);
-    return CriarLivro(ISBN,nome,area,anoPublicacao,autor);
+    fgets(temp, sizeof(temp), stdin);
+    sscanf(temp, "%49[^\n]", autor);
+
+    return CriarLivro(ISBN, nome, area, anoPublicacao, autor);
 }
 void MostrarLivro(LIVRO *P)
 {
-    printf("\nLivro: \nISBN: %s\nTitulo: %s \nArea: %s \nAutor: %s \nAno de Publicacao: %d\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao);
+    printf("\nLivro: \nISBN: %s\nTitulo: %s \nArea: %s \nAutor: %s \nAno de Publicacao: %d\n\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao);
 }
 void DestruirLivro(LIVRO *P)
 {
@@ -72,11 +83,11 @@ void *AdicionarLivro(ListaLivro *L,Elemento *E){
         ultimo->proximo = E;
     }
     L->num_Livros ++;
-    printf("Livro adicionado a biblioteca.");
+    printf("\nLivro adicionado a biblioteca.");
 }
 
 void ListarLivros(ListaLivro *L){
-    printf("Lista de Livros:\n");
+    printf("\nLista de Livros:\n");
     Elemento *E = L->Inicio;
     for (int i = 0; i < L->num_Livros; i++){
         printf("Livro %d:\n", i + 1);
@@ -84,11 +95,13 @@ void ListarLivros(ListaLivro *L){
         E = E->proximo;
     }
 }
-LIVRO *PesquisarLivroPorISBN(LIVRO *P, int numLivros, char *isbn) {
-    for (int i = 0; i < numLivros; i++) {
-        if (strcmp(&P[i].ISBN, isbn) == 0) {
-            return &P[i];
+LIVRO *PesquisarLivroPorISBN(ListaLivro *L, char *isbn) {
+    Elemento *E = L->Inicio;
+    for (int i = 0; i < L->num_Livros; i++) {
+        if(strcmp(E->livro->ISBN,isbn) == 0){
+            return E->livro;
         }
+        E = E->proximo;
     }
     return NULL;
 }
