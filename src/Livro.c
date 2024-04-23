@@ -15,11 +15,22 @@ LIVRO *CriarLivro( char *_ISBN, char *_nome, char *_area, int _anoPublicacao, ch
     strcpy(P->Autor,_autor);
     return P;
 }
-LIVRO *PedirDadosLivro(){
+LIVRO *PedirDadosLivro(ListaLivro *L){
     char nome[50], area[50], ISBN[50], autor[50], temp[100];
     int anoPublicacao;
     fflush(stdin);
     printf("\nCriar Livro: ");
+
+    do {
+        printf("\nISBN: ");
+        fgets(temp, sizeof(temp), stdin);
+        sscanf(temp, "%49[^\n]", ISBN);
+
+        if (PesquisarLivroPorISBN(L, ISBN) != NULL) {
+            printf("\nErro: O ISBN inserido já existe.\n");
+        }
+    }while(PesquisarLivroPorISBN(L,ISBN) != NULL);
+
     printf("\nTitulo do Livro: ");
     fgets(temp, sizeof(temp), stdin);
     sscanf(temp, "%[^\n]", nome);
@@ -31,10 +42,6 @@ LIVRO *PedirDadosLivro(){
     printf("\nAno de Publicacao: ");
     fgets(temp, sizeof(temp), stdin);
     sscanf(temp, "%d", &anoPublicacao);
-
-    printf("\nISBN: ");
-    fgets(temp, sizeof(temp), stdin);
-    sscanf(temp, "%49[^\n]", ISBN);
 
     printf("\nAutor do Livro: ");
     fgets(temp, sizeof(temp), stdin);
@@ -83,7 +90,7 @@ void *AdicionarLivro(ListaLivro *L,Elemento *E){
         ultimo->proximo = E;
     }
     L->num_Livros ++;
-    printf("\nLivro adicionado a biblioteca.");
+    printf("\nLivro adicionado a biblioteca.\n");
 }
 
 void ListarLivros(ListaLivro *L){

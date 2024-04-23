@@ -62,7 +62,7 @@ int main() {
                     switch(opLivro) {
                         case 1: {
                             // Adicionar Livro
-                            LIVRO *novoLivro = PedirDadosLivro();
+                            LIVRO *novoLivro = PedirDadosLivro(listaLivros);
                             Elemento *novoElemento = criar_elemento(novoLivro);
                             AdicionarLivro(listaLivros, novoElemento);
                             break;

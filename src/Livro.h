@@ -26,7 +26,7 @@ typedef struct{
 }ListaLivro, *ptLista;
 
 LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
-LIVRO *PedirDadosLivro();
+LIVRO *PedirDadosLivro(ListaLivro *L);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 ListaLivro *criarLista();
