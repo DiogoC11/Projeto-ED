@@ -32,6 +32,7 @@ int Menu()
     printf("2- Listar Livros\n");
     printf("3- Pesquisar Livro por ISBN\n");
     printf("4- Encontrar Livro Mais Recente\n");
+    printf("5- Destruir Livro\n");
     printf("0- Sair\n");
     int op;
     op = LerInteiro("Qual a opcao? ");
@@ -40,6 +41,7 @@ int Menu()
 
 int main()
 {
+
     printf("Projecto-Biblioteca-Versao-Base!\n");
     //Exemplo_Hashing();
     ListaLivro *listaLivros = criarLista(); // Criar a lista de livros
@@ -49,8 +51,12 @@ int main()
         OP = Menu();
         switch(OP)
         {
-            case 1:
-                MostrarLivro(PedirDadosLivro());
+            case 1: {
+                LIVRO *novoLivro = PedirDadosLivro();
+                Elemento *novoElemento = criar_elemento(novoLivro);
+                MostrarLivro(novoLivro);
+                AdicionarLivro(listaLivros,novoElemento);
+            }
                 break;
             case 2: {
                 ListarLivros(listaLivros);
@@ -77,6 +83,9 @@ int main()
                     printf("Nenhum livro disponível.\n");
                 }
                 break;
+            }
+            case 5:{
+
             }
             default:
                 printf("Opção não implementada\n");

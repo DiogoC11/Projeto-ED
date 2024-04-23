@@ -23,7 +23,7 @@ LIVRO *PedirDadosLivro(){
     scanf("%s",nome);
     printf("\nArea do Livro: ");
     scanf("%s",area);
-    printf("\nAno de Publicação: ");
+    printf("\nAno de Publicacao: ");
     scanf("%d",&anoPublicacao);
     printf("\nISBN: ");
     scanf("%s",ISBN);
@@ -33,7 +33,7 @@ LIVRO *PedirDadosLivro(){
 }
 void MostrarLivro(LIVRO *P)
 {
-    printf("\tLivro: \nISBN: %s\nTitulo: %s \nArea: %s \nAutor: %s \nAno de Publicacao: %d\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao);
+    printf("\nLivro: \nISBN: %s\nTitulo: %s \nArea: %s \nAutor: %s \nAno de Publicacao: %d\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao);
 }
 void DestruirLivro(LIVRO *P)
 {
@@ -62,9 +62,17 @@ Elemento *criar_elemento(LIVRO *L){
 void *AdicionarLivro(ListaLivro *L,Elemento *E){
     if(!L) return NULL;
     if(!E) return NULL;
-    E->proximo = L->Inicio;
-    L->Inicio = E;
-    L->num_Livros++;
+    if(L->num_Livros == 0){
+        L->Inicio = E;
+    }else {
+        Elemento *ultimo = L->Inicio;
+        while (ultimo->proximo != NULL) {
+            ultimo = ultimo->proximo;
+        }
+        ultimo->proximo = E;
+    }
+    L->num_Livros ++;
+    printf("Livro adicionado a biblioteca.");
 }
 
 void ListarLivros(ListaLivro *L){
