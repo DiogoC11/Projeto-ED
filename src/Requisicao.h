@@ -27,7 +27,7 @@ REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisico
 //numero de pessoas cuja a idade superior a x
 //idade com mais requisitantes
 void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRequisicoes, int tamanhoLista); //lista requisiçoes de um requisitante
-void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas sem requisiçao
+void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas sem requisições
 void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas com requisiçao
 //sobrenome mais usado nas requisiçoes
 //numero de pessoas do distrito x, com o nome/apelido y
