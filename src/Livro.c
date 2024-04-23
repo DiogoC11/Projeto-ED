@@ -10,9 +10,9 @@ LIVRO *CriarLivro( char *_ISBN, char *_nome, char *_area, int _anoPublicacao, ch
     strcpy(P->AREA, _area);
     P->anoPublicacao = _anoPublicacao;
     P->ISBN = (char *) malloc(strlen(_ISBN + 1)*sizeof(char));
-    P->ISBN = _ISBN;
+    strcpy(P->ISBN,_ISBN);
     P->Autor = (char *) malloc(strlen(_autor + 1)*sizeof(char));
-    P->Autor = _autor;
+    strcpy(P->Autor,_autor);
     return P;
 }
 LIVRO *PedirDadosLivro(){
@@ -24,7 +24,7 @@ LIVRO *PedirDadosLivro(){
     printf("\nArea do Livro: ");
     scanf("%s",area);
     printf("\nAno de Publicação: ");
-    scanf("%d",anoPublicacao);
+    scanf("%d",&anoPublicacao);
     printf("\nISBN: ");
     scanf("%s",ISBN);
     printf("\nAutor do Livro: ");
@@ -33,12 +33,14 @@ LIVRO *PedirDadosLivro(){
 }
 void MostrarLivro(LIVRO *P)
 {
-    printf("\tLivro: \nISBN: [%s] \nTitulo: [%s] \nArea: [%s] \nAutor: [%s] \nAno de Publicacao: [%d]\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao);
+    printf("\tLivro: \nISBN: %s\nTitulo: %s \nArea: %s \nAutor: %s \nAno de Publicacao: %d\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao);
 }
 void DestruirLivro(LIVRO *P)
 {
     free (P->NOME);
     free (P->AREA);
+    free(P->ISBN);
+    free(P->Autor);
     free (P);
 }
 ListaLivro *criarLista(){
