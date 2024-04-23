@@ -25,7 +25,7 @@ typedef struct{
     Elemento *Inicio;
 }ListaLivro, *ptLista;
 
-LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao);
+LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
 LIVRO *PedirDadosLivro();
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
