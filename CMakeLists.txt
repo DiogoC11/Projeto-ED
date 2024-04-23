@@ -3,7 +3,7 @@ project(Exem_Projeto C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Exem_Projeto src/main.c
+add_executable(Exem_Projeto main.c
         src/Biblioteca.c
         src/Hashing.c
         src/Lista.c

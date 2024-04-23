@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Lista.h"
-#include "Hashing.h"
-#include "Biblioteca.h"
+#include "src/Lista.h"
+#include "src/Hashing.h"
+#include "src/Biblioteca.h"
 
 //olaaaaaaaaa
 
@@ -39,6 +39,7 @@ int Menu()
 
 int main()
 {
+    printf("Está a executar sem erros!");
     /*printf("Projecto-Biblioteca-Versao-Base!\n");
     //Exemplo_Hashing();
     BIBLIOTECA *Bib;
