@@ -84,9 +84,8 @@ void DestruirPessoa(PESSOA *P)
     free (P);
 }
 
-int GerarID(ListaPessoa *L, ElementoP *E) {
-    /*
-     static int baseID = 000000000;  // Começa com um número de 9 dígitos.
+int GerarID() {
+    static int baseID = 100000000;  // Começa com um número de 9 dígitos.
     int sum = 0, id = baseID;
     int tempID = id;
 

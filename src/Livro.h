@@ -26,6 +26,13 @@ typedef struct{
     ElementoL *Inicio;
 }ListaLivro, *ptListaL;
 
+// Hashing
+typedef struct NO_CHAVE { // Inicial do livro
+    char *KEY; // 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
+    ListaLivro *DADOS;
+    struct NO_CHAVE *Prox; // 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
+} NO_CHAVE;
+
 LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
 LIVRO *PedirDadosLivro(ListaLivro *L);
 void MostrarLivro(LIVRO *P);

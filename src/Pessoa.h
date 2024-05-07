@@ -5,12 +5,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct{
+    int dia;
+    int mes;
+    int ano;
+}DATANASC;
 
 typedef struct
 {
     char *NOME;
     int ID;
-    char *dataNascimento;
+    DATANASC *dataNascimento;
 }PESSOA;
 
 typedef struct elemento{
@@ -22,6 +27,13 @@ typedef struct{
     int num_Pessoas;
     ElementoP *Inicio;
 }ListaPessoa, *ptListaP;
+
+// Hashing
+typedef struct NO_CHAVE { // Inicial da pessoa
+    char *KEY; // 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
+    ListaPessoa *DADOS;
+    struct NO_CHAVE *Prox; // 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
+} NO_CHAVE;
 
 PESSOA *CriarPessoa(char *_nome, char *dataNascimento);
 PESSOA *PedirDadosPessoa();
