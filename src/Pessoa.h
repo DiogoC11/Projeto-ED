@@ -10,10 +10,24 @@ typedef struct
 {
     char *NOME;
     int ID;
-    char *CATEGORIA;
+    char *dataNascimento;
 }PESSOA;
 
-PESSOA *CriarPessoa(int _id, char *_nome, char *_categoria);
+typedef struct elemento{
+    PESSOA *pessoa;
+    struct elemento *proximo;
+}ElementoP, *ptElementoP;
+
+typedef struct{
+    int num_Pessoas;
+    ElementoP *Inicio;
+}ListaPessoa, *ptListaP;
+
+PESSOA *CriarPessoa(char *_nome, char *dataNascimento);
+PESSOA *PedirDadosPessoa();
+ListaPessoa *criarListaP();
+ElementoP *criar_elementoP(PESSOA *L);
+void *AdicionarPessoa(ListaPessoa *L,ElementoP *E);
 void MostrarPessoa(PESSOA *P);
 void DestruirPessoa(PESSOA *P);
 int GerarID();

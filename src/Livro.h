@@ -13,34 +13,30 @@ typedef struct
     char *AREA;
     int anoPublicacao;
     char *Autor;
+    int Disponivel;
 }LIVRO;
 
 typedef struct elemento{
     LIVRO *livro;
     struct elemento *proximo;
-}Elemento, *ptElemento;
+}ElementoL, *ptElementoL;
 
 typedef struct{
     int num_Livros;
-    Elemento *Inicio;
-}ListaLivro, *ptLista;
+    ElementoL *Inicio;
+}ListaLivro, *ptListaL;
 
 LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
 LIVRO *PedirDadosLivro(ListaLivro *L);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
-ListaLivro *criarLista();
-Elemento *criar_elemento(LIVRO *L);
-void *AdicionarLivro(ListaLivro *L,Elemento *E);
+ListaLivro *criarListaL();
+ElementoL *criar_elementoL(LIVRO *L);
+void *AdicionarLivro(ListaLivro *L,ElementoL *E);
 void ListarLivros(ListaLivro *L);
 LIVRO *PesquisarLivroPorISBN(ListaLivro *L, char *isbn);
 LIVRO *LivroMaisRecente(ListaLivro *L);
 //---------------------------------------------------------------------------------------
-
-//listar livros;
-//pesquisar por isbn;
-//livro mais recente;
-
 
 
 //livro mais requisitado;

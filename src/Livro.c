@@ -13,6 +13,7 @@ LIVRO *CriarLivro( char *_ISBN, char *_nome, char *_area, int _anoPublicacao, ch
     strcpy(P->ISBN,_ISBN);
     P->Autor = (char *) malloc(strlen(_autor + 1)*sizeof(char));
     strcpy(P->Autor,_autor);
+    P->Disponivel = 0;
     return P;
 }
 LIVRO *PedirDadosLivro(ListaLivro *L){
@@ -51,7 +52,13 @@ LIVRO *PedirDadosLivro(ListaLivro *L){
 }
 void MostrarLivro(LIVRO *P)
 {
-    printf("\nLivro: \nISBN: %s\nTitulo: %s \nArea: %s \nAutor: %s \nAno de Publicacao: %d\n\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao);
+    char disponivel[4];
+    if(P->Disponivel ){
+        strcpy(disponivel,"NAO");
+    }else{
+        strcpy(disponivel,"SIM");
+    }
+    printf("\nLivro: \nISBN: %s\nTitulo: %s \nArea: %s \nAutor: %s \nAno de Publicacao: %d\nDisponivel? %s\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel);
 }
 void DestruirLivro(LIVRO *P)
 {
@@ -61,7 +68,7 @@ void DestruirLivro(LIVRO *P)
     free(P->Autor);
     free (P);
 }
-ListaLivro *criarLista(){
+ListaLivro *criarListaL(){
     ListaLivro *L = (ListaLivro *) malloc(sizeof (ListaLivro));
     if (!L) return NULL;
     L->num_Livros = 0;
@@ -69,21 +76,21 @@ ListaLivro *criarLista(){
     return L;
 }
 
-Elemento *criar_elemento(LIVRO *L){
-    Elemento *e = (Elemento * ) malloc(sizeof (Elemento));
+ElementoL *criar_elementoL(LIVRO *L){
+    ElementoL *e = (ElementoL * ) malloc(sizeof (ElementoL));
     if(!e) return NULL;
     e->livro = L;
     e->proximo = NULL;
     return e;
 }
 
-void *AdicionarLivro(ListaLivro *L,Elemento *E){
+void *AdicionarLivro(ListaLivro *L,ElementoL *E){
     if(!L) return NULL;
     if(!E) return NULL;
     if(L->num_Livros == 0){
         L->Inicio = E;
     }else {
-        Elemento *ultimo = L->Inicio;
+        ElementoL *ultimo = L->Inicio;
         while (ultimo->proximo != NULL) {
             ultimo = ultimo->proximo;
         }
@@ -95,7 +102,7 @@ void *AdicionarLivro(ListaLivro *L,Elemento *E){
 
 void ListarLivros(ListaLivro *L){
     printf("\nLista de Livros:\n");
-    Elemento *E = L->Inicio;
+    ElementoL *E = L->Inicio;
     for (int i = 0; i < L->num_Livros; i++){
         printf("Livro %d:\n", i + 1);
         MostrarLivro(E->livro);
@@ -103,7 +110,7 @@ void ListarLivros(ListaLivro *L){
     }
 }
 LIVRO *PesquisarLivroPorISBN(ListaLivro *L, char *isbn) {
-    Elemento *E = L->Inicio;
+    ElementoL *E = L->Inicio;
     for (int i = 0; i < L->num_Livros; i++) {
         if(strcmp(E->livro->ISBN,isbn) == 0){
             return E->livro;
@@ -116,7 +123,7 @@ LIVRO *LivroMaisRecente(ListaLivro *L) {
     if (L->num_Livros == 0) {
         return NULL;
     }
-    Elemento *E = L->Inicio;
+    ElementoL *E = L->Inicio;
     LIVRO *maisRecente = E->livro;
     E = E->proximo;
     while (E != NULL) {

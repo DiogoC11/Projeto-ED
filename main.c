@@ -59,7 +59,8 @@ int MenuGeral() {
 
 int main() {
     printf("Projeto-Biblioteca-Versao-Base!\n");
-    ListaLivro *listaLivros = criarLista();
+    ListaLivro *listaLivros = criarListaL();
+    ListaPessoa *listaPessoa = criarListaP();
     int OP;
     do {
         OP = MenuGeral();
@@ -73,7 +74,8 @@ int main() {
                         case 1: {
                             // Adicionar Livro
                             LIVRO *novoLivro = PedirDadosLivro(listaLivros);
-                            Elemento *novoElemento = criar_elemento(novoLivro);
+                            MostrarLivro(novoLivro);
+                            ElementoL *novoElemento = criar_elementoL(novoLivro);
                             AdicionarLivro(listaLivros, novoElemento);
                             break;
                         }
@@ -107,18 +109,17 @@ int main() {
                             break;
                         }
                         case 5: {
-                            // Destruir Livro
+                            //Destruir Livro
                             char ISBN[50];
                             printf("Digite o ISBN do livro a destruir: ");
                             scanf("%49s", ISBN);
-                            LIVRO *livroEncontrado = PesquisarLivroPorISBN(listaLivros, ISBN);
-                            if (livroEncontrado != NULL) {
-                                DestruirLivro(livroEncontrado);
-                                printf("Livro com ISBN %s destruído.\n", ISBN);
+                            LIVRO *livroDestruir = PesquisarLivroPorISBN(listaLivros, ISBN);
+                            if (livroDestruir != NULL) {
+                                livroDestruir->Disponivel = 1;
+                                printf("O livro de ISBN %s nao está mais disponivel.",ISBN);
                             } else {
-                                printf("Livro com ISBN %s não encontrado.\n", ISBN);
+                                printf("Nenhum livro disponível.\n");
                             }
-                            // Implemente conforme necessário
                             break;
                         }
                         case 0:
@@ -137,20 +138,10 @@ int main() {
                     opPessoa=MenuPessoa();
                     switch (opPessoa) {
                         case 1: {
-                            // Criar Pessoa
-                            char nome[100];
-                            char categoria[100];
-                            printf("Digite o nome da pessoa: ");
-                            scanf("%s", nome);
-                            printf("Digite a data de nascimento da pessoa: ");
-                            scanf("%s", categoria);
-                            PESSOA *novaPessoa = CriarPessoa(0, nome, categoria);
-                            if (novaPessoa != NULL) {
-                                printf("Pessoa criada com sucesso!\n");
-                                // Implemente o que deseja fazer com a pessoa criada aqui, como mostrá-la ou adicioná-la a uma lista de pessoas.
-                            } else {
-                                printf("Erro ao criar pessoa.\n");
-                            }
+                            PESSOA *novaPessoa = PedirDadosPessoa();
+                            MostrarPessoa(novaPessoa);
+                            ElementoP *novoElemento = criar_elementoP(novaPessoa);
+                            AdicionarPessoa(listaPessoa, novoElemento);
                             break;
                         }
                         case 2: {
@@ -168,7 +159,6 @@ int main() {
                 } while (opPessoa != 0);
                 break;
             }
-
             case 0:
                 printf("Saindo...\n");
                 break;
@@ -179,9 +169,9 @@ int main() {
     } while (OP != 0);
     printf("\nA sair da biblioteca...");
     // Liberar memória alocada para a lista de livros
-    Elemento *e = listaLivros->Inicio;
+    ElementoL *e = listaLivros->Inicio;
     while (e != NULL) {
-        Elemento *prox = e->proximo;
+        ElementoL *prox = e->proximo;
         DestruirLivro(e->livro);
         free(e);
         e = prox;
