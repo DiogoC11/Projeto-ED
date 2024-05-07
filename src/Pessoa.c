@@ -64,17 +64,6 @@ ElementoP *criar_elementoP(PESSOA *P){
     return e;
 }
 
-void *AdicionarPessoaInicio(ListaPessoa *L,ElementoP *E){
-    if(!L) return NULL;
-    if(!E) return NULL;
-    if(L->num_Pessoas == 0){
-        L->Inicio = E;
-    }else{
-        return NULL;
-    }
-    L->num_Pessoas ++;
-}
-
 void *AdicionarPessoa(ListaPessoa *L,ElementoP *E){
     if(!L) return NULL;
     if(!E) return NULL;
@@ -103,21 +92,31 @@ void *PesquisarPesssoaPorNome(ListaPessoa *L, char *nome) {
     return NULL;
 }
 
-int compararPessoas(const void *a, const void *b) {
+int compararUltimoNome(const void *a, const void *b) {
     PESSOA *pessoaA = (*(ElementoP **)a)->pessoa;
     PESSOA *pessoaB = (*(ElementoP **)b)->pessoa;
     return strcmp(pessoaA->UltimoNome, pessoaB->UltimoNome);
 }
 
-void *OrganizarPorApelido(ListaPessoa *L){
+int compararPrimeiroNome(const void *a, const void *b) {
+    PESSOA *pessoaA = (*(ElementoP **)a)->pessoa;
+    PESSOA *pessoaB = (*(ElementoP **)b)->pessoa;
+    return strcmp(pessoaA->PrimeiroNome, pessoaB->PrimeiroNome);
+}
+
+void *OrganizarPorNome(ListaPessoa *L, int op){
     ElementoP **arrayElementos = malloc(L->num_Pessoas * sizeof(ElementoP *));
     if (arrayElementos == NULL) {
         perror("Erro ao alocar memória para o array de elementos");
         exit(EXIT_FAILURE);
     }
-    ElementoP *atual =  L->Inicio;
-
-    qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararPessoas);
+    if(op == 1){
+        qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararUltimoNome);
+    }else if(op==2){
+        qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararPrimeiroNome);
+    }else if(op == 3){
+        //funcao de comparar id de freguesias
+    }
     for(int i = 0; i < L->num_Pessoas;i++){
         printf("Livro %d:\n", i+1);
         MostrarPessoa(arrayElementos[i]->pessoa);

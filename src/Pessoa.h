@@ -34,11 +34,11 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int 
 PESSOA *PedirDadosPessoa();
 ListaPessoa *criarListaP();
 ElementoP *criar_elementoP(PESSOA *P);
-void *AdicionarPessoaInicio(ListaPessoa *L,ElementoP *E);
 void *AdicionarPessoa(ListaPessoa *L,ElementoP *E);
 void *PesquisarPesssoaPorNome(ListaPessoa *L, char *nome);
-int compararPessoas(const void *a, const void *b);
-void *OrganizarPorApelido(ListaPessoa *L);
+int compararPrimeiroNome(const void *a, const void *b);
+int compararUltimoNome(const void *a, const void *b);
+void *OrganizarPorNome(ListaPessoa *L, int op);
 void *ListarPessoas(ListaPessoa *L);
 void MostrarPessoa(PESSOA *P);
 NO_CHAVE *criarNoChave(char *chave);

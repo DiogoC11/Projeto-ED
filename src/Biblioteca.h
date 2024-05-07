@@ -6,8 +6,8 @@
 #include <time.h>
 
 #include "Livro.h"
-#include "Lista.h"
 #include "Hashing.h"
+#include "Pessoa.h"
 typedef struct
 {
     char *NOME;
