@@ -30,6 +30,12 @@ typedef struct{
     ElementoP *Inicio;
 }ListaPessoa, *ptListaP;
 
+typedef struct NO_CHAVE { // Inicial da pessoa
+    char *KEY; // 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
+    ListaPessoa *DADOS;
+    struct NO_CHAVE *Prox; // 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
+} NO_CHAVE;
+
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
 PESSOA *PedirDadosPessoa();
 ListaPessoa *criarListaP();
