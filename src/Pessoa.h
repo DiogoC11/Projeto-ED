@@ -16,6 +16,7 @@ typedef struct
 PESSOA *CriarPessoa(int _id, char *_nome, char *_categoria);
 void MostrarPessoa(PESSOA *P);
 void DestruirPessoa(PESSOA *P);
+int GerarID();
 //criar uma requisição de um livro
 //devolver livro requisitado
 //listar livros requisitados
