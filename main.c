@@ -26,7 +26,7 @@ extern int LerInteiro(char *txt);
 
 LIVRO *PedirDadosLivro();
 */
-int Menu() {
+int MenuLivro() {
     printf("\n1- Adicionar Livro\n");
     printf("2- Listar Livros\n");
     printf("3- Pesquisar Livro por ISBN\n");
@@ -37,11 +37,20 @@ int Menu() {
     op = LerInteiro("Qual a opcao? ");
     return op;
 }
+int MenuPessoa() {
+    printf("\n--- Menu de Operacoes de Pessoa ---\n");
+    printf("1- Criar Pessoa\n");
+    printf("2- Outra operacao com Pessoa\n");
+    printf("0- Voltar\n");
+    int op;
+    op = LerInteiro("Qual a opcao? ");
+    return op;
+}
 
 int MenuGeral() {
     printf("\n--- Menu Geral ---\n");
     printf("1- Operacoes de Livro\n");
-    printf("2-Operacoes de Pessoas\n");
+    printf("2- Operacoes de Pessoas\n");
     printf("0- Sair\n");
     int op;
     op = LerInteiro("Qual a opcao? ");
@@ -59,7 +68,7 @@ int main() {
                 // Menu de Operações de Livro
                 int opLivro;
                 do {
-                    opLivro = Menu();
+                    opLivro = MenuLivro();
                     switch(opLivro) {
                         case 1: {
                             // Adicionar Livro
@@ -125,11 +134,7 @@ int main() {
             case 2: {
                 int opPessoa;
                 do {
-                    printf("\n--- Menu de Operacoes de Pessoa ---\n");
-                    printf("1- Criar Pessoa\n");
-                    printf("2- Outra operação com Pessoa\n");
-                    printf("0- Voltar\n");
-                    opPessoa = LerInteiro("Qual a opcao? ");
+                    opPessoa=MenuPessoa();
                     switch (opPessoa) {
                         case 1: {
                             // Criar Pessoa
