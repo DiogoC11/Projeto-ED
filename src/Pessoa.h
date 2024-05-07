@@ -13,6 +13,8 @@ typedef struct{
 
 typedef struct
 {
+    char *PrimeiroNome;
+    char *UltimoNome;
     char *NOME;
     int ID;
     DATANASC *dataNascimento;
@@ -28,20 +30,21 @@ typedef struct{
     ElementoP *Inicio;
 }ListaPessoa, *ptListaP;
 
-// Hashing
-typedef struct NO_CHAVE { // Inicial da pessoa
-    char *KEY; // 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
-    ListaPessoa *DADOS;
-    struct NO_CHAVE *Prox; // 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
-} NO_CHAVE;
-
-PESSOA *CriarPessoa(char *_nome, int _ID, int _dia, int _mes, int _ano);
+PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
+PESSOA *PedirDadosPessoa();
+ListaPessoa *criarListaP();
+ElementoP *criar_elementoP(PESSOA *P);
+void *AdicionarPessoaInicio(ListaPessoa *L,ElementoP *E);
+void *AdicionarPessoa(ListaPessoa *L,ElementoP *E);
+void *PesquisarPesssoaPorNome(ListaPessoa *L, char *nome);
+int compararPessoas(const void *a, const void *b);
+void *OrganizarPorApelido(ListaPessoa *L);
+void *ListarPessoas(ListaPessoa *L);
 void MostrarPessoa(PESSOA *P);
-ptListaP criarListaPessoa();
-ptElementoP criarElemento(PESSOA *pessoa);
-void inserirPessoa(ptListaP lista, PESSOA *pessoa);
 NO_CHAVE *criarNoChave(char *chave);
 void inserirPessoaHash(NO_CHAVE **tabela, char *chave, PESSOA *pessoa);
+PESSOA *buscarPessoaPorID(ptListaP lista, int id);
+int verificarIDArquivo(char *idRequisitante);
 //criar uma requisição de um livro
 //devolver livro requisitado
 //listar livros requisitados

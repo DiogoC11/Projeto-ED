@@ -4,59 +4,139 @@
 #include <time.h>
 #include "Pessoa.h"
 
-PESSOA *CriarPessoa(char *_nome, int _ID, int _dia, int _mes, int _ano)
-{
-    PESSOA *novaPessoa = (PESSOA *)malloc(sizeof(PESSOA));
-    if (novaPessoa != NULL)
-    {
-        novaPessoa->NOME = _nome;
-        novaPessoa->ID = _ID;
-        novaPessoa->dataNascimento = (DATANASC *)malloc(sizeof(DATANASC));
-        novaPessoa->dataNascimento->dia = _dia;
-        novaPessoa->dataNascimento->mes = _mes;
-        novaPessoa->dataNascimento->ano = _ano;
+/** \brief Permite Alocar e inicializar uma estrutura Pessoa
+ *
+ * \param _id int
+ * \param _nome char*
+ * \param _categoria char*
+ * \return PESSOA*
+ *
+ */
+
+
+PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano){
+    PESSOA *P = (PESSOA *)malloc(sizeof(PESSOA));
+    P->PrimeiroNome = (char *)malloc((strlen(primeiroNome) + 1)*sizeof(char));
+    strcpy(P->NOME, primeiroNome);
+    P->UltimoNome = (char *)malloc((strlen(ultimoNome) + 1)*sizeof(char));
+    strcpy(P->UltimoNome,ultimoNome);
+    P->NOME = (char *) malloc((strlen(primeiroNome)+ strlen(ultimoNome)+2)* sizeof(char));
+    strcpy(P->NOME, primeiroNome);
+    strcat(P->NOME, " ");
+    strcat(P->NOME, ultimoNome);
+    P->dataNascimento->dia = dia;
+    P->dataNascimento->mes = mes;
+    P->dataNascimento->ano = ano;
+
+    return P;
+}
+
+PESSOA *PedirDadosPessoa(){
+    int dia,mes,ano;
+    char primeiroNome[30],ultimoNome[30];
+    printf("\nAdicionar Pessoa:\n");
+    printf("\nPrimeiro Nome: ");
+    scanf("%s",primeiroNome);
+    printf("\nUltimo Nome: ");
+    scanf("%s",ultimoNome);
+    printf("\nData de nascimento: \n");
+    printf("\nDia: ");
+    scanf("%d",dia);
+    printf("\nMês: ");
+    scanf("%d",mes);
+    printf("\nAno: ");
+    scanf("%d",ano);
+    return CriarPessoa(primeiroNome,ultimoNome,dia,mes,ano);
+}
+ListaPessoa *criarListaP(){
+    ListaPessoa *L = (ListaPessoa *) malloc(sizeof (ListaPessoa));
+    if (!L) return NULL;
+    L->num_Pessoas = 0;
+    L->Inicio = NULL;
+    return L;
+}
+
+ElementoP *criar_elementoP(PESSOA *P){
+    ElementoP *e = (ElementoP * ) malloc(sizeof (ElementoP));
+    if(!e) return NULL;
+    e->pessoa = P;
+    e->proximo = NULL;
+    return e;
+}
+
+void *AdicionarPessoaInicio(ListaPessoa *L,ElementoP *E){
+    if(!L) return NULL;
+    if(!E) return NULL;
+    if(L->num_Pessoas == 0){
+        L->Inicio = E;
+    }else{
+        return NULL;
     }
-    return novaPessoa;
+    L->num_Pessoas ++;
+}
+
+void *AdicionarPessoa(ListaPessoa *L,ElementoP *E){
+    if(!L) return NULL;
+    if(!E) return NULL;
+    if(L->num_Pessoas == 0){
+        L->Inicio = E;
+    }else {
+        ElementoP *ultimo = L->Inicio;
+        while (ultimo->proximo != NULL) {
+            ultimo = ultimo->proximo;
+        }
+        ultimo->proximo = E;
+    }
+    L->num_Pessoas++;
+    printf("\nPessoa adicionada a lista.\n");
+}
+
+void *PesquisarPesssoaPorNome(ListaPessoa *L, char *nome) {
+    if(!L ) return NULL;
+    ElementoP *E = L->Inicio;
+    for (int i = 0; i < L->num_Pessoas; i++) {
+        if(strcmp(E->pessoa->NOME,nome) == 0){
+            return E->pessoa;
+        }
+        E = E->proximo;
+    }
+    return NULL;
+}
+
+int compararPessoas(const void *a, const void *b) {
+    PESSOA *pessoaA = (*(ElementoP **)a)->pessoa;
+    PESSOA *pessoaB = (*(ElementoP **)b)->pessoa;
+    return strcmp(pessoaA->UltimoNome, pessoaB->UltimoNome);
+}
+
+void *OrganizarPorApelido(ListaPessoa *L){
+    ElementoP **arrayElementos = malloc(L->num_Pessoas * sizeof(ElementoP *));
+    if (arrayElementos == NULL) {
+        perror("Erro ao alocar memória para o array de elementos");
+        exit(EXIT_FAILURE);
+    }
+    ElementoP *atual =  L->Inicio;
+
+    qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararPessoas);
+    for(int i = 0; i < L->num_Pessoas;i++){
+        printf("Livro %d:\n", i+1);
+        MostrarPessoa(arrayElementos[i]->pessoa);
+    }
+}
+
+void *ListarPessoas(ListaPessoa *L){
+    printf("\nLista de Livros:\n");
+    ElementoP *E = L->Inicio;
+    for (int i = 0; i < L->num_Pessoas; i++){
+        printf("Livro %d:\n", i + 1);
+        MostrarPessoa(E->pessoa);
+        E = E->proximo;
+    }
 }
 
 void MostrarPessoa(PESSOA *P)
 {
     printf("\tPESSOA: ID: %d [%s] [%s]\n", P->ID, P->NOME, P->dataNascimento);
-}
-
-ptListaP criarListaPessoa() {
-    ptListaP novaLista = (ptListaP)malloc(sizeof(ListaPessoa));
-    if (novaLista != NULL) {
-        novaLista->num_Pessoas = 0;
-        novaLista->Inicio = NULL;
-    }
-    return novaLista;
-}
-
-ptElementoP criarElemento(PESSOA *pessoa) {
-    ptElementoP novoElemento = (ptElementoP)malloc(sizeof(ElementoP));
-    if (novoElemento != NULL) {
-        novoElemento->pessoa = pessoa;
-        novoElemento->proximo = NULL;
-    }
-    return novoElemento;
-}
-
-// Função para inserir uma pessoa na lista
-void inserirPessoa(ptListaP lista, PESSOA *pessoa) {
-    ptElementoP novoElemento = criarElemento(pessoa);
-    if (novoElemento != NULL) {
-        if (lista->Inicio == NULL) {
-            lista->Inicio = novoElemento;
-        } else {
-            ptElementoP temp = lista->Inicio;
-            while (temp->proximo != NULL) {
-                temp = temp->proximo;
-            }
-            temp->proximo = novoElemento;
-        }
-        lista->num_Pessoas++;
-    }
 }
 
 // Função para criar um novo nó de chave

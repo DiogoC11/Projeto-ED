@@ -7,7 +7,8 @@
 extern int LerInteiro(char *txt);
 
 int MenuLivro() {
-    printf("\n1- Adicionar Livro\n");
+    printf("\n--- Menu de Operacoes de Livros ---\n");
+    printf("1- Adicionar Livro\n");
     printf("2- Listar Livros\n");
     printf("3- Pesquisar Livro por ISBN\n");
     printf("4- Encontrar Livro Mais Recente\n");
@@ -19,8 +20,9 @@ int MenuLivro() {
 }
 int MenuPessoa() {
     printf("\n--- Menu de Operacoes de Pessoa ---\n");
-    printf("1- Criar Pessoa\n");
-    printf("2- Outra operacao com Pessoa\n");
+    printf("1- Adicionar Pessoa\n");
+    printf("2- Pesquisar Pessoa por Nome\n");
+    printf("3- Listar Pessoas\n");
     printf("0- Voltar\n");
     int op;
     op = LerInteiro("Qual a opcao? ");
@@ -226,6 +228,13 @@ int main() {
                             }
                             break;
                         }
+                        case 3:{
+                            opPessoa =0;
+                            printf("\nComo deseja organizar a lista: \n");
+                            printf("1- Primeiro Nome\n");
+                            printf("2- Ultimo Nome\n");
+                            printf("3- ID Freguesia\n");
+                        }
                         case 0:
                             printf("Voltando para o menu geral...\n");
                             break;
@@ -242,6 +251,7 @@ int main() {
                     opPessoa=MenuPessoa();
                     switch (opPessoa) {
                         case 1: {
+                            //Adicionar Pessoa
                             PESSOA *novaPessoa = PedirDadosPessoa();
                             MostrarPessoa(novaPessoa);
                             ElementoP *novoElemento = criar_elementoP(novaPessoa);
@@ -249,8 +259,16 @@ int main() {
                             break;
                         }
                         case 2: {
-                            // Outra operação com Pessoa
-                            // Implemente o que deseja fazer com a pessoa aqui.
+                            //Pesquisar pessoa pelo nome
+                            char nome[50];
+                            printf("Digite o nome da Pessoa a pesquisar: ");
+                            scanf("%49s", nome);
+                            PESSOA *PessoaEncontrada = PesquisarPesssoaPorNome(listaPessoa, nome);
+                            if (PessoaEncontrada != NULL) {
+                                MostrarPessoa(PessoaEncontrada);
+                            } else {
+                                printf("Pessoa com Nome %s nao encontrado.\n", nome);
+                            }
                             break;
                         }
                         case 0:
