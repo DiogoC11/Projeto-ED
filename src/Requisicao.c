@@ -1,5 +1,3 @@
-
-
 #include <stdbool.h>
 #include "Requisicao.h"
 
@@ -36,10 +34,7 @@ REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisico
 }
 
 
-//  Determinar a idade máxima de todos os requisitantes;
-
-
-
+//Funcao para ver todas as requisiçoes de algum requisitante
 void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRequisicoes, int tamanhoLista) {
     printf("Requisicões do requisitante %s:\n", requisitante->NOME);
     for (int i = 0; i < tamanhoLista; i++) {
@@ -49,7 +44,7 @@ void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRe
     }
 }
 
-
+//Funcão para ver se a pessoa tem alguma requisiçao ou nao
 bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
     for (int i = 0; i < tamanhoListaRequisicoes; i++) {
         if (listaRequisicoes[i]->Ptr_Req == pessoa) {
@@ -58,6 +53,7 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
     }
     return false; // senao retorna false
 }
+
 
 // Listar pessoas SEM requisição
 void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
@@ -82,3 +78,4 @@ void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, 
 }
 
 
+//  Determinar a idade máxima de todos os requisitantes;
