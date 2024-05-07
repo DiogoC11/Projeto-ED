@@ -34,13 +34,14 @@ int Menu() {
     printf("5- Destruir Livro\n");
     printf("0- Voltar\n");
     int op;
-    op = LerInteiro("Qual a opção? ");
+    op = LerInteiro("Qual a opcao? ");
     return op;
 }
 
 int MenuGeral() {
     printf("\n--- Menu Geral ---\n");
     printf("1- Operacoes de Livro\n");
+    printf("2-Operaçoes de Pessoas\n");
     printf("0- Sair\n");
     int op;
     op = LerInteiro("Qual a opcao? ");
@@ -81,7 +82,7 @@ int main() {
                             if (livroEncontrado != NULL) {
                                 MostrarLivro(livroEncontrado);
                             } else {
-                                printf("Livro com ISBN %s não encontrado.\n", ISBN);
+                                printf("Livro com ISBN %s nao encontrado.\n", ISBN);
                             }
                             break;
                         }
@@ -92,7 +93,7 @@ int main() {
                                 printf("Livro mais recente:\n");
                                 MostrarLivro(livroMaisRecente);
                             } else {
-                                printf("Nenhum livro disponível.\n");
+                                printf("Nenhum livro disponivel.\n");
                             }
                             break;
                         }
@@ -105,11 +106,15 @@ int main() {
                             printf("Voltando para o menu geral...\n");
                             break;
                         default:
-                            printf("Opcao não implementada\n");
+                            printf("Opcao nao implementada\n");
                             break;
                     }
                 } while (opLivro != 0);
                 break;
+            }
+            case 2:{
+                PESSOA *CriarPessoa;
+                CriarPessoa = CriarPessoa();
             }
             case 0:
                 printf("Saindo...\n");
