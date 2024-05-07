@@ -41,7 +41,7 @@ int Menu() {
 int MenuGeral() {
     printf("\n--- Menu Geral ---\n");
     printf("1- Operacoes de Livro\n");
-    printf("2-Operaçoes de Pessoas\n");
+    printf("2-Operacoes de Pessoas\n");
     printf("0- Sair\n");
     int op;
     op = LerInteiro("Qual a opcao? ");
@@ -112,10 +112,48 @@ int main() {
                 } while (opLivro != 0);
                 break;
             }
-            case 2:{
-                PESSOA *CriarPessoa;
-                CriarPessoa = CriarPessoa();
+            case 2: {
+                int opPessoa;
+                do {
+                    printf("\n--- Menu de Operacoes de Pessoa ---\n");
+                    printf("1- Criar Pessoa\n");
+                    printf("2- Outra operação com Pessoa\n");
+                    printf("0- Voltar\n");
+                    opPessoa = LerInteiro("Qual a opcao? ");
+                    switch (opPessoa) {
+                        case 1: {
+                            // Criar Pessoa
+                            char nome[100];
+                            char categoria[100];
+                            printf("Digite o nome da pessoa: ");
+                            scanf("%s", nome);
+                            printf("Digite a data de nascimento da pessoa: ");
+                            scanf("%s", categoria);
+                            PESSOA *novaPessoa = CriarPessoa(0, nome, categoria);
+                            if (novaPessoa != NULL) {
+                                printf("Pessoa criada com sucesso!\n");
+                                // Implemente o que deseja fazer com a pessoa criada aqui, como mostrá-la ou adicioná-la a uma lista de pessoas.
+                            } else {
+                                printf("Erro ao criar pessoa.\n");
+                            }
+                            break;
+                        }
+                        case 2: {
+                            // Outra operação com Pessoa
+                            // Implemente o que deseja fazer com a pessoa aqui.
+                            break;
+                        }
+                        case 0:
+                            printf("Voltando para o menu geral...\n");
+                            break;
+                        default:
+                            printf("Opcao nao implementada\n");
+                            break;
+                    }
+                } while (opPessoa != 0);
+                break;
             }
+
             case 0:
                 printf("Saindo...\n");
                 break;
