@@ -36,3 +36,4 @@ void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, 
 //numero de pessoas do distrito x, com o nome/apelido y
 
 #endif // REQUISICAO_H_INCLUDED
+

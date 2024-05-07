@@ -24,6 +24,7 @@ void DestruirRequisicao(REQUISICAO *R)
 }
 
 
+
 REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisicoes, int tamanhoLista) {
     for (int i = 0; i < tamanhoLista; i++) {
         if (strcmp(listaRequisicoes[i]->Ptr_Req->NOME, nome) == 0) {
