@@ -99,6 +99,16 @@ int main() {
                         }
                         case 5: {
                             // Destruir Livro
+                            char ISBN[50];
+                            printf("Digite o ISBN do livro a destruir: ");
+                            scanf("%49s", ISBN);
+                            LIVRO *livroEncontrado = PesquisarLivroPorISBN(listaLivros, ISBN);
+                            if (livroEncontrado != NULL) {
+                                DestruirLivro(livroEncontrado);
+                                printf("Livro com ISBN %s destruído.\n", ISBN);
+                            } else {
+                                printf("Livro com ISBN %s não encontrado.\n", ISBN);
+                            }
                             // Implemente conforme necessário
                             break;
                         }
