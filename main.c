@@ -26,7 +26,7 @@ extern int LerInteiro(char *txt);
 
 LIVRO *PedirDadosLivro();
 */
-int Menu() {
+int MenuLivro() {
     printf("\n1- Adicionar Livro\n");
     printf("2- Listar Livros\n");
     printf("3- Pesquisar Livro por ISBN\n");
@@ -37,11 +37,20 @@ int Menu() {
     op = LerInteiro("Qual a opcao? ");
     return op;
 }
+int MenuPessoa() {
+    printf("\n--- Menu de Operacoes de Pessoa ---\n");
+    printf("1- Criar Pessoa\n");
+    printf("2- Outra operacao com Pessoa\n");
+    printf("0- Voltar\n");
+    int op;
+    op = LerInteiro("Qual a opcao? ");
+    return op;
+}
 
 int MenuGeral() {
     printf("\n--- Menu Geral ---\n");
     printf("1- Operacoes de Livro\n");
-    printf("2-Operaçoes de Pessoas\n");
+    printf("2- Operacoes de Pessoas\n");
     printf("0- Sair\n");
     int op;
     op = LerInteiro("Qual a opcao? ");
@@ -59,7 +68,7 @@ int main() {
                 // Menu de Operações de Livro
                 int opLivro;
                 do {
-                    opLivro = Menu();
+                    opLivro = MenuLivro();
                     switch(opLivro) {
                         case 1: {
                             // Adicionar Livro
@@ -99,6 +108,16 @@ int main() {
                         }
                         case 5: {
                             // Destruir Livro
+                            char ISBN[50];
+                            printf("Digite o ISBN do livro a destruir: ");
+                            scanf("%49s", ISBN);
+                            LIVRO *livroEncontrado = PesquisarLivroPorISBN(listaLivros, ISBN);
+                            if (livroEncontrado != NULL) {
+                                DestruirLivro(livroEncontrado);
+                                printf("Livro com ISBN %s destruído.\n", ISBN);
+                            } else {
+                                printf("Livro com ISBN %s não encontrado.\n", ISBN);
+                            }
                             // Implemente conforme necessário
                             break;
                         }
@@ -112,10 +131,44 @@ int main() {
                 } while (opLivro != 0);
                 break;
             }
-            case 2:{
-                PESSOA *CriarPessoa;
-                CriarPessoa = CriarPessoa();
+            case 2: {
+                int opPessoa;
+                do {
+                    opPessoa=MenuPessoa();
+                    switch (opPessoa) {
+                        case 1: {
+                            // Criar Pessoa
+                            char nome[100];
+                            char categoria[100];
+                            printf("Digite o nome da pessoa: ");
+                            scanf("%s", nome);
+                            printf("Digite a data de nascimento da pessoa: ");
+                            scanf("%s", categoria);
+                            PESSOA *novaPessoa = CriarPessoa(0, nome, categoria);
+                            if (novaPessoa != NULL) {
+                                printf("Pessoa criada com sucesso!\n");
+                                // Implemente o que deseja fazer com a pessoa criada aqui, como mostrá-la ou adicioná-la a uma lista de pessoas.
+                            } else {
+                                printf("Erro ao criar pessoa.\n");
+                            }
+                            break;
+                        }
+                        case 2: {
+                            // Outra operação com Pessoa
+                            // Implemente o que deseja fazer com a pessoa aqui.
+                            break;
+                        }
+                        case 0:
+                            printf("Voltando para o menu geral...\n");
+                            break;
+                        default:
+                            printf("Opcao nao implementada\n");
+                            break;
+                    }
+                } while (opPessoa != 0);
+                break;
             }
+
             case 0:
                 printf("Saindo...\n");
                 break;
