@@ -35,14 +35,13 @@ typedef struct NO_CHAVE { // Inicial da pessoa
     struct NO_CHAVE *Prox; // 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
 } NO_CHAVE;
 
-PESSOA *CriarPessoa(char *_nome, char *dataNascimento);
-PESSOA *PedirDadosPessoa();
-ListaPessoa *criarListaP();
-ElementoP *criar_elementoP(PESSOA *L);
-void *AdicionarPessoa(ListaPessoa *L,ElementoP *E);
+PESSOA *CriarPessoa(char *_nome, int _ID, int _dia, int _mes, int _ano);
 void MostrarPessoa(PESSOA *P);
-void DestruirPessoa(PESSOA *P);
-int GerarID();
+ptListaP criarListaPessoa();
+ptElementoP criarElemento(PESSOA *pessoa);
+void inserirPessoa(ptListaP lista, PESSOA *pessoa);
+NO_CHAVE *criarNoChave(char *chave);
+void inserirPessoaHash(NO_CHAVE **tabela, char *chave, PESSOA *pessoa);
 //criar uma requisição de um livro
 //devolver livro requisitado
 //listar livros requisitados
