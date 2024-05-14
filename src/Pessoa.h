@@ -16,7 +16,7 @@ typedef struct
     char *PrimeiroNome;
     char *UltimoNome;
     char *NOME;
-    int ID;
+    char ID[10];
     DATANASC *dataNascimento;
 }PESSOA;
 
@@ -35,6 +35,31 @@ typedef struct NO_CHAVE { // Inicial da pessoa
     ListaPessoa *DADOS;
     struct NO_CHAVE *Prox; // 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
 } NO_CHAVE;
+
+typedef struct {
+    char codigo[7]; // O código da freguesia
+    char nome[100]; // O nome da freguesia
+} Freguesia;
+
+typedef struct {
+    char codigo[10]; // O código do requisitante
+    char nome[100]; // O nome completo do requisitante
+    char data_nascimento[11]; // A data de nascimento do requisitante (no formato dd-mm-yyyy)
+    int numero_requisicoes; // O número de requisições feitas pelo requisitante
+} Requisitante;
+
+typedef struct {
+    char codigo[3]; // O código do distrito
+    char nome[50]; // O nome do distrito
+} Distrito;
+
+typedef struct {
+    char codigo[5]; // O código do conselho
+    char nome[50]; // O nome do conselho
+} Conselho;
+
+
+
 
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
 PESSOA *PedirDadosPessoa();
