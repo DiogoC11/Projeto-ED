@@ -4,7 +4,7 @@
 // Função para encontrar o no_chave por uma KEY
 NO_CHAVE *encontrarNoChave(NO_CHAVE *noChave, char *chave) {
     while (noChave != NULL) {
-        if (strcmp(noChave->KEY, chave) == 0) {
+        if (strcmp(noChave->categoria, chave) == 0) {
             return noChave;
         }
         noChave = noChave->Prox;
@@ -27,7 +27,8 @@ LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao, cha
     P->Disponivel = 0;
     return P;
 }
-LIVRO *PedirDadosLivro(ListaLivro *L){
+
+LIVRO *PedirDadosLivro(Lista_Chaves *C){
     char nome[50], area[50], ISBN[50], autor[50], temp[100];
     int anoPublicacao;
     fflush(stdin);
@@ -38,10 +39,10 @@ LIVRO *PedirDadosLivro(ListaLivro *L){
         fgets(temp, sizeof(temp), stdin);
         sscanf(temp, "%49[^\n]", ISBN);
 
-        if (PesquisarLivroPorISBN(L, ISBN) != NULL) {
+        if (PesquisarLivroPorISBN(C, ISBN) != NULL) {
             printf("\nErro: O ISBN inserido já existe.\n");
         }
-    }while(PesquisarLivroPorISBN(L,ISBN) != NULL);
+    }while(PesquisarLivroPorISBN(C,ISBN) != NULL);
 
     printf("\nTitulo do Livro: ");
     fgets(temp, sizeof(temp), stdin);
@@ -101,7 +102,8 @@ ElementoL *criar_elementoL(LIVRO *L){
     return e;
 }
 
-void *AdicionarLivro(ListaLivro *L,ElementoL *E){
+void *AdicionarLivro(ListaLivro *L,ElementoL *E, Lista_Chaves *C){
+    int a = 0;
     if(!L) return NULL;
     if(!E) return NULL;
     if(L->num_Livros == 0){
@@ -113,7 +115,28 @@ void *AdicionarLivro(ListaLivro *L,ElementoL *E){
         }
         ultimo->proximo = E;
     }
-    L->num_Livros ++;
+    for(int i = 0; i < C->num_chaves; i++){
+        if(C->Inicio->categoria == E->livro->AREA){
+            if(C->Inicio->DADOS->Inicio==0) {
+                C->Inicio->DADOS->Inicio = E;
+                a = 1;
+            }else{
+                ElementoL  *ultimo = C->Inicio->DADOS->Inicio;
+                while (ultimo->proximo != NULL){
+                    ultimo = ultimo->proximo;
+                }
+                ultimo->proximo = E;
+                a = 1;
+            }
+            C->Inicio->DADOS->num_Livros ++;
+        }
+        C->Inicio = C->Inicio->Prox;
+    }
+    if(!a){
+        NO_CHAVE *newChave = AdicionarChave(C,E->livro->AREA);
+        C->Inicio->DADOS->Inicio = E;
+        C->Inicio->DADOS->num_Livros ++;
+    }
     printf("\nLivro adicionado a biblioteca.\n");
 }
 
@@ -126,14 +149,17 @@ void ListarLivros(ListaLivro *L){
         E = E->proximo;
     }
 }
-LIVRO *PesquisarLivroPorISBN(ListaLivro *L, char *isbn) {
-    ElementoL *E = L->Inicio;
-    for (int i = 0; i < L->num_Livros; i++) {
-        if(strcmp(E->livro->ISBN,isbn) == 0){
-            return E->livro;
+LIVRO *PesquisarLivroPorISBN(Lista_Chaves *C, char *isbn) {
+    ElementoL *E = C->Inicio->DADOS->Inicio;
+    for(int i = 0; i < C->num_chaves; i++){
+        for (int j = 0; i < C->Inicio->DADOS->num_Livros; i++) {
+            if(strcmp(E->livro->ISBN,isbn) == 0){
+                return E->livro;
+            }
+            E = E->proximo;
         }
-        E = E->proximo;
     }
+
     return NULL;
 }
 LIVRO *LivroMaisRecente(ListaLivro *L) {
@@ -150,4 +176,23 @@ LIVRO *LivroMaisRecente(ListaLivro *L) {
         E = E->proximo;
     }
     return maisRecente;
+}
+
+Lista_Chaves *CriarListaChaves(){
+    Lista_Chaves *L = (Lista_Chaves *)malloc(sizeof(Lista_Chaves));
+    L->num_chaves = 0;
+    L->Inicio = NULL;
+    return L;
+}
+
+NO_CHAVE *AdicionarChave(Lista_Chaves *L, char *categoria)
+{
+    if (!L) return NULL;
+    NO_CHAVE *chave = (NO_CHAVE *)malloc(sizeof(NO_CHAVE));
+    strcpy(chave->categoria, categoria);
+    chave->DADOS = criarListaL();
+    chave->Prox = L->Inicio;
+    L->Inicio = chave;
+    L->num_chaves ++;
+    return L;
 }
