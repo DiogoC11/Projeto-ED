@@ -1,8 +1,8 @@
 #include "Livro.h"
 #include "ctype.h"
 
-// Função para encontrar o no_chave por uma KEY
-NO_CHAVE *encontrarNoChave(NO_CHAVE *noChave, char *chave) {
+// Função para encontrar o NO_CHAVE_L por uma KEY
+NO_CHAVE_L *encontrarNoChave(NO_CHAVE_L *noChave, char *chave) {
     while (noChave != NULL) {
         if (strcmp(noChave->categoria, chave) == 0) {
             return noChave;
@@ -28,7 +28,7 @@ LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao, cha
     return P;
 }
 
-LIVRO *PedirDadosLivro(Lista_Chaves *C){
+LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     char nome[50], area[50], ISBN[50], autor[50], temp[100];
     int anoPublicacao;
     fflush(stdin);
@@ -102,93 +102,106 @@ ElementoL *criar_elementoL(LIVRO *L){
     return e;
 }
 
-void *AdicionarLivro(ListaLivro *L,ElementoL *E, Lista_Chaves *C){
+void *AdicionarLivro(ElementoL *E, Lista_Chaves_L *C){
     int a = 0;
-    if(!L) return NULL;
+    if(!C) return NULL;
     if(!E) return NULL;
-    if(L->num_Livros == 0){
-        L->Inicio = E;
-    }else {
-        ElementoL *ultimo = L->Inicio;
-        while (ultimo->proximo != NULL) {
-            ultimo = ultimo->proximo;
-        }
-        ultimo->proximo = E;
-    }
+    NO_CHAVE_L *Inicio = C->Inicio;
     for(int i = 0; i < C->num_chaves; i++){
-        if(C->Inicio->categoria == E->livro->AREA){
+        if(Inicio->categoria == E->livro->AREA){
             if(C->Inicio->DADOS->Inicio==0) {
                 C->Inicio->DADOS->Inicio = E;
-                a = 1;
             }else{
                 ElementoL  *ultimo = C->Inicio->DADOS->Inicio;
                 while (ultimo->proximo != NULL){
                     ultimo = ultimo->proximo;
                 }
                 ultimo->proximo = E;
-                a = 1;
             }
+            a=1;
             C->Inicio->DADOS->num_Livros ++;
         }
-        C->Inicio = C->Inicio->Prox;
+        Inicio = Inicio->Prox;
     }
     if(!a){
-        NO_CHAVE *newChave = AdicionarChave(C,E->livro->AREA);
+        AdicionarChave(C,E->livro->AREA);
+        C->num_chaves ++;
         C->Inicio->DADOS->Inicio = E;
         C->Inicio->DADOS->num_Livros ++;
     }
     printf("\nLivro adicionado a biblioteca.\n");
 }
 
-void ListarLivros(ListaLivro *L){
+void ListarLivros(Lista_Chaves_L *C){
     printf("\nLista de Livros:\n");
-    ElementoL *E = L->Inicio;
-    for (int i = 0; i < L->num_Livros; i++){
-        printf("Livro %d:\n", i + 1);
-        MostrarLivro(E->livro);
-        E = E->proximo;
+    NO_CHAVE_L *N = C->Inicio;
+    ElementoL *E = C->Inicio->DADOS->Inicio;
+    for (int i = 0; i < C->num_chaves; i++){
+        for(int j = 0; i < N->DADOS->num_Livros; j++){
+            printf("\nLivro: ");
+            MostrarLivro(E->livro);
+            E = E->proximo;
+        }
+        N = N->Prox;
     }
 }
-LIVRO *PesquisarLivroPorISBN(Lista_Chaves *C, char *isbn) {
+LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn) {
+    NO_CHAVE_L *N = C->Inicio;
     ElementoL *E = C->Inicio->DADOS->Inicio;
     for(int i = 0; i < C->num_chaves; i++){
-        for (int j = 0; i < C->Inicio->DADOS->num_Livros; i++) {
+        for (int j = 0; i < N->DADOS->num_Livros; j++) {
             if(strcmp(E->livro->ISBN,isbn) == 0){
                 return E->livro;
             }
             E = E->proximo;
         }
+        N = N->Prox;
     }
 
     return NULL;
 }
-LIVRO *LivroMaisRecente(ListaLivro *L) {
-    if (L->num_Livros == 0) {
+LIVRO *LivroMaisRecente(Lista_Chaves_L * L) {
+    if (L->num_chaves == 0) {
         return NULL;
     }
-    ElementoL *E = L->Inicio;
-    LIVRO *maisRecente = E->livro;
-    E = E->proximo;
-    while (E != NULL) {
-        if (E->livro->anoPublicacao > maisRecente->anoPublicacao) {
-            maisRecente = E->livro;
+    NO_CHAVE_L *N = L->Inicio;
+    LIVRO *maisRecente = N->DADOS->Inicio->livro;
+    ElementoL *E = L->Inicio->DADOS->Inicio;
+    for(int i = 0; i < L->num_chaves; i++){
+        for (int j = 0; i < N->DADOS->num_Livros; j++) {
+            if (E->livro->anoPublicacao > maisRecente->anoPublicacao) {
+                maisRecente = E->livro;
+            }
+            E = E->proximo;
         }
-        E = E->proximo;
+        N = N->Prox;
     }
     return maisRecente;
 }
 
-Lista_Chaves *CriarListaChaves(){
-    Lista_Chaves *L = (Lista_Chaves *)malloc(sizeof(Lista_Chaves));
+void AreaMaisLivros(Lista_Chaves_L *C){
+    NO_CHAVE_L *Area = C->Inicio;
+    NO_CHAVE_L *Inicio = C->Inicio;
+    for(int i = 0; i < C->num_chaves; i++){
+        if(Inicio->DADOS->num_Livros > Area->DADOS->num_Livros ){
+            Area = Inicio->categoria;
+        }
+        Inicio = Inicio->Prox;
+    }
+    printf("A area com mais livros na biblioteca é: %s", Area->categoria);
+}
+
+Lista_Chaves_L *CriarListaChaves(){
+    Lista_Chaves_L *L = (Lista_Chaves_L *)malloc(sizeof(Lista_Chaves_L));
     L->num_chaves = 0;
     L->Inicio = NULL;
     return L;
 }
 
-NO_CHAVE *AdicionarChave(Lista_Chaves *L, char *categoria)
+NO_CHAVE_L *AdicionarChave(Lista_Chaves_L *L, char *categoria)
 {
     if (!L) return NULL;
-    NO_CHAVE *chave = (NO_CHAVE *)malloc(sizeof(NO_CHAVE));
+    NO_CHAVE_L *chave = (NO_CHAVE_L *)malloc(sizeof(NO_CHAVE_L));
     strcpy(chave->categoria, categoria);
     chave->DADOS = criarListaL();
     chave->Prox = L->Inicio;

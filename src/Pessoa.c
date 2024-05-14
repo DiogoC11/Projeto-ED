@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <time.h>
 #include "Pessoa.h"
 
 /** \brief Permite Alocar e inicializar uma estrutura Pessoa
@@ -48,6 +46,7 @@ PESSOA *PedirDadosPessoa(){
     scanf("%d",ano);
     return CriarPessoa(primeiroNome,ultimoNome,dia,mes,ano);
 }
+
 ListaPessoa *criarListaP(){
     ListaPessoa *L = (ListaPessoa *) malloc(sizeof (ListaPessoa));
     if (!L) return NULL;
@@ -64,19 +63,34 @@ ElementoP *criar_elementoP(PESSOA *P){
     return e;
 }
 
-void *AdicionarPessoa(ListaPessoa *L,ElementoP *E){
-    if(!L) return NULL;
+void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E){
+    if(!C) return NULL;
     if(!E) return NULL;
-    if(L->num_Pessoas == 0){
-        L->Inicio = E;
-    }else {
-        ElementoP *ultimo = L->Inicio;
-        while (ultimo->proximo != NULL) {
-            ultimo = ultimo->proximo;
+    int a = 0;
+    NO_CHAVE_P *N = C->Inicio;
+    for(int i = 0; i < C->num_chaves; i++){
+        if(N->Key == E->pessoa->PrimeiroNome[0]){
+            if(C->Inicio->DADOS->Inicio==0) {
+                C->Inicio->DADOS->Inicio = E;
+            }else{
+                ElementoP *ultimo = C->Inicio->DADOS->Inicio;
+                while (ultimo->proximo != NULL){
+                    ultimo = ultimo->proximo;
+                }
+                ultimo->proximo = E;
+            }
+            a=1;
+            C->Inicio->DADOS->num_Pessoas ++;
         }
-        ultimo->proximo = E;
+        N = N->Prox;
     }
-    L->num_Pessoas++;
+    if(!a){
+        char key = E->pessoa->PrimeiroNome[0];
+        criarNoChave(key);
+        C->num_chaves ++;
+        C->Inicio->DADOS->Inicio = E;
+        C->Inicio->DADOS->num_Pessoas ++;
+    }
     printf("\nPessoa adicionada a lista.\n");
 }
 
@@ -139,20 +153,20 @@ void MostrarPessoa(PESSOA *P)
 }
 
 // Função para criar um novo nó de chave
-NO_CHAVE *criarNoChave(char *chave) {
-    NO_CHAVE *novoNoChave = (NO_CHAVE *)malloc(sizeof(NO_CHAVE));
+NO_CHAVE_P *criarNoChave(char chave) {
+    NO_CHAVE_P *novoNoChave = (NO_CHAVE_P *)malloc(sizeof(NO_CHAVE_P));
     if (novoNoChave != NULL) {
-        novoNoChave->KEY = chave;
-        novoNoChave->DADOS = criarListaPessoa();
+        novoNoChave->Key = chave;
+        novoNoChave->DADOS = criarListaP();
         novoNoChave->Prox = NULL;
     }
     return novoNoChave;
 }
 
 // Função para inserir uma pessoa na tabela de hashing
-void inserirPessoaHash(NO_CHAVE **tabela, char *chave, PESSOA *pessoa) {
+void inserirPessoaHash(NO_CHAVE_P **tabela, char *chave, PESSOA *pessoa) {
     int indice = chave[0] - 'A'; // Supondo que as chaves sejam letras maiúsculas de A a Z
-    NO_CHAVE *atual = tabela[indice];
+    NO_CHAVE_P *atual = tabela[indice];
     if (atual == NULL) {
         tabela[indice] = criarNoChave(chave);
         atual = tabela[indice];
@@ -163,7 +177,7 @@ void inserirPessoaHash(NO_CHAVE **tabela, char *chave, PESSOA *pessoa) {
         atual->Prox = criarNoChave(chave);
         atual = atual->Prox;
     }
-    inserirPessoa(atual->DADOS, pessoa);
+    AdicionarPessoa(atual->DADOS, pessoa);
 }
 
 // Função percorrer as pessoas a busca se o id é identifco ao parametro
