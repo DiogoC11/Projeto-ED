@@ -66,7 +66,7 @@ PESSOA *PedirDadosPessoa(); // adicionar para pedir freguesia
 ListaPessoa *criarListaP();
 ElementoP *criar_elementoP(PESSOA *P);
 void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E);
-void *PesquisarPesssoaPorNome(ListaPessoa *L, char *nome);
+void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);
 void *OrganizarPorNome(ListaPessoa *L, int op);

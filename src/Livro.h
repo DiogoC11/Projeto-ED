@@ -27,7 +27,7 @@ typedef struct{
 }ListaLivro, *ptListaL;
 
 // Hashing
-typedef struct NO_CHAVE_L_L {
+typedef struct NO_CHAVE_L {
     char categoria[50];
     ListaLivro *DADOS;
     struct NO_CHAVE_L *Prox;

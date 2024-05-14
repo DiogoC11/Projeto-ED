@@ -94,7 +94,7 @@ void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E){
     printf("\nPessoa adicionada a lista.\n");
 }
 
-void *PesquisarPesssoaPorNome(ListaPessoa *L, char *nome) {
+void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
     if(!L ) return NULL;
     ElementoP *E = L->Inicio;
     for (int i = 0; i < L->num_Pessoas; i++) {
