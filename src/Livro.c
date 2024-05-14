@@ -1,7 +1,17 @@
-
 #include "Livro.h"
 
-LIVRO *CriarLivro( char *_ISBN, char *_nome, char *_area, int _anoPublicacao, char *_autor)
+// Função para encontrar o no_chave por uma KEY
+NO_CHAVE *encontrarNoChave(NO_CHAVE *noChave, char *chave) {
+    while (noChave != NULL) {
+        if (strcmp(noChave->KEY, chave) == 0) {
+            return noChave;
+        }
+        noChave = noChave->Prox;
+    }
+    return NULL;
+}
+
+LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao, char *_autor)
 {
     LIVRO *P = (LIVRO *)malloc(sizeof(LIVRO));
     P->NOME = (char *)malloc((strlen(_nome) + 1)*sizeof(char));
@@ -28,7 +38,7 @@ LIVRO *PedirDadosLivro(ListaLivro *L){
         sscanf(temp, "%49[^\n]", ISBN);
 
         if (PesquisarLivroPorISBN(L, ISBN) != NULL) {
-            printf("\nErro: O ISBN inserido j� existe.\n");
+            printf("\nErro: O ISBN inserido já existe.\n");
         }
     }while(PesquisarLivroPorISBN(L,ISBN) != NULL);
 
@@ -48,8 +58,15 @@ LIVRO *PedirDadosLivro(ListaLivro *L){
     fgets(temp, sizeof(temp), stdin);
     sscanf(temp, "%49[^\n]", autor);
 
+    // Verifica se a area existe
+    NO_CHAVE *noChave = encontrarNoChave(L->Inicio, area);
+    if (noChave == NULL) {
+        printf("\nErro: A area inserida nao existe.\n");
+        return NULL;
+    }
     return CriarLivro(ISBN, nome, area, anoPublicacao, autor);
 }
+
 void MostrarLivro(LIVRO *P)
 {
     char disponivel[4];
