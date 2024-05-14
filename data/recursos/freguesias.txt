@@ -1,0 +1,2882 @@
+010103	Aguada de Cima
+010109	Fermentelos
+010112	Macinhata do Vouga
+010119	Valongo do Vouga
+010121	Agueda e Borralha
+010122	Barro e Aguada de Baixo
+010123	Belazaima do Chao, Castanheira do Vouga e Agadao
+010124	Recardaes e Espinhel
+010125	Travasso e Ois da Ribeira
+010126	Trofa, Segadaes e Lamas do Vouga
+010127	Prestimo e Macieira de Alcoba
+010202	Alquerubim
+010203	Angeja
+010204	Branca
+010206	Ribeira de Fraguas
+010209	Albergaria-A-Velha e Valmaior
+010210	Sao Joao de Loure e Frossos
+010304	Avelas de Caminho
+010305	Avelas de Cima
+010307	Moita
+010309	Sangalhos
+010310	S. Lourenco do Bairro
+010312	Vila Nova de Monsarros
+010313	Vilarinho do Bairro
+010316	Amoreira da Gandara, Paredes do Bairro e Ancas
+010317	Arcos e Mogofores
+010318	Tamengos, Aguim e Ois do Bairro
+010402	Alvarenga
+010407	Chave
+010409	Escariz
+010411	Fermedo
+010413	Mansores
+010414	Moldes
+010415	Rossas
+010416	Santa Eulalia
+010417	S. Miguel do Mato
+010418	Tropeco
+010419	Urro
+010420	Varzea
+010421	Arouca e Burgo
+010422	Cabreiros e Albergaria da Serra
+010423	Canelas e Espiunca
+010424	Covelo de Paivo e Janarde
+010501	Aradas
+010502	Cacia
+010505	Esgueira
+010508	Oliveirinha
+010510	S. Bernardo
+010511	S. Jacinto
+010513	Santa Joana
+010515	Eixo e Eirol
+010516	Requeixo, Nossa Senhora de Fatima e Nariz
+010517	Gloria e Vera Cruz
+010602	Fornos
+010606	Real
+010607	Santa Maria de Sardoura
+010608	S. Martinho de Sardoura
+010610	Raiva, Pedorido e Paraiso
+010611	Sobrado e Bairros
+010702	Espinho
+010704	Paramos
+010705	Silvalde
+010706	Anta e Guetim
+010801	Avanca
+010805	Pardilho
+010806	Salreu
+010808	Beduido e Veiros
+010809	Canelas e Fermela
+010901	Argoncilhe
+010902	Arrifana
+010904	Escapaes
+010907	Fiaes
+010908	Fornos
+010913	Lourosa
+010914	Milheiros de Poiares
+010916	Mozelos
+010917	Nogueira da Regedoura
+010918	S. Paio de Oleiros
+010919	Pacos de Brandao
+010921	Rio Meao
+010922	Romariz
+010924	Sanguedo
+010925	Santa Maria de Lamas
+010926	S. Joao de Ver
+010932	Caldas de Sao Jorge e Pigeiros
+010933	Canedo, Vale e Vila Maior
+010934	Lobao, Giao, Louredo e Guisande
+010935	Santa Maria da Feira, Travanca, Sanfins e Espargo
+010936	Sao Miguel do Souto e Mosteiro
+011005	Gafanha da Encarnacao
+011006	Gafanha da Nazare
+011007	Gafanha do Carmo
+011008	Ilhavo (Sao Salvador)
+011102	Barcouco
+011103	Casal Comba
+011104	Luso
+011106	Pampilhosa
+011107	Vacarica
+011109	Mealhada, Ventosa do Bairro e Antes
+011201	Bunheiro
+011202	Monte
+011203	Murtosa
+011204	Torreira
+011301	Carregosa
+011302	Cesar
+011303	Fajoes
+011304	Loureiro
+011305	Macieira de Sarnes
+011310	Ossela
+011315	S. Martinho da Gandara
+011318	Sao Roque
+011319	Vila de Cucujaes
+011320	Nogueira do Cravo e Pindelo
+011321	O. Azemeis, Riba-Ul, Ul, Macinhata Seixa, Madail
+011322	Pinheiro da Bemposta, Travanca e Palmaz
+011403	Oia
+011404	Oliveira do Bairro
+011405	Palhaca
+011407	Bustos, Troviscal e Mamarrosa
+011502	Cortegaca
+011503	Esmoriz
+011504	Maceda
+011507	Valega
+011509	Ovar, S.Joao, Arada e S.Vicente de Pereira Jusa
+011601	S. Joao da Madeira
+011702	Couto de Esteves
+011704	Pessegueiro do Vouga
+011705	Rocas do Vouga
+011706	Sever do Vouga
+011708	Talhadas
+011710	Cedrim e Paradela
+011711	Silva Escura e Dornelas
+011801	Calvao
+011804	Gafanha da Boa Hora
+011805	Ouca
+011807	Soza
+011810	Santo Andre de Vagos
+011812	Fonte de Angeao e Covao do Lobo
+011813	Ponte de Vagos e Santa Catarina
+011814	Vagos e Santo Antonio
+011901	Aroes
+011902	Sao Pedro de Casteloes
+011903	Cepelos
+011905	Junqueira
+011906	Macieira de Cambra
+011907	Roge
+011910	Vila Cha, Codal e Vila Cova de Perrinho
+020102	Ervidel
+020103	Messejana
+020104	S. Joao de Negrilhos
+020106	Aljustrel e Rio de Moinhos
+020203	Rosario
+020205	Santa Cruz
+020206	S. Barnabe
+020208	Aldeia Dos Fernandes
+020209	Almodovar e Graca Dos Padroes
+020210	Santa Clara-A-Nova e Gomes Aires
+020301	Alvito
+020302	Vila Nova da Baronia
+020401	Barrancos
+020502	Baleizao
+020503	Beringel
+020504	Cabeca Gorda
+020506	Nossa Senhora Das Neves
+020510	Santa Clara de Louredo
+020516	S. Matias
+020519	Albernoa e Trindade
+020520	Beja (Salvador e Santa Maria da Feira)
+020521	Beja (Santiago Maior e Sao Joao Baptista)
+020522	Salvada e Quintos
+020523	Santa Vitoria e Mombeja
+020524	Trigaches e Sao Brissos
+020603	Entradas
+020604	Santa Barbara de Padroes
+020605	S. Marcos da Ataboeira
+020606	Castro Verde e Casevel
+020701	Cuba
+020702	Faro do Alentejo
+020703	Vila Alva
+020704	Vila Ruiva
+020803	Figueira Dos Cavaleiros
+020804	Odivelas
+020807	Alfundao e Peroguarda
+020808	Ferreira do Alentejo e Canhestros
+020901	Alcaria Ruiva
+020902	Corte do Pinto
+020903	Espirito Santo
+020904	Mertola
+020905	Santana de Cambas
+020906	S. Joao Dos Caldeireiros
+020910	S.Mig. Pinheiro, S.Pedro Solis, S.Sebastiao Carros
+021001	Amareleja
+021002	Povoa de Sao Miguel
+021008	Sobral da Adica
+021009	Santo Agostinho e Sao Joao Baptista e Santo Amador
+021010	Safara e Santo Aleixo da Restauracao
+021102	Reliquias
+021103	Saboia
+021106	S. Luis
+021107	S. Martinho Das Amoreiras
+021111	Vila Nova de Milfontes
+021115	Luzianes-Gare
+021116	Longueira/Almograve
+021117	Boavista Dos Pinheiros
+021118	Colos
+021119	Santa Clara-A-Velha
+021120	Sao Salvador e Santa Maria
+021121	Sao Teotonio
+021122	Vale de Santiago
+021203	Ourique
+021206	Santana da Serra
+021207	Garvao e Santa Luzia
+021208	Panoias e Conceicao
+021302	Brinches
+021303	Pias
+021307	Vila Verde de Ficalho
+021308	Serpa (Salvador e Santa Maria)
+021309	Vila Nova de Sao Bento e Vale de Vargo
+021401	Pedrogao
+021402	Selmes
+021403	Vidigueira
+021404	Vila de Frades
+030102	Barreiros
+030104	Bico
+030105	Caires
+030107	Carrazedo
+030108	Dornelas
+030111	Fiscal
+030112	Goaes
+030113	Lago
+030118	Rendufe
+030119	Bouro (Santa Maria)
+030120	Bouro (Santa Marta)
+030125	Amares e Figueiredo
+030126	Caldelas, Sequeiros e Paranhos
+030127	Ferreiros, Prozelo e Besteiros
+030128	Torre e Portela
+030129	Vilela, Seramil e Paredes Secas
+030201	Abade de Neiva
+030202	Aborim
+030203	Adaes
+030205	Airo
+030206	Aldreu
+030208	Alvelos
+030209	Arcozelo
+030210	Areias
+030212	Balugaes
+030213	Barcelinhos
+030215	Barqueiros
+030216	Cambeses
+030218	Carapecos
+030220	Carvalhal
+030221	Carvalhas
+030224	Cossourado
+030228	Cristelo
+030234	Fornelos
+030235	Fragoso
+030237	Gilmonde
+030242	Lama
+030243	Lijo
+030244	Macieira de Rates
+030245	Manhente
+030247	Martim
+030252	Moure
+030254	Oliveira
+030255	Palme
+030256	Panque
+030257	Paradela
+030259	Pereira
+030260	Perelhal
+030261	Pousa
+030263	Remelhe
+030264	Roriz
+030265	Rio Covo (Santa Eugenia)
+030268	Galegos (Santa Maria)
+030272	Galegos (S. Martinho)
+030277	Tamel (S. Verissimo)
+030279	Silva
+030282	Ucha
+030283	Varzea
+030287	Vila Seca
+030290	Alheira e Igreja Nova
+030291	Alvito (Sao Pedro e Sao Martinho) e Couto
+030292	Areias de Vilar e Encourados
+030293	Barcelos, V.Boa, V.Frescainha
+030294	Campo e Tamel (Sao Pedro Fins)
+030295	Carreira e Fonte Coberta
+030296	Chorente, Goios, Courel, Pedra Furada e Gueral
+030297	Creixomil e Mariz
+030298	Durraes e Tregosa
+030299	Gamil e Midoes
+0302FA	Milhazes, Vilar de Figos e Faria
+0302FB	Negreiros e Chavao
+0302FC	Quintiaes e Aguiar
+0302FD	Sequeade e Bastuco (Sao Joao e Santo Estevao)
+0302FE	Silveiros e Rio Covo (Santa Eulalia)
+0302FF	Tamel (Santa Leocadia) e Vilar do Monte
+0302FG	Viatodos, Grimancelos, Minhotaes, Monte Fralaes
+0302FH	Vila Cova e Feitos
+030301	Adaufe
+030312	Espinho
+030313	Esporoes
+030315	Figueiredo
+030319	Gualtar
+030322	Lamas
+030325	Mire de Tibaes
+030330	Padim da Graca
+030331	Palmeira
+030334	Pedralva
+030336	Priscos
+030338	Ruilhe
+030349	Braga (S. Vicente)
+030351	Braga (S. Vitor)
+030354	Sequeira
+030355	Sobreposta
+030356	Tadim
+030357	Tebosa
+030363	Arentim e Cunha
+030364	Braga (Maximinos, Se e Cividade)
+030365	Braga (Sao Jose de Sao Lazaro e Sao Joao do Souto)
+030366	Cabreiros e Passos (Sao Juliao)
+030367	Celeiros, Aveleda e Vimieiro
+030368	Crespos e Pousada
+030369	Escudeiros e Penso (Santo Estevao e Sao Vicente)
+030370	Este (Sao Pedro e Sao Mamede)
+030371	Ferreiros e Gondizalves
+030372	Guisande e Oliveira (Sao Pedro)
+030373	Lomar e Arcos
+030374	Merelim (Sao Paio), Panoias e Parada de Tibaes
+030375	Merelim (Sao Pedro) e Frossos
+030376	Morreira e Trandeiras
+030377	Nogueira, Fraiao e Lamacaes
+030378	Nogueiro e Tenoes
+030379	Real, Dume e Semelhe
+030380	Santa Lucrecia de Algeriz e Navarra
+030381	Vilaca e Fradelos
+030401	Abadim
+030404	Basto
+030405	Bucos
+030406	Cabeceiras de Basto
+030407	Cavez
+030408	Faia
+030413	Pedraca
+030415	Rio Douro
+030418	Alvite e Passos
+030419	Arco de Baulhe e Vila Nune
+030420	Gondiaes e Vilar de Cunhas
+030421	Refojos de Basto, Outeiro e Painzela
+030501	Agilde
+030502	Arnoia
+030503	Borba da Montanha
+030508	Codecoso
+030510	Fervenca
+030515	Moreira do Castelo
+030517	Rego
+030518	Ribas
+030520	Basto (S. Clemente)
+030521	Vale de Bouro
+030523	Britelo, Gemeos e Ourilhe
+030524	Cacarilhe e Infesta
+030525	Canedo de Basto e Corgo
+030526	Carvalho e Basto (Santa Tecla)
+030527	Veade, Gagos e Molares
+030601	Antas
+030608	Forjaes
+030610	Gemeses
+030615	Vila Cha
+030616	Apulia e Fao
+030617	Belinho e Mar
+030618	Esposende, Marinhas e Gandra
+030619	Fonte Boa e Rio Tinto
+030620	Palmeira de Faro e Curvos
+030705	Armil
+030708	Estoraos
+030709	Fafe
+030712	Fornelos
+030714	Golaes
+030716	Medelo
+030719	Passos
+030722	Quinchaes
+030723	Regadas
+030724	Revelhe
+030725	Ribeiros
+030726	Aroes (Santa Cristina)
+030728	S. Gens
+030729	Silvares (S. Martinho)
+030730	Aroes (S. Romao)
+030733	Travassos
+030736	Vinhos
+030737	Aboim, Felgueiras, Gontim e Pedraido
+030738	Agrela e Serafao
+030739	Antime e Silvares (Sao Clemente)
+030740	Ardegao, Arnozela e Seidoes
+030741	Cepaes e Fareja
+030742	Freitas e Vila Cova
+030743	Monte e Queimadela
+030744	Moreira do Rei e Varzea Cova
+030801	Aldao
+030804	Azurem
+030806	Barco
+030807	Brito
+030808	Caldelas
+030812	Costa
+030813	Creixomil
+030815	Fermentoes
+030820	Gonca
+030821	Gondar
+030823	Guardizela
+030824	Infantas
+030827	Longos
+030828	Lordelo
+030830	Mesao Frio
+030831	Moreira de Conegos
+030832	Nespereira
+030835	Pencelo
+030836	Pinheiro
+030837	Polvoreira
+030838	Ponte
+030840	Ronfe
+030842	Prazins (Santa Eufemia)
+030850	Selho (S. Cristovao)
+030854	Selho (S. Jorge)
+030857	Candoso (S. Martinho)
+030858	Sande (S. Martinho)
+030865	S. Torcato
+030866	Serzedelo
+030868	Silvares
+030871	Urgezes
+030875	Abacao e Gemeos
+030876	Airao Santa Maria, Airao Sao Joao e Vermil
+030877	Arosa e Casteloes
+030878	Ataes e Rendufe
+030879	Briteiros Santo Estevao e Donim
+030880	Briteiros Sao Salvador e Briteiros Santa Leocadia
+030881	Candoso Sao Tiago e Mascotelos
+030882	Conde e Gandarela
+030883	Leitoes, Oleiros e Figueiredo
+030884	Oliveira, Sao Paio e Sao Sebastiao
+030885	Prazins Santo Tirso e Corvite
+030886	Sande Sao Lourenco e Balazar
+030887	Sande Vila Nova e Sande Sao Clemente
+030888	Selho Sao Lourenco e Gominhaes
+030889	Serzedo e Calvos
+030890	Souto Santa Maria, Souto Sao Salvador e Gondomar
+030891	Tabuadelo e Sao Faustino
+030906	Covelas
+030908	Ferreiros
+030912	Galegos
+030913	Garfe
+030914	Geraz do Minho
+030915	Lanhoso
+030917	Monsul
+030919	Povoa de Lanhoso (N. Senhora do Amparo)
+030921	Rendufinho
+030922	Santo Emiliao
+030923	S. Joao de Rei
+030924	Serzedelo
+030925	Sobradelo da Goma
+030926	Taide
+030927	Travassos
+030929	Vilela
+030930	Aguas Santas e Moure
+030931	Calvos e Frades
+030932	Campos e Louredo
+030933	Esperanca e Brunhais
+030934	Fonte Arcada e Oliveira
+030935	Verim, Friande e Ajude
+031001	Balanca
+031003	Campo do Geres
+031004	Carvalheira
+031008	Covide
+031009	Gondoriz
+031010	Moimenta
+031012	Ribeira
+031013	Rio Caldo
+031014	Souto
+031015	Valdosende
+031017	Vilar da Veiga
+031018	Chamoim e Vilar
+031019	Chorense e Monte
+031020	Ciboes e Brufe
+031105	Cantelaes
+031107	Eira Vedra
+031108	Guilhofrei
+031109	Louredo
+031110	Mosteiro
+031111	Parada do Bouro
+031112	Pinheiro
+031113	Rossas
+031115	Salamonde
+031118	Tabuacas
+031120	Vieira do Minho
+031122	Anisso e Soutelo
+031123	Anjos e Vilar do Chao
+031124	Canicada e Soengas
+031125	Ruivaes e Campos
+031126	Ventosa e Cova
+031204	Bairro
+031206	Brufe
+031210	Casteloes
+031212	Cruz
+031213	Delaes
+031215	Fradelos
+031216	Gaviao
+031219	Joane
+031221	Landim
+031223	Louro
+031224	Lousado
+031225	Mogege
+031227	Nine
+031230	Pedome
+031232	Pousada de Saramagos
+031233	Requiao
+031234	Riba de Ave
+031235	Ribeirao
+031239	Oliveira (Santa Maria)
+031241	Vale (S. Martinho)
+031242	Oliveira (S. Mateus)
+031247	Vermoim
+031249	Vilarinho Das Cambas
+031250	Antas e Abade de Vermoim
+031251	Arnoso (Santa Maria e Santa Eulalia) e Sezures
+031252	Avidos e Lagoa
+031253	Carreira e Bente
+031254	Esmeriz e Cabecudos
+031255	Gondifelos, Cavaloes e Outiz
+031256	Lemenhe, Mouquim e Jesufrei
+031257	Ruivaes e Novais
+031258	Seide
+031259	Vale (Sao Cosme), Telhado e Portela
+031260	Vila Nova de Famalicao e Calendario
+031304	Atiaes
+031308	Cabanelas
+031309	Cervaes
+031311	Coucieiro
+031313	Dossaos
+031316	Freiriz
+031317	Geme
+031323	Lage
+031324	Lanhas
+031325	Loureira
+031328	Moure
+031330	Oleiros
+031331	Parada de Gatim
+031335	Pico
+031337	Ponte
+031340	Sabariz
+031342	Vila de Prado
+031350	Prado (S. Miguel)
+031352	Soutelo
+031354	Turiz
+031355	Valdreu
+031359	Aboim da Nobrega e Gondomar
+031360	Ribeira do Neiva
+031361	Carreiras (Sao Miguel) e Carreiras (Santiago)
+031362	Escariz (Sao Mamede) e Escariz (Sao Martinho)
+031363	Esqueiros, Nevogilde e Travassos
+031364	Marrancos e Arcozelo
+031365	Oriz (Santa Marinha) e Oriz (Sao Miguel)
+031366	Pico de Regalados, Gondiaes e Mos
+031367	Sande, Vilarinho, Barros e Gomide
+031368	Valbom (Sao Pedro), Passo e Valbom (Sao Martinho)
+031369	Vade
+031370	Vila Verde e Barbudo
+031401	Infias
+031402	Santa Eulalia
+031403	Santo Adriao de Vizela
+031408	Caldas de Vizela (Sao Miguel e Sao Joao)
+031409	Tagilde e Vizela (Sao Paio)
+040102	Alfandega da Fe
+040103	Cerejais
+040111	Sambade
+040118	Vilar Chao
+040119	Vilarelhos
+040120	Vilares de Vilarica
+040121	Agrobom, Saldonha e Vale Pereiro
+040122	Eucisia, Gouveia e Valverde
+040123	Ferradosa e Sendim da Serra
+040124	Gebelim e Soeima
+040125	Parada e Sendim da Ribeira
+040126	Pombal e Vales
+040201	Alfaiao
+040203	Babe
+040204	Bacal
+040206	Carragosa
+040209	Castro de Avelas
+040210	Coelhoso
+040212	Donai
+040213	Espinhosela
+040215	Franca
+040216	Gimonde
+040217	Gondesende
+040218	Gostei
+040219	Grijo de Parada
+040221	Macedo do Mato
+040224	Mos
+040225	Nogueira
+040226	Outeiro
+040229	Paramio
+040230	Pinela
+040232	Quintanilha
+040233	Quintela de Lampacas
+040234	Rabal
+040236	Rebordaos
+040239	Salsas
+040240	Samil
+040241	Santa Comba de Rossas
+040244	S. Pedro de Serracenos
+040246	Sendas
+040247	Serapicos
+040248	Sortes
+040249	Zoio
+040250	Aveleda e Rio de Onor
+040251	Castrelos e Carrazedo
+040252	Izeda, Calvelhe e Paradinha Nova
+040253	Parada e Failde
+040254	Rebordainhos e Pombares
+040255	Rio Frio e Milhao
+040256	Sao Juliao de Palacios e Deilao
+040257	Se, Santa Maria e Meixedo
+040304	Carrazeda de Ansiaes
+040306	Fonte Longa
+040308	Linhares
+040309	Marzagao
+040311	Parambos
+040312	Pereiros
+040313	Pinhal do Norte
+040314	Pombal
+040316	Seixo de Ansiaes
+040318	Vilarinho da Castanheira
+040320	Amedo e Zedes
+040321	Belver e Mogo de Malta
+040322	Castanheiro do Norte e Ribalonga
+040323	Lavandeira, Beira Grande e Selores
+040404	Ligares
+040406	Poiares
+040407	Freixo de Espada a Cinta e Mazouco
+040408	Lagoaca e Fornos
+040502	Amendoeira
+040503	Arcas
+040507	Carrapatas
+040509	Chacim
+040510	Corticos
+040511	Corujas
+040514	Ferreira
+040515	Grijo
+040516	Lagoa
+040517	Lamalonga
+040518	Lamas
+040519	Lombo
+040520	Macedo de Cavaleiros
+040521	Morais
+040523	Olmos
+040524	Peredo
+040526	Salselas
+040528	Sezulfe
+040530	Talhas
+040532	Vale Benfeito
+040533	Vale da Porca
+040534	Vale de Prados
+040536	Vilarinho de Agrochao
+040538	Vinhas
+040539	Ala e Vilarinho do Monte
+040540	Bornes e Burga
+040541	Castelaos e Vilar do Monte
+040542	Espadanedo, Edroso, Murcos e Soutelo Mourisco
+040543	Podence e Santa Combinha
+040544	Talhinhas e Bagueixe
+040604	Duas Igrejas
+040605	Genisio
+040607	Malhadas
+040608	Miranda do Douro
+040609	Palacoulo
+040611	Picote
+040612	Povoa
+040613	S. Martinho de Angueira
+040616	Vila Cha de Braciosa
+040618	Constantim e Cicouro
+040619	Ifanes e Paradela
+040620	Sendim e Atenor
+040621	Silva e Aguas Vivas
+040701	Abambres
+040702	Abreiro
+040703	Aguieiras
+040704	Alvites
+040708	Bouca
+040709	Cabanelas
+040710	Caravelas
+040711	Carvalhais
+040712	Cedaes
+040713	Cobro
+040714	Fradizela
+040716	Frechas
+040718	Lamas de Orelhao
+040720	Mascarenhas
+040721	Mirandela
+040722	Murias
+040724	Passos
+040727	S. Pedro Velho
+040728	S. Salvador
+040729	Sucaes
+040730	Torre de D. Chama
+040731	Vale de Asnes
+040732	Vale de Gouvinhas
+040733	Vale de Salgueiro
+040734	Vale de Telhas
+040738	Avantos e Romeu
+040739	Avidagos, Navalho e Pereira
+040740	Barcel, Marmelos e Valverde da Gestosa
+040741	Franco e Vila Boa
+040742	Freixeda e Vila Verde
+040801	Azinhoso
+040802	Bemposta
+040803	Bruco
+040804	Brunhoso
+040807	Castelo Branco
+040808	Castro Vicente
+040809	Meirinhos
+040811	Paradela
+040812	Penas Roias
+040813	Peredo da Bemposta
+040815	Saldanha
+040817	S. Martinho do Peso
+040819	To
+040820	Travanca
+040821	Urros
+040822	Vale da Madre
+040826	Vila de Ala
+040829	Brunhozinho, Castanheira e Sanhoane
+040830	Mogadouro, Valverde, Vale de Porco e Vilar de Rei
+040831	Remondes e Soutelo
+040832	Vilarinho Dos Galegos e Ventozelo
+040901	Acoreira
+040903	Cabeca Boa
+040905	Carvicais
+040906	Castedo
+040909	Horta da Vilarica
+040910	Larinho
+040911	Lousa
+040913	Mos
+040916	Torre de Moncorvo
+040918	Adeganha e Cardanha
+040919	Felgar e Souto da Velha
+040920	Felgueiras e Macores
+040921	Urros e Peredo Dos Castelhanos
+041002	Benlhevai
+041005	Freixiel
+041009	Roios
+041010	Samoes
+041011	Sampaio
+041012	Santa Comba de Vilarica
+041013	Seixo de Manhoses
+041014	Trindade
+041015	Vale Frechoso
+041020	Assares e Lodoes
+041021	Candoso e Carvalho de Egas
+041022	Valtorno e Mourao
+041023	Vila Flor e Nabo
+041024	Vilas Boas e Vilarinho Das Azenhas
+041103	Argozelo
+041107	Carcao
+041108	Matela
+041109	Pinelo
+041110	Santulhao
+041113	Vilar Seco
+041114	Vimioso
+041115	Algoso, Campo de Viboras e Uva
+041116	Cacarelhos e Angueira
+041117	Vale de Frades e Avelanoso
+041201	Agrochao
+041203	Candedo
+041204	Celas
+041206	Edral
+041207	Edrosa
+041208	Ervedosa
+041215	Paco
+041216	Penhas Juntas
+041219	Rebordelo
+041221	Santalha
+041226	Tuizelo
+041227	Vale Das Fontes
+041229	Vila Boa de Ousilhao
+041230	Vila Verde
+041232	Vilar de Ossos
+041233	Vilar de Peregrinos
+041234	Vilar Seco de Lomba
+041235	Vinhais
+041236	Curopos e Vale de Janeiro
+041237	Moimenta e Montouto
+041238	Nunes e Ousilhao
+041239	Quiras e Pinheiro Novo
+041240	Sobreiro de Baixo e Alvaredos
+041241	Soeira, Fresulfe e Mofreita
+041242	Travanca e Santa Cruz
+041243	Vilar de Lomba e Sao Jomil
+050102	Caria
+050104	Inguias
+050105	Macainhas
+050106	Belmonte e Colmeal da Torre
+050201	Alcains
+050202	Almaceda
+050203	Benquerencas
+050205	Castelo Branco
+050211	Lardosa
+050212	Lourical do Campo
+050214	Malpica do Tejo
+050216	Monforte da Beira
+050220	Salgueiro do Campo
+050221	Santo Andre Das Tojeiras
+050222	S. Vicente da Beira
+050223	Sarzedas
+050225	Tinalhas
+050226	Cebolais de Cima e Retaxo
+050227	Escalos de Baixo e Mata
+050228	Escalos de Cima e Lousa
+050229	Freixial e Juncal do Campo
+050230	Ninho do Acor e Sobral do Campo
+050231	Povoa de Rio de Moinhos e Cafede
+050302	Aldeia de S. Francisco de Assis
+050305	Boidobra
+050308	Cortes do Meio
+050309	Dominguizo
+050310	Erada
+050311	Ferro
+050312	Orjais
+050314	Paul
+050315	Peraboa
+050318	S. Jorge da Beira
+050322	Sobral de S. Miguel
+050324	Tortosendo
+050325	Unhais da Serra
+050327	Verdelhos
+050332	Barco e Coutada
+050333	Cantar-Galo e Vila do Carvalho
+050334	Casegas e Ourondo
+050335	Covilha e Canhoso
+050336	Peso e Vales do Rio
+050337	Teixoso e Sarzedo
+050338	Vale Formoso e Aldeia do Souto
+050401	Alcaide
+050402	Alcaria
+050403	Alcongosta
+050406	Alpedrinha
+050408	Barroca
+050410	Bogas de Cima
+050411	Capinha
+050412	Castelejo
+050413	Castelo Novo
+050416	Fatela
+050419	Lavacolhos
+050420	Orca
+050421	Pero Viseu
+050424	Silvares
+050425	Soalheira
+050426	Souto da Casa
+050427	Telhado
+050431	Enxames
+050432	Tres Povos
+050433	Janeiro de Cima e Bogas de Baixo
+050434	Fundao, Valverde, Donas, A. Joanes, A. Nova Cabo
+050435	Povoa de Atalaia e Atalaia do Campo
+050436	Vale de Prazeres e Mata da Rainha
+050502	Aldeia de Santa Margarida
+050505	Ladoeiro
+050506	Medelim
+050509	Oledo
+050510	Penha Garcia
+050511	Proenca-A-Velha
+050512	Rosmaninhal
+050514	S. Miguel de Acha
+050516	Touloes
+050518	Idanha-A-Nova e Alcafozes
+050519	Monfortinho e Salvaterra do Extremo
+050520	Monsanto e Idanha-A-Velha
+050521	Zebreira e Segura
+050601	Alvaro
+050603	Cambas
+050605	Isna
+050606	Madeira
+050607	Mosteiro
+050609	Orvalho
+050610	Sarnadas de S. Simao
+050611	Sobral
+050613	Estreito-Vilar Barroco
+050614	Oleiros-Amieira
+050704	Aranhas
+050706	Benquerenca
+050707	Meimao
+050708	Meimoa
+050710	Penamacor
+050711	Salvador
+050712	Vale da Senhora da Povoa
+050713	Aldeia do Bispo, Aguas e Aldeia de Joao Pires
+050714	Pedrogao de Sao Pedro e Bemposta
+050802	Montes da Senhora
+050805	S. Pedro do Esteval
+050807	Proenca-A-Nova e Peral
+050808	Sobreira Formosa e Alvito da Beira
+050901	Cabecudo
+050902	Carvalhal
+050903	Castelo
+050911	Pedrogao Pequeno
+050912	Serta
+050913	Troviscal
+050914	Varzea Dos Cavaleiros
+050915	Cernache do Bonjardim, Nesperal e Palhais
+050916	Cumeada e Marmeleiro
+050917	Ermida e Figueiredo
+051001	Fundada
+051002	S. Joao do Peso
+051003	Vila de Rei
+051101	Fratel
+051102	Perais
+051103	Sarnadas de Rodao
+051104	Vila Velha de Rodao
+060102	Arganil
+060104	Benfeita
+060105	Celavisa
+060109	Folques
+060111	Piodao
+060112	Pomares
+060113	Pombeiro da Beira
+060114	S. Martinho da Cortica
+060115	Sarzedo
+060116	Secarias
+060119	Cepos e Teixeira
+060120	Cerdeira e Moura da Serra
+060121	Coja e Barril de Alva
+060122	Vila Cova de Alva e Anseriz
+060201	Anca
+060203	Cadima
+060205	Cordinha
+060207	Febres
+060208	Murtede
+060209	Ourenta
+060214	Tocha
+060215	S. Caetano
+060218	Sanguinheira
+060220	Cantanhede e Pocarica
+060221	Covoes e Camarneira
+060222	Portunhos e Outil
+060223	Sepins e Bolho
+060224	Vilamar e Corticeiro de Cima
+060301	Almalagues
+060309	Brasfemes
+060311	Ceira
+060312	Cernache
+060318	Santo Antonio Dos Olivais
+060320	S. Joao do Campo
+060324	S. Silvestre
+060329	Torres do Mondego
+060332	Antuzede e Vil de Matos
+060333	Assafarge e Antanhol
+060334	Se Nova, Santa Cruz, Almedina e Sao Bartolomeu
+060335	Eiras e Sao Paulo de Frades
+060336	Santa Clara e Castelo Viegas
+060337	Sao Martinho de Arvore e Lamarosa
+060338	Sao Martinho do Bispo e Ribeira de Frades
+060339	Souselas e Botao
+060340	Taveiro, Ameal e Arzila
+060341	Trouxemil e Torre de Vilela
+060401	Anobra
+060406	Ega
+060407	Furadouro
+060410	Zambujal
+060411	Condeixa-A-Velha e Condeixa-A-Nova
+060412	Sebal e Belide
+060413	Vila Seca e Bem da Fe
+060502	Alqueidao
+060507	Maiorca
+060508	Marinha Das Ondas
+060512	Tavarede
+060513	Vila Verde
+060514	S. Pedro
+060515	Bom Sucesso
+060518	Moinhos de Gandara
+060519	Alhadas
+060520	Buarcos
+060521	Ferreira-A-Nova
+060522	Lavos
+060523	Paiao
+060524	Quiaios
+060601	Alvares
+060604	Gois
+060605	Vila Nova do Ceira
+060606	Cadafaz e Colmeal
+060704	Serpins
+060706	Gandaras
+060707	Foz de Arouce e Casal de Ermio
+060708	Lousa e Vilarinho
+060801	Mira
+060802	Seixo
+060803	Carapelhos
+060804	Praia de Mira
+060901	Lamas
+060902	Miranda do Corvo
+060905	Vila Nova
+060906	Semide e Rio Vide
+061002	Arazede
+061003	Carapinheira
+061005	Liceia
+061006	Meas do Campo
+061008	Pereira
+061009	Santo Varao
+061010	Seixo de Gatoes
+061011	Tentugal
+061014	Ereira
+061015	Abrunheira, Verride e Vila Nova da Barca
+061016	Montemor-O-Velho e Gatoes
+061101	Aldeia Das Dez
+061102	Alvoco Das Varzeas
+061103	Avo
+061104	Bobadela
+061106	Lagares
+061109	Lourosa
+061110	Meruge
+061111	Nogueira do Cravo
+061115	S. Giao
+061118	Seixo da Beira
+061119	Travanca de Lagos
+061122	Ervedal e Vila Franca da Beira
+061123	Lagos da Beira e Lajeosa
+061124	Oliveira do Hospital e Sao Paio de Gramacos
+061125	Penalva de Alva e Sao Sebastiao da Feira
+061126	Santa Ovaia e Vila Pouca da Beira
+061201	Cabril
+061202	Dornelas do Zezere
+061204	Janeiro de Baixo
+061206	Pampilhosa da Serra
+061207	Pessegueiro
+061209	Unhais-O-Velho
+061211	Fajao-Vidual
+061212	Portela do Fojo-Machio
+061301	Carvalho
+061302	Figueira de Lorvao
+061304	Lorvao
+061307	Penacova
+061310	Sazes do Lorvao
+061312	Friumes e Paradela
+061313	Oliveira do Mondego e Travanca do Mondego
+061314	Sao Pedro de Alva e Sao Paio de Mondego
+061401	Cumeeira
+061402	Espinhal
+061403	Podentes
+061407	Sao Miguel, Santa Eufemia e Rabacal
+061501	Alfarelos
+061504	Figueiro do Campo
+061506	Granja do Ulmeiro
+061508	Samuel
+061509	Soure
+061510	Tapeus
+061511	Vila Nova de Ancos
+061512	Vinha da Rainha
+061513	Degracias e Pombalinho
+061514	Gesteira e Brunhos
+061602	Candosa
+061603	Carapinha
+061608	Midoes
+061609	Mouronho
+061611	Povoa de Midoes
+061612	S. Joao da Boa Vista
+061614	Tabua
+061616	Azere e Covelo
+061617	Covas e Vila Nova de Oliveirinha
+061618	Espariz e Sinde
+061619	Pinheiro de Coja e Meda de Mouros
+061701	Arrifana
+061702	Lavegadas
+061703	Poiares (Santo Andre)
+061704	S. Miguel de Poiares
+070103	Santiago Maior
+070104	Capelins (Santo Antonio)
+070105	Terena (S. Pedro)
+070107	N.S. Conceicao, S.Bras Matos, Juromenha
+070201	Arraiolos
+070202	Igrejinha
+070206	Vimieiro
+070208	Gafanhoeira (Sao Pedro) e Sabugueiro
+070209	Sao Gregorio e Santa Justa
+070301	Borba (Matriz)
+070302	Orada
+070303	Rio de Moinhos
+070304	Borba (S. Bartolomeu)
+070401	Arcos
+070402	Gloria
+070404	Evora Monte (Santa Maria)
+070411	S. Domingos de Ana Loura
+070413	Veiros
+070414	Estremoz (Santa Maria e Santo Andre)
+070415	Sao Bento do Cortico e Santo Estevao
+070416	Sao Lourenco de Mamporcao e Sao Bento de Ana Loura
+070417	Ameixial (Santa Vitoria e Sao Bento)
+070502	Nossa Senhora da Graca do Divor
+070503	Nossa Senhora de Machede
+070506	S. Bento do Mato
+070509	S. Miguel de Machede
+070513	Torre de Coelheiros
+070515	Canaviais
+070522	Bacelo e Senhora da Saude
+070523	Evora (Sao Mamede, Se, Sao Pedro e Santo Antao)
+070524	Malagueira e Horta Das Figueiras
+070525	N.S. da Tourega e N.S. de Guadalupe
+070526	Sao Mancos e Sao Vicente do Pigeiro
+070527	S.Sebastiao da Giesteira e N.S. da Boa Fe
+070601	Cabrela
+070605	Santiago do Escoural
+070606	S. Cristovao
+070607	Ciborro
+070610	Foros de Vale de Figueira
+070611	Corticadas de Lavre e Lavre
+070612	N.S. da Vila, N.S. do Bispo e Silveiras
+070701	Brotas
+070702	Cabecao
+070703	Mora
+070704	Pavia
+070801	Granja
+070802	Luz
+070803	Mourao
+070903	Monte do Trigo
+070905	Portel
+070906	Santana
+070908	Vera Cruz
+070909	Amieira e Alqueva
+070910	Sao Bartolomeu do Outeiro e Oriola
+071001	Montoito
+071002	Redondo
+071102	Corval
+071103	Monsaraz
+071104	Reguengos de Monsaraz
+071106	Campo e Campinho
+071201	Vendas Novas
+071202	Landeira
+071301	Alcacovas
+071302	Viana do Alentejo
+071303	Aguiar
+071401	Bencatel
+071402	Ciladas
+071404	Pardais
+071406	Nossa Senhora da Conceicao e Sao Bartolomeu
+080102	Guia
+080103	Paderne
+080104	Ferreiras
+080106	Albufeira e Olhos de Agua
+080202	Gioes
+080203	Martim Longo
+080205	Vaqueiros
+080206	Alcoutim e Pereiro
+080301	Aljezur
+080302	Bordeira
+080303	Odeceixe
+080304	Rogil
+080401	Azinhal
+080402	Castro Marim
+080403	Odeleite
+080404	Altura
+080503	Santa Barbara de Nexe
+080506	Montenegro
+080507	Conceicao e Estoi
+080508	Faro (Se e Sao Pedro)
+080602	Ferragudo
+080604	Porches
+080607	Estombar e Parchal
+080608	Lagoa e Carvoeiro
+080703	Luz
+080704	Odiaxere
+080707	Bensafrim e Barao de Sao Joao
+080708	Lagos (Sao Sebastiao e Santa Maria)
+080801	Almancil
+080802	Alte
+080803	Ameixial
+080804	Boliqueime
+080805	Quarteira
+080807	Salir
+080808	Loule (S. Clemente)
+080809	Loule (S. Sebastiao)
+080812	Querenca, Tor e Benafim
+080901	Alferce
+080902	Marmelete
+080903	Monchique
+081003	Olhao
+081004	Pechao
+081005	Quelfes
+081006	Moncarapacho e Fuseta
+081101	Alvor
+081102	Mexilhoeira Grande
+081103	Portimao
+081201	S. Bras de Alportel
+081303	Armacao de Pera
+081305	S. Bartolomeu de Messines
+081306	S. Marcos da Serra
+081307	Silves
+081309	Alcantarilha e Pera
+081310	Algoz e Tunes
+081401	Cachopo
+081404	Santa Catarina da Fonte do Bispo
+081408	Santa Luzia
+081410	Conceicao e Cabanas de Tavira
+081411	Luz de Tavira e Santo Estevao
+081412	Tavira (Santa Maria e Santiago)
+081501	Barao de S. Miguel
+081502	Budens
+081504	Vila de Sagres
+081506	Vila do Bispo e Raposeira
+081601	Vila Nova de Cacela
+081602	Vila Real de Santo Antonio
+081603	Monte Gordo
+090102	Carapito
+090103	Corticada
+090105	Dornelas
+090106	Eirado
+090107	Forninhos
+090109	Pena Verde
+090110	Pinheiro
+090114	Aguiar da Beira e Coruche
+090115	Sequeiros e Gradiz
+090116	Souto de Aguiar da Beira e Valverde
+090203	Almeida
+090207	Castelo Bom
+090209	Freineda
+090210	Freixo
+090213	Malhada Sorda
+090219	Nave de Haver
+090224	S. Pedro de Rio Seco
+090227	Vale da Mula
+090229	Vilar Formoso
+090230	Amoreira, Parada e Cabreira
+090231	Azinhal, Peva e Valverde
+090232	Castelo Mendo, Ade, Monteperobolso e Mesquitela
+090233	Junca e Naves
+090234	Leomil, Mido, Senouras e Aldeia Nova
+090235	Malpartida e Vale de Coelha
+090236	Miuzela e Porto de Ovelha
+090302	Baracal
+090304	Carrapichana
+090306	Forno Telheiro
+090307	Lajeosa do Mondego
+090308	Linhares
+090309	Macal do Chao
+090310	Mesquitela
+090311	Minhocal
+090312	Prados
+090314	Ratoeira
+090318	Vale de Azares
+090322	Casas do Soeiro
+090323	Acores e Velosa
+090324	Sao Pedro e Santa Maria e Vila Boa do Mondego
+090325	Cortico da Serra, Vide Entre Vinhas e Salgueirais
+090326	Rapa e Cadafaz
+090403	Castelo Rodrigo
+090406	Escalhao
+090408	Figueira de Castelo Rodrigo
+090410	Mata de Lobos
+090415	Vermiosa
+090418	Algodres, Vale de Afonsinho e Vilar de Amargo
+090419	Almofala e Escarigo
+090420	Cinco Vilas e Reigada
+090421	Freixeda Torrao, Quinta Pero Martins, Penha Aguia
+090422	Colmeal e Vilar Torpim
+090501	Algodres
+090502	Casal Vasco
+090504	Figueiro da Granja
+090505	Fornos de Algodres
+090507	Infias
+090509	Maceira
+090510	Matanca
+090511	Muxagata
+090512	Queiriz
+090517	Cortico e Vila Cha
+090518	Juncais, Vila Ruiva e Vila Soeiro do Chao
+090519	Sobral Pichorro e Fuinhas
+090602	Arcozelo
+090603	Cativelos
+090605	Folgosinho
+090612	Nespereira
+090613	Pacos da Serra
+090614	Ribamondego
+090617	S. Paio
+090619	Vila Cortes da Serra
+090620	Vila Franca da Serra
+090621	Vila Nova de Tazem
+090623	Aldeias e Mangualde da Serra
+090624	Figueiro da Serra e Freixo da Serra
+090625	Gouveia (Sao Pedro e Sao Juliao)
+090626	Melo e Nabais
+090627	Moimenta da Serra e Vinho
+090628	Rio Torto e Lagarinhos
+090703	Aldeia do Bispo
+090704	Aldeia Vicosa
+090705	Alvendre
+090706	Arrifana
+090708	Avelas da Ribeira
+090709	Benespera
+090711	Casal de Cinza
+090712	Castanheira
+090713	Cavadoude
+090714	Codesseiro
+090716	Faia
+090717	Famalicao
+090718	Fernao Joanes
+090721	Goncalo Bocas
+090722	Joao Antao
+090723	Macainhas
+090724	Marmeleiro
+090725	Meios
+090728	Panoias de Cima
+090729	Pega
+090730	Pera do Moco
+090732	Porto da Carne
+090734	Ramela
+090738	Santana da Azinha
+090744	Sobral da Serra
+090746	Vale de Estrela
+090747	Valhelhas
+090748	Vela
+090749	Videmonte
+090750	Vila Cortes do Mondego
+090751	Vila Fernando
+090752	Vila Franca do Deao
+090753	Vila Garcia
+090757	Goncalo
+090758	Guarda
+090759	Jarmelo Sao Miguel
+090760	Jarmelo Sao Pedro
+090761	Avelas de Ambom e Rocamondo
+090762	Corujeira e Trinta
+090763	Mizarela, Pero Soares e Vila Soeiro
+090764	Pousade e Albardo
+090765	Rochoso e Monte Margarida
+090766	Adao
+090801	Sameiro
+090802	Manteigas (Santa Maria)
+090803	Manteigas (S. Pedro)
+090804	Vale da Amoreira
+090901	Aveloso
+090902	Barreira
+090905	Coriscada
+090907	Longroiva
+090908	Marialva
+090912	Poco do Canto
+090914	Rabacal
+090915	Ranhados
+090917	Meda, Outeiro de Gatos e Fonte Longa
+090918	Prova e Casteicao
+090919	Vale Flor, Carvalhal e Pai Penela
+091009	Ervedosa
+091010	Freixedas
+091012	Lamegal
+091013	Lameiras
+091014	Manigoto
+091015	Pala
+091017	Pinhel
+091018	Pinzio
+091024	Souro Pires
+091027	Vascoveiro
+091028	Agregacao Das Freguesias Sul de Pinhel
+091029	Alverca da Beira/Bouca Cova
+091030	Terras de Massueime
+091031	Valbom/Bogalhal
+091032	Alto do Palurdo
+091033	Vale do Coa
+091034	Vale do Massueime
+091035	Atalaia e Safurdao
+091101	Aguas Belas
+091102	Aldeia do Bispo
+091103	Aldeia da Ponte
+091106	Aldeia Velha
+091107	Alfaiates
+091109	Baracal
+091110	Bendada
+091111	Bismula
+091112	Casteleiro
+091113	Cerdeira
+091114	Foios
+091118	Malcata
+091120	Nave
+091123	Quadrazais
+091124	Quintas de Sao Bartolomeu
+091125	Rapoula do Coa
+091126	Rebolosa
+091127	Rendo
+091133	Sortelha
+091134	Souto
+091136	Vale de Espinho
+091138	Vila Boa
+091139	Vila do Touro
+091141	Aldeia da Ribeira, Vilar Maior e Badamalos
+091142	Lajeosa e Forcalhos
+091143	Pousafoles do Bispo, Pena Lobo e Lomba
+091144	Ruvina, Ruivos e Vale Das Eguas
+091145	Sabugal e Aldeia de Santo Antonio
+091146	Santo Estevao e Moita
+091147	Seixo do Coa e Vale Longo
+091201	Alvoco da Serra
+091205	Girabolhos
+091207	Loriga
+091208	Paranhos
+091209	Pinhancos
+091210	Sabugueiro
+091212	Sandomil
+091213	Santa Comba
+091216	Santiago
+091219	Sazes da Beira
+091221	Teixeira
+091224	Travancinha
+091225	Valezim
+091228	Vila Cova A Coelheira
+091230	Carragozela e Varzea de Meruge
+091231	Sameice e Santa Eulalia
+091232	Santa Marinha e Sao Martinho
+091233	Seia, Sao Romao e Lapa Dos Dinheiros
+091234	Torrozelo e Folhadosa
+091235	Tourais e Lajes
+091236	Vide e Cabeca
+091301	Aldeia Nova
+091303	Castanheira
+091304	Cogula
+091305	Cotimos
+091307	Fiaes
+091309	Granja
+091310	Guilheiro
+091311	Moimentinha
+091312	Moreira de Rei
+091313	Palhais
+091314	Povoa do Concelho
+091315	Reboleiro
+091316	Rio de Mel
+091321	Tamanhos
+091325	Valdujo
+091330	Freches e Torres
+091331	Torre do Terrenho, Sebadelhe da Serra e Terrenho
+091332	Trancoso (Sao Pedro e Santa Maria) e Souto Maior
+091333	Vale do Seixo e Vila Garcia
+091334	Vila Franca Das Naves e Feital
+091335	Vilares e Carnicaes
+091401	Almendra
+091402	Castelo Melhor
+091403	Cedovim
+091404	Chas
+091405	Custoias
+091407	Horta
+091410	Muxagata
+091411	Numao
+091412	Santa Comba
+091414	Sebadelhe
+091415	Seixas
+091416	Touca
+091418	Freixo de Numao
+091419	Vila Nova de Foz Coa
+100102	Alfeizerao
+100104	Barrio
+100105	Benedita
+100106	Cela
+100108	Evora de Alcobaca
+100109	Maiorga
+100112	S. Martinho do Porto
+100114	Turquel
+100116	Vimeiro
+100120	Aljubarrota
+100121	Alcobaca e Vestiaria
+100122	Coz, Alpedriz e Montes
+100123	Pataias e Martinganca
+100201	Almoster
+100204	Macas de D. Maria
+100205	Pelma
+100208	Alvaiazere
+100209	Pussos Sao Pedro
+100301	Alvorge
+100303	Avelar
+100304	Chao de Couce
+100306	Pousaflores
+100307	Santiago da Guarda
+100309	Ansiao
+100401	Batalha
+100402	Reguengo do Fetal
+100403	S. Mamede
+100404	Golpilheira
+100502	Carvalhal
+100503	Rolica
+100505	Po
+100506	Bombarral e Vale Covo
+100601	A Dos Francos
+100602	Alvorninha
+100604	Carvalhal Benfeito
+100606	Foz do Arelho
+100607	Landal
+100608	Nadadouro
+100609	Salir de Matos
+100611	Santa Catarina
+100615	Vidais
+100617	Nossa Senhora do Populo, Coto e Sao Gregorio
+100618	Caldas da Rainha - Santo Onofre e Serra do Bouro
+100619	Tornada e Salir do Porto
+100703	Castanheira de Pera e Coentral
+100801	Aguda
+100802	Arega
+100803	Campelo
+100806	Figueiro Dos Vinhos e Bairradas
+100901	Amor
+100902	Arrabal
+100907	Caranguejeira
+100909	Coimbrao
+100913	Maceira
+100915	Milagres
+100921	Regueira de Pontes
+100925	Bajouca
+100926	Bidoeira de Cima
+100932	Colmeias e Memoria
+100933	Leiria, Pousos, Barreira e Cortes
+100934	Marrazes e Barosa
+100935	Monte Real e Carvide
+100936	Monte Redondo e Carreira
+100937	Parceiros e Azoia
+100938	Santa Catarina da Serra e Chainca
+100939	Santa Eufemia e Boa Vista
+100940	Souto da Carpalhosa e Ortigosa
+101001	Marinha Grande
+101002	Vieira de Leiria
+101003	Moita
+101101	Famalicao
+101102	Nazare
+101103	Valado Dos Frades
+101201	A Dos Negros
+101202	Amoreira
+101203	Olho Marinho
+101207	Vau
+101208	Gaeiras
+101209	Usseira
+101210	Santa Maria, Sao Pedro e Sobral da Lagoa
+101301	Graca
+101302	Pedrogao Grande
+101303	Vila Facaia
+101402	Atouguia da Baleia
+101405	Serra D'el-Rei
+101406	Ferrel
+101407	Peniche
+101501	Abiul
+101503	Almagreira
+101504	Carnide
+101505	Carrico
+101506	Lourical
+101508	Pelariga
+101509	Pombal
+101510	Redinha
+101513	Vermoil
+101514	Vila Ca
+101515	Meirinhas
+101518	Guia, Ilha e Mata Mourisca
+101519	Santiago e S.Simao de Litem e Albergaria Dos Doze
+101602	Alqueidao da Serra
+101605	Calvaria de Cima
+101606	Juncal
+101608	Mira de Aire
+101609	Pedreiras
+101610	S. Bento
+101613	Serro Ventoso
+101614	Porto de Mos - Sao Joao Baptista e Sao Pedro
+101615	Alvados e Alcaria
+101616	Arrimal e Mendiga
+110106	Carnota
+110107	Meca
+110108	Olhalvo
+110109	Ota
+110113	Ventosa
+110114	Vila Verde Dos Francos
+110117	Abrigada e Cabanas de Torres
+110118	Aldeia Galega da Merceana e Aldeia Gavinha
+110119	Alenquer (Santo Estevao e Triana)
+110120	Carregado e Cadafais
+110121	Ribafria e Pereiro de Palhacana
+110201	Arranho
+110202	Arruda Dos Vinhos
+110203	Cardosas
+110204	Santiago Dos Velhos
+110301	Alcoentre
+110302	Aveiras de Baixo
+110303	Aveiras de Cima
+110304	Azambuja
+110306	Vale do Paraiso
+110307	Vila Nova da Rainha
+110310	Manique do Intendente, V.N.De S.Pedro e Macussa
+110401	Alguber
+110407	Peral
+110409	Vermelha
+110410	Vilar
+110411	Cadaval e Pero Moniz
+110412	Lamas e Cercal
+110413	Painho e Figueiros
+110501	Alcabideche
+110506	S. Domingos de Rana
+110507	Carcavelos e Parede
+110508	Cascais e Estoril
+110601	Ajuda
+110602	Alcantara
+110607	Beato
+110608	Benfica
+110610	Campolide
+110611	Carnide
+110618	Lumiar
+110621	Marvila
+110633	Olivais
+110639	S. Domingos de Benfica
+110654	Alvalade
+110655	Areeiro
+110656	Arroios
+110657	Avenidas Novas
+110658	Belem
+110659	Campo de Ourique
+110660	Estrela
+110661	Misericordia
+110662	Parque Das Nacoes
+110663	Penha de Franca
+110664	Santa Clara
+110665	Santa Maria Maior
+110666	Santo Antonio
+110667	Sao Vicente
+110702	Bucelas
+110705	Fanhoes
+110707	Loures
+110708	Lousa
+110726	Moscavide e Portela
+110727	Sacavem e Prior Velho
+110728	Santa Iria de Azoia, Sao Joao da Talha e Bobadela
+110729	Santo Antao e Sao Juliao do Tojal
+110730	Santo Antonio Dos Cavaleiros e Frielas
+110731	Camarate, Unhos e Apelacao
+110803	Moita Dos Ferreiros
+110805	Reguengo Grande
+110806	Santa Barbara
+110808	Vimeiro
+110810	Ribamar
+110812	Lourinha e Atalaia
+110813	Miragaia e Marteleira
+110814	Sao Bartolomeu Dos Galegos e Moledo
+110902	Carvoeira
+110904	Encarnacao
+110906	Ericeira
+110909	Mafra
+110911	Milharado
+110913	Santo Isidoro
+110918	Azueira e Sobral da Abelheira
+110919	Enxara do Bispo, Gradil e Vila Franca do Rosario
+110920	Igreja Nova e Cheleiros
+110921	Malveira e Sao Miguel de Alcainca
+110922	Venda do Pinheiro e Santo Estevao Das Gales
+111002	Barcarena
+111010	Porto Salvo
+111012	Alges, Linda-A-Velha e Cruz Quebrada-Dafundo
+111013	Carnaxide e Queijas
+111014	Oeiras e S.Juliao da Barra, Paco de Arcos e Caxias
+111102	Algueirao-Mem Martins
+111105	Colares
+111108	Rio de Mouro
+111115	Casal de Cambra
+111122	Agualva e Mira-Sintra
+111123	Almargem do Bispo, Pero Pinheiro e Montelavar
+111124	Cacem e Sao Marcos
+111125	Massama e Monte Abraao
+111126	Queluz e Belas
+111127	Sao Joao Das Lampas e Terrugem
+111128	S.Maria e S.Miguel, S.Martinho, S.Pedro Penaferrim
+111201	Santo Quintino
+111202	Sapataria
+111203	Sobral de Monte Agraco
+111306	Freiria
+111310	Ponte do Rol
+111311	Ramalhal
+111314	S. Pedro da Cadeira
+111316	Silveira
+111317	Turcifal
+111318	Ventosa
+111321	A Dos Cunhados e Maceira
+111322	Campelos e Outeiro da Cabeca
+111323	Carvoeira e Carmoes
+111324	Dois Portos e Runa
+111325	Maxial e Monte Redondo
+111326	S.P., Santiago, S.M. Castelo e S.Miguel, Matacaes
+111408	Vialonga
+111409	Vila Franca de Xira
+111412	Alhandra, Sao Joao Dos Montes e Calhandriz
+111413	Alverca do Ribatejo e Sobralinho
+111414	Castanheira do Ribatejo e Cachoeiras
+111415	Povoa de Santa Iria e Forte da Casa
+111512	Alfragide
+111513	Aguas Livres
+111514	Encosta do Sol
+111515	Falagueira-Venda Nova
+111516	Mina de Agua
+111517	Venteira
+111603	Odivelas
+111608	Pontinha e Famoes
+111609	Povoa de Santo Adriao e Olival Basto
+111610	Ramada e Canecas
+120101	Alter do Chao
+120102	Chancelaria
+120103	Seda
+120104	Cunheira
+120201	Assuncao
+120202	Esperanca
+120203	Mosteiros
+120302	Aldeia Velha
+120303	Avis
+120305	Ervedal
+120306	Figueira e Barros
+120309	Alcorrego e Maranhao
+120310	Benavila e Valongo
+120401	Nossa Senhora da Expectacao
+120402	Nossa Senhora da Graca Dos Degolados
+120403	S. Joao Baptista
+120501	Nossa Senhora da Graca de Povoa e Meadas
+120502	Santa Maria da Devesa
+120503	Santiago Maior
+120504	S. Joao Baptista
+120601	Aldeia da Mata
+120604	Gafete
+120605	Monte da Pedra
+120607	Crato e Martires, Flor da Rosa e Vale do Peso
+120706	Santa Eulalia
+120707	S. Bras e S. Lourenco
+120708	S. Vicente e Ventosa
+120712	Assuncao, Ajuda, Salvador e Santo Ildefonso
+120713	Caia, Sao Pedro e Alcacova
+120714	Barbacena e Vila Fernando
+120715	Terrugem e Vila Boim
+120801	Cabeco de Vide
+120802	Fronteira
+120803	S. Saturnino
+120902	Belver
+120903	Comenda
+120905	Margem
+120906	Gaviao e Atalaia
+121001	Beira
+121002	Santa Maria de Marvao
+121003	Santo Antonio Das Areias
+121004	S. Salvador da Aramenha
+121101	Assumar
+121102	Monforte
+121103	Santo Aleixo
+121104	Vaiamonte
+121201	Alpalhao
+121205	Montalvao
+121207	Santana
+121208	S. Matias
+121210	Tolosa
+121211	Arez e Amieira do Tejo
+121212	Espirito Santo, Nossa Senhora da Graca e Sao Simao
+121301	Galveias
+121302	Montargil
+121304	Foros de Arrao
+121305	Longomel
+121308	Ponte de Sor, Tramaga e Vale de Acor
+121401	Alagoa
+121402	Alegrete
+121404	Fortios
+121410	Urra
+121411	Se e Sao Lourenco
+121412	Reguengo e Sao Juliao
+121413	Ribeira de Nisa e Carreiras
+121501	Cano
+121502	Casa Branca
+121503	Santo Amaro
+121504	Sousel
+130103	Ansiaes
+130107	Candemil
+130112	Fregim
+130115	Fridao
+130117	Gondar
+130118	Jazente
+130119	Lomba
+130120	Louredo
+130121	Lufrei
+130123	Mancelos
+130126	Padronelo
+130128	Rebordelo
+130129	Salvador do Monte
+130134	Gouveia (S. Simao)
+130135	Teloes
+130136	Travanca
+130138	Vila Caiz
+130139	Vila Chao do Marao
+130141	Aboadela, Sanche e Varzea
+130142	Amarante (Sao Goncalo), Madalena, Cepelos e Gatao
+130143	Bustelo, Carneiro e Carvalho de Rei
+130144	Figueiro (Santiago e Santa Cristina)
+130145	Freixo de Cima e de Baixo
+130146	Olo e Canadelo
+130147	Real, Ataide e Oliveira
+130148	Vila Garcia, Aboim e Chapa
+130204	Frende
+130205	Gestaco
+130206	Gove
+130207	Grilo
+130208	Loivos do Monte
+130215	Santa Marinha do Zezere
+130219	Valadares
+130220	Viariz
+130221	Ancede e Ribadouro
+130222	Baiao (Santa Leocadia) e Mesquinhata
+130223	Campelo e Ovil
+130224	Loivos da Ribeira e Tresouras
+130225	Santa Cruz do Douro e Sao Tome de Covelas
+130226	Teixeira e Teixeiro
+130301	Aiao
+130302	Airaes
+130305	Friande
+130306	Idaes
+130307	Jugueiros
+130313	Penacova
+130314	Pinheiro
+130315	Pombeiro de Ribavizela
+130317	Refontoura
+130318	Regilde
+130319	Revinhade
+130324	Sendim
+130334	Macieira da Lixa e Caramos
+130335	Margaride, Varzea, Lagares, Varziela, Moure
+130336	Pedreira, Rande e Sernande
+130337	Torrados e Sousa
+130338	Unhao e Lordelo
+130339	Vila Cova da Lixa e Borba de Godim
+130340	Vila Fria e Vizela (Sao Jorge)
+130341	Vila Verde e Santao
+130405	Lomba
+130408	Rio Tinto
+130412	Baguim do Monte (Rio Tinto)
+130413	Fanzeres e Sao Pedro da Cova
+130414	Foz do Sousa e Covelo
+130415	Gondomar (Sao Cosme), Valbom e Jovim
+130416	Melres e Medas
+130502	Aveleda
+130504	Caide de Rei
+130510	Lodares
+130512	Macieira
+130513	Meinedo
+130515	Nevogilde
+130524	Sousela
+130525	Torno
+130526	Vilar do Torno e Alentem
+130527	Cernadelo e Lousada (Sao Miguel e Santa Margarida)
+130528	Cristelos, Boim e Ordem
+130529	Figueiras e Covas
+130530	Lustosa e Barrosas (Santo Estevao)
+130531	Nespereira e Casais
+130532	Silvares, Pias, Nogueira e Alvarenga
+130601	Aguas Santas
+130603	Folgosa
+130608	Milheiros
+130609	Moreira
+130613	S. Pedro Fins
+130616	Vila Nova da Telha
+130617	Pedroucos
+130618	Castelo da Maia
+130619	Cidade da Maia
+130620	Nogueira e Silva Escura
+130704	Banho e Carvalhosa
+130705	Constance
+130722	Soalhaes
+130723	Sobretamega
+130724	Tabuado
+130730	Vila Boa do Bispo
+130732	Alpendorada, Varzea e Torrao
+130733	Avessadas e Rosem
+130734	Bem Viver
+130735	Livracao
+130736	Marco
+130737	Paredes de Viadores e Manhuncelos
+130738	Penhalonga e Pacos de Gaiolo
+130739	Sande e Sao Lourenco
+130740	Varzea, Aliviada e Folhada
+130741	Vila Boa de Quires e Maureles
+130811	Custoias, Leca do Balio e Guifoes
+130812	Matosinhos e Leca da Palmeira
+130813	Perafita, Lavra e Santa Cruz do Bispo
+130814	Sao Mamede de Infesta e Senhora da Hora
+130902	Carvalhosa
+130904	Eiriz
+130905	Ferreira
+130906	Figueiro
+130908	Freamunde
+130910	Meixomil
+130913	Penamaior
+130914	Raimonda
+130916	Seroa
+130917	Frazao Arreigada
+130918	Pacos de Ferreira
+130919	Sanfins Lamoso Codessos
+131001	Aguiar de Sousa
+131002	Astromil
+131003	Baltar
+131004	Beire
+131008	Cete
+131009	Cristelo
+131010	Duas Igrejas
+131011	Gandra
+131013	Lordelo
+131014	Louredo
+131017	Parada de Todeia
+131018	Rebordosa
+131019	Recarei
+131020	Sobreira
+131021	Sobrosa
+131022	Vandoma
+131024	Vilela
+131025	Paredes
+131101	Abragao
+131102	Boelhe
+131103	Bustelo
+131104	Cabeca Santa
+131105	Canelas
+131106	Capela
+131107	Casteloes
+131108	Croca
+131109	Duas Igrejas
+131110	Eja
+131112	Fonte Arcada
+131113	Galegos
+131115	Irivo
+131121	Oldroes
+131122	Paco de Sousa
+131125	Perozelo
+131128	Rans
+131129	Rio de Moinhos
+131132	Recezinhos (S. Mamede)
+131133	Recezinhos (S. Martinho)
+131134	Sebolido
+131136	Valpedre
+131138	Rio Mau
+131139	Penafiel
+131140	Luzim e Vila Cova
+131141	Guilhufe e Urro
+131142	Lagares e Figueira
+131143	Termas de Sao Vicente
+131202	Bonfim
+131203	Campanha
+131210	Paranhos
+131211	Ramalde
+131216	Aldoar, Foz do Douro e Nevogilde
+131217	Cedofeita,Ildefonso,Se,Miragaia,Nicolau,Vitoria
+131218	Lordelo do Ouro e Massarelos
+131305	Balazar
+131307	Estela
+131308	Laundos
+131311	Rates
+131313	Aver-O-Mar, Amorim e Terroso
+131314	Agucadoura e Navais
+131315	Povoa de Varzim, Beiriz e Argivai
+131401	Agrela
+131402	Agua Longa
+131405	Aves
+131413	Monte Cordova
+131416	Rebordoes
+131418	Reguenga
+131419	Roriz
+131430	Negrelos (S. Tome)
+131432	Vilarinho
+131433	Areias, Sequeiro, Lama e Palmeira
+131434	Campo, S.Salvador Campo, Negrelos
+131435	Carreira e Refojos de Riba de Ave
+131436	Lamelas e Guimarei
+131437	St.Tirso, Couto (S.Cristina e S.Miguel) e Burgaes
+131501	Alfena
+131503	Ermesinde
+131505	Valongo
+131506	Campo e Sobrado
+131602	Arvore
+131603	Aveleda
+131604	Azurara
+131607	Fajozes
+131610	Giao
+131611	Guilhabreu
+131612	Junqueira
+131613	Labruge
+131614	Macieira da Maia
+131616	Mindelo
+131617	Modivas
+131627	Vila Cha
+131628	Vila do Conde
+131630	Vilar de Pinheiro
+131631	Bagunte, Ferreiro, Outeiro Maior e Parada
+131632	Fornelo e Vairao
+131633	Malta e Canidelo
+131634	Retorta e Tougues
+131635	Rio Mau e Arcos
+131636	Touguinha e Touguinho
+131637	Vilar e Mosteiro
+131701	Arcozelo
+131702	Avintes
+131703	Canelas
+131704	Canidelo
+131709	Madalena
+131712	Oliveira do Douro
+131717	S. Felix da Marinha
+131723	Vilar de Andorinho
+131725	Grijo e Sermonde
+131726	Gulpilhares e Valadares
+131727	Mafamude e Vilar do Paraiso
+131728	Pedroso e Seixezelo
+131729	Sandim, Olival, Lever e Crestuma
+131730	Santa Marinha e Sao Pedro da Afurada
+131731	Serzedo e Perosinho
+131806	Covelas
+131808	Muro
+131809	Alvarelhos e Guidoes
+131810	Bougado (Sao Martinho e Santiago)
+131811	Coronado (Sao Romao e Sao Mamede)
+140104	Bemposta
+140105	Martinchel
+140106	Mouriscas
+140107	Pego
+140108	Rio de Moinhos
+140115	Tramagal
+140118	Fontes
+140119	Carvalhal
+140120	Abrantes (Sao Vicente e Sao Joao) e Alferrarede
+140121	Aldeia do Mato e Souto
+140122	Alvega e Concavada
+140123	Sao Facundo e Vale Das Mos
+140124	Sao Miguel do Rio Torto e Rossio Ao Sul do Tejo
+140202	Bugalhos
+140206	Minde
+140207	Moitas Venda
+140208	Monsanto
+140209	Serra de Santo Antonio
+140211	Alcanena e Vila Moreira
+140212	Malhou, Louriceira e Espinheiro
+140301	Almeirim
+140302	Benfica do Ribatejo
+140303	Fazendas de Almeirim
+140304	Raposa
+140401	Alpiarca
+140501	Benavente
+140502	Samora Correia
+140503	Santo Estevao
+140504	Barrosa
+140604	Pontevel
+140605	Valada
+140607	Vila Cha de Ourique
+140608	Vale da Pedra
+140609	Cartaxo e Vale da Pinta
+140610	Ereira e Lapa
+140704	Ulme
+140705	Vale de Cavalos
+140707	Carregueira
+140708	Chamusca e Pinheiro Grande
+140709	Parreira e Chouto
+140801	Constancia
+140802	Montalvo
+140803	Santa Margarida da Coutada
+140902	Couco
+140903	S. Jose da Lamarosa
+140905	Branca
+140907	Biscainho
+140908	Santana do Mato
+140909	Coruche, Fajarda e Erra
+141002	Nossa Sra de Fatima
+141003	Sao Joao Baptista
+141101	Aguas Belas
+141103	Beco
+141104	Chaos
+141106	Ferreira do Zezere
+141107	Igreja Nova do Sobral
+141110	Nossa Senhora do Pranto
+141111	Areias e Pias
+141201	Azinhaga
+141202	Golega
+141203	Pombalinho
+141302	Amendoa
+141303	Cardigos
+141304	Carvoeiro
+141305	Envendos
+141307	Ortiga
+141309	Macao, Penhascoso e Aboboreira
+141401	Alcobertas
+141402	Arrouquelas
+141405	Fraguas
+141408	Rio Maior
+141410	Asseiceira
+141411	S. Sebastiao
+141415	Azambujeira e Malaqueijo
+141416	Marmeleira e Assentiz
+141417	Outeiro da Corticada e Arruda Dos Pisoes
+141418	Sao Joao da Ribeira e Ribeira de Sao Joao
+141502	Marinhais
+141503	Muge
+141507	Gloria do Ribatejo e Granho
+141508	Salvaterra de Magos e Foros de Salvaterra
+141601	Abitureiras
+141602	Abra
+141604	Alcanede
+141605	Alcanhoes
+141606	Almoster
+141607	Amiais de Baixo
+141608	Arneiro Das Milharicas
+141613	Mocarria
+141614	Pernes
+141616	Povoa da Isenta
+141625	Vale de Santarem
+141628	Gancaria
+141629	Achete, Azoia de Baixo e Povoa de Santarem
+141630	Azoia de Cima e Tremes
+141631	Casevel e Vaqueiros
+141632	Romeira e Varzea
+141633	Marvila, Ribeira Santarem, S.Salvador, S.Nicolau
+141634	Sao Vicente do Paul e Vale de Figueira
+141701	Alcaravela
+141702	Santiago de Montalegre
+141703	Sardoal
+141704	Valhascos
+141802	Asseiceira
+141804	Carregueiros
+141808	Olalhas
+141809	Paialvo
+141813	S. Pedro de Tomar
+141814	Sabacheira
+141817	Alem da Ribeira e Pedreira
+141818	Casais e Alviobeira
+141819	Madalena e Beselga
+141820	Serra e Junceira
+141821	Sao Joao Baptista e Santa Maria Dos Olivais
+141902	Assentiz
+141904	Chancelaria
+141909	Pedrogao
+141910	Riachos
+141916	Zibreira
+141917	Meia Via
+141918	Brogueira, Parceiros de Igreja e Alcorochel
+141919	Olaia e Paco
+141920	Torres Novas (Santa Maria, Salvador e Santiago)
+141921	Torres Novas (Sao Pedro), Lapas e Ribeira Branca
+142001	Atalaia
+142002	Praia do Ribatejo
+142003	Tancos
+142006	Vila Nova da Barquinha
+142101	Alburitel
+142102	Atouguia
+142104	Caxarias
+142105	Espite
+142106	Fatima
+142111	Nossa Senhora Das Misericordias
+142113	Seica
+142114	Urqueira
+142115	Nossa Senhora da Piedade
+142119	Freixianda, Ribeira do Farrio e Formigais
+142120	Gondemaria e Olival
+142121	Matas e Cercal
+142122	Rio de Couros e Casal Dos Bernardos
+150104	Torrao
+150105	S. Martinho
+150106	Comporta
+150107	Santa Maria do Castelo e Santiago e Santa Susana
+150201	Alcochete
+150202	Samouco
+150203	S. Francisco
+150303	Costa da Caparica
+150312	Almada, Cova da Piedade, Pragal e Cacilhas
+150313	Caparica e Trafaria
+150314	Charneca de Caparica e Sobreda
+150315	Laranjeiro e Feijo
+150407	Santo Antonio da Charneca
+150409	Alto do Seixalinho, Santo Andre e Verderena
+150410	Barreiro e Lavradio
+150411	Palhais e Coina
+150501	Azinheira Dos Barros e Sao Mamede do Sadao
+150503	Melides
+150505	Carvalhal
+150506	Grandola e Santa Margarida da Serra
+150601	Alhos Vedros
+150603	Moita
+150607	Baixa da Banheira e Vale da Amoreira
+150608	Gaio-Rosario e Sarilhos Pequenos
+150701	Canha
+150704	Sarilhos Grandes
+150709	Atalaia e Alto Estanqueiro-Jardia
+150710	Montijo e Afonsoeiro
+150711	Pegoes
+150802	Palmela
+150803	Pinhal Novo
+150804	Quinta do Anjo
+150806	Poceirao e Marateca
+150901	Abela
+150902	Alvalade
+150903	Cercal
+150904	Ermidas-Sado
+150907	Santo Andre
+150910	S. Francisco da Serra
+150912	Santiago do Cacem, S.Cruz e S.Bartolomeu da Serra
+150913	Sao Domingos e Vale de Agua
+151002	Amora
+151005	Corroios
+151006	Fernao Ferro
+151007	Seixal, Arrentela e Aldeia de Paio Pires
+151101	Sesimbra (Castelo)
+151102	Sesimbra (Santiago)
+151103	Quinta do Conde
+151205	Setubal (S. Sebastiao)
+151207	Gambia-Pontes-Alto da Guerra
+151208	Sado
+151209	Azeitao (Sao Lourenco e Sao Simao)
+151210	S.Juliao, N.S. da Anunciada e S.Maria da Graca
+151301	Sines
+151302	Porto Covo
+160101	Aboim Das Chocas
+160102	Aguia
+160104	Azere
+160105	Cabana Maior
+160106	Cabreiro
+160108	Cendufe
+160109	Couto
+160113	Gavieira
+160115	Gondoriz
+160121	Miranda
+160122	Monte Redondo
+160123	Oliveira
+160124	Paco
+160125	Padroso
+160128	Prozelo
+160130	Rio Frio
+160131	Rio de Moinhos
+160133	Sabadim
+160142	Jolda (S. Paio)
+160144	Senharei
+160145	Sistelo
+160146	Soajo
+160149	Vale
+160152	Alvora e Loureda
+160153	Arcos de Valdevez (Sao Paio) e Giela
+160154	Salvador, Vila Fonche e Parada
+160155	Eiras e Mei
+160156	Grade e Carralcova
+160157	Guilhadeses e Santar
+160158	Jolda (Madalena) e Rio Cabrao
+160159	Padreiro (Salvador e Santa Cristina)
+160160	Portela e Extremo
+160161	Sao Jorge e Ermelo
+160162	Souto e Tabaco
+160163	Tavora (Santa Maria e Sao Vicente)
+160164	Vilela, Sao Cosme e Sao Damiao e Sa
+160201	Ancora
+160205	Argela
+160209	Dem
+160211	Lanhelas
+160214	Riba de Ancora
+160215	Seixas
+160217	Vila Praia de Ancora
+160218	Vilar de Mouros
+160220	Vile
+160221	Arga (Baixo, Cima e Sao Joao)
+160222	Caminha (Matriz) e Vilarelho
+160223	Gondar e Orbacem
+160224	Moledo e Cristelo
+160225	Venade e Azevedo
+160301	Alvaredo
+160304	Cousso
+160305	Cristoval
+160307	Fiaes
+160308	Gave
+160311	Paderne
+160313	Penso
+160317	S. Paio
+160319	Castro Laboreiro e Lamas de Mouro
+160320	Chaviaes e Pacos
+160321	Parada do Monte e Cubalhao
+160322	Prado e Remoaes
+160323	Vila e Roussas
+160401	Abedim
+160404	Barbeita
+160405	Barrocas e Taias
+160406	Bela
+160407	Cambeses
+160410	Lara
+160411	Longos Vales
+160415	Merufe
+160418	Moreira
+160420	Pias
+160421	Pinheiros
+160422	Podame
+160423	Portela
+160424	Riba de Mouro
+160427	Segude
+160428	Tangil
+160431	Trute
+160434	Anhoes e Luzio
+160435	Ceivaes e Badim
+160436	Mazedo e Cortes
+160437	Messegaes, Valadares e Sa
+160438	Moncao e Troviscoso
+160439	Sago, Lordelo e Parada
+160440	Troporiz e Lapela
+160501	Agualonga
+160503	Castanheira
+160505	Coura
+160507	Cunha
+160510	Infesta
+160513	Mozelos
+160514	Padornelo
+160515	Parada
+160519	Romarigaes
+160520	Rubiaes
+160521	Vascoes
+160522	Bico e Cristelo
+160523	Cossourado e Linhares
+160524	Formariz e Ferreira
+160525	Insalde e Porreiras
+160526	Paredes de Coura e Resende
+160601	Azias
+160602	Boivaes
+160603	Bravaes
+160604	Britelo
+160606	Cuide de Vila Verde
+160611	Lavradas
+160612	Lindoso
+160613	Nogueira
+160614	Oleiros
+160619	Sampriz
+160623	Vade (S. Pedro)
+160624	Vade (S. Tome)
+160626	Crasto, Ruivos e Grovelas
+160627	Entre Ambos-Os-Rios, Ermida e Germil
+160628	Ponte da Barca, V.N. Muia, Paco Vedro Magalhaes
+160629	Touvedo (Sao Lourenco e Salvador)
+160630	Vila Cha (Sao Joao Baptista e Santiago)
+160701	Anais
+160703	Sao Pedro de Arcos
+160704	Arcozelo
+160707	Beiral do Lima
+160708	Bertiandos
+160709	Boalhosa
+160710	Brandara
+160713	Calheiros
+160714	Calvelo
+160716	Correlha
+160717	Estoraos
+160718	Facha
+160719	Feitosa
+160721	Fontao
+160724	Friastelas
+160726	Gandra
+160727	Gemieira
+160728	Gondufe
+160729	Labruja
+160734	Poiares
+160737	Refoios do Lima
+160739	Ribeira
+160740	Sa
+160742	Santa Comba
+160743	Santa Cruz do Lima
+160744	Rebordoes (Santa Maria)
+160745	Seara
+160746	Serdedelo
+160747	Rebordoes (Souto)
+160750	Vitorino Das Donas
+160752	Arca e Ponte de Lima
+160753	Ardegao, Freixo e Mato
+160754	Associacao de Freguesias do Vale do Neiva
+160755	Barrio e Cepoes
+160756	Cabacos e Fojo Lobal
+160757	Cabracao e Moreira do Lima
+160758	Fornelos e Queijada
+160759	Labrujo, Rendufe e Vilar do Monte
+160760	Navio e Vitorino Dos Piaes
+160802	Boivao
+160803	Cerdal
+160805	Fontoura
+160806	Friestas
+160808	Ganfei
+160812	S. Pedro da Torre
+160816	Verdoejo
+160817	Gandra e Taiao
+160818	Gondomil e Sanfins
+160819	Sao Juliao e Silva
+160820	Valenca, Cristelo Covo e Arao
+160901	Afife
+160902	Alvaraes
+160903	Amonde
+160904	Vila Nova de Anha
+160905	Areosa
+160908	Carreco
+160910	Castelo do Neiva
+160911	Darque
+160914	Freixieiro de Soutelo
+160915	Lanheses
+160920	Montaria
+160922	Mujaes
+160923	Sao Romao de Neiva
+160925	Outeiro
+160926	Perre
+160928	Santa Marta de Portuzelo
+160935	Vila Franca
+160938	Vila de Punhe
+160940	Chafe
+160941	Barroselas e Carvoeiro
+160942	Cardielos e Serreleis
+160943	Geraz do Lima (S.Maria, S.Leocadia, Moreira), Deao
+160944	Mazarefes e Vila Fria
+160945	Nogueira, Meixedo e Vilar de Murteda
+160946	Subportela, Deocriste e Portela Susa
+160947	Torre e Vila Mou
+160948	Santa Maria Maior e Monserrate e Meadela
+161003	Cornes
+161004	Covas
+161006	Gondarem
+161007	Loivo
+161009	Mentrestido
+161012	Sapardos
+161013	Sopo
+161016	Campos e Vila Mea
+161017	Candemil e Gondar
+161018	Reboreda e Nogueira
+161019	Vila Nova de Cerveira e Lovelhe
+170101	Alijo
+170107	Favaios
+170108	Pegarinhos
+170109	Pinhao
+170112	Sanfins do Douro
+170113	Santa Eugenia
+170114	S. Mamede de Ribatua
+170116	Vila Cha
+170117	Vila Verde
+170118	Vilar de Macada
+170120	Carlao e Amieiro
+170121	Castedo e Cotas
+170122	Populo e Ribalonga
+170123	Vale Mendiz, Casal Loivos, Vilarinho Cotas
+170203	Beca
+170208	Covas do Barroso
+170210	Dornelas
+170213	Pinho
+170215	Sapiaos
+170217	Alturas do Barroso e Cerdedo
+170218	Ardaos e Bobadela
+170219	Boticas e Granja
+170220	Codessoso, Curros e Fiaes do Tamega
+170221	Vilar e Viveiro
+170301	Aguas Frias
+170302	Anelhe
+170305	Bustelo
+170309	Cimo de Vila da Castanheira
+170310	Curalha
+170312	Ervededo
+170313	Faioes
+170314	Lama de Arcos
+170316	Mairos
+170317	Moreiras
+170318	Nogueira da Montanha
+170320	Oura
+170321	Outeiro Seco
+170322	Paradela
+170324	Redondelo
+170327	Sanfins
+170329	Santa Leocadia
+170330	Santo Antonio de Monforte
+170331	Santo Estevao
+170333	S. Pedro de Agostem
+170334	S. Vicente
+170340	Tronco
+170341	Vale de Anta
+170343	Vila Verde da Raia
+170344	Vilar de Nantes
+170345	Vilarelho da Raia
+170347	Vilas Boas
+170348	Vilela Seca
+170349	Vilela do Tamega
+170350	Santa Maria Maior
+170353	Planalto de Monforte (Oucidres e Bobadela)
+170354	Madalena e Samaioes
+170355	Eiras, Sao Juliao de Montenegro e Cela
+170356	Calvao e Soutelinho da Raia
+170357	Loivos e Povoa de Agracoes
+170358	Santa Cruz/Trindade e Sanjurge
+170359	Soutelo e Seara Velha
+170360	Travancas e Roriz
+170361	Vidago, Arcosso, Selhariz, Vilarinho Paranheiras
+170401	Barqueiros
+170402	Cidadelhe
+170403	Oliveira
+170407	Vila Marim
+170408	Mesao Frio (Santo Andre)
+170501	Atei
+170502	Bilho
+170505	Mondim de Basto
+170508	Vilar de Ferreiros
+170509	Campanho e Paradanca
+170510	Ermelo e Pardelhas
+170601	Cabril
+170603	Cervos
+170604	Cha
+170607	Covelo do Geres
+170609	Ferral
+170612	Gralhas
+170616	Morgade
+170618	Negroes
+170619	Outeiro
+170623	Pitoes Das Junias
+170625	Reigoso
+170626	Salto
+170627	Santo Andre
+170629	Sarraquinhos
+170631	Solveira
+170632	Tourem
+170635	Vila da Ponte
+170636	Cambeses do Rio, Donoes e Mourilhe
+170637	Meixedo e Padornelos
+170638	Montalegre e Padroso
+170639	Paradela, Contim e Fiaes
+170640	Sezelhe e Covelaes
+170641	Venda Nova e Pondras
+170642	Viade de Baixo e Fervidelas
+170643	Vilar de Perdizes e Meixide
+170701	Candedo
+170703	Fiolhoso
+170704	Jou
+170705	Murca
+170708	Valongo de Milhais
+170710	Carva e Vilares
+170711	Noura e Palheiros
+170802	Fontelas
+170805	Loureiro
+170809	Sedielos
+170810	Vilarinho Dos Freires
+170813	Galafura e Covelinhas
+170814	Moura Morta e Vinhos
+170815	Peso da Regua e Godim
+170816	Poiares e Canelas
+170901	Alvadia
+170902	Canedo
+170906	Santa Marinha
+170908	Cerva e Limoes
+170909	Salvador e Santo Aleixo de Alem-Tamega
+171001	Celeiros
+171002	Covas do Douro
+171004	Gouvinhas
+171005	Parada de Pinhao
+171007	Pacos
+171009	Sabrosa
+171011	S. Lourenco de Ribapinhao
+171013	Souto Maior
+171014	Torre do Pinhao
+171015	Vilarinho de S. Romao
+171016	Provesende, Gouvaes Douro, S.Cristovao Douro
+171017	Sao Martinho de Antas e Paradela de Guiaes
+171101	Alvacoes do Corgo
+171102	Cumieira
+171103	Fontes
+171106	Medroes
+171110	Sever
+171111	Lobrigos (S.Miguel e S.Joao Baptista) e Sanhoane
+171112	Louredo e Fornelos
+171201	Agua Reves e Crasto
+171203	Argeriz
+171205	Boucoaes
+171206	Canaveses
+171209	Ervoes
+171211	Fornos do Pinhal
+171212	Frioes
+171215	Padrela e Tazem
+171216	Possacos
+171217	Rio Torto
+171219	Santa Maria de Emeres
+171220	Santa Valha
+171221	Santiago de Ribeira de Alhariz
+171222	S. Joao da Corveira
+171223	S. Pedro de Veiga de Lila
+171224	Serapicos
+171227	Vales
+171229	Vassal
+171230	Veiga de Lila
+171231	Vilarandelo
+171232	Carrazedo de Montenegro e Curros
+171233	Lebucao, Fiaes e Nozelos
+171234	Sonim e Barreiros
+171235	Tinhela e Alvarelhos
+171236	Valpacos e Sanfins
+171302	Alfarela de Jales
+171303	Bornes de Aguiar
+171304	Bragado
+171305	Capeludos
+171310	Soutelo de Aguiar
+171311	Teloes
+171312	Tresminas
+171313	Valoura
+171314	Vila Pouca de Aguiar
+171315	Vreia de Bornes
+171316	Vreia de Jales
+171317	Sabroso de Aguiar
+171319	Alvao
+171320	Pensalvos e Parada de Monteiros
+171401	Abacas
+171403	Andraes
+171404	Arroios
+171406	Campea
+171409	Folhadela
+171410	Guiaes
+171414	Lordelo
+171415	Mateus
+171416	Mondroes
+171420	Parada de Cunhos
+171426	Torgueda
+171429	Vila Marim
+171431	Adoufe e Vilarinho de Samarda
+171432	Borbela e Lamas de Olo
+171433	Constantim e Vale de Nogueiras
+171434	Moucos e Lamares
+171435	Nogueira e Ermida
+171436	Pena, Quinta e Vila Cova
+171437	Sao Tome do Castelo e Justes
+171438	Nossa Senhora da Conceicao, Sao Pedro e Sao Dinis
+180101	Aldeias
+180104	Cimbres
+180106	Folgosa
+180107	Fontelo
+180109	Queimada
+180110	Queimadela
+180111	Santa Cruz
+180114	S. Cosmado
+180115	S. Martinho Das Chas
+180118	Vacalar
+180120	Armamar
+180121	Aricera e Goujoim
+180122	Sao Romao e Santiago
+180123	Vila Seca e Santo Adriao
+180201	Beijos
+180202	Cabanas de Viriato
+180204	Oliveira do Conde
+180206	Parada
+180208	Currelos, Papizios e Sobral
+180301	Almofala
+180303	Cabril
+180304	Castro Daire
+180305	Cujo
+180309	Gosende
+180312	Moes
+180313	Moledo
+180314	Monteiras
+180317	Pepim
+180319	Pinheiro
+180322	S. Joaninho
+180323	Mamouros, Alva e Ribolhos
+180324	Mezio e Moura Morta
+180325	Parada de Ester e Ester
+180326	Picao e Ermida
+180327	Reriz e Gafanhao
+180403	Cinfaes
+180404	Espadanedo
+180405	Ferreiros de Tendais
+180406	Fornelos
+180408	Moimenta
+180409	Nespereira
+180410	Oliveira do Douro
+180412	Santiago de Piaes
+180413	S. Cristovao de Nogueira
+180414	Souselo
+180415	Tarouquela
+180416	Tendais
+180417	Travanca
+180418	Alhoes, Bustelo, Gralheira e Ramires
+180502	Avoes
+180504	Britiande
+180505	Cambres
+180507	Ferreirim
+180508	Ferreiros de Avoes
+180509	Figueira
+180510	Lalim
+180511	Lazarim
+180516	Penajoia
+180517	Penude
+180519	Samodaes
+180520	Sande
+180523	Varzea de Abrunhais
+180524	Vila Nova de Souto D El-Rei
+180525	Lamego (Almacave e Se)
+180526	Bigorne, Magueija e Pretarouca
+180527	Cepoes, Meijinhos e Melcoes
+180528	Parada do Bispo e Valdigem
+180601	Abrunhosa-A-Velha
+180602	Alcafache
+180605	Cunha Baixa
+180606	Espinho
+180607	Fornos de Maceira Dao
+180608	Freixiosa
+180614	Quintela de Azurara
+180616	S. Joao da Fresta
+180619	Mangualde, Mesquitela e Cunha Alta
+180620	Moimenta de Maceira Dao e Lobelhe do Mato
+180621	Santiago de Cassurraes e Povoa de Cervaes
+180622	Tavares (Chas, Varzea e Travanca)
+180702	Alvite
+180703	Arcozelos
+180705	Baldos
+180706	Cabacos
+180707	Caria
+180708	Castelo
+180709	Leomil
+180710	Moimenta da Beira
+180713	Passo
+180716	Rua
+180717	Sarzedo
+180719	Sever
+180720	Vilar
+180721	Paradinha e Nagosa
+180722	Pera Velha, Aldeia de Nacomba e Ariz
+180723	Peva e Segoes
+180802	Cercosa
+180804	Espinho
+180805	Marmeleira
+180807	Pala
+180808	Sobral
+180809	Trezoi
+180811	Mortagua, Vale de Remigio, Cortegaca e Almaca
+180901	Canas de Senhorim
+180903	Nelas
+180905	Senhorim
+180906	Vilar Seco
+180908	Lapa do Lobo
+180910	Carvalhal Redondo e Aguieira
+180911	Santar e Moreira
+181002	Arcozelo Das Maias
+181005	Pinheiro
+181007	Ribeiradio
+181008	S. Joao da Serra
+181009	S. Vicente de Lafoes
+181013	Arca e Varzielas
+181014	Destriz e Reigoso
+181015	Oliveira de Frades, Souto de Lafoes e Sejaes
+181102	Castelo de Penalva
+181103	Esmolfe
+181104	Germil
+181105	Insua
+181106	Lusinde
+181109	Pindo
+181110	Real
+181111	Sezures
+181112	Trancozelos
+181114	Antas e Matela
+181115	Vila Cova do Covelo/Mareco
+181202	Beselga
+181203	Castainco
+181207	Penela da Beira
+181208	Povoa de Penela
+181209	Souto
+181210	Antas e Ourozinho
+181211	Penedono e Granja
+181302	Barro
+181303	Carquere
+181310	Paus
+181311	Resende
+181312	S. Cipriano
+181313	S. Joao de Fontoura
+181314	S. Martinho de Mouros
+181316	Anreade e Sao Romao de Aregos
+181317	Felgueiras e Feirao
+181318	Freigil e Miomaes
+181319	Ovadas e Panchorra
+181403	Pinheiro de Azere
+181405	S. Joaninho
+181406	S. Joao de Areias
+181410	Ovoa e Vimieiro
+181411	Santa Comba Dao e Couto do Mosteiro
+181412	Treixedo e Nagozela
+181501	Castanheiro do Sul
+181502	Ervedosa do Douro
+181504	Nagozelo do Douro
+181505	Paredes da Beira
+181507	Riodades
+181509	Soutelo do Douro
+181511	Vale de Figueira
+181512	Valongo Dos Azeites
+181515	Sao Joao da Pesqueira e Varzea de Trevoes
+181516	Trevoes e Espinhosa
+181517	Vilarouco e Pereiros
+181602	Bordonhos
+181606	Figueiredo de Alva
+181607	Manhouce
+181608	Pindelo Dos Milagres
+181609	Pinho
+181612	S. Felix
+181615	Serrazes
+181616	Sul
+181617	Valadares
+181619	Vila Maior
+181620	Carvalhais e Candal
+181621	Santa Cruz da Trapa e Sao Cristovao de Lafoes
+181622	Sao Martinho Das Moitas e Covas do Rio
+181623	Sao Pedro do Sul, Varzea e Baioes
+181702	Avelal
+181704	Ferreira de Aves
+181706	Mioma
+181707	Rio de Moinhos
+181709	S. Miguel de Vila Boa
+181710	Satao
+181711	Silva de Cima
+181713	Aguas Boas e Forles
+181714	Romas, Decermilo e Vila Longa
+181801	Arnas
+181802	Carregal
+181803	Chosendo
+181804	Cunha
+181806	Faia
+181810	Granjal
+181811	Lamosa
+181814	Quintela
+181817	Vila da Ponte
+181818	Ferreirim e Macieira
+181819	Fonte Arcada e Escurquela
+181820	Penso e Freixinho
+181821	Sernancelhe e Sarzeda
+181901	Adorigo
+181902	Arcos
+181904	Chavaes
+181905	Desejosa
+181906	Granja do Tedo
+181908	Longa
+181913	Sendim
+181914	Tabuaco
+181917	Valenca do Douro
+181918	Barcos e Santa Leocadia
+181919	Paradela e Granjinha
+181920	Pinheiros e Vale de Figueira
+181921	Tavora e Pereiro
+182004	Mondim da Beira
+182005	Salzedas
+182006	S. Joao de Tarouca
+182009	Varzea da Serra
+182011	Gouviaes e Ucanha
+182012	Granja Nova e Vila Cha da Beira
+182013	Tarouca e Dalvares
+182102	Campo de Besteiros
+182103	Canas de Santa Maria
+182105	Casteloes
+182106	Dardavaz
+182107	Ferreiros do Dao
+182108	Guardao
+182109	Lajeosa do Dao
+182110	Lobao da Beira
+182111	Molelos
+182116	Parada de Gonta
+182118	Santiago de Besteiros
+182122	Tonda
+182127	Barreiro de Besteiros e Tourigo
+182128	Caparrosa e Silvares
+182129	Mouraz e Vila Nova da Rainha
+182130	Sao Joao do Monte e Mosteirinho
+182131	Sao Miguel do Outeiro e Sabugosa
+182132	Tondela e Nandufe
+182133	Vilar de Besteiros e Mosteiro de Fraguas
+182203	Pendilhe
+182204	Queiriga
+182205	Touro
+182206	Vila Cova A Coelheira
+182208	Vila Nova de Paiva, Alhais e Fraguas
+182301	Abraveses
+182304	Bodiosa
+182305	Calde
+182306	Campo
+182307	Cavernaes
+182310	Cota
+182315	Fragosela
+182316	Lordosa
+182317	Silgueiros
+182318	Mundao
+182319	Orgens
+182320	Povolide
+182321	Ranhados
+182322	Ribafeita
+182323	Rio de Loba
+182325	Santos Evos
+182327	S. Joao de Lourosa
+182329	S. Pedro de France
+182335	Barreiros e Cepoes
+182336	Boa Aldeia, Farminhao e Torredeita
+182337	Couto de Baixo e Couto de Cima
+182338	Fail e Vila Cha de Sa
+182339	Repeses e Sao Salvador
+182340	Sao Cipriano e Vil de Souto
+182341	Viseu
+182401	Alcofra
+182403	Campia
+182407	Fornelo do Monte
+182409	Queira
+182410	S. Miguel do Mato
+182411	Ventosa
+182413	Cambra e Carvalhal de Vermilhas
+182414	Fatauncos e Figueiredo Das Donas
+182415	Vouzela e Pacos de Vilharigues
