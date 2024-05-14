@@ -125,3 +125,67 @@ float CalcularIdadeMedia(PESSOA** listaPessoas, int tamanhoListaPessoas) {
     float idadeMedia = (float)totalIdades / tamanhoListaPessoas;
     return idadeMedia;
 }
+
+// idade com mais requisitantes
+int IdadeComMaisRequisitantes(PESSOA** listaPessoas, int tamanhoListaPessoas) {
+    int contadorIdades[100] = {0}; // array para contar pessoas por cada idade (até 100 anos de idade)
+
+    // contar nr de pessoas de cada idade
+    for (int i = 0; i < tamanhoListaPessoas; i++) {
+        DATANASC *dataNascimento = listaPessoas[i]->dataNascimento; // ver data de nasc da pessoa atual
+        time_t t = time(NULL); // obter tempo atual
+        struct tm today = *localtime(&t); // isto converte o tempo atual numa estrutura tm que representa a data e hora do local atual
+
+        int idade = today.tm_year + 1900 - dataNascimento->ano; // calcular idade
+
+        // ver se a pessoa ja fez anos nesse ano
+        if (today.tm_mon + 1 < dataNascimento->mes || (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+            idade--; // se o mes de nasc for depois do mes atual / o mesmo mes mas o dia de nasc depois entao ainda tem -1 ano
+        }
+
+        // adicionar pessoa de x idade
+        contadorIdades[idade]++;
+    }
+
+    int idadeComMaisRequisitantes = 0; // idade com mais requisitantes.
+    int maxContador = 0; // número máximo de pessoas de uma idade específica.
+
+    // encontrar a idade com mais requisitantes.
+    for (int i = 0; i < 100; i++) {
+        // se a idade I for > do que o max atual, ent o max vai passar a ser a idade I
+        // logo a idade com mais requisitantes tambem vai ser a idade I
+        if (contadorIdades[i] > maxContador) {
+            maxContador = contadorIdades[i];
+            idadeComMaisRequisitantes = i;
+        }
+    }
+
+    return idadeComMaisRequisitantes;
+}
+
+// numero de pessoas cuja a idade superior a x
+int NumeroPessoasIdadeSuperiorX(PESSOA** listaPessoas, int tamanhoListaPessoas, int x) {
+    int numeroPessoas = 0;
+
+    time_t t = time(NULL); // obter tempo atual
+    struct tm today = *localtime(&t); // isto converte o tempo atual numa estrutura tm que representa a data e hora do local atual
+
+    // contar pessoas com idade superior a x.
+    for (int i = 0; i < tamanhoListaPessoas; i++) {
+        DATANASC *dataNascimento = listaPessoas[i]->dataNascimento; // ver data de nasc da pessoa atual
+
+        int idade = today.tm_year + 1900 - dataNascimento->ano; // calcular idade
+
+        // ver se a pessoa ja fez anos nesse ano
+        if (today.tm_mon + 1 < dataNascimento->mes || (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+            idade--; // se o mes de nasc for depois do mes atual / o mesmo mes mas o dia de nasc depois entao ainda tem -1 ano
+        }
+
+        // ver se idade da pessoa é maior que x
+        if (idade > x) {
+            numeroPessoas++; // se for entao adicionar mais uma pessoa
+        }
+    }
+
+    return numeroPessoas;
+}
