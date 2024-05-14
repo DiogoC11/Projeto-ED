@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <time.h>
 #include "Requisicao.h"
 
 
@@ -80,3 +81,48 @@ void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, 
 
 
 //  Determinar a idade máxima de todos os requisitantes;
+int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas) {
+    time_t t = time(NULL); // retorna o tempo atual
+    struct tm today = *localtime(&t); // isto converte o tempo atual numa estrutura tm que representa a data e hora do local atual
+    int idadeMaxima = 0;
+
+    for (int i = 0; i < tamanhoListaPessoas; i++) {
+        DATANASC *dataNascimento = listaPessoas[i]->dataNascimento; // ver data de nasc da pessoa atual
+        int anos = today.tm_year + 1900 - dataNascimento->ano; // calcular idade
+
+        // ver se a pessoa ja fez anos nesse ano
+        if (today.tm_mon + 1 < dataNascimento->mes || (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+            anos--; // se o mes de nasc for depois do mes atual / o mesmo mes mas o dia de nasc depois entao ainda tem -1 ano
+        }
+        if (anos > idadeMaxima) {
+            idadeMaxima = anos;
+        }
+    }
+
+    return idadeMaxima;
+}
+
+
+//idade media de todos os requisitantes
+float CalcularIdadeMedia(PESSOA** listaPessoas, int tamanhoListaPessoas) {
+    int totalIdades = 0;
+    time_t t = time(NULL); // obter tempo atual
+    struct tm today = *localtime(&t); // isto converte o tempo atual numa estrutura tm que representa a data e hora do local atual
+
+    for (int i = 0; i < tamanhoListaPessoas; i++) {
+        DATANASC *dataNascimento = listaPessoas[i]->dataNascimento; // ver data de nasc da pessoa atual
+
+        int anos = today.tm_year + 1900 - dataNascimento->ano; // calcular idade
+
+        // ver se a pessoa ja fez anos nesse ano
+        if (today.tm_mon + 1 < dataNascimento->mes || (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+            anos--; // se o mes de nasc for depois do mes atual / o mesmo mes mas o dia de nasc depois entao ainda tem -1 ano
+        }
+
+        totalIdades += anos;
+    }
+    // fazer media
+    float idadeMedia = (float)totalIdades / tamanhoListaPessoas;
+
+    return idadeMedia;
+}
