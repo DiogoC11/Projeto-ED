@@ -22,6 +22,7 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L);
 void MostrarRequisicao(REQUISICAO *P);
 void DestruirRequisicao(REQUISICAO *P);
 REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisicoes, int tamanhoLista); //pesquisar requisitante pelo nome
+
 //listar requisitantes com filtro(1- nome,2-apelido,3-freguisia)
 
 //idade maxima de todos os requisitantes
@@ -32,6 +33,7 @@ REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisico
 void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRequisicoes, int tamanhoLista); //lista requisiçoes de um requisitante
 void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas sem requisições
 void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas com requisiçao
+
 //sobrenome mais usado nas requisiçoes
 //numero de pessoas do distrito x, com o nome/apelido y
 
