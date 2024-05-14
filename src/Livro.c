@@ -1,4 +1,5 @@
 #include "Livro.h"
+#include "ctype.h"
 
 // Função para encontrar o no_chave por uma KEY
 NO_CHAVE *encontrarNoChave(NO_CHAVE *noChave, char *chave) {
@@ -58,12 +59,11 @@ LIVRO *PedirDadosLivro(ListaLivro *L){
     fgets(temp, sizeof(temp), stdin);
     sscanf(temp, "%49[^\n]", autor);
 
-    // Verifica se a area existe
-    NO_CHAVE *noChave = encontrarNoChave(L->Inicio, area);
-    if (noChave == NULL) {
-        printf("\nErro: A area inserida nao existe.\n");
-        return NULL;
+// Deixar a AREA em maiuscula
+    for (int i = 0; i < strlen(area); i++) {
+        area[i] = toupper(area[i]);
     }
+
     return CriarLivro(ISBN, nome, area, anoPublicacao, autor);
 }
 
