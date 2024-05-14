@@ -1,0 +1,278 @@
+0101	Agueda
+0102	Albergaria-A-Velha
+0103	Anadia
+0104	Arouca
+0105	Aveiro
+0106	Castelo de Paiva
+0107	Espinho
+0108	Estarreja
+0109	Santa Maria da Feira
+0110	Ilhavo
+0111	Mealhada
+0112	Murtosa
+0113	Oliveira de Azemeis
+0114	Oliveira do Bairro
+0115	Ovar
+0116	S. Joao da Madeira
+0117	Sever do Vouga
+0118	Vagos
+0119	Vale de Cambra
+0201	Aljustrel
+0202	Almodovar
+0203	Alvito
+0204	Barrancos
+0205	Beja
+0206	Castro Verde
+0207	Cuba
+0208	Ferreira do Alentejo
+0209	Mertola
+0210	Moura
+0211	Odemira
+0212	Ourique
+0213	Serpa
+0214	Vidigueira
+0301	Amares
+0302	Barcelos
+0303	Braga
+0304	Cabeceiras de Basto
+0305	Celorico de Basto
+0306	Esposende
+0307	Fafe
+0308	Guimaraes
+0309	Povoa de Lanhoso
+0310	Terras de Bouro
+0311	Vieira do Minho
+0312	Vila Nova de Famalicao
+0313	Vila Verde
+0314	Vizela
+0401	Alfandega da Fe
+0402	Braganca
+0403	Carrazeda de Ansiaes
+0404	Freixo de Espada A Cinta
+0405	Macedo de Cavaleiros
+0406	Miranda do Douro
+0407	Mirandela
+0408	Mogadouro
+0409	Torre de Moncorvo
+0410	Vila Flor
+0411	Vimioso
+0412	Vinhais
+0501	Belmonte
+0502	Castelo Branco
+0503	Covilha
+0504	Fundao
+0505	Idanha-A-Nova
+0506	Oleiros
+0507	Penamacor
+0508	Proenca-A-Nova
+0509	Serta
+0510	Vila de Rei
+0511	Vila Velha de Rodao
+0601	Arganil
+0602	Cantanhede
+0603	Coimbra
+0604	Condeixa-A-Nova
+0605	Figueira da Foz
+0606	Gois
+0607	Lousa
+0608	Mira
+0609	Miranda do Corvo
+0610	Montemor-O-Velho
+0611	Oliveira do Hospital
+0612	Pampilhosa da Serra
+0613	Penacova
+0614	Penela
+0615	Soure
+0616	Tabua
+0617	Vila Nova de Poiares
+0701	Alandroal
+0702	Arraiolos
+0703	Borba
+0704	Estremoz
+0705	Evora
+0706	Montemor-O-Novo
+0707	Mora
+0708	Mourao
+0709	Portel
+0710	Redondo
+0711	Reguengos de Monsaraz
+0712	Vendas Novas
+0713	Viana do Alentejo
+0714	Vila Vicosa
+0801	Albufeira
+0802	Alcoutim
+0803	Aljezur
+0804	Castro Marim
+0805	Faro
+0806	Lagoa (Algarve)
+0807	Lagos
+0808	Loule
+0809	Monchique
+0810	Olhao
+0811	Portimao
+0812	S. Bras de Alportel
+0813	Silves
+0814	Tavira
+0815	Vila do Bispo
+0816	Vila Real de Santo Antonio
+0901	Aguiar da Beira
+0902	Almeida
+0903	Celorico da Beira
+0904	Figueira de Castelo Rodrigo
+0905	Fornos de Algodres
+0906	Gouveia
+0907	Guarda
+0908	Manteigas
+0909	Meda
+0910	Pinhel
+0911	Sabugal
+0912	Seia
+0913	Trancoso
+0914	Vila Nova de Foz Coa
+1001	Alcobaca
+1002	Alvaiazere
+1003	Ansiao
+1004	Batalha
+1005	Bombarral
+1006	Caldas da Rainha
+1007	Castanheira de Pera
+1008	Figueiro Dos Vinhos
+1009	Leiria
+1010	Marinha Grande
+1011	Nazare
+1012	Obidos
+1013	Pedrogao Grande
+1014	Peniche
+1015	Pombal
+1016	Porto de Mos
+1101	Alenquer
+1102	Arruda Dos Vinhos
+1103	Azambuja
+1104	Cadaval
+1105	Cascais
+1106	Lisboa
+1107	Loures
+1108	Lourinha
+1109	Mafra
+1110	Oeiras
+1111	Sintra
+1112	Sobral de Monte Agraco
+1113	Torres Vedras
+1114	Vila Franca de Xira
+1115	Amadora
+1116	Odivelas
+1201	Alter do Chao
+1202	Arronches
+1203	Avis
+1204	Campo Maior
+1205	Castelo de Vide
+1206	Crato
+1207	Elvas
+1208	Fronteira
+1209	Gaviao
+1210	Marvao
+1211	Monforte
+1212	Nisa
+1213	Ponte de Sor
+1214	Portalegre
+1215	Sousel
+1301	Amarante
+1302	Baiao
+1303	Felgueiras
+1304	Gondomar
+1305	Lousada
+1306	Maia
+1307	Marco de Canaveses
+1308	Matosinhos
+1309	Pacos de Ferreira
+1310	Paredes
+1311	Penafiel
+1312	Porto
+1313	Povoa de Varzim
+1314	Santo Tirso
+1315	Valongo
+1316	Vila do Conde
+1317	Vila Nova de Gaia
+1318	Trofa
+1401	Abrantes
+1402	Alcanena
+1403	Almeirim
+1404	Alpiarca
+1405	Benavente
+1406	Cartaxo
+1407	Chamusca
+1408	Constancia
+1409	Coruche
+1410	Entroncamento
+1411	Ferreira do Zezere
+1412	Golega
+1413	Macao
+1414	Rio Maior
+1415	Salvaterra de Magos
+1416	Santarem
+1417	Sardoal
+1418	Tomar
+1419	Torres Novas
+1420	Vila Nova da Barquinha
+1421	Ourem
+1501	Alcacer do Sal
+1502	Alcochete
+1503	Almada
+1504	Barreiro
+1505	Grandola
+1506	Moita
+1507	Montijo
+1508	Palmela
+1509	Santiago do Cacem
+1510	Seixal
+1511	Sesimbra
+1512	Setubal
+1513	Sines
+1601	Arcos de Valdevez
+1602	Caminha
+1603	Melgaco
+1604	Moncao
+1605	Paredes de Coura
+1606	Ponte da Barca
+1607	Ponte de Lima
+1608	Valenca
+1609	Viana do Castelo
+1610	Vila Nova de Cerveira
+1701	Alijo
+1702	Boticas
+1703	Chaves
+1704	Mesao Frio
+1705	Mondim de Basto
+1706	Montalegre
+1707	Murca
+1708	Peso da Regua
+1709	Ribeira de Pena
+1710	Sabrosa
+1711	Santa Marta de Penaguiao
+1712	Valpacos
+1713	Vila Pouca de Aguiar
+1714	Vila Real
+1801	Armamar
+1802	Carregal do Sal
+1803	Castro Daire
+1804	Cinfaes
+1805	Lamego
+1806	Mangualde
+1807	Moimenta da Beira
+1808	Mortagua
+1809	Nelas
+1810	Oliveira de Frades
+1811	Penalva do Castelo
+1812	Penedono
+1813	Resende
+1814	Santa Comba Dao
+1815	S. Joao da Pesqueira
+1816	S. Pedro do Sul
+1817	Satao
+1818	Sernancelhe
+1819	Tabuaco
+1820	Tarouca
+1821	Tondela
+1822	Vila Nova de Paiva
+1823	Viseu
+1824	Vouzela

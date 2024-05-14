@@ -98,7 +98,6 @@ int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas) {
             idadeMaxima = anos;
         }
     }
-
     return idadeMaxima;
 }
 
