@@ -186,6 +186,5 @@ int NumeroPessoasIdadeSuperiorX(PESSOA** listaPessoas, int tamanhoListaPessoas, 
             numeroPessoas++; // se for entao adicionar mais uma pessoa
         }
     }
-
     return numeroPessoas;
 }
