@@ -6,13 +6,11 @@
 #include <time.h>
 
 #include "Livro.h"
-#include "Hashing.h"
 #include "Pessoa.h"
 typedef struct
 {
     char *NOME;
     char FICHEIRO_LOGS[50];
-
     HASHING *HLivros;
    // LISTA   *LRequisitantes;
    // LISTA_Requisicoes *LRequisicoes;
