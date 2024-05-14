@@ -18,6 +18,8 @@ typedef struct
     char *NOME;
     char ID[10];
     DATANASC *dataNascimento;
+    int codigo_freguesia[6];
+    int numero_requiscoes;
 }PESSOA;
 
 typedef struct elemento{
@@ -30,23 +32,21 @@ typedef struct{
     ElementoP *Inicio;
 }ListaPessoa, *ptListaP;
 
-typedef struct NO_CHAVE { // Inicial da pessoa
-    char *KEY; // 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
+typedef struct NO_CHAVE_P { 
+    char Key;
     ListaPessoa *DADOS;
-    struct NO_CHAVE *Prox; // 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', ...
-} NO_CHAVE;
+    struct NO_CHAVE_P *Prox; 
+} NO_CHAVE_P;
+
+typedef struct{
+    int num_chaves;
+    NO_CHAVE_P *Inicio;
+}Lista_Chaves_P;
 
 typedef struct {
     char codigo[7]; // O código da freguesia
     char nome[100]; // O nome da freguesia
 } Freguesia;
-
-typedef struct {
-    char codigo[10]; // O código do requisitante
-    char nome[100]; // O nome completo do requisitante
-    char data_nascimento[11]; // A data de nascimento do requisitante (no formato dd-mm-yyyy)
-    int numero_requisicoes; // O número de requisições feitas pelo requisitante
-} Requisitante;
 
 typedef struct {
     char codigo[3]; // O código do distrito
@@ -62,22 +62,24 @@ typedef struct {
 
 
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
-PESSOA *PedirDadosPessoa();
+PESSOA *PedirDadosPessoa(); // adicionar para pedir freguesia
 ListaPessoa *criarListaP();
 ElementoP *criar_elementoP(PESSOA *P);
-void *AdicionarPessoa(ListaPessoa *L,ElementoP *E);
+void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E);
 void *PesquisarPesssoaPorNome(ListaPessoa *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);
 void *OrganizarPorNome(ListaPessoa *L, int op);
 void *ListarPessoas(ListaPessoa *L);
 void MostrarPessoa(PESSOA *P);
-NO_CHAVE *criarNoChave(char *chave);
-void inserirPessoaHash(NO_CHAVE **tabela, char *chave, PESSOA *pessoa);
+NO_CHAVE_P *criarNoChave(char chave);
+void inserirPessoaHash(NO_CHAVE_P **tabela, char *chave, PESSOA *pessoa);
 PESSOA *buscarPessoaPorID(ptListaP lista, int id);
 int verificarIDArquivo(char *idRequisitante);
 //criar uma requisição de um livro
 //devolver livro requisitado
 //listar livros requisitados
+
+
 
 #endif // PESSOA_H_INCLUDED

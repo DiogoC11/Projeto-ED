@@ -27,38 +27,37 @@ typedef struct{
 }ListaLivro, *ptListaL;
 
 // Hashing
-typedef struct NO_CHAVE {
+typedef struct NO_CHAVE_L_L {
     char categoria[50];
     ListaLivro *DADOS;
-    struct NO_CHAVE *Prox;
-} NO_CHAVE;
+    struct NO_CHAVE_L *Prox;
+} NO_CHAVE_L;
 
 typedef struct{
     int num_chaves;
-    NO_CHAVE *Inicio;
-}Lista_Chaves;
+    NO_CHAVE_L *Inicio;
+}Lista_Chaves_L;
 
 LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
-LIVRO *PedirDadosLivro(Lista_Chaves *C);
+LIVRO *PedirDadosLivro(Lista_Chaves_L *C);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 ListaLivro *criarListaL();
 ElementoL *criar_elementoL(LIVRO *L);
-void *AdicionarLivro(ListaLivro *L,ElementoL *E, Lista_Chaves *C);
-void ListarLivros(ListaLivro *L);
-LIVRO *PesquisarLivroPorISBN(Lista_Chaves *C, char *isbn);
-LIVRO *LivroMaisRecente(ListaLivro *L);
+void *AdicionarLivro(ElementoL *E, Lista_Chaves_L *C);
+void ListarLivros(Lista_Chaves_L *C);
+LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn);
+LIVRO *LivroMaisRecente(Lista_Chaves_L * L);
+void AreaMaisLivros(Lista_Chaves_L *C);
 
 //funcoes hashing-----------------------------------------------------------------------
-Lista_Chaves *CriarListaChaves();
-NO_CHAVE *AdicionarChave(Lista_Chaves *L, char *categoria);
+Lista_Chaves_L *CriarListaChaves();
+NO_CHAVE_L *AdicionarChave(Lista_Chaves_L *L, char *categoria);
 
 //---------------------------------------------------------------------------------------
 
 
 //livro mais requisitado;
 //area mais requisitada;
-//area com mais livros;
-
 
 #endif // LIVRO_H_INCLUDED
