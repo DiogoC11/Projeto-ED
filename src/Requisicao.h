@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "Pessoa.h"
 #include "Livro.h"
 typedef struct
@@ -22,8 +21,8 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L);
 void MostrarRequisicao(REQUISICAO *P);
 void DestruirRequisicao(REQUISICAO *P);
 REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisicoes, int tamanhoLista); //pesquisar requisitante pelo nome
-//listar requisitantes com filtro(1- nome,2-apelido,3-freguisia)
 
+//listar requisitantes com filtro(1- nome,2-apelido,3-freguisia)
 //idade maxima de todos os requisitantes
 //idade media de todos os requisitantes
 //numero de pessoas cuja a idade superior a x
