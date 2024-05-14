@@ -121,8 +121,8 @@ float CalcularIdadeMedia(PESSOA** listaPessoas, int tamanhoListaPessoas) {
 
         totalIdades += anos;
     }
+
     // fazer media
     float idadeMedia = (float)totalIdades / tamanhoListaPessoas;
-
     return idadeMedia;
 }
