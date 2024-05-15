@@ -48,6 +48,7 @@ PESSOA *PedirDadosPessoa(){
     scanf("%d",ano);
     return CriarPessoa(primeiroNome,ultimoNome,dia,mes,ano);
 }
+
 ListaPessoa *criarListaP(){
     ListaPessoa *L = (ListaPessoa *) malloc(sizeof (ListaPessoa));
     if (!L) return NULL;
@@ -97,12 +98,17 @@ void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E){
 
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
     if(!L ) return NULL;
-    ElementoP *E = L->Inicio;
-    for (int i = 0; i < L->num_Pessoas; i++) {
-        if(strcmp(E->pessoa->NOME,nome) == 0){
-            return E->pessoa;
+    NO_CHAVE_P *N = L->Inicio;
+    ElementoP *E = N->DADOS->Inicio;
+
+    for (int i = 0; i < L->num_chaves; i++) {
+        for(int j = 0; j < L->Inicio[i].DADOS->num_Pessoas; j++){
+            if(strcmp(E->pessoa->NOME,nome) == 0){
+                return E->pessoa;
+            }
+            E = E->proximo;
         }
-        E = E->proximo;
+        N = N->Prox;
     }
     return NULL;
 }
@@ -274,7 +280,7 @@ int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
     return num_freguesias;
 }
 
-int lerRequisitantes(const char* nome_arquivo, Requisitante **requisitantes) {
+/*int lerRequisitantes(const char* nome_arquivo, Requisitante **requisitantes) {
     FILE *arquivo;
     char linha[200]; // Tamanho máximo da linha do arquivo
     int num_requisitantes = 0;
@@ -320,7 +326,7 @@ int lerRequisitantes(const char* nome_arquivo, Requisitante **requisitantes) {
     fclose(arquivo);
     return num_requisitantes;
 }
-
+*/
 int lerDistritos(const char* nome_arquivo, Distrito **distritos) {
     FILE *arquivo;
     char linha[100]; // Tamanho máximo da linha do arquivo
