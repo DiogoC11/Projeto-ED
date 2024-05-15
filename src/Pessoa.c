@@ -227,18 +227,6 @@ int verificarIDArquivo(char *idRequisitante) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Função para ler o arquivo de freguesias e armazenar os dados em uma matriz de Freguesia
 int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
     FILE *arquivo;
@@ -280,56 +268,7 @@ int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
     return num_freguesias;
 }
 
-/*int lerRequisitantes(const char* nome_arquivo, Requisitante **requisitantes) {
-    FILE *arquivo;
-    char linha[200]; // Tamanho máximo da linha do arquivo
-    int num_requisitantes = 0;
-
-    arquivo = fopen(nome_arquivo, "r");
-    if (arquivo == NULL) {
-        perror("Erro ao abrir o arquivo");
-        exit(EXIT_FAILURE);
-    }
-
-    // Alocar memória inicial para os requisitantes
-    *requisitantes = malloc(sizeof(Requisitante));
-    if (*requisitantes == NULL) {
-        perror("Erro ao alocar memória para os requisitantes");
-        exit(EXIT_FAILURE);
-    }
-
-    // Ler cada linha do arquivo
-    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
-        // Realocar memória para armazenar mais um requisitante
-        *requisitantes = realloc(*requisitantes, (num_requisitantes + 1) * sizeof(Requisitante));
-        if (*requisitantes == NULL) {
-            perror("Erro ao realocar memória para os requisitantes");
-            exit(EXIT_FAILURE);
-        }
-
-        // Separar os dados do requisitante
-        char *token = strtok(linha, "\t");
-        strcpy((*requisitantes)[num_requisitantes].codigo, token);
-
-        token = strtok(NULL, "\t");
-        strcpy((*requisitantes)[num_requisitantes].nome, token);
-
-        token = strtok(NULL, "\t");
-        strcpy((*requisitantes)[num_requisitantes].data_nascimento, token);
-
-        token = strtok(NULL, "\t");
-        (*requisitantes)[num_requisitantes].numero_requisicoes = atoi(token);
-
-        num_requisitantes++;
-    }
-
-    fclose(arquivo);
-    return num_requisitantes;
-}
-*/
-
-
-int lerRequisitantes(const char *nome_arquivo, ListaPessoa **listaPessoas) {
+int lerPessoas(const char *nome_arquivo, ListaPessoa **listaPessoas) {
     FILE *arquivo;
     char linha[200]; // Tamanho máximo da linha do arquivo
     int num_requisitantes = 0;
@@ -396,6 +335,7 @@ int lerRequisitantes(const char *nome_arquivo, ListaPessoa **listaPessoas) {
 
         num_requisitantes++;
     }
+
 
     fclose(arquivo);
     return num_requisitantes;

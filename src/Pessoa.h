@@ -5,6 +5,58 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Localidade
+
+typedef struct {
+    char codigo[7];
+    char nome[50];
+} Freguesia;
+
+typedef struct elementoF{
+    Freguesia *freguesia;
+    struct elementoF *prox;
+}ElementoF;
+
+typedef struct {
+    int num_Freguesias;
+    ElementoF *Inicio;
+}Lista_F;
+
+typedef struct {
+    char codigo[5];
+    char nome[50];
+    Lista_F *freguesias;
+} Conselho;
+
+typedef struct elementoC{
+    Conselho *conselho;
+    struct elementoC *prox;
+}ElementoC;
+
+typedef struct {
+    int num_Concelho;
+    ElementoF *Inicio;
+}Lista_C;
+
+typedef struct {
+    char codigo[3];
+    char nome[50];
+    Lista_C *concelhos;
+} Distrito;
+
+typedef struct elementoD{
+    Distrito *distrito;
+    struct elementoD *prox;
+}ElementoD;
+
+typedef struct {
+    int num_Distrito;
+    ElementoF *Inicio;
+}Lista_D;
+
+
+//Pessoa
+
 typedef struct{
     int dia;
     int mes;
@@ -18,7 +70,7 @@ typedef struct
     char *NOME;
     int ID;
     DATANASC *dataNascimento;
-    int codigo_freguesia[6];
+    Freguesia *freguesia;
     int numero_requiscoes;
 }PESSOA;
 
@@ -41,25 +93,7 @@ typedef struct NO_CHAVE_P {
 typedef struct{
     int num_chaves;
     NO_CHAVE_P *Inicio;
-    int num_Pessoas;
 }Lista_Chaves_P;
-
-typedef struct {
-    char codigo[7]; // O código da freguesia
-    char nome[100]; // O nome da freguesia
-} Freguesia;
-
-typedef struct {
-    char codigo[3]; // O código do distrito
-    char nome[50]; // O nome do distrito
-} Distrito;
-
-typedef struct {
-    char codigo[5]; // O código do conselho
-    char nome[50]; // O nome do conselho
-} Conselho;
-
-
 
 
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
@@ -74,7 +108,6 @@ void *OrganizarPorNome(ListaPessoa *L, int op);
 void *ListarPessoas(ListaPessoa *L);
 void MostrarPessoa(PESSOA *P);
 NO_CHAVE_P *criarNoChave(char chave);
-void inserirPessoaHash(NO_CHAVE_P **tabela, char *chave, PESSOA *pessoa);
 PESSOA *buscarPessoaPorID(ptListaP lista, int id);
 int verificarIDArquivo(char *idRequisitante);
 //criar uma requisição de um livro
