@@ -268,10 +268,9 @@ int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
     return num_freguesias;
 }
 
-int lerPessoas(const char *nome_arquivo, ListaPessoa **listaPessoas) {
+void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
     FILE *arquivo;
-    char linha[200]; // Tamanho máximo da linha do arquivo
-    int num_requisitantes = 0;
+    char linha[MAX_LINE];
 
     arquivo = fopen(nome_arquivo, "r");
     if (arquivo == NULL) {
@@ -279,66 +278,51 @@ int lerPessoas(const char *nome_arquivo, ListaPessoa **listaPessoas) {
         exit(EXIT_FAILURE);
     }
 
-    // Inicializar a lista de pessoas
-    *listaPessoas = malloc(sizeof(ListaPessoa));
-    if (*listaPessoas == NULL) {
-        perror("Erro ao alocar memória para a lista de pessoas");
-        exit(EXIT_FAILURE);
-    }
-    (*listaPessoas)->Inicio = NULL;
-    (*listaPessoas)->num_Pessoas = 0;
-
-    // Ler cada linha do arquivo
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
-        // Separar os dados da linha
-        char *token = strtok(linha, "\t");
+        PESSOA *novaPessoa = (PESSOA *)malloc(sizeof(PESSOA));
+        novaPessoa->dataNascimento = (DATANASC *)malloc(sizeof(DATANASC));
 
-        // Criar uma nova estrutura PESSOA
-        PESSOA *novaPessoa = malloc(sizeof(PESSOA));
-        if (novaPessoa == NULL) {
-            perror("Erro ao alocar memória para uma nova pessoa");
-            exit(EXIT_FAILURE);
-        }
+        // Ler ID
+        novaPessoa->ID = atoi(strtok(linha, " "));
 
-        // Definir os campos da nova pessoa
-        novaPessoa->PrimeiroNome = strdup(strtok(NULL, " "));
-        novaPessoa->UltimoNome = strdup(strtok(NULL, " "));
-        novaPessoa->NOME = strdup(strtok(NULL, "\t"));
-        novaPessoa->ID = atoi(strtok(NULL, "\t"));
+        // Ler nome
+        char *nome = strtok(NULL, "0123456789");
+        int nome_len = strlen(nome);
+        novaPessoa->NOME = (char *)malloc((nome_len + 1) * sizeof(char));
+        strcpy(novaPessoa->NOME, nome);
 
-        DATANASC *dataNascimento = malloc(sizeof(DATANASC));
-        if (dataNascimento == NULL) {
-            perror("Erro ao alocar memória para a data de nascimento");
-            exit(EXIT_FAILURE);
-        }
-        dataNascimento->dia = atoi(strtok(NULL, "-"));
-        dataNascimento->mes = atoi(strtok(NULL, "-"));
-        dataNascimento->ano = atoi(strtok(NULL, "\t"));
-        novaPessoa->dataNascimento = dataNascimento;
+        // Extrair primeiro e último nome
+        novaPessoa->PrimeiroNome = strtok(novaPessoa->NOME, " ");
+        novaPessoa->UltimoNome = strtok(NULL, " ");
 
-        for (int i = 0; i < 6; i++) {
-            novaPessoa->codigo_freguesia[i] = atoi(strtok(NULL, "\t"));
-        }
+        // Ler data de nascimento
+        sscanf(strtok(NULL, " "), "%d-%d-%d", &novaPessoa->dataNascimento->dia, &novaPessoa->dataNascimento->mes, &novaPessoa->dataNascimento->ano);
 
-        novaPessoa->numero_requiscoes = atoi(strtok(NULL, "\t"));
+        // Ler código da freguesia
+        novaPessoa->freguesia = (Freguesia *)malloc(sizeof(Freguesia));
+        sscanf(strtok(NULL, " "), "%d", &novaPessoa->freguesia->codigo);
 
-        // Adicionar a nova pessoa à lista de pessoas
-        ElementoP *novoElemento = malloc(sizeof(ElementoP));
-        if (novoElemento == NULL) {
-            perror("Erro ao alocar memória para um novo elemento da lista");
-            exit(EXIT_FAILURE);
-        }
+        // Número de requisições inicializado como 0
+        novaPessoa->numero_requiscoes = 0;
+
+        // Adicionar pessoa à lista
+        ElementoP *novoElemento = (ElementoP *)malloc(sizeof(ElementoP));
         novoElemento->pessoa = novaPessoa;
-        novoElemento->proximo = (*listaPessoas)->Inicio;
-        (*listaPessoas)->Inicio = novoElemento;
-        (*listaPessoas)->num_Pessoas++;
+        novoElemento->proximo = NULL;
 
-        num_requisitantes++;
+        if (listaPessoa->Inicio == NULL) {
+            listaPessoa->Inicio = novoElemento;
+        } else {
+            ElementoP *atual = listaPessoa->Inicio;
+            while (atual->proximo != NULL) {
+                atual = atual->proximo;
+            }
+            atual->proximo = novoElemento;
+        }
+        listaPessoa->num_Pessoas++;
     }
-
 
     fclose(arquivo);
-    return num_requisitantes;
 }
 
 
