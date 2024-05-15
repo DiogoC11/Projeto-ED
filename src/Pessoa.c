@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
 #include "Pessoa.h"
 
 /** \brief Permite Alocar e inicializar uma estrutura Pessoa
@@ -46,7 +48,6 @@ PESSOA *PedirDadosPessoa(){
     scanf("%d",ano);
     return CriarPessoa(primeiroNome,ultimoNome,dia,mes,ano);
 }
-
 ListaPessoa *criarListaP(){
     ListaPessoa *L = (ListaPessoa *) malloc(sizeof (ListaPessoa));
     if (!L) return NULL;
@@ -168,13 +169,13 @@ void inserirPessoaHash(NO_CHAVE_P **tabela, char *chave, PESSOA *pessoa) {
     int indice = chave[0] - 'A'; // Supondo que as chaves sejam letras maiúsculas de A a Z
     NO_CHAVE_P *atual = tabela[indice];
     if (atual == NULL) {
-        tabela[indice] = criarNoChave(chave);
+        tabela[indice] = criarNoChave(*chave);
         atual = tabela[indice];
     } else {
         while (atual->Prox != NULL) {
             atual = atual->Prox;
         }
-        atual->Prox = criarNoChave(chave);
+        atual->Prox = criarNoChave(*chave);
         atual = atual->Prox;
     }
     AdicionarPessoa(atual->DADOS, pessoa);
@@ -217,4 +218,187 @@ int verificarIDArquivo(char *idRequisitante) {
 
     fclose(arquivo); // Fecha o arquivo
     return 0; // Retorna falso se o ID requisitante não for encontrado
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Função para ler o arquivo de freguesias e armazenar os dados em uma matriz de Freguesia
+int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
+    FILE *arquivo;
+    char linha[150]; // Tamanho máximo da linha do arquivo
+    int num_freguesias = 0;
+
+    arquivo = fopen("./data/recursos/freguesias.txt", "r");
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(EXIT_FAILURE);
+    }
+
+    // Alocar memória inicial para as freguesias
+    *freguesias = malloc(sizeof(Freguesia));
+    if (*freguesias == NULL) {
+        perror("Erro ao alocar memória para as freguesias");
+        exit(EXIT_FAILURE);
+    }
+
+    // Ler cada linha do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Realocar memória para armazenar mais uma freguesia
+        *freguesias = realloc(*freguesias, (num_freguesias + 1) * sizeof(Freguesia));
+        if (*freguesias == NULL) {
+            perror("Erro ao realocar memória para as freguesias");
+            exit(EXIT_FAILURE);
+        }
+
+        // Separar o código e o nome da freguesia
+        char *token = strtok(linha, "\t");
+        strcpy((*freguesias)[num_freguesias].codigo, token);
+        token = strtok(NULL, "\t");
+        strcpy((*freguesias)[num_freguesias].nome, token);
+
+        num_freguesias++;
+    }
+
+    fclose(arquivo);
+    return num_freguesias;
+}
+
+int lerRequisitantes(const char* nome_arquivo, Requisitante **requisitantes) {
+    FILE *arquivo;
+    char linha[200]; // Tamanho máximo da linha do arquivo
+    int num_requisitantes = 0;
+
+    arquivo = fopen(nome_arquivo, "r");
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(EXIT_FAILURE);
+    }
+
+    // Alocar memória inicial para os requisitantes
+    *requisitantes = malloc(sizeof(Requisitante));
+    if (*requisitantes == NULL) {
+        perror("Erro ao alocar memória para os requisitantes");
+        exit(EXIT_FAILURE);
+    }
+
+    // Ler cada linha do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Realocar memória para armazenar mais um requisitante
+        *requisitantes = realloc(*requisitantes, (num_requisitantes + 1) * sizeof(Requisitante));
+        if (*requisitantes == NULL) {
+            perror("Erro ao realocar memória para os requisitantes");
+            exit(EXIT_FAILURE);
+        }
+
+        // Separar os dados do requisitante
+        char *token = strtok(linha, "\t");
+        strcpy((*requisitantes)[num_requisitantes].codigo, token);
+
+        token = strtok(NULL, "\t");
+        strcpy((*requisitantes)[num_requisitantes].nome, token);
+
+        token = strtok(NULL, "\t");
+        strcpy((*requisitantes)[num_requisitantes].data_nascimento, token);
+
+        token = strtok(NULL, "\t");
+        (*requisitantes)[num_requisitantes].numero_requisicoes = atoi(token);
+
+        num_requisitantes++;
+    }
+
+    fclose(arquivo);
+    return num_requisitantes;
+}
+
+int lerDistritos(const char* nome_arquivo, Distrito **distritos) {
+    FILE *arquivo;
+    char linha[100]; // Tamanho máximo da linha do arquivo
+    int num_distritos = 0;
+
+    arquivo = fopen(nome_arquivo, "r");
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(EXIT_FAILURE);
+    }
+
+    // Alocar memória inicial para os distritos
+    *distritos = malloc(sizeof(Distrito));
+    if (*distritos == NULL) {
+        perror("Erro ao alocar memória para os distritos");
+        exit(EXIT_FAILURE);
+    }
+
+    // Ler cada linha do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Realocar memória para armazenar mais um distrito
+        *distritos = realloc(*distritos, (num_distritos + 1) * sizeof(Distrito));
+        if (*distritos == NULL) {
+            perror("Erro ao realocar memória para os distritos");
+            exit(EXIT_FAILURE);
+        }
+
+        // Separar os dados do distrito
+        char *token = strtok(linha, "\t");
+        strcpy((*distritos)[num_distritos].codigo, token);
+
+        token = strtok(NULL, "\n");
+        strcpy((*distritos)[num_distritos].nome, token);
+
+        num_distritos++;
+    }
+
+    fclose(arquivo);
+    return num_distritos;
+}
+
+int lerConselhos(const char* nome_arquivo, Conselho **conselhos) {
+    FILE *arquivo;
+    char linha[100]; // Tamanho máximo da linha do arquivo
+    int num_conselhos = 0;
+
+    arquivo = fopen(nome_arquivo, "r");
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(EXIT_FAILURE);
+    }
+
+    // Alocar memória inicial para os conselhos
+    *conselhos = malloc(sizeof(Conselho));
+    if (*conselhos == NULL) {
+        perror("Erro ao alocar memória para os conselhos");
+        exit(EXIT_FAILURE);
+    }
+
+    // Ler cada linha do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Realocar memória para armazenar mais um conselho
+        *conselhos = realloc(*conselhos, (num_conselhos + 1) * sizeof(Conselho));
+        if (*conselhos == NULL) {
+            perror("Erro ao realocar memória para os conselhos");
+            exit(EXIT_FAILURE);
+        }
+
+        // Separar os dados do conselho
+        char *token = strtok(linha, "\t");
+        strcpy((*conselhos)[num_conselhos].codigo, token);
+
+        token = strtok(NULL, "\n");
+        strcpy((*conselhos)[num_conselhos].nome, token);
+
+        num_conselhos++;
+    }
+
+    fclose(arquivo);
+    return num_conselhos;
 }

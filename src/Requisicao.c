@@ -36,6 +36,7 @@ REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisico
 }
 
 
+
 //Funcao para ver todas as requisiçoes de algum requisitante
 void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRequisicoes, int tamanhoLista) {
     printf("Requisicões do requisitante %s:\n", requisitante->NOME);
@@ -78,7 +79,6 @@ void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, 
         }
     }
 }
-
 
 //  Determinar a idade máxima de todos os requisitantes;
 int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas) {

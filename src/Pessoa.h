@@ -16,7 +16,7 @@ typedef struct
     char *PrimeiroNome;
     char *UltimoNome;
     char *NOME;
-    char ID[10];
+    int ID;
     DATANASC *dataNascimento;
     int codigo_freguesia[6];
     int numero_requiscoes;
@@ -41,6 +41,7 @@ typedef struct NO_CHAVE_P {
 typedef struct{
     int num_chaves;
     NO_CHAVE_P *Inicio;
+    int num_Pessoas;
 }Lista_Chaves_P;
 
 typedef struct {
