@@ -184,7 +184,7 @@ void inserirPessoaHash(NO_CHAVE_P **tabela, char *chave, PESSOA *pessoa) {
         atual->Prox = criarNoChave(*chave);
         atual = atual->Prox;
     }
-    AdicionarPessoa(atual->DADOS, pessoa);
+    AdicionarPessoa((Lista_Chaves_P *) atual->DADOS, (ElementoP *) pessoa);
 }
 
 // Função percorrer as pessoas a busca se o id é identifco ao parametro
@@ -327,6 +327,82 @@ int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
     return num_requisitantes;
 }
 */
+
+
+int lerRequisitantes(const char *nome_arquivo, ListaPessoa **listaPessoas) {
+    FILE *arquivo;
+    char linha[200]; // Tamanho máximo da linha do arquivo
+    int num_requisitantes = 0;
+
+    arquivo = fopen(nome_arquivo, "r");
+    if (arquivo == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(EXIT_FAILURE);
+    }
+
+    // Inicializar a lista de pessoas
+    *listaPessoas = malloc(sizeof(ListaPessoa));
+    if (*listaPessoas == NULL) {
+        perror("Erro ao alocar memória para a lista de pessoas");
+        exit(EXIT_FAILURE);
+    }
+    (*listaPessoas)->Inicio = NULL;
+    (*listaPessoas)->num_Pessoas = 0;
+
+    // Ler cada linha do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Separar os dados da linha
+        char *token = strtok(linha, "\t");
+
+        // Criar uma nova estrutura PESSOA
+        PESSOA *novaPessoa = malloc(sizeof(PESSOA));
+        if (novaPessoa == NULL) {
+            perror("Erro ao alocar memória para uma nova pessoa");
+            exit(EXIT_FAILURE);
+        }
+
+        // Definir os campos da nova pessoa
+        novaPessoa->PrimeiroNome = strdup(strtok(NULL, " "));
+        novaPessoa->UltimoNome = strdup(strtok(NULL, " "));
+        novaPessoa->NOME = strdup(strtok(NULL, "\t"));
+        novaPessoa->ID = atoi(strtok(NULL, "\t"));
+
+        DATANASC *dataNascimento = malloc(sizeof(DATANASC));
+        if (dataNascimento == NULL) {
+            perror("Erro ao alocar memória para a data de nascimento");
+            exit(EXIT_FAILURE);
+        }
+        dataNascimento->dia = atoi(strtok(NULL, "-"));
+        dataNascimento->mes = atoi(strtok(NULL, "-"));
+        dataNascimento->ano = atoi(strtok(NULL, "\t"));
+        novaPessoa->dataNascimento = dataNascimento;
+
+        for (int i = 0; i < 6; i++) {
+            novaPessoa->codigo_freguesia[i] = atoi(strtok(NULL, "\t"));
+        }
+
+        novaPessoa->numero_requiscoes = atoi(strtok(NULL, "\t"));
+
+        // Adicionar a nova pessoa à lista de pessoas
+        ElementoP *novoElemento = malloc(sizeof(ElementoP));
+        if (novoElemento == NULL) {
+            perror("Erro ao alocar memória para um novo elemento da lista");
+            exit(EXIT_FAILURE);
+        }
+        novoElemento->pessoa = novaPessoa;
+        novoElemento->proximo = (*listaPessoas)->Inicio;
+        (*listaPessoas)->Inicio = novoElemento;
+        (*listaPessoas)->num_Pessoas++;
+
+        num_requisitantes++;
+    }
+
+    fclose(arquivo);
+    return num_requisitantes;
+}
+
+
+
 int lerDistritos(const char* nome_arquivo, Distrito **distritos) {
     FILE *arquivo;
     char linha[100]; // Tamanho máximo da linha do arquivo
