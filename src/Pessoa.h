@@ -22,7 +22,7 @@ typedef struct
     int numero_requiscoes;
 }PESSOA;
 
-typedef struct elemento{
+typedef struct ElementoP{
     PESSOA *pessoa;
     struct elemento *proximo;
 }ElementoP, *ptElementoP;
