@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include "Requisicao.h"
+#include "Pessoa.h"
 
 
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L)
@@ -187,4 +188,55 @@ int NumeroPessoasIdadeSuperiorX(PESSOA** listaPessoas, int tamanhoListaPessoas, 
         }
     }
     return numeroPessoas;
+}
+
+
+//sobrenome mais usado nas requisiçoes
+char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
+
+    // estrutura para armazenar sobrenome e contar quantas vezes aparece
+    typedef struct {
+        char* sobrenome;
+        int contagem;
+    } ContadorSobrenome;
+
+    // alocar memoria para contar sobrenomes
+    ContadorSobrenome* contadores = (ContadorSobrenome*)malloc(tamanhoListaRequisicoes * sizeof(ContadorSobrenome));
+    int numSobrenomes = 0;
+
+    // contar sobrenomes
+    for (int i = 0; i < tamanhoListaRequisicoes; i++) {
+        char* sobrenomeAtual = listaRequisicoes[i]->Ptr_Req->UltimoNome; // sobrenome do requisitante atual
+        int encontrado = 0; // ver se o sobrenome ja foi encontrado
+
+        // isto é para ver se o sobrenome ja está no array de contadores
+        for (int j = 0; j < numSobrenomes; j++) {
+            if (strcmp(contadores[j].sobrenome, sobrenomeAtual) == 0) {
+                contadores[j].contagem++; // adicionar mais um na contagem se ja estiver no array
+                encontrado = 1; // marcar como encontrado
+                break;
+            }
+        }
+
+        // se o sobrenome nao foi encontrado, vai adicionar um novo ao contador
+        if (!encontrado) {
+            contadores[numSobrenomes].sobrenome = sobrenomeAtual; // adicionar ao array
+            contadores[numSobrenomes].contagem = 1; // começar contagem para novo sobrenome
+            numSobrenomes++; // incrementar o número de sobrenomes únicos
+        }
+    }
+
+    // encontrar sobrenome com maior frequencia
+    char* sobrenomeMaisUsado = NULL;
+    int maxContagem = 0;
+    for (int i = 0; i < numSobrenomes; i++) {
+        if (contadores[i].contagem > maxContagem) {
+            maxContagem = contadores[i].contagem; // atualizar contagem maxima
+            sobrenomeMaisUsado = contadores[i].sobrenome; // atualizar sobrenome mais usado
+        }
+    }
+
+    // libertar memoria
+    free(contadores);
+    return sobrenomeMaisUsado;
 }
