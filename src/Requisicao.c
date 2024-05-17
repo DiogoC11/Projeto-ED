@@ -12,6 +12,22 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L)
     Req->Ptr_Livro = L;
     return Req;
 }
+
+ListaRequisicoes *criarListaR(){
+    ListaRequisicoes *L = (ListaRequisicoes *)malloc(sizeof(ListaRequisicoes));
+    if(!L) return NULL;
+    L->num_Requisicoes = 0;
+    L->Inicio = NULL;
+    return L;
+}
+
+ElementoR *criarElementoR(REQUISICAO *R){
+    ElementoR *e = (ElementoR *)malloc(sizeof(ElementoR));
+    if(!e) return NULL;
+    e->requisicao = R;
+    e->proximo = NULL;
+    return e;
+}
 void MostrarRequisicao(REQUISICAO *R)
 {
     printf("REQ ID = %d\n", R->ID);
@@ -25,28 +41,6 @@ void DestruirRequisicao(REQUISICAO *R)
     free (R);
 }
 
-
-
-REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisicoes, int tamanhoLista) {
-    for (int i = 0; i < tamanhoLista; i++) {
-        if (strcmp(listaRequisicoes[i]->Ptr_Req->NOME, nome) == 0) {
-            return listaRequisicoes[i];
-        }
-    }
-    return NULL; //se nao encontrar nng com o nome especifico vai retornar NULL
-}
-
-
-
-//Funcao para ver todas as requisiçoes de algum requisitante
-void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRequisicoes, int tamanhoLista) {
-    printf("Requisicões do requisitante %s:\n", requisitante->NOME);
-    for (int i = 0; i < tamanhoLista; i++) {
-        if (listaRequisicoes[i]->Ptr_Req == requisitante) {
-            MostrarRequisicao(listaRequisicoes[i]);
-        }
-    }
-}
 
 //Funcão para ver se a pessoa tem alguma requisiçao ou nao
 bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {

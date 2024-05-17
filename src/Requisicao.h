@@ -17,23 +17,35 @@ typedef struct
     //DATA Data_Requisicao;
 }REQUISICAO;
 
+typedef struct elementoR{
+    REQUISICAO *requisicao;
+    struct elementoR *proximo;
+} ElementoR, *ptElementoR;
+
+typedef struct {
+    int num_Requisicoes;
+    ElementoR *Inicio;
+}ListaRequisicoes, *ptListaR;
+//qddwqdq
+
 
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L);
+ListaRequisicoes *criarListaR();
+ElementoR *criarElementoR(REQUISICAO *R);
 void MostrarRequisicao(REQUISICAO *P);
 void DestruirRequisicao(REQUISICAO *P);
-REQUISICAO* PesquisarRequisitantePorNome(char* nome, REQUISICAO** listaRequisicoes, int tamanhoLista); //pesquisar requisitante pelo nome
-//listar requisitantes com filtro(1- nome,2-apelido,3-freguisia)
 
 int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas);  //idade maxima de todos os requisitantes
 float CalcularIdadeMedia(PESSOA** listaPessoas, int tamanhoListaPessoas); //idade media de todos os requisitantes
 int IdadeComMaisRequisitantes(PESSOA** listaPessoas, int tamanhoListaPessoas); //idade com mais requisitantes
 int NumeroPessoasIdadeSuperiorX(PESSOA** listaPessoas, int tamanhoListaPessoas, int x); //numero de pessoas cuja a idade superior a x
 
-void ListarRequisicoesPorRequisitante(PESSOA* requisitante, REQUISICAO** listaRequisicoes, int tamanhoLista); //lista requisiçoes de um requisitante
 void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas sem requisições
 void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas com requisiçao
 char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //sobrenome mais usado nas requisiçoes
 //numero de pessoas do distrito x, com o nome/apelido y
 
+//devolver livro requisitado
+//listar livros requisitados
 #endif // REQUISICAO_H_INCLUDED
 

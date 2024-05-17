@@ -4,15 +4,6 @@
 #include <time.h>
 #include "Pessoa.h"
 
-/** \brief Permite Alocar e inicializar uma estrutura Pessoa
- *
- * \param _id int
- * \param _nome char*
- * \param _categoria char*
- * \return PESSOA*
- *
- */
-
 
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano){
     PESSOA *P = (PESSOA *)malloc(sizeof(PESSOA));
@@ -57,12 +48,31 @@ ListaPessoa *criarListaP(){
     return L;
 }
 
-ElementoP *criar_elementoP(PESSOA *P){
+ElementoP *criarElementoP(PESSOA *P){
     ElementoP *e = (ElementoP * ) malloc(sizeof (ElementoP));
     if(!e) return NULL;
     e->pessoa = P;
     e->proximo = NULL;
     return e;
+}
+
+NO_CHAVE_P *criarNoChave(char chave) {
+    NO_CHAVE_P *novoNoChave = (NO_CHAVE_P *)malloc(sizeof(NO_CHAVE_P));
+    if (novoNoChave != NULL) {
+        novoNoChave->Key = chave;
+        novoNoChave->DADOS = criarListaP();
+        novoNoChave->Prox = NULL;
+    }
+    return novoNoChave;
+}
+
+Lista_Chaves_P *criarListaChave () {
+    Lista_Chaves_P *novaLista = (Lista_Chaves_P *) malloc(sizeof(Lista_Chaves_P));
+    if (novaLista != NULL) {
+        novaLista->Inicio = NULL;
+        novaLista->num_chaves = 0;
+    }
+    return novaLista;
 }
 
 void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E){
@@ -102,7 +112,7 @@ void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
     ElementoP *E = N->DADOS->Inicio;
 
     for (int i = 0; i < L->num_chaves; i++) {
-        for(int j = 0; j < L->Inicio[i].DADOS->num_Pessoas; j++){
+        for(int j = 0; j < N->DADOS->num_Pessoas; j++){
             if(strcmp(E->pessoa->NOME,nome) == 0){
                 return E->pessoa;
             }
@@ -132,11 +142,11 @@ void *OrganizarPorNome(ListaPessoa *L, int op){
         exit(EXIT_FAILURE);
     }
     if(op == 1){
-        qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararUltimoNome);
-    }else if(op==2){
         qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararPrimeiroNome);
+    }else if(op==2){
+        qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararUltimoNome);
     }else if(op == 3){
-        //funcao de comparar id de freguesias
+        //fazer funcao de comparar id de freguesias
     }
     for(int i = 0; i < L->num_Pessoas;i++){
         printf("Livro %d:\n", i+1);
@@ -144,60 +154,47 @@ void *OrganizarPorNome(ListaPessoa *L, int op){
     }
 }
 
-void *ListarPessoas(ListaPessoa *L){
-    printf("\nLista de Livros:\n");
-    ElementoP *E = L->Inicio;
-    for (int i = 0; i < L->num_Pessoas; i++){
-        printf("Livro %d:\n", i + 1);
-        MostrarPessoa(E->pessoa);
-        E = E->proximo;
+void *ListarPessoas(Lista_Chaves_P *L){
+    printf("\nLista de Pessoas:\n");
+    NO_CHAVE_P *N = L->Inicio;
+    ElementoP *E = N->DADOS->Inicio;
+
+    for(int i = 0; i < L->num_chaves; i++){
+        for(int j = 0; i < N->DADOS->num_Pessoas; j++){
+            printf("\nPessoa: ");
+            MostrarPessoa(E->pessoa);
+            E = E->proximo;
+        }
+        N = N->Prox;
     }
+
 }
 
 void MostrarPessoa(PESSOA *P)
 {
-    printf("\tPESSOA: ID: %d [%s] [%s]\n", P->ID, P->NOME, P->dataNascimento);
+    printf("\tPESSOA (ID: %d )\n Nome: %s \n Data de Nascimento: [%d]/[%d]/[%d]\n", P->ID, P->NOME, P->dataNascimento->dia, P->dataNascimento->mes, P->dataNascimento->ano);
 }
 
-// Função para criar um novo nó de chave
-NO_CHAVE_P *criarNoChave(char chave) {
-    NO_CHAVE_P *novoNoChave = (NO_CHAVE_P *)malloc(sizeof(NO_CHAVE_P));
-    if (novoNoChave != NULL) {
-        novoNoChave->Key = chave;
-        novoNoChave->DADOS = criarListaP();
-        novoNoChave->Prox = NULL;
-    }
-    return novoNoChave;
-}
-
-// Função para inserir uma pessoa na tabela de hashing
-void inserirPessoaHash(NO_CHAVE_P **tabela, char *chave, PESSOA *pessoa) {
-    int indice = chave[0] - 'A'; // Supondo que as chaves sejam letras maiúsculas de A a Z
-    NO_CHAVE_P *atual = tabela[indice];
-    if (atual == NULL) {
-        tabela[indice] = criarNoChave(*chave);
-        atual = tabela[indice];
-    } else {
-        while (atual->Prox != NULL) {
-            atual = atual->Prox;
-        }
-        atual->Prox = criarNoChave(*chave);
-        atual = atual->Prox;
-    }
-    AdicionarPessoa((Lista_Chaves_P *) atual->DADOS, (ElementoP *) pessoa);
-}
 
 // Função percorrer as pessoas a busca se o id é identifco ao parametro
-PESSOA *buscarPessoaPorID(ptListaP lista, int id) {
-    ptElementoP atual = lista->Inicio;
-    while (atual != NULL) {
-        if (atual->pessoa->ID == id) {
-            return atual->pessoa;
+
+PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id) {
+        if(!L ) return NULL;
+        NO_CHAVE_P *N = L->Inicio;
+        ElementoP *E = N->DADOS->Inicio;
+
+        for (int i = 0; i < L->num_chaves; i++) {
+            for(int j = 0; j < N->DADOS->num_Pessoas; j++){
+                if(E->pessoa->ID == id){
+                    return E->pessoa;
+                }
+                E = E->proximo;
+            }
+            N = N->Prox;
         }
-        atual = atual->proximo;
-    }
-    return NULL;
+        return NULL;
 }
+
 
 ////------------- Percorrer
 
@@ -226,6 +223,24 @@ int verificarIDArquivo(char *idRequisitante) {
     return 0; // Retorna falso se o ID requisitante não for encontrado
 }
 
+void *MostrarLivrosRequisitados(int ID,Lista_Chaves_P *Lp, ListaRequisicoes *R) {
+    if (!R) return NULL;
+    if (!Lp) return NULL;
+    PESSOA *P = buscarPessoaPorID(Lp, ID);
+    if (!P) return NULL;
+    printf("Requisitante: %s\n", P->NOME);
+    printf("\n Livros requisitados: ");
+    ElementoR *atual = R->Inicio;
+    for (int i = 0; i < R->num_Requisicoes; i++) {
+        if (atual->requisicao->Ptr_Req == P) {
+            printf("Livro: %s\n", R->Inicio->requisicao->Ptr_Livro->NOME);
+        }
+        atual = atual->proximo;
+    }
+}
+
+
+//FUNCOES LER E GRAVAR
 
 // Função para ler o arquivo de freguesias e armazenar os dados em uma matriz de Freguesia
 int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
@@ -270,7 +285,7 @@ int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
 
 void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
     FILE *arquivo;
-    char linha[MAX_LINE];
+    char linha[100];
 
     arquivo = fopen(nome_arquivo, "r");
     if (arquivo == NULL) {
@@ -303,7 +318,7 @@ void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
         sscanf(strtok(NULL, " "), "%d", &novaPessoa->freguesia->codigo);
 
         // Número de requisições inicializado como 0
-        novaPessoa->numero_requiscoes = 0;
+        novaPessoa->numero_requisicoes = 0;
 
         // Adicionar pessoa à lista
         ElementoP *novoElemento = (ElementoP *)malloc(sizeof(ElementoP));
@@ -323,6 +338,7 @@ void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
     }
 
     fclose(arquivo);
+
 }
 
 

@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Requisicao.h"
+#include "Livro.h"
 
 //Localidade
 
@@ -71,7 +73,7 @@ typedef struct
     int ID;
     DATANASC *dataNascimento;
     Freguesia *freguesia;
-    int numero_requiscoes;
+    int numero_requisicoes;
 }PESSOA;
 
 typedef struct ElementoP{
@@ -99,20 +101,19 @@ typedef struct{
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
 PESSOA *PedirDadosPessoa(); // adicionar para pedir freguesia
 ListaPessoa *criarListaP();
-ElementoP *criar_elementoP(PESSOA *P);
+ElementoP *criarElementoP(PESSOA *P);
+NO_CHAVE_P *criarNoChave(char chave);
+Lista_Chaves_P *criarListaChave ();
 void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E);
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);
 void *OrganizarPorNome(ListaPessoa *L, int op);
-void *ListarPessoas(ListaPessoa *L);
+void *ListarPessoas(Lista_Chaves_P *L); // colocar com filtro nome, fereguesia, apelido
 void MostrarPessoa(PESSOA *P);
-NO_CHAVE_P *criarNoChave(char chave);
-PESSOA *buscarPessoaPorID(ptListaP lista, int id);
+PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
-//criar uma requisição de um livro
-//devolver livro requisitado
-//listar livros requisitados
+void *MostrarLivrosRequisitados(int ID,Lista_Chaves_P *Lp, ListaRequisicoes *R);
 
 
 
