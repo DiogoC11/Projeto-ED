@@ -7,8 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-//Localidade
+// Localidade
 
 typedef struct {
     char codigo[7];
@@ -38,7 +37,7 @@ typedef struct elementoC{
 
 typedef struct {
     int num_Concelho;
-    ElementoF *Inicio;
+    ElementoC *Inicio;
 }Lista_C;
 
 typedef struct {
@@ -54,11 +53,10 @@ typedef struct elementoD{
 
 typedef struct {
     int num_Distrito;
-    ElementoF *Inicio;
+    ElementoD *Inicio;
 }Lista_D;
 
-
-//Pessoa
+// Pessoa
 
 typedef struct{
     int dia;
@@ -86,10 +84,10 @@ typedef struct{
     ElementoP *Inicio;
 }ListaPessoa, *ptListaP;
 
-typedef struct NO_CHAVE_P { 
+typedef struct NO_CHAVE_P {
     char Key;
     ListaPessoa *DADOS;
-    struct NO_CHAVE_P *Prox; 
+    struct NO_CHAVE_P *Prox;
 } NO_CHAVE_P;
 
 typedef struct{
@@ -97,24 +95,24 @@ typedef struct{
     NO_CHAVE_P *Inicio;
 }Lista_Chaves_P;
 
-
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
-PESSOA *PedirDadosPessoa(); // adicionar para pedir freguesia
+PESSOA *PedirDadosPessoa();
 ListaPessoa *criarListaP();
 ElementoP *criarElementoP(PESSOA *P);
 NO_CHAVE_P *criarNoChave(char chave);
 Lista_Chaves_P *criarListaChave ();
-void *AdicionarPessoa(Lista_Chaves_P *C,ElementoP *E);
+void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E);
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);
-void *OrganizarPorNome(Lista_Chaves_P *L, int op) ;
-void *ListarPessoas(Lista_Chaves_P *L); // colocar com filtro nome, freguesia, apelido
+void *OrganizarPorNome(Lista_Chaves_P *L, int op);
+void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
 PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
-//void *MostrarLivrosRequisitados(int ID,Lista_Chaves_P *Lp, ListaRequisicoes *R);
-
-
+int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias);
+void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
+int lerDistritos(const char* nome_arquivo, Distrito **distritos);
+int lerConselhos(const char* nome_arquivo, Conselho **conselhos);
 
 #endif // PESSOA_H_INCLUDED
