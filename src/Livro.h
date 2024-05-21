@@ -61,3 +61,4 @@ void *AdicionarChave(Lista_Chaves_L *L, char *categoria);
 //area mais requisitada;
 
 #endif // LIVRO_H_INCLUDED
+//fgdhgg
