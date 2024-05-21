@@ -37,12 +37,14 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     NO_CHAVE_L *N = C->Inicio;
     do {
         ISBN = LerInteiro("\nISBN: ");
-        if (ISBN < 1000000000000 || ISBN > 9999999999999) {
+        if (isdigit(ISBN) == 1) {
+            printf("\nErro: Deve inserir um inteiro\n");
+        }else if (ISBN < 999999999999 || ISBN > 9999999999999) {
             printf("\nErro: O ISBN tem de ter 13 dígitos.\n");
         } else if (PesquisarLivroPorISBN(C, ISBN) != NULL) {
             printf("\nErro: O ISBN inserido já existe.\n");
         }
-    } while (ISBN < 1000000000000 || ISBN > 9999999999999);
+    } while (ISBN < 999999999999 || ISBN > 9999999999999);
 
     printf("\nTitulo do Livro: ");
     fgets(temp, sizeof(temp), stdin);
