@@ -1,0 +1,17 @@
+# ninja log v5
+16	160	7379930450410160	CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj	4faa8967da3c7a2c
+7	115	7379933606970651	CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj	41cb4ab6c55ec92
+12	147	7379933607299135	CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj	326abbee1327ee63
+22	161	7379930450410160	CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj	9c7f1afb01d53137
+7	114	7379931582795917	CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj	df705aebe2dc54dd
+100	176	7379873069955367	Exem_Projeto.exe	a685bdc0a9f6d21a
+2	127	7379933607082796	CMakeFiles/Exem_Projeto.dir/main.c.obj	4c985a20e6aaff36
+9	184	7379934489200985	CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj	326abbee1327ee63
+6	186	7379934489212374	CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj	df705aebe2dc54dd
+23	186	7379934489242302	CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj	41cb4ab6c55ec92
+2	196	7379934489412908	CMakeFiles/Exem_Projeto.dir/main.c.obj	4c985a20e6aaff36
+14	199	7379934489463709	CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj	9c7f1afb01d53137
+19	206	7379934489538292	CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj	4faa8967da3c7a2c
+207	282	7379934490258609	Exem_Projeto.exe	a685bdc0a9f6d21a
+2	65	7379937906366557	CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj	41cb4ab6c55ec92
+65	144	7379937907111432	Exem_Projeto.exe	a685bdc0a9f6d21a
