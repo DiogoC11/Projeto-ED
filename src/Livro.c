@@ -30,20 +30,19 @@ LIVRO *CriarLivro(int ISBN, char *_nome, char *_area, int _anoPublicacao, char *
 
 LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     char nome[50], area[50], autor[50], temp[100];
-    int ISBN;
+    long ISBN;
     int anoPublicacao;
     fflush(stdin);
     printf("\nCriar Livro: ");
     NO_CHAVE_L *N = C->Inicio;
-
     do {
-        ISBN = LerInteiro("ISBN: ");
-        if(ISBN<999999999999 || ISBN>9999999999999){
-            printf("\nErro: O ISBN tem de ter 13 digitos.\n");
-        }else if (PesquisarLivroPorISBN(C, ISBN) != NULL) {
-            printf("\nErro: O ISBN inserido ja existe.\n");
+        ISBN = LerInteiro("\nISBN: ");
+        if (ISBN < 1000000000000 || ISBN > 9999999999999) {
+            printf("\nErro: O ISBN tem de ter 13 dígitos.\n");
+        } else if (PesquisarLivroPorISBN(C, ISBN) != NULL) {
+            printf("\nErro: O ISBN inserido já existe.\n");
         }
-    }while(PesquisarLivroPorISBN(C,ISBN) != NULL || ISBN<999999999999 || ISBN>9999999999999);
+    } while (ISBN < 1000000000000 || ISBN > 9999999999999);
 
     printf("\nTitulo do Livro: ");
     fgets(temp, sizeof(temp), stdin);
