@@ -17,9 +17,9 @@ int LerInteiro(char *txt){
     printf("%s : ", txt);
     do {
         scanf("%d", &x);
-        if (isdigit(x) == 0) {
+        if (isdigit(x) == 1) {
             printf("\nErro: Deve inserir um inteiro\n");
         }
-    }while (isdigit(x) == 0);
+    }while (isdigit(x) == 1);
     return x;
 }
