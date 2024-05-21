@@ -35,7 +35,6 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     fflush(stdin);
     printf("\nCriar Livro: ");
     NO_CHAVE_L *N = C->Inicio;
-
     do {
         ISBN = LerInteiro("\nISBN: ");
         if (ISBN < 1000000000000 || ISBN > 9999999999999) {
