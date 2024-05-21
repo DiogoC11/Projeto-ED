@@ -32,7 +32,7 @@ int main() {
 
 // Menu de operações de livros
 void menuLivro(Lista_Chaves_L *listaChavesLivro){
-    int opLivro;
+    int opLivro,confirm;
     do {
         printf("\n--- Menu de Operacoes de Livros ---\n");
         printf("1- Adicionar Livro\n");
@@ -48,8 +48,14 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 // Adicionar Livro
                 LIVRO *novoLivro = PedirDadosLivro(listaChavesLivro);
                 MostrarLivro(novoLivro);
-                ElementoL *novoElemento = criar_elementoL(novoLivro);
-                AdicionarLivro( novoElemento,  listaChavesLivro);
+                confirm = LerInteiro("\nDeseja adicionar o livro? (1-Sim, 0-Nao) ");
+                if(confirm == 1) {
+                    ElementoL *novoElemento = criar_elementoL(novoLivro);
+                    AdicionarLivro(novoElemento, listaChavesLivro);
+                }else{
+                    printf("Livro nao adicionado.\n");
+                    free(novoLivro);
+                }
                 break;
             }
             case 2: {
@@ -60,9 +66,9 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
             }
             case 3: {
                 // Pesquisar Livro por ISBN
-                char ISBN[50];
+                int ISBN;
                 printf("Digite o ISBN do livro a pesquisar: ");
-                scanf("%49s", ISBN);
+                scanf("%d", ISBN);
                 LIVRO *livroEncontrado = PesquisarLivroPorISBN( listaChavesLivro, ISBN);
                 if (livroEncontrado != NULL) {
                     MostrarLivro(livroEncontrado);
@@ -84,9 +90,9 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
             }
             case 5: {
                 //Destruir Livro
-                char ISBN[50];
+                int ISBN;
                 printf("Digite o ISBN do livro a destruir: ");
-                scanf("%49s", ISBN);
+                scanf("%d", ISBN);
                 LIVRO *livroDestruir = PesquisarLivroPorISBN(listaChavesLivro, ISBN);
                 if (livroDestruir != NULL) {
                     livroDestruir->Disponivel = 1;

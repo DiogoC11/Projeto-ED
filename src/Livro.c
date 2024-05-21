@@ -1,5 +1,6 @@
 #include "Livro.h"
 #include "ctype.h"
+#include "Uteis.c"
 
 // Função para encontrar o NO_CHAVE_L por uma KEY
 NO_CHAVE_L *encontrarNoChave(NO_CHAVE_L *noChave, char *chave) {
@@ -12,7 +13,7 @@ NO_CHAVE_L *encontrarNoChave(NO_CHAVE_L *noChave, char *chave) {
     return NULL;
 }
 
-LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao, char *_autor)
+LIVRO *CriarLivro(int ISBN, char *_nome, char *_area, int _anoPublicacao, char *_autor)
 {
     LIVRO *P = (LIVRO *)malloc(sizeof(LIVRO));
     P->NOME = (char *)malloc((strlen(_nome) + 1)*sizeof(char));
@@ -20,8 +21,7 @@ LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao, cha
     P->AREA = (char *)malloc((strlen(_area) + 1)*sizeof(char));
     strcpy(P->AREA, _area);
     P->anoPublicacao = _anoPublicacao;
-    P->ISBN = (char *) malloc(strlen(_ISBN + 1)*sizeof(char));
-    strcpy(P->ISBN,_ISBN);
+    P->ISBN = ISBN;
     P->Autor = (char *) malloc(strlen(_autor + 1)*sizeof(char));
     strcpy(P->Autor,_autor);
     P->Disponivel = 0;
@@ -29,42 +29,59 @@ LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao, cha
 }
 
 LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
-    char nome[50], area[50], ISBN[50], autor[50], temp[100];
+    char nome[50], area[50], autor[50], temp[100];
+    int ISBN;
     int anoPublicacao;
     fflush(stdin);
     printf("\nCriar Livro: ");
+    NO_CHAVE_L *N = C->Inicio;
 
     do {
-        printf("\nISBN: ");
-        fgets(temp, sizeof(temp), stdin);
-        sscanf(temp, "%49[^\n]", ISBN);
-
-        if (PesquisarLivroPorISBN(C, ISBN) != NULL) {
-            printf("\nErro: O ISBN inserido já existe.\n");
+        ISBN = LerInteiro("ISBN: ");
+        if(ISBN<999999999999 || ISBN>9999999999999){
+            printf("\nErro: O ISBN tem de ter 13 digitos.\n");
+        }else if (PesquisarLivroPorISBN(C, ISBN) != NULL) {
+            printf("\nErro: O ISBN inserido ja existe.\n");
         }
-    }while(PesquisarLivroPorISBN(C,ISBN) != NULL);
+    }while(PesquisarLivroPorISBN(C,ISBN) != NULL || ISBN<999999999999 || ISBN>9999999999999);
 
     printf("\nTitulo do Livro: ");
     fgets(temp, sizeof(temp), stdin);
     sscanf(temp, "%[^\n]", nome);
 
     printf("\nArea do Livro: ");
-    printf(" Escolha uma area: ");
-    fgets(temp, sizeof(temp), stdin);
-    sscanf(temp, "%[^\n]", area);
+    do {
 
-    printf("\nAno de Publicacao: ");
-    fgets(temp, sizeof(temp), stdin);
-    sscanf(temp, "%d", &anoPublicacao);
+        printf("\nEscolha uma area: ");
+        for(int i = 0; i < C->num_chaves; i++) {
+            printf("%s\n", N->categoria);
+            N = N->Prox;
+        }
+        fgets(temp, sizeof(temp), stdin);
+        sscanf(temp, "%[^\n]", area);
+        for (int i = 0; i < strlen(area); i++) {
+            area[i] = toupper(area[i]);
+        }
+        if(encontrarNoChave(C->Inicio, area) == NULL){
+            printf("\nErro: A area inserida nao existe.\n");
+        }
+    }while(encontrarNoChave(C->Inicio, area) == NULL);
+
+
+    do {
+        anoPublicacao = LerInteiro("\n Ano de Publicacao: ");
+        if(anoPublicacao>2024){
+            printf("\nErro: Insira um ano anterior ao ano atual.\n");
+        }else if(anoPublicacao<999){
+            printf("\nErro: O ano tem de ter 4 digitos.\n");
+        }else if (PesquisarLivroPorISBN(C, ISBN) != NULL) {
+            printf("\nErro: O ISBN inserido ja existe.\n");
+        }
+    }while(PesquisarLivroPorISBN(C,ISBN) != NULL || anoPublicacao>2024 || anoPublicacao<999);
 
     printf("\nAutor do Livro: ");
     fgets(temp, sizeof(temp), stdin);
     sscanf(temp, "%49[^\n]", autor);
-
-// Deixar a AREA em maiuscula
-    for (int i = 0; i < strlen(area); i++) {
-        area[i] = toupper(area[i]);
-    }
 
     return CriarLivro(ISBN, nome, area, anoPublicacao, autor);
 }
@@ -81,10 +98,10 @@ void MostrarLivro(LIVRO *P)
 }
 void DestruirLivro(LIVRO *P)
 {
-    free (P->NOME);
+    /*free (P->NOME);
     free (P->AREA);
-    free(P->ISBN);
-    free(P->Autor);
+    free(P->Autor);*/
+    P->Disponivel = 1;
     free (P);
 }
 ListaLivro *criarListaL(){
@@ -132,9 +149,12 @@ void *AdicionarLivro(ElementoL *E, Lista_Chaves_L *C){
     }
     printf("\nLivro adicionado a biblioteca.\n");
 }
-
-void ListarLivros(Lista_Chaves_L *C){
-    printf("\nLista de Livros:\n");
+ int ListarLivros(Lista_Chaves_L *C){
+    if(!C){
+        printf("\nErro: Lista de Livros vazia.\n");
+        return 1;
+    }
+    printf("\nLista de Livros:");
     NO_CHAVE_L *N = C->Inicio;
     ElementoL *E = C->Inicio->DADOS->Inicio;
     for (int i = 0; i < C->num_chaves; i++){
@@ -145,13 +165,14 @@ void ListarLivros(Lista_Chaves_L *C){
         }
         N = N->Prox;
     }
+     return 0;
 }
-LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn) {
+LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, int isbn) {
     NO_CHAVE_L *N = C->Inicio;
     ElementoL *E = C->Inicio->DADOS->Inicio;
     for(int i = 0; i < C->num_chaves; i++){
         for (int j = 0; i < N->DADOS->num_Livros; j++) {
-            if(strcmp(E->livro->ISBN,isbn) == 0){
+            if( E->livro->ISBN == isbn){
                 return E->livro;
             }
             E = E->proximo;

@@ -9,7 +9,7 @@
 typedef struct
 {
     char *NOME;
-    char *ISBN;
+    int ISBN;
     char *AREA;
     int anoPublicacao;
     char *Autor;
@@ -38,15 +38,15 @@ typedef struct{
     NO_CHAVE_L *Inicio;
 }Lista_Chaves_L;
 
-LIVRO *CriarLivro(char *_ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
+LIVRO *CriarLivro( int ISBN, char *_nome, char *_area, int _anoPublicacao,char *_autor);
 LIVRO *PedirDadosLivro(Lista_Chaves_L *C);
 void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 ListaLivro *criarListaL();
 ElementoL *criar_elementoL(LIVRO *L);
 void *AdicionarLivro(ElementoL *E, Lista_Chaves_L *C);
-void ListarLivros(Lista_Chaves_L *C);
-LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn);
+int ListarLivros(Lista_Chaves_L *C);
+LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, int isbn);
 LIVRO *LivroMaisRecente(Lista_Chaves_L * L);
 void AreaMaisLivros(Lista_Chaves_L *C);
 

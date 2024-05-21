@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "ctype.h"
 #include <time.h>//necessário p/ função time()
 
 int Aleatorio(int min, int max)
@@ -19,6 +20,11 @@ int LerInteiro(char *txt)
 {
     int x;
     printf("%s : ", txt);
-    scanf("%d", &x);
+    do {
+        scanf("%d", &x);
+        if (isdigit(x) == 0) {
+            printf("\nErro: Deve inserir um inteiro\n");
+        }
+    }while (isdigit(x) == 0);
     return x;
 }
