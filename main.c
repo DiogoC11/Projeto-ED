@@ -189,6 +189,59 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
     } while (opPessoa != 0);
 }
 
+//Menu Requisiçoes
+void menuRequisicoes(ListaRequisicoes *listaRequisicoes){
+    int opRequisicao;
+    do {
+        printf("\n--- Menu Requisicoes ---\n");
+        printf("1- Fazer Requisicao\n");
+        printf("2- Livros Mais Requisitados\n");
+        printf("3- Devolucao de Livro Requisitado\n");
+        printf("4- Area Mais Requisitada\n");
+        printf("5- Verificar Requisitante\n");
+        printf("6- Idade Maxima dos Requisitantes\n");
+        printf("7- Media de Idades dos Requisitantes\n");
+        printf("8- Idade com mais Requisitantes\n");
+        printf("9- Lista Pessoas Nao Requisitantes\n");
+        printf("10- Listar Requisitantes com Livro Requisitado\n");
+        printf("11- Sobrenome mais Comum Requisitantes\n");
+        printf("12- Pesquisar Apelido/Nome por Distrito/Concelho\n");
+        printf("0- Sair\n");
+        opRequisicao = LerInteiro("Qual a opcao? ");
+
+        switch (opRequisicao) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            case 0:
+                break;
+            default:
+                break;
+        }
+    } while (opRequisicao != 0);
+}
+
 // Menu geral
 void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPessoas) {
     int opGeral;
@@ -196,6 +249,7 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
         printf("\n--- Menu Geral ---\n");
         printf("1- Operacoes de Livro\n");
         printf("2- Operacoes de Pessoas\n");
+        printf("3- Operacoes de Requisicoes\n");
         printf("0- Sair\n");
         opGeral = LerInteiro("Qual a opcao? ");
 
@@ -210,6 +264,9 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
                 menuPessoa(ListaChavesPessoas);
                 break;
             }
+            case 3:
+                //Menu de Operaçoes de Requisições
+                break;
             case 0:
                 printf("Saindo...\n");
                 break;
