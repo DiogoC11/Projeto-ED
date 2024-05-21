@@ -254,6 +254,7 @@ int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
 }
 
 // Função para ler pessoas de um arquivo
+/*
 void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
     FILE *file = fopen(nome_arquivo, "r");
     if (!file) return;
@@ -264,10 +265,11 @@ void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
         PESSOA *pessoa = CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano);
         pessoa->ID = ID;
         ElementoP *elemento = criarElementoP(pessoa);
-        AdicionarPessoa(listaPessoa, elemento);
+        AdicionarPessoa(, elemento);
     }
     fclose(file);
 }
+ */
 
 // Função para ler distritos de um arquivo
 int lerDistritos(const char* nome_arquivo, Distrito **distritos) {

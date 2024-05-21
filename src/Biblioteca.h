@@ -7,6 +7,8 @@
 
 #include "Livro.h"
 #include "Pessoa.h"
+#include "Requisicao.h"
+
 typedef struct
 {
     char *NOME;

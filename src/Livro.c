@@ -1,6 +1,6 @@
 #include "Livro.h"
 #include "ctype.h"
-#include "Uteis.c"
+#include "Uteis.h"
 
 // Função para encontrar o NO_CHAVE_L por uma KEY
 NO_CHAVE_L *encontrarNoChave(NO_CHAVE_L *noChave, char *chave) {
@@ -206,7 +206,7 @@ void AreaMaisLivros(Lista_Chaves_L *C){
     NO_CHAVE_L *Inicio = C->Inicio;
     for(int i = 0; i < C->num_chaves; i++){
         if(Inicio->DADOS->num_Livros > Area->DADOS->num_Livros ){
-            Area = Inicio->categoria;
+            Area = Inicio;
         }
         Inicio = Inicio->Prox;
     }
@@ -220,7 +220,7 @@ Lista_Chaves_L *CriarListaChaves(){
     return L;
 }
 
-NO_CHAVE_L *AdicionarChave(Lista_Chaves_L *L, char *categoria)
+void *AdicionarChave(Lista_Chaves_L *L, char *categoria)
 {
     if (!L) return NULL;
     NO_CHAVE_L *chave = (NO_CHAVE_L *)malloc(sizeof(NO_CHAVE_L));
@@ -229,5 +229,4 @@ NO_CHAVE_L *AdicionarChave(Lista_Chaves_L *L, char *categoria)
     chave->Prox = L->Inicio;
     L->Inicio = chave;
     L->num_chaves ++;
-    return L;
 }

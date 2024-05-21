@@ -101,7 +101,7 @@ ListaPessoa *criarListaP();
 ElementoP *criarElementoP(PESSOA *P);
 NO_CHAVE_P *criarNoChave(char chave);
 Lista_Chaves_P *criarListaChave ();
-void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E);
+void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) ;
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);

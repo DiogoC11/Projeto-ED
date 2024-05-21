@@ -2,33 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "src/Biblioteca.h"
-
-extern int LerInteiro(char *txt);
-
-// Protótipos das funções
-void menuLivro(Lista_Chaves_L *listaChavesLivro);
-void menuPessoa(Lista_Chaves_P *listaChavesPessoa);
-void menuGeral(Lista_Chaves_L *listaChavesLivro, Lista_Chaves_P *listaChavesPessoa);
-
-int main() {
-    printf("Projeto-Biblioteca-Versao-Base!\n");
-    Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
-    Lista_Chaves_P *listaChavesPessoa = criarListaChave();
-    menuGeral(listaChavesLivro, listaChavesPessoa);
-    printf("\nA sair da biblioteca...");
-/*
-    // Liberar memória alocada para a lista de livros
-    ElementoL *e = listaLivros->Inicio;
-    while (e != NULL) {
-        ElementoL *prox = e->proximo;
-        DestruirLivro(e->livro);
-        free(e);
-        e = prox;
-    }
-    free(listaLivros);
-*/
-    return EXIT_SUCCESS; // ou EXIT_FAILURE
-}
+#include "src/Uteis.h"
 
 // Menu de operações de livros
 void menuLivro(Lista_Chaves_L *listaChavesLivro){
@@ -275,4 +249,24 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
                 break;
         }
     } while (opGeral != 0);
+}
+
+int main() {
+    printf("Projeto-Biblioteca-Versao-Base!\n");
+    Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
+    Lista_Chaves_P *listaChavesPessoa = criarListaChave();
+    menuGeral(listaChavesLivro, listaChavesPessoa);
+    printf("\nA sair da biblioteca...");
+/*
+    // Liberar memória alocada para a lista de livros
+    ElementoL *e = listaLivros->Inicio;
+    while (e != NULL) {
+        ElementoL *prox = e->proximo;
+        DestruirLivro(e->livro);
+        free(e);
+        e = prox;
+    }
+    free(listaLivros);
+*/
+    return EXIT_SUCCESS; // ou EXIT_FAILURE
 }
