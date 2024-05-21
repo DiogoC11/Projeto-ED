@@ -135,23 +135,53 @@ int compararPrimeiroNome(const void *a, const void *b) {
     return strcmp(pessoaA->PrimeiroNome, pessoaB->PrimeiroNome);
 }
 
-void *OrganizarPorNome(ListaPessoa *L, int op){
-    ElementoP **arrayElementos = malloc(L->num_Pessoas * sizeof(ElementoP *));
-    if (arrayElementos == NULL) {
-        perror("Erro ao alocar memória para o array de elementos");
+void *OrganizarPorNome(Lista_Chaves_P *L, int op) {
+    // Contar o número total de pessoas
+    int totalPessoas = 0;
+    NO_CHAVE_P *no_chave_atual = L->Inicio;
+    while (no_chave_atual != NULL) {
+        totalPessoas += no_chave_atual->DADOS->num_Pessoas;
+        no_chave_atual = no_chave_atual->Prox;
+    }
+
+    // Criar array para armazenar todos os ponteiros de pessoas
+    PESSOA **arrayPessoas = malloc(totalPessoas * sizeof(PESSOA *));
+    if (arrayPessoas == NULL) {
+        perror("Erro ao alocar memória para o array de pessoas");
         exit(EXIT_FAILURE);
     }
-    if(op == 1){
-        qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararPrimeiroNome);
-    }else if(op==2){
-        qsort(arrayElementos, L->num_Pessoas, sizeof(ElementoP *), compararUltimoNome);
-    }else if(op == 3){
-        //fazer funcao de comparar id de freguesias
+
+    // Preencher o array com as pessoas das listas
+    int index = 0;
+    no_chave_atual = L->Inicio;
+    while (no_chave_atual != NULL) {
+        ElementoP *elemento_atual = no_chave_atual->DADOS->Inicio;
+        while (elemento_atual != NULL) {
+            arrayPessoas[index++] = elemento_atual->pessoa;
+            elemento_atual = elemento_atual->proximo;
+        }
+        no_chave_atual = no_chave_atual->Prox;
     }
-    for(int i = 0; i < L->num_Pessoas;i++){
-        printf("Livro %d:\n", i+1);
-        MostrarPessoa(arrayElementos[i]->pessoa);
+
+    // Ordenar o array conforme a opção fornecida
+    if (op == 1) {
+        qsort(arrayPessoas, totalPessoas, sizeof(PESSOA *), compararPrimeiroNome);
+    } else if (op == 2) {
+        qsort(arrayPessoas, totalPessoas, sizeof(PESSOA *), compararUltimoNome);
+    } else if (op == 3) {
+        // Adicionar função de comparação para o ID de freguesia
     }
+
+    // Exibir as pessoas ordenadas
+    for (int i = 0; i < totalPessoas; i++) {
+        printf("Pessoa %d:\n", i + 1);
+        MostrarPessoa(arrayPessoas[i]);
+    }
+
+    // Liberar memória alocada para o array
+    free(arrayPessoas);
+
+    return NULL;
 }
 
 void *ListarPessoas(Lista_Chaves_P *L){
@@ -222,7 +252,7 @@ int verificarIDArquivo(char *idRequisitante) {
     fclose(arquivo); // Fecha o arquivo
     return 0; // Retorna falso se o ID requisitante não for encontrado
 }
-
+/*
 void *MostrarLivrosRequisitados(int ID,Lista_Chaves_P *Lp, ListaRequisicoes *R) {
     if (!R) return NULL;
     if (!Lp) return NULL;
@@ -232,14 +262,14 @@ void *MostrarLivrosRequisitados(int ID,Lista_Chaves_P *Lp, ListaRequisicoes *R) 
     printf("\n Livros requisitados: ");
     ElementoR *atual = R->Inicio;
     for (int i = 0; i < R->num_Requisicoes; i++) {
-        if (atual->requisicao->Ptr_Req == P) {
-            printf("Livro: %s\n", R->Inicio->requisicao->Ptr_Livro->NOME);
+        if (atual->requisicao->Pessoa == P) {
+            printf("Livro: %s\n", R->Inicio->requisicao->Livro->NOME);
         }
         atual = atual->proximo;
     }
 }
 
-
+*/
 //FUNCOES LER E GRAVAR
 
 // Função para ler o arquivo de freguesias e armazenar os dados em uma matriz de Freguesia

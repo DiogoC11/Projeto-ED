@@ -49,6 +49,7 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     sscanf(temp, "%[^\n]", nome);
 
     printf("\nArea do Livro: ");
+    printf(" Escolha uma area: ");
     fgets(temp, sizeof(temp), stdin);
     sscanf(temp, "%[^\n]", area);
 

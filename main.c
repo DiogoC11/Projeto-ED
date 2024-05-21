@@ -6,17 +6,17 @@
 extern int LerInteiro(char *txt);
 
 // Protótipos das funções
-void menuLivro(ListaLivro *listaLivros);
-void menuPessoa(ListaPessoa *listaPessoa);
-void menuGeral(ListaLivro *listaLivros, ListaPessoa *listaPessoa);
+void menuLivro(Lista_Chaves_L *listaChavesLivro);
+void menuPessoa(Lista_Chaves_P *listaChavesPessoa);
+void menuGeral(Lista_Chaves_L *listaChavesLivro, Lista_Chaves_P *listaChavesPessoa);
 
 int main() {
     printf("Projeto-Biblioteca-Versao-Base!\n");
-    ListaLivro *listaLivros = criarListaL();
-    ListaPessoa *listaPessoa = criarListaP();
-    menuGeral(listaLivros, listaPessoa);
+    Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
+    Lista_Chaves_P *listaChavesPessoa = criarListaChave();
+    menuGeral(listaChavesLivro, listaChavesPessoa);
     printf("\nA sair da biblioteca...");
-
+/*
     // Liberar memória alocada para a lista de livros
     ElementoL *e = listaLivros->Inicio;
     while (e != NULL) {
@@ -26,12 +26,12 @@ int main() {
         e = prox;
     }
     free(listaLivros);
-
+*/
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }
 
 // Menu de operações de livros
-void menuLivro(ListaLivro *listaLivros) {
+void menuLivro(Lista_Chaves_L *listaChavesLivro){
     int opLivro;
     do {
         printf("\n--- Menu de Operacoes de Livros ---\n");
@@ -46,15 +46,15 @@ void menuLivro(ListaLivro *listaLivros) {
         switch (opLivro) {
             case 1: {
                 // Adicionar Livro
-                LIVRO *novoLivro = PedirDadosLivro((Lista_Chaves_L *) listaLivros);
+                LIVRO *novoLivro = PedirDadosLivro(listaChavesLivro);
                 MostrarLivro(novoLivro);
                 ElementoL *novoElemento = criar_elementoL(novoLivro);
-                AdicionarLivro((ElementoL *) listaLivros, (Lista_Chaves_L *) novoElemento);
+                AdicionarLivro( novoElemento,  listaChavesLivro);
                 break;
             }
             case 2: {
                 // Listar Livros
-                ListarLivros((Lista_Chaves_L *) listaLivros);
+                ListarLivros( listaChavesLivro);
                 break;
                 break;
             }
@@ -63,7 +63,7 @@ void menuLivro(ListaLivro *listaLivros) {
                 char ISBN[50];
                 printf("Digite o ISBN do livro a pesquisar: ");
                 scanf("%49s", ISBN);
-                LIVRO *livroEncontrado = PesquisarLivroPorISBN((Lista_Chaves_L *) listaLivros, ISBN);
+                LIVRO *livroEncontrado = PesquisarLivroPorISBN( listaChavesLivro, ISBN);
                 if (livroEncontrado != NULL) {
                     MostrarLivro(livroEncontrado);
                 } else {
@@ -73,7 +73,7 @@ void menuLivro(ListaLivro *listaLivros) {
             }
             case 4: {
                 // Encontrar Livro Mais Recente
-                LIVRO *livroMaisRecente = LivroMaisRecente((Lista_Chaves_L *) listaLivros);
+                LIVRO *livroMaisRecente = LivroMaisRecente(listaChavesLivro);
                 if (livroMaisRecente != NULL) {
                     printf("Livro mais recente:\n");
                     MostrarLivro(livroMaisRecente);
@@ -87,7 +87,7 @@ void menuLivro(ListaLivro *listaLivros) {
                 char ISBN[50];
                 printf("Digite o ISBN do livro a destruir: ");
                 scanf("%49s", ISBN);
-                LIVRO *livroDestruir = PesquisarLivroPorISBN((Lista_Chaves_L *) listaLivros, ISBN);
+                LIVRO *livroDestruir = PesquisarLivroPorISBN(listaChavesLivro, ISBN);
                 if (livroDestruir != NULL) {
                     livroDestruir->Disponivel = 1;
                     printf("O livro de ISBN %s nao está mais disponivel.",ISBN);
@@ -107,7 +107,7 @@ void menuLivro(ListaLivro *listaLivros) {
 }
 
 // Menu de operações de pessoas
-void menuPessoa(ListaPessoa *listaPessoa) {
+void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
     int opPessoa;
     do {
         printf("\n--- Menu de Operacoes de Pessoa ---\n");
@@ -122,8 +122,8 @@ void menuPessoa(ListaPessoa *listaPessoa) {
                 //Adicionar Pessoa
                 PESSOA *novaPessoa = PedirDadosPessoa();
                 MostrarPessoa(novaPessoa);
-                ElementoP *novoElemento = criar_elementoP(novaPessoa);
-                AdicionarPessoa((Lista_Chaves_P *) listaPessoa, novoElemento);
+                ElementoP *novoElemento = criarElementoP(novaPessoa);
+                AdicionarPessoa(listaChavesPessoa , novoElemento);
                 break;
             }
             case 2: {
@@ -131,7 +131,7 @@ void menuPessoa(ListaPessoa *listaPessoa) {
                 char nome[50];
                 printf("Digite o nome da Pessoa a pesquisar: ");
                 scanf("%49s", nome);
-                PESSOA *PessoaEncontrada = PesquisarPesssoaPorNome((Lista_Chaves_P *) listaPessoa, nome);
+                PESSOA *PessoaEncontrada = PesquisarPesssoaPorNome(listaChavesPessoa, nome);
                 if (PessoaEncontrada != NULL) {
                     MostrarPessoa(PessoaEncontrada);
                 } else {
@@ -150,11 +150,11 @@ void menuPessoa(ListaPessoa *listaPessoa) {
                 do{
                     switch (opPessoa) {
                         case 1: {
-                            OrganizarPorNome(listaPessoa,opPessoa);
+                            OrganizarPorNome(listaChavesPessoa,opPessoa);
                             break;
                         }
                         case 2:{
-                            OrganizarPorNome(listaPessoa,opPessoa);
+                            OrganizarPorNome(listaChavesPessoa,opPessoa);
                             break;
                         }
                         case 3:{
@@ -184,7 +184,7 @@ void menuPessoa(ListaPessoa *listaPessoa) {
 }
 
 // Menu geral
-void menuGeral(ListaLivro *listaLivros, ListaPessoa *listaPessoa) {
+void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPessoas) {
     int opGeral;
     do {
         printf("\n--- Menu Geral ---\n");
@@ -196,12 +196,12 @@ void menuGeral(ListaLivro *listaLivros, ListaPessoa *listaPessoa) {
         switch (opGeral) {
             case 1: {
                 // Menu de Operações de Livro
-                menuLivro(listaLivros);
+                menuLivro(ListaChavesLivros);
                 break;
             }
             case 2: {
                 // Menu de Operações de Pessoa
-                menuPessoa(listaPessoa);
+                menuPessoa(ListaChavesPessoas);
                 break;
             }
             case 0:

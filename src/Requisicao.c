@@ -3,15 +3,16 @@
 #include "Requisicao.h"
 #include "Pessoa.h"
 
-
+/*
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L)
 {
     REQUISICAO *Req = (REQUISICAO *)malloc(sizeof(REQUISICAO));
     Req->ID = _id;
-    Req->Ptr_Req = P;
-    Req->Ptr_Livro = L;
+    Req->Pessoa = P;
+    Req->Livro = L;
     return Req;
 }
+ */
 
 ListaRequisicoes *criarListaR(){
     ListaRequisicoes *L = (ListaRequisicoes *)malloc(sizeof(ListaRequisicoes));
@@ -31,8 +32,8 @@ ElementoR *criarElementoR(REQUISICAO *R){
 void MostrarRequisicao(REQUISICAO *R)
 {
     printf("REQ ID = %d\n", R->ID);
-    MostrarPessoa(R->Ptr_Req);
-    MostrarLivro(R->Ptr_Livro);
+    //MostrarPessoa(R->Pessoa);
+    //MostrarLivro(R->Livro);
 }
 void DestruirRequisicao(REQUISICAO *R)
 {
@@ -45,9 +46,9 @@ void DestruirRequisicao(REQUISICAO *R)
 //Funcão para ver se a pessoa tem alguma requisiçao ou nao
 bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
     for (int i = 0; i < tamanhoListaRequisicoes; i++) {
-        if (listaRequisicoes[i]->Ptr_Req == pessoa) {
+       /* if (listaRequisicoes[i]->Pessoa == pessoa) {
             return true; // se essa pessoa tiver alguma requisição retorna true
-        }
+        }*/
     }
     return false; // senao retorna false
 }
@@ -199,18 +200,19 @@ char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanh
     int numSobrenomes = 0;
 
     // contar sobrenomes
-    for (int i = 0; i < tamanhoListaRequisicoes; i++) {
-        char* sobrenomeAtual = listaRequisicoes[i]->Ptr_Req->UltimoNome; // sobrenome do requisitante atual
-        int encontrado = 0; // ver se o sobrenome ja foi encontrado
+    /*
+     for (int i = 0; i < tamanhoListaRequisicoes; i++) {
+         char* sobrenomeAtual = listaRequisicoes[i]->Pessoa->UltimoNome; // sobrenome do requisitante atual
+         int encontrado = 0; // ver se o sobrenome ja foi encontrado
 
-        // isto é para ver se o sobrenome ja está no array de contadores
-        for (int j = 0; j < numSobrenomes; j++) {
-            if (strcmp(contadores[j].sobrenome, sobrenomeAtual) == 0) {
-                contadores[j].contagem++; // adicionar mais um na contagem se ja estiver no array
-                encontrado = 1; // marcar como encontrado
-                break;
-            }
-        }
+         // isto é para ver se o sobrenome ja está no array de contadores
+         for (int j = 0; j < numSobrenomes; j++) {
+             if (strcmp(contadores[j].sobrenome, sobrenomeAtual) == 0) {
+                 contadores[j].contagem++; // adicionar mais um na contagem se ja estiver no array
+                 encontrado = 1; // marcar como encontrado
+                 break;
+             }
+         }
 
         // se o sobrenome nao foi encontrado, vai adicionar um novo ao contador
         if (!encontrado) {
@@ -219,7 +221,7 @@ char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanh
             numSobrenomes++; // incrementar o número de sobrenomes únicos
         }
     }
-
+ */
     // encontrar sobrenome com maior frequencia
     char* sobrenomeMaisUsado = NULL;
     int maxContagem = 0;
