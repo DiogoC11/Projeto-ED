@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <intrin.h>
 #include "ctype.h"
 
 /*int Aleatorio(int min, int max){
@@ -15,6 +16,22 @@ int Factorial(int N){
 int LerInteiro(char *txt){
     int x;
     printf("%s : ", txt);
-    scanf("%d", &x);
+    scanf("%ld", &x);
     return x;
 }
+
+void limparBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void lerString(char *str, int tamanho) {
+    if (fgets(str, tamanho, stdin) != NULL) {
+        size_t len = strlen(str);
+        if (len > 0 && str[len-1] == '\n') {
+            str[len-1] = '\0';
+        }
+    }
+}
+
+

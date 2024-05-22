@@ -6,5 +6,7 @@
 #define EXEM_PROJETO_UTEIS_H
 
 int LerInteiro(char *txt);
+void limparBuffer();
+void lerString(char *str, int tamanho);
 
 #endif //EXEM_PROJETO_UTEIS_H

@@ -37,13 +37,18 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 // Listar Livros
                 ListarLivros( listaChavesLivro);
                 break;
-                break;
             }
             case 3: {
                 // Pesquisar Livro por ISBN
-                int ISBN;
-                printf("Digite o ISBN do livro a pesquisar: ");
-                scanf("%d", ISBN);
+                char ISBN[14];
+                do {
+                    printf("\nISBN: ");
+                    scanf("%s", ISBN);
+                    limparBuffer();
+                    if (strlen(ISBN) != 13) {
+                        printf("\nErro: O ISBN tem de ter 13 digitos.(%d)\n", strlen(ISBN));
+                    }
+                } while ( strlen(ISBN) != 13 );
                 LIVRO *livroEncontrado = PesquisarLivroPorISBN( listaChavesLivro, ISBN);
                 if (livroEncontrado != NULL) {
                     MostrarLivro(livroEncontrado);
