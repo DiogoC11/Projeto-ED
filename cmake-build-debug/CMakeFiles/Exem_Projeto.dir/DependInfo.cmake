@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/admin/Desktop/Projeto-ED/main.c" "CMakeFiles/Exem_Projeto.dir/main.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/main.c.obj.d"
-  "C:/Users/admin/Desktop/Projeto-ED/src/Biblioteca.c" "CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj.d"
-  "C:/Users/admin/Desktop/Projeto-ED/src/Livro.c" "CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj.d"
-  "C:/Users/admin/Desktop/Projeto-ED/src/Pessoa.c" "CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj.d"
-  "C:/Users/admin/Desktop/Projeto-ED/src/Requisicao.c" "CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj.d"
-  "C:/Users/admin/Desktop/Projeto-ED/src/Uteis.c" "CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj.d"
+  "C:/Users/danielfferreira/CLionProjects/Projeto-ED master/main.c" "CMakeFiles/Exem_Projeto.dir/main.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/main.c.obj.d"
+  "C:/Users/danielfferreira/CLionProjects/Projeto-ED master/src/Biblioteca.c" "CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj.d"
+  "C:/Users/danielfferreira/CLionProjects/Projeto-ED master/src/Livro.c" "CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj.d"
+  "C:/Users/danielfferreira/CLionProjects/Projeto-ED master/src/Pessoa.c" "CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj.d"
+  "C:/Users/danielfferreira/CLionProjects/Projeto-ED master/src/Requisicao.c" "CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj.d"
+  "C:/Users/danielfferreira/CLionProjects/Projeto-ED master/src/Uteis.c" "CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj" "gcc" "CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

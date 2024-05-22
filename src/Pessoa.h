@@ -116,8 +116,12 @@ int verificarIDArquivo(char *idRequisitante);
 //int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias);
 
 Lista_F* LerTXT();
-void LiberarLista(Lista_F *lista);
+Conselho* LerTXTConc();
+void LiberarConcelhos(ElementoC *inicio);
+void LiberarFreguesias(Lista_F *lista);
 void LiberarListaChaves_P(Lista_Chaves_P *lista);
+
+
 
 
         void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
