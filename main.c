@@ -73,7 +73,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 int ISBN;
                 printf("Digite o ISBN do livro a destruir: ");
                 scanf("%d", ISBN);
-                LIVRO *livroDestruir = PesquisarLivroPorISBN(listaChavesLivro, ISBN);
+                LIVRO *livroDestruir = PesquisarLivroPorISBN(listaChavesLivro, (char *) ISBN);
                 if (livroDestruir != NULL) {
                     livroDestruir->Disponivel = 1;
                     printf("O livro de ISBN %s nao está mais disponivel.",ISBN);
@@ -230,6 +230,7 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
         printf("1- Operacoes de Livro\n");
         printf("2- Operacoes de Pessoas\n");
         printf("3- Operacoes de Requisicoes\n");
+        printf("4- testar funcoes");
         printf("0- Sair\n");
         opGeral = LerInteiro("Qual a opcao? ");
 
@@ -247,6 +248,9 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
             case 3:
                 //Menu de Operaçoes de Requisições
                 break;
+            case 4:
+
+                break;
             case 0:
                 printf("Saindo...\n");
                 break;
@@ -259,20 +263,24 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
 
 int main() {
     printf("Projeto-Biblioteca-Versao-Base!\n");
+
+    // Criar listas para livros e pessoas
     Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
+
+    Lista_F *ListaF= LerTXT();
+
+
+    // Executar o menu geral
     menuGeral(listaChavesLivro, listaChavesPessoa);
-    printf("\nA sair da biblioteca...");
-/*
-    // Liberar memória alocada para a lista de livros
-    ElementoL *e = listaLivros->Inicio;
-    while (e != NULL) {
-        ElementoL *prox = e->proximo;
-        DestruirLivro(e->livro);
-        free(e);
-        e = prox;
-    }
-    free(listaLivros);
-*/
+
+    //Fregs
+
+    printf("\nA sair da biblioteca...\n");
+
+    // Liberar memória alocada para as listas de livros e pessoas
+    LiberarListaChaves_L(listaChavesLivro);
+    LiberarListaChaves_P(listaChavesPessoa);
+
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }

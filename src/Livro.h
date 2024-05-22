@@ -53,6 +53,7 @@ void AreaMaisLivros(Lista_Chaves_L *C);
 //funcoes hashing-----------------------------------------------------------------------
 Lista_Chaves_L *CriarListaChaves();
 void *AdicionarChave(Lista_Chaves_L *L, char *categoria);
+void LiberarListaChaves_L(Lista_Chaves_L *lista);
 
 //---------------------------------------------------------------------------------------
 

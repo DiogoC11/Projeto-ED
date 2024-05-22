@@ -239,8 +239,98 @@ int verificarIDArquivo(char *idRequisitante) {
     return 0;
 }
 
+
+
+Lista_F* LerTXT() {
+    FILE *arquivo;
+    char linha[100];
+    Lista_F *lista = (Lista_F *)malloc(sizeof(Lista_F));
+    if (lista == NULL) {
+        printf("Erro ao alocar memória para a lista de freguesias.\n");
+        return NULL;
+    }
+    lista->num_Freguesias = 0;
+    lista->Inicio = NULL;
+
+    arquivo = fopen("../data/recursos/freguesias.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        free(lista);
+        return NULL;
+    }
+
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Extrair ID_DIST, ID_CONC e nome da linha
+        int id_dist, id_conc;
+        char ID[3]; // Aumente para 3 para permitir o caractere nulo
+        char nome[50];
+        if (sscanf(linha, "%2d%2d%2s %[^\n]", &id_dist, &id_conc, ID, nome) != 4) {
+            printf("Erro ao ler os dados da linha.\n");
+            fclose(arquivo);
+            LiberarLista(lista); // Supondo que isso libera a memória da lista
+            return NULL;
+        }
+
+        // Criar uma nova freguesia e alocar memória
+        Freguesia *nova_freg = (Freguesia *)malloc(sizeof(Freguesia));
+        if (nova_freg == NULL) {
+            printf("Erro ao alocar memória para nova_freg.\n");
+            fclose(arquivo);
+            LiberarLista(lista); // Supondo que isso libera a memória da lista
+            return NULL;
+        }
+
+        // Preencher os campos da freguesia
+        sprintf(nova_freg->ID, "%s", ID); // Você pode copiar diretamente o ID
+        nova_freg->ID_CONC = id_conc; // Não precisa usar sprintf para inteiros
+        nova_freg->ID_DIST = id_dist; // Não precisa usar sprintf para inteiros
+        strcpy(nova_freg->nome, nome); // Copia o nome da freguesia
+
+        // Criar um novo elemento para a lista de freguesias e alocar memória
+        ElementoF *novo_elemento = (ElementoF *)malloc(sizeof(ElementoF));
+        if (novo_elemento == NULL) {
+            printf("Erro ao alocar memória para novo_elemento.\n");
+            fclose(arquivo);
+            LiberarLista(lista); // Supondo que isso libera a memória da lista
+            free(nova_freg);
+            return NULL;
+        }
+
+        // Preencher o elemento com a nova freguesia
+        novo_elemento->freguesia = nova_freg;
+        novo_elemento->prox = lista->Inicio;
+        lista->Inicio = novo_elemento;
+        printf("Novo elemento: ID: %s, Nome: %s\n", novo_elemento->freguesia->ID, novo_elemento->freguesia->nome);
+        lista->num_Freguesias++;
+    }
+
+    fclose(arquivo);
+    return lista;
+}
+
+
+// Função para liberar a memória da lista de freguesias
+void LiberarLista(Lista_F *lista) {
+    ElementoF *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoF *temp = atual;
+        atual = atual->prox;
+        free(temp->freguesia);
+        free(temp);
+    }
+    lista->Inicio = NULL;
+    lista->num_Freguesias = 0;
+}
+
+
+
+
+
+
+
+
 // Função para ler freguesias de um arquivo
-int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
+/*int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
     FILE *file = fopen(nome_arquivo, "r");
     if (!file) return -1;
     int num_freguesias;
@@ -254,7 +344,7 @@ int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
 }
 
 // Função para ler pessoas de um arquivo
-/*
+
 void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
     FILE *file = fopen(nome_arquivo, "r");
     if (!file) return;
@@ -269,7 +359,7 @@ void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
     }
     fclose(file);
 }
- */
+
 
 // Função para ler distritos de um arquivo
 int lerDistritos(const char* nome_arquivo, Distrito **distritos) {
@@ -297,4 +387,15 @@ int lerConselhos(const char* nome_arquivo, Conselho **conselhos) {
     }
     fclose(file);
     return num_conselhos;
+}*/
+
+void LiberarListaChaves_P(Lista_Chaves_P *lista) {
+    ElementoP *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoP *temp = atual;
+        atual = atual->proximo;
+        free(temp->pessoa); // Libera a pessoa apontada por este elemento
+        free(temp);         // Libera o próprio elemento
+    }
+    free(lista); // Libera a estrutura de lista
 }

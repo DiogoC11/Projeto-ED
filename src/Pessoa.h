@@ -10,51 +10,54 @@
 // Localidade
 
 typedef struct {
-    char codigo[7];
+    int ID_DIST;
+    int ID_CONC;
+    char ID[3];
     char nome[50];
 } Freguesia;
 
-typedef struct elementoF{
+typedef struct elementoF {
     Freguesia *freguesia;
     struct elementoF *prox;
-}ElementoF;
+} ElementoF;
 
 typedef struct {
     int num_Freguesias;
     ElementoF *Inicio;
-}Lista_F;
+} Lista_F;
 
 typedef struct {
-    char codigo[5];
+    int ID_DIST;
+    int ID_CONC;
     char nome[50];
     Lista_F *freguesias;
 } Conselho;
 
-typedef struct elementoC{
+typedef struct elementoC {
     Conselho *conselho;
     struct elementoC *prox;
-}ElementoC;
+} ElementoC;
 
 typedef struct {
     int num_Concelho;
     ElementoC *Inicio;
-}Lista_C;
+} Lista_C;
 
 typedef struct {
-    char codigo[3];
+    int ID_DIST;
     char nome[50];
     Lista_C *concelhos;
 } Distrito;
 
-typedef struct elementoD{
+typedef struct elementoD {
     Distrito *distrito;
     struct elementoD *prox;
-}ElementoD;
+} ElementoD;
 
 typedef struct {
     int num_Distrito;
     ElementoD *Inicio;
-}Lista_D;
+} Lista_D;
 
 // Pessoa
 
@@ -110,8 +113,14 @@ void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
 PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
-int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias);
-void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
+//int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias);
+
+Lista_F* LerTXT();
+void LiberarLista(Lista_F *lista);
+void LiberarListaChaves_P(Lista_Chaves_P *lista);
+
+
+        void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
 int lerDistritos(const char* nome_arquivo, Distrito **distritos);
 int lerConselhos(const char* nome_arquivo, Conselho **conselhos);
 

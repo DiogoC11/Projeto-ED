@@ -32,6 +32,7 @@ LIVRO *CriarLivro(char *ISBN, char *_nome, char *_area, int _anoPublicacao, char
 LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     char nome[50], area[50], autor[50], ISBN[14];
     int anoPublicacao;
+    fflush(stdin);
     printf("\nCriar Livro: ");
     NO_CHAVE_L *N = C->Inicio;
     do {
@@ -68,7 +69,6 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
         for (int i = 0; i < strlen(area); i++) {
             area[i] = toupper(area[i]);
         }
-
         if(encontrarNoChave(C->Inicio, area) == NULL){
             printf("\nErro: A area inserida nao existe.\n");
         }
@@ -245,4 +245,15 @@ void *AdicionarChave(Lista_Chaves_L *L, char *categoria)
     chave->Prox = L->Inicio;
     L->Inicio = chave;
     L->num_chaves ++;
+}
+
+void LiberarListaChaves_L(Lista_Chaves_L *lista) {
+    ElementoL *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoL *temp = atual;
+        atual = atual->proximo;
+        free(temp->livro); // Libera o livro apontado por este elemento
+        free(temp);        // Libera o próprio elemento
+    }
+    free(lista); // Libera a estrutura de lista
 }
