@@ -27,6 +27,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 if(confirm == 1) {
                     ElementoL *novoElemento = criar_elementoL(novoLivro);
                     AdicionarLivro(novoElemento, listaChavesLivro);
+                    //free(novoElemento);
                 }else{
                     printf("Livro nao adicionado.\n");
                     free(novoLivro);
@@ -61,7 +62,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 // Encontrar Livro Mais Recente
                 LIVRO *livroMaisRecente = LivroMaisRecente(listaChavesLivro);
                 if (livroMaisRecente != NULL) {
-                    printf("Livro mais recente:\n");
+                    printf("\nLivro mais recente:");
                     MostrarLivro(livroMaisRecente);
                 } else {
                     printf("Nenhum livro disponivel.\n");
@@ -70,13 +71,27 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
             }
             case 5: {
                 //Destruir Livro
-                int ISBN;
-                printf("Digite o ISBN do livro a destruir: ");
-                scanf("%d", ISBN);
+                char ISBN[14];
+                do {
+                    printf("\nInsira o ISBN do livro: ");
+                    scanf("%s", ISBN);
+                    limparBuffer();
+                    if (strlen(ISBN) != 13) {
+                        printf("\nErro: O ISBN tem de ter 13 digitos.(%d)\n", strlen(ISBN));
+                    }
+                } while ( strlen(ISBN) != 13);
                 LIVRO *livroDestruir = PesquisarLivroPorISBN(listaChavesLivro, (char *) ISBN);
                 if (livroDestruir != NULL) {
-                    livroDestruir->Disponivel = 1;
-                    printf("O livro de ISBN %s nao está mais disponivel.",ISBN);
+                    MostrarLivro(livroDestruir);
+                    do {
+                        confirm = LerInteiro("\nDeseja destruir o livro? (1-Sim, 0-Nao) ");
+                        if (confirm == 1) {
+                            livroDestruir->Disponivel = 1;
+                            printf("O livro de ISBN %s foi destruido.", ISBN);
+                        }else if (confirm == 0) {
+                            printf("Livro nao foi destruido.\n");
+                        }
+                    }while(confirm != 0 && confirm != 1);
                 } else {
                     printf("Nenhum livro disponível.\n");
                 }

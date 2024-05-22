@@ -44,7 +44,7 @@ void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 ListaLivro *criarListaL();
 ElementoL *criar_elementoL(LIVRO *L);
-void *AdicionarLivro(ElementoL *E, Lista_Chaves_L *C);
+int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C);
 int ListarLivros(Lista_Chaves_L *C);
 LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn);
 LIVRO *LivroMaisRecente(Lista_Chaves_L * L);
