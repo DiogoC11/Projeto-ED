@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 typedef struct
 {
     char *NOME;
@@ -14,6 +13,7 @@ typedef struct
     int anoPublicacao;
     char *Autor;
     int Disponivel;
+    int quant_requisicaoL;
 }LIVRO;
 
 typedef struct elemento{
@@ -29,6 +29,7 @@ typedef struct{
 // Hashing
 typedef struct NO_CHAVE_L {
     char categoria[50];
+    int quant_requisicaoN;
     ListaLivro *DADOS;
     struct NO_CHAVE_L *Prox;
 } NO_CHAVE_L;
@@ -44,11 +45,14 @@ void MostrarLivro(LIVRO *P);
 void DestruirLivro(LIVRO *P);
 ListaLivro *criarListaL();
 ElementoL *criar_elementoL(LIVRO *L);
+
 int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C);
 int ListarLivros(Lista_Chaves_L *C);
 LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn);
 LIVRO *LivroMaisRecente(Lista_Chaves_L * L);
-void AreaMaisLivros(Lista_Chaves_L *C);
+NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C);
+LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C);
+NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C);
 
 //funcoes hashing-----------------------------------------------------------------------
 Lista_Chaves_L *CriarListaChaves();
@@ -57,9 +61,5 @@ void LiberarListaChaves_L(Lista_Chaves_L *lista);
 
 //---------------------------------------------------------------------------------------
 
-
-//livro mais requisitado;
-//area mais requisitada;
-
 #endif // LIVRO_H_INCLUDED
-//fgdhgg
+

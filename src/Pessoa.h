@@ -31,34 +31,36 @@ typedef struct {
     int ID_CONC;
     char nome[50];
     Lista_F *freguesias;
-} Conselho;
+} Concelho;
 
 typedef struct elementoC {
-    Conselho *conselho;
+    Concelho *concelho;
     struct elementoC *prox;
 } ElementoC;
 
 typedef struct {
-    int num_Concelho;
+    int num_Concelhos;
     ElementoC *Inicio;
 } Lista_C;
 
-typedef struct {
+typedef struct Distrito {
     int ID_DIST;
-    char nome[50];
-    Lista_C *concelhos;
+    char *nome;
+    Lista_C *Conc; // Lista de concelhos associados ao distrito
+    int NEL; // Número de concelhos associados
 } Distrito;
 
-typedef struct elementoD {
-    Distrito *distrito;
-    struct elementoD *prox;
+// Estrutura para Elemento de Distrito na Lista
+typedef struct ElementoD {
+    Distrito *Info;
+    struct ElementoD *Prox;
 } ElementoD;
 
+// Estrutura para Lista de Distritos
 typedef struct {
-    int num_Distrito;
+    int num_Distritos;
     ElementoD *Inicio;
 } Lista_D;
-
 // Pessoa
 
 typedef struct{
@@ -123,16 +125,18 @@ int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas);  //idad
 
 
 Lista_F* LerTXT();
-Conselho* LerTXTConc();
-void LiberarConcelhos(ElementoC *inicio);
-void LiberarFreguesias(Lista_F *lista);
-void LiberarListaChaves_P(Lista_Chaves_P *lista);
+void LibertarFreguesias(Lista_F *lista);
+Lista_C* LerTXTConc();
+void LibertarConcelhos(Lista_C *lista);
+Lista_D* LerTXTDist();
+void LibertarDistritos(Lista_D *lista);
+void LibertarListaChaves_P(Lista_Chaves_P *lista);
 
 
 
 
-        void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
+void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
 int lerDistritos(const char* nome_arquivo, Distrito **distritos);
-int lerConselhos(const char* nome_arquivo, Conselho **conselhos);
+int lerConcelhos(const char* nome_arquivo, Concelho **Concelhos);
 
 #endif // PESSOA_H_INCLUDED

@@ -26,6 +26,7 @@ LIVRO *CriarLivro(char *ISBN, char *_nome, char *_area, int _anoPublicacao, char
     P->Autor = (char *) malloc(strlen(_autor + 1)*sizeof(char));
     strcpy(P->Autor,_autor);
     P->Disponivel = 0;
+    P->quant_requisicaoL = 0;
     return P;
 }
 
@@ -103,7 +104,7 @@ void MostrarLivro(LIVRO *P)
     }else{
         strcpy(disponivel,"SIM");
     }
-    printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel);
+    printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Quantidade de vezes requisitado: %d", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel,P->quant_requisicaoL);
 }
 void DestruirLivro(LIVRO *P)
 {
@@ -207,10 +208,10 @@ LIVRO *LivroMaisRecente(Lista_Chaves_L *L) {
 }
 
 
-void AreaMaisLivros(Lista_Chaves_L *C) {
+NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C) {
     if (!C || C->num_chaves == 0) {
         printf("\nErro: Lista de Chaves vazia ou não inicializada.\n");
-        return;
+        return NULL;
     }
     NO_CHAVE_L *Area = C->Inicio;
     NO_CHAVE_L *Inicio = C->Inicio;
@@ -220,8 +221,39 @@ void AreaMaisLivros(Lista_Chaves_L *C) {
         }
         Inicio = Inicio->Prox;
     }
-    printf("A area com mais livros na biblioteca é: %s\n", Area->categoria);
+    return Area;
 }
+
+LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C){
+    if(!C || C->Inicio == NULL) return NULL;
+    NO_CHAVE_L *N = C->Inicio;
+    ElementoL *E = C->Inicio->DADOS->Inicio;
+    LIVRO *maisRequisitado = NULL;
+    while (N != NULL){
+        while(E != NULL){
+            if(maisRequisitado == NULL || E->livro->Disponivel > maisRequisitado->Disponivel){
+                maisRequisitado = E->livro;
+            }
+            E = E->proximo;
+        }
+        N = N->Prox;
+    }
+    return maisRequisitado;
+}
+
+NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C){
+    if(!C || C->Inicio == NULL) return NULL;
+    NO_CHAVE_L *N = C->Inicio;
+    NO_CHAVE_L *Area = C->Inicio;
+    while (N != NULL){
+        if(N->quant_requisicaoN > Area->quant_requisicaoN){
+            Area = N;
+        }
+        N = N->Prox;
+    }
+    return Area;
+}
+
 
 Lista_Chaves_L *CriarListaChaves(){
     Lista_Chaves_L *L = (Lista_Chaves_L *)malloc(sizeof(Lista_Chaves_L));

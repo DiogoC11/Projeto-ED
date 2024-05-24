@@ -13,7 +13,9 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
         printf("2- Listar Livros\n");
         printf("3- Pesquisar Livro por ISBN\n");
         printf("4- Encontrar Livro Mais Recente\n");
-        printf("5- Destruir Livro\n");
+        printf("5- Encontrar Livro Mais Requisitado\n");
+        printf("6- Encontrar Area Mais Requisitada\n");
+        printf("7- Destruir Livro\n");
         printf("0- Voltar\n");
         opLivro = LerInteiro("Qual a opcao? ");
 
@@ -29,7 +31,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                     AdicionarLivro(novoElemento, listaChavesLivro);
                     //free(novoElemento);
                 }else{
-                    printf("Livro nao adicionado.\n");
+                    printf("\nErro: Livro nao adicionado.\n");
                     free(novoLivro);
                 }
                 break;
@@ -54,7 +56,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 if (livroEncontrado != NULL) {
                     MostrarLivro(livroEncontrado);
                 } else {
-                    printf("Livro com ISBN %s nao encontrado.\n", ISBN);
+                    printf("\nErro: Livro com ISBN %s nao encontrado.\n", ISBN);
                 }
                 break;
             }
@@ -62,14 +64,37 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 // Encontrar Livro Mais Recente
                 LIVRO *livroMaisRecente = LivroMaisRecente(listaChavesLivro);
                 if (livroMaisRecente != NULL) {
-                    printf("\nLivro mais recente:");
+                    printf("\nLivro mais recente:\n");
                     MostrarLivro(livroMaisRecente);
                 } else {
-                    printf("Nenhum livro disponivel.\n");
+                    printf("\nErro: Nenhum livro disponivel.\n");
                 }
                 break;
             }
-            case 5: {
+            case 5:{
+                // Encontrar Livro Mais Requisitado
+                LIVRO *livroMaisRequisitado = LivroMaisRequisitado(listaChavesLivro);
+                if(livroMaisRequisitado != NULL){
+                    printf("\nLivro mais requisitado:\n");
+                    MostrarLivro(livroMaisRequisitado);
+                }else{
+                    printf("\nErro: Nenhum livro disponivel.\n");
+                }
+
+                break;
+            }
+            case 6:{
+                // Encontrar Area Mais Requisitada
+                NO_CHAVE_L *areaMaisRequisitada = AreaMaisRequisitada(listaChavesLivro);
+                if(areaMaisRequisitada != NULL){
+                    printf("\nArea mais requisitado:\n");
+                    printf("Area: %s\n", areaMaisRequisitada->categoria);
+                    printf("Quantidade de Requisicoes: %d\n", areaMaisRequisitada->quant_requisicaoN);
+                }else{
+                    printf("\nErro: Nenhum livro disponivel.\n");
+                }
+            }
+            case 7: {
                 //Destruir Livro
                 char ISBN[14];
                 do {
@@ -338,7 +363,9 @@ int main() {
     Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
 
-    Lista_F *ListaF= LerTXT();
+    //Lista_F *ListaF= LerTXT();
+    //Lista_C *ListaC= LerTXTConc();
+    //Lista_D *listaDistritos = LerTXTDist();
 
 
     // Executar o menu geral
@@ -350,7 +377,7 @@ int main() {
 
     // Liberar memória alocada para as listas de livros e pessoas
     LiberarListaChaves_L(listaChavesLivro);
-    LiberarListaChaves_P(listaChavesPessoa);
+    //LibertarListaChaves_P(listaChavesPessoa);
 
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }
