@@ -356,7 +356,7 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
     } while (opGeral != 0);
 }
 
-/*int main() {
+int main() {
     printf("Projeto-Biblioteca-Versao-Base!\n");
 
     // Criar listas para livros e pessoas
@@ -380,38 +380,6 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
     // Liberar memória alocada para as listas de livros e pessoas
     LiberarListaChaves_L(listaChavesLivro);
     //LibertarListaChaves_P(listaChavesPessoa);
-
-    return EXIT_SUCCESS; // ou EXIT_FAILURE
-}*/
-
-int main() {
-    printf("Projeto-Biblioteca-Versao-Base!\n");
-
-    // Criar listas para livros e pessoas
-    Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
-    Lista_Chaves_P *listaChavesPessoa = criarListaChave();
-
-    // Ler os dados dos ficheiros para criar as listas de freguesias e concelhos
-    Lista_F *listaFreguesias = LerTXT();
-    Lista_C *listaConcelhos = LerTXTConc();
-
-    // Lista de distritos não está sendo utilizada neste exemplo
-
-    // Teste da função: listar freguesias de um concelho específico
-    int idConcelhoDesejado = 1; // Substitua pelo ID do concelho desejado
-    printf("\nListando freguesias do concelho com ID %d:\n", idConcelhoDesejado);
-    ListarFreguesiasPorConcelho(listaConcelhos, idConcelhoDesejado);
-
-    // Executar o menu geral
-    menuGeral(listaChavesLivro, listaChavesPessoa);
-
-    printf("\nA sair da biblioteca...\n");
-
-    // Liberar memória alocada para as listas de livros, pessoas, freguesias e concelhos
-    LiberarListaChaves_L(listaChavesLivro);
-    LibertarListaChaves_P(listaChavesPessoa);
-    LibertarFreguesias(listaFreguesias);
-    LibertarConcelhos(listaConcelhos);
 
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }
