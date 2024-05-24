@@ -586,12 +586,13 @@ int lerConcelhos(const char* nome_arquivo, Concelho **Concelhos) {
 }*/
 
 void LiberarListaChaves_P(Lista_Chaves_P *lista) {
-    ElementoP *atual = lista->Inicio;
+    NO_CHAVE_P *atual = lista->Inicio;
     while (atual != NULL) {
-        ElementoP *temp = atual;
-        atual = atual->proximo;
-        free(temp->pessoa); // Libera a pessoa apontada por este elemento
-        free(temp);         // Libera o próprio elemento
+        NO_CHAVE_P *temp = atual;
+        atual = atual->Prox;
+        // Se houver dados associados ao nó, libere-os aqui
+        // Exemplo: LiberarListaPessoa(temp->DADOS);
+        free(temp); // Libera o próprio nó
     }
     free(lista); // Libera a estrutura de lista
 }
