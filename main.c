@@ -308,9 +308,9 @@ int main() {
     Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
 
-    //Lista_F *ListaF= LerTXT();
-    //Lista_C *ListaC= LerTXTConc();
-    //Lista_D *listaDistritos = LerTXTDist();
+    Lista_F *ListaF= LerTXT();
+    Lista_C *ListaC= LerTXTConc();
+    Lista_D *listaDistritos = LerTXTDist();
 
 
     // Executar o menu geral

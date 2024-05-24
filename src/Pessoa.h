@@ -115,7 +115,11 @@ void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
 PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
-//int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias);
+
+//listar distritos pelo id distrito
+//listar concelhos de id do distrito
+//listar freguesias de id do concelho
+
 
 Lista_F* LerTXT();
 void LibertarFreguesias(Lista_F *lista);
