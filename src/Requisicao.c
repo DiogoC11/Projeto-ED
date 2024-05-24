@@ -46,27 +46,27 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
 
 
 
- // Funções 24/05 || test me
- // Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
- int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
-     int count = 0;
-     NO_CHAVE_P *current = peopleList->Inicio;
-     while (current != NULL) {
-         ElementoP *personElement = current->DADOS->Inicio;
-         while (personElement != NULL) {
-             PESSOA *person = personElement->pessoa;
-             char districtID[10];
-             sprintf(districtID, "%d", person->freguesia->ID_DIST);
-             if (strcmp(districtID, districtX) == 0 &&
-                 (strcmp(person->PrimeiroNome, nameY) == 0 || strcmp(person->UltimoNome, nameY) == 0)) {
-                 count++;
-             }
-             personElement = personElement->proximo;
-         }
-         current = current->Prox;
-     }
-     return count;
- }
+// Funções 24/05 || test me
+// Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
+int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
+    int count = 0;
+    NO_CHAVE_P *current = peopleList->Inicio;
+    while (current != NULL) {
+        ElementoP *personElement = current->DADOS->Inicio;
+        while (personElement != NULL) {
+            PESSOA *person = personElement->pessoa;
+            char districtID[10];
+            sprintf(districtID, "%d", person->freguesia->ID_DIST);
+            if (strcmp(districtID, districtX) == 0 &&
+                (strcmp(person->PrimeiroNome, nameY) == 0 || strcmp(person->UltimoNome, nameY) == 0)) {
+                count++;
+            }
+            personElement = personElement->proximo;
+        }
+        current = current->Prox;
+    }
+    return count;
+}
 
 // Função para devolver um livro solicitado
 void returnRequestedBook(Lista_Chaves_L *bookList, char *ISBN) {

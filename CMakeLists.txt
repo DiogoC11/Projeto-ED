@@ -11,6 +11,5 @@ add_executable(Exem_Projeto main.c
         src/Uteis.c
         src/Livro.h
         src/Livro.h
-        main.c
         src/Uteis.h
         src/Uteis.h)

@@ -32,7 +32,7 @@ LIVRO *CriarLivro(char *ISBN, char *_nome, char *_area, int _anoPublicacao, char
 
 LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     char nome[50], area[50], autor[50], ISBN[14];
-    int anoPublicacao;
+    int anoPublicacao, op;
     printf("\nCriar Livro: ");
     NO_CHAVE_L *N = C->Inicio;
     do {
@@ -56,7 +56,7 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
 
 
     printf("\nArea do Livro: \n");
-    //do {
+    do {
         printf("\nEscolha uma area: (0-Inserir nova area)\n");
         while(N != NULL){
             printf("%s\n", N->categoria);
@@ -68,27 +68,52 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
         area[i] = toupper(area[i]);
         }
         if(area[0] == '0'){
-            printf("\nInsira a nova area: ");
-            scanf("%s", area);
-            AdicionarChave(C, area);
+            do{
+                printf("\nInsira a nova area: ");
+                scanf("%s", area);
+                printf("\nDeseja adicionar a area %s? (1-Sim, 2-Nao): ", area);
+                scanf("%d", &op);
+                limparBuffer();
+                for (int i = 0; i < strlen(area); i++) {
+                    area[i] = toupper(area[i]);
+                }
+                switch (op) {
+                    case 1:
+                        if (!AdicionarChave(C, area)) {
+                            printf("\nErro: Area nao adicionada.\n");
+                        } else {
+                            printf("\nArea %s adicionada.\n",area);
+                        }
+                        break;
+                    case 2:
+                        printf("\nArea nao foi adicionada.\n");
+                        break;
+                    default:
+                        printf("\nOpcao invalida.\n");
+                        break;
+                }
+            }while(op != 1 && op != 2);
         }else if(encontrarNoChave(C->Inicio, area) == NULL){
                 printf("\nErro: A area inserida nao existe.\n");
         }
-    //}while(encontrarNoChave(C->Inicio, area) == NULL);
+    }while(encontrarNoChave(C->Inicio, area) == NULL);
     do {
         printf("\nAno de Publicacao: ");
         scanf("%d", &anoPublicacao);
         limparBuffer();
         if(anoPublicacao>2024){
             printf("\nErro: Insira um ano anterior ao ano atual.\n");
-        }else if(anoPublicacao<999)
-            printf("\nErro: O ano tem de ter 4 digitos.\n");
+        }else if(anoPublicacao<0) {
+            printf("\nErro: O ano tem de ser positivo.\n");
+        }else if(isalpha(anoPublicacao)){
+            printf("\nErro: Insira um numero inteiro.\n");
+        }
     }while( anoPublicacao>2024 || anoPublicacao<999);
 
     do{
         printf("\nAutor do Livro: ");
         lerString(autor,  sizeof (autor));
-        if(!strlen(autor)){
+        if(strlen(autor) < 3){
             printf("\nErro: O nome do autor e muito pequeno\n");
         }
     }while(!strlen(autor));
@@ -104,7 +129,11 @@ void MostrarLivro(LIVRO *P)
     }else{
         strcpy(disponivel,"SIM");
     }
-    printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Quantidade de vezes requisitado: %d", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel,P->quant_requisicaoL);
+    if(P->quant_requisicaoL > 0){
+        printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Quantidade de vezes requisitado: %d\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel,P->quant_requisicaoL);
+    }else{
+        printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel);
+    }
 }
 void DestruirLivro(LIVRO *P)
 {
@@ -138,16 +167,17 @@ int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C) {
         if (strcmp(Inicio->categoria, E->livro->AREA) == 0) {
             if (Inicio->DADOS->Inicio == NULL) {
                 Inicio->DADOS->Inicio = E;
-                printf("\nLivro adicionado a biblioteca no inicio da categoria %s.\n", Inicio->categoria);
+                //printf("\nLivro adicionado a biblioteca no inicio da categoria %s.\n", Inicio->categoria);
             } else {
                 ElementoL *ultimo = Inicio->DADOS->Inicio;
                 while (ultimo->proximo != NULL) {
                     ultimo = ultimo->proximo;
                 }
                 ultimo->proximo = E;
-                printf("\nLivro adicionado a biblioteca na categoria %s.\n", Inicio->categoria);
+                //printf("\nLivro adicionado a biblioteca na categoria %s.\n", Inicio->categoria);
             }
             Inicio->DADOS->num_Livros++;
+            printf("\nO Livro foi adicionado a biblioteca.\n");
             return 1;
         }
         Inicio = Inicio->Prox;
@@ -262,23 +292,36 @@ Lista_Chaves_L *CriarListaChaves(){
     return L;
 }
 
-void *AdicionarChave(Lista_Chaves_L *L, char *categoria){
-    if (!L) return NULL;
+int *AdicionarChave(Lista_Chaves_L *L, char *categoria){
+    if (!L) return 0;
     NO_CHAVE_L *chave = (NO_CHAVE_L *)malloc(sizeof(NO_CHAVE_L));
     strcpy(chave->categoria, categoria);
     chave->DADOS = criarListaL();
     chave->Prox = L->Inicio;
     L->Inicio = chave;
     L->num_chaves ++;
+    return (int *)1;
 }
 
-void LiberarListaChaves_L(Lista_Chaves_L *lista) {
+void LiberarListaLivros(ListaLivro *lista) {
     ElementoL *atual = lista->Inicio;
     while (atual != NULL) {
         ElementoL *temp = atual;
         atual = atual->proximo;
-        free(temp->livro); // Libera o livro apontado por este elemento
-        free(temp);        // Libera o próprio elemento
+        free(temp->livro);
+        free(temp);
     }
-    free(lista); // Libera a estrutura de lista
+    free(lista);
+}
+
+
+void LiberarListaChaves_L(Lista_Chaves_L *lista) {
+    NO_CHAVE_L *atual = lista->Inicio;
+    while (atual != NULL) {
+        NO_CHAVE_L *temp = atual;
+        atual = atual->Prox;
+        LiberarListaLivros(temp->DADOS);
+        free(temp);
+    }
+    free(lista);
 }

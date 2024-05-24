@@ -56,7 +56,8 @@ NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C);
 
 //funcoes hashing-----------------------------------------------------------------------
 Lista_Chaves_L *CriarListaChaves();
-void *AdicionarChave(Lista_Chaves_L *L, char *categoria);
+int *AdicionarChave(Lista_Chaves_L *L, char *categoria);
+void LiberarListaLivros(ListaLivro *lista);
 void LiberarListaChaves_L(Lista_Chaves_L *lista);
 
 //---------------------------------------------------------------------------------------

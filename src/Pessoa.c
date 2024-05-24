@@ -152,7 +152,7 @@ int compararIdFreguesia(const void* a, const void* b) {
 }
 
 // Função para organizar a lista de pessoas por nome / freguesia
-void *OrganizarPorNome(Lista_Chaves_P *L, int op) {
+ListaPessoa *ListaOrganizada(Lista_Chaves_P *L, int op) {
     if (!L) return NULL;
 
     // coletar todas as pessoas
@@ -657,7 +657,7 @@ Lista_F* LerTXT() {
         novo_elemento->freguesia = nova_freg;
         novo_elemento->prox = lista->Inicio;
         lista->Inicio = novo_elemento;
-        printf("Novo elemento: ID: %s,ID_DIST :%d, ID_CONC: %d, Nome: %s\n", novo_elemento->freguesia->ID,novo_elemento->freguesia->ID_DIST,novo_elemento->freguesia->ID_CONC ,novo_elemento->freguesia->nome);
+        //printf("Novo elemento: ID: %s,ID_DIST :%d, ID_CONC: %d, Nome: %s\n", novo_elemento->freguesia->ID,novo_elemento->freguesia->ID_DIST,novo_elemento->freguesia->ID_CONC ,novo_elemento->freguesia->nome);
         lista->num_Freguesias++;
     }
 
@@ -700,7 +700,7 @@ Lista_C* LerTXTConc() {
         return NULL;
     }
 
-    printf("Arquivo aberto com sucesso.\n");
+    //printf("Arquivo aberto com sucesso.\n");
 
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         // Extrair os IDs DIST e CONC da linha (uso de ASCII)
@@ -747,7 +747,7 @@ Lista_C* LerTXTConc() {
         lista->Inicio = novo_elemento;
         lista->num_Concelhos++;
 
-        printf("Novo concelho adicionado: ID_DIST=%d, ID_CONC=%d, Nome=%s\n", id_dist, id_conc, nome);
+        //printf("Novo concelho adicionado: ID_DIST=%d, ID_CONC=%d, Nome=%s\n", id_dist, id_conc, nome);
     }
 
     fclose(arquivo);
@@ -765,18 +765,34 @@ void LibertarConcelhos(Lista_C *lista) {
 }
 
 
-void LibertarDistritos(Lista_D *lista) {
-    ElementoD *atual = lista->Inicio;
-    while (atual != NULL) {
-        ElementoD *temp = atual;
-        atual = atual->Prox;
-        free(temp->Info->nome); // Libera o nome do distrito
-        free(temp->Info->Conc); // Libera a lista de concelhos associados ao distrito
-        free(temp->Info); // Libera a estrutura do distrito
-        free(temp); // Libera o elemento da lista
+char* ObterNomeDistrito(Lista_D *listaDistritos, int idDistrito) {
+    ElementoD *atualDistrito = listaDistritos->Inicio;
+    while (atualDistrito != NULL) {
+        if (atualDistrito->Info->ID_DIST == idDistrito) {
+            // Encontrou o distrito correspondente ao ID especificado
+            return atualDistrito->Info->nome;
+        }
+        atualDistrito = atualDistrito->Prox;
     }
-    free(lista); // Libera a lista de distritos
+    // Se não encontrar o distrito correspondente ao ID especificado, retorna NULL
+    return NULL;
 }
+
+void ListarConcelhosPorDistrito(Lista_D *listadistritos,Lista_C *listaConcelhos, int idDistrito) {
+    ElementoC *atualConcelho = listaConcelhos->Inicio;
+    printf("ID do Distrito: %d\nNome: %s\n", idDistrito, ObterNomeDistrito(listadistritos,idDistrito) );
+    while (atualConcelho != NULL) {
+        if (atualConcelho->concelho->ID_DIST == idDistrito) {
+            // Encontrou o concelho correspondente ao ID do distrito especificado
+            printf("ID do Concelho: %d\nNome: %s\n",
+                   atualConcelho->concelho->ID_CONC, atualConcelho->concelho->nome);
+        }
+        atualConcelho = atualConcelho->prox;
+    }
+}
+
+
+
 
 Lista_D* LerTXTDist() {
     FILE *arquivo;
@@ -837,7 +853,6 @@ Lista_D* LerTXTDist() {
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
         }
-        novo_distrito->NEL = 0; // Inicialmente, nenhum concelho associado
 
         // Criar um novo elemento para a lista de distritos e alocar memória
         ElementoD *novo_elemento = malloc(sizeof(ElementoD));
@@ -854,7 +869,8 @@ Lista_D* LerTXTDist() {
         novo_elemento->Prox = distritos->Inicio;
         distritos->Inicio = novo_elemento;
         distritos->num_Distritos++;
-       // printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
+       //printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
+
     }
 
     fclose(arquivo);
@@ -862,85 +878,88 @@ Lista_D* LerTXTDist() {
     return distritos;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-// Função para ler freguesias de um arquivo
-/*int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return -1;
-    int num_freguesias;
-    fscanf(file, "%d", &num_freguesias);
-    *freguesias = (Freguesia *)malloc(num_freguesias * sizeof(Freguesia));
-    for (int i = 0; i < num_freguesias; i++) {
-        fscanf(file, "%s %s", (*freguesias)[i].codigo, (*freguesias)[i].nome);
+void LibertarDistritos(Lista_D *lista) {
+    ElementoD *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoD *temp = atual;
+        atual = atual->Prox;
+        free(temp->Info->nome); // Libera o nome do distrito
+        free(temp->Info->Conc); // Libera a lista de concelhos associados ao distrito
+        free(temp->Info); // Libera a estrutura do distrito
+        free(temp); // Libera o elemento da lista
     }
-    fclose(file);
-    return num_freguesias;
+    free(lista); // Libera a lista de distritos
 }
 
-// Função para ler pessoas de um arquivo
-
-void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return;
-    while (!feof(file)) {
-        char primeiroNome[30], ultimoNome[30];
-        int dia, mes, ano, ID;
-        fscanf(file, "%d %s %s %d %d %d", &ID, primeiroNome, ultimoNome, &dia, &mes, &ano);
-        PESSOA *pessoa = CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano);
-        pessoa->ID = ID;
-        ElementoP *elemento = criarElementoP(pessoa);
-        AdicionarPessoa(, elemento);
+void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito) {
+    ElementoD *atualDistrito = listaDistritos->Inicio;
+    while (atualDistrito != NULL) {
+        if (atualDistrito->Info->ID_DIST == idDistrito) {
+            // Encontrou o distrito correspondente ao ID especificado
+            printf("Distrito encontrado:\n");
+            printf("ID: %d\nNome: %s\n", atualDistrito->Info->ID_DIST, atualDistrito->Info->nome);
+            return; // Termina a função após encontrar o distrito
+        }
+        atualDistrito = atualDistrito->Prox;
     }
-    fclose(file);
+    // Se não encontrar o distrito correspondente ao ID especificado
+    printf("Distrito com ID %d não encontrado.\n", idDistrito);
 }
 
 
-// Função para ler distritos de um arquivo
-int lerDistritos(const char* nome_arquivo, Distrito **distritos) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return -1;
-    int num_distritos;
-    fscanf(file, "%d", &num_distritos);
-    *distritos = (Distrito *)malloc(num_distritos * sizeof(Distrito));
-    for (int i = 0; i < num_distritos; i++) {
-        fscanf(file, "%s %s", (*distritos)[i].codigo, (*distritos)[i].nome);
-    }
-    fclose(file);
-    return num_distritos;
-}
 
-// Função para ler Concelhos de um arquivo
-int lerConcelhos(const char* nome_arquivo, Concelho **Concelhos) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return -1;
-    int num_Concelhos;
-    fscanf(file, "%d", &num_Concelhos);
-    *Concelhos = (Concelho *)malloc(num_Concelhos * sizeof(Concelho));
-    for (int i = 0; i < num_Concelhos; i++) {
-        fscanf(file, "%s %s", (*Concelhos)[i].codigo, (*Concelhos)[i].nome);
+
+void LiberarListaPessoas(ListaPessoa *lista) {
+    ElementoP *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoP *temp = atual;
+        atual = atual->proximo;
+        free(temp->pessoa->dataNascimento);
+        free(temp->pessoa);
+        free(temp);
     }
-    fclose(file);
-    return num_Concelhos;
-}*/
+    free(lista);
+}
 
 void LiberarListaChaves_P(Lista_Chaves_P *lista) {
     NO_CHAVE_P *atual = lista->Inicio;
     while (atual != NULL) {
         NO_CHAVE_P *temp = atual;
         atual = atual->Prox;
-        // Se houver dados associados ao nó, libere-os aqui
-        // Exemplo: LiberarListaPessoa(temp->DADOS);
-        free(temp); // Libera o próprio nó
+        LiberarListaPessoas(temp->DADOS);
+        free(temp);
     }
-    free(lista); // Libera a estrutura de lista
+    free(lista);
 }
+
+
+
+
+void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho) {
+    ElementoC *atualConcelho = listaConcelhos->Inicio;
+    while (atualConcelho != NULL) {
+        if (atualConcelho->concelho->ID_CONC == idConcelho) {
+            // Encontrou o concelho correspondente ao ID especificado
+            printf("Freguesias do concelho %s:\n", atualConcelho->concelho->nome);
+
+            // Verifica se há freguesias associadas ao concelho
+            if (atualConcelho->concelho->freguesias != NULL && atualConcelho->concelho->freguesias->Inicio != NULL) {
+                ElementoF *atualFreguesia = atualConcelho->concelho->freguesias->Inicio;
+                while (atualFreguesia != NULL) {
+                    printf("- %s\n", atualFreguesia->freguesia->nome);
+                    atualFreguesia = atualFreguesia->prox;
+                }
+            } else {
+                printf("Nenhuma freguesia encontrada para este concelho.\n");
+            }
+            return; // Termina a função após listar as freguesias
+        }
+        atualConcelho = atualConcelho->prox;
+    }
+    // Se não encontrar o concelho correspondente ao ID especificado
+    printf("Concelho com ID %d não encontrado.\n", idConcelho);
+}
+
+
+
+

@@ -18,6 +18,7 @@ typedef struct
    // LISTA_Requisicoes *LRequisicoes;
 }BIBLIOTECA;
 
+/*
 BIBLIOTECA *CriarBiblioteca(char *_nome, char *_logs);
 void ShowBiblioteca(BIBLIOTECA *B);
 void DestruirBiblioteca(BIBLIOTECA *B);
@@ -29,4 +30,5 @@ char *ApelidoMaisComum(BIBLIOTECA *B);
 char *AreaMaisComum(BIBLIOTECA *B);
 int AddRequisitante(BIBLIOTECA *B, PESSOA *X);
 PESSOA *PesquisarRequisitante(BIBLIOTECA *B, int cod);
+ */
 #endif // BIBLIOTECA_H_INCLUDED

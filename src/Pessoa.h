@@ -1,7 +1,5 @@
 #ifndef PESSOA_H_INCLUDED
 #define PESSOA_H_INCLUDED
-
-#include "Requisicao.h"
 #include "Livro.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,21 +44,20 @@ typedef struct {
 typedef struct Distrito {
     int ID_DIST;
     char *nome;
-    Lista_C *Conc; // Lista de concelhos associados ao distrito
-    int NEL; // Número de concelhos associados
+    Lista_C *Conc;
 } Distrito;
 
-// Estrutura para Elemento de Distrito na Lista
 typedef struct ElementoD {
     Distrito *Info;
     struct ElementoD *Prox;
 } ElementoD;
 
-// Estrutura para Lista de Distritos
 typedef struct {
     int num_Distritos;
     ElementoD *Inicio;
 } Lista_D;
+
+
 // Pessoa
 
 typedef struct{
@@ -106,6 +103,7 @@ ListaPessoa *criarListaP();
 ElementoP *criarElementoP(PESSOA *P);
 NO_CHAVE_P *criarNoChave(char chave);
 Lista_Chaves_P *criarListaChave ();
+
 void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) ;
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
@@ -116,7 +114,11 @@ void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
 PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
-//int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias);
+
+//listar distritos pelo id distrito
+//listar concelhos de id do distrito
+//listar freguesias de id do concelho
+
 
 int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa);  //idade maxima de todos os requisitantes
 
@@ -137,15 +139,26 @@ Lista_F* LerTXT();
 void LibertarFreguesias(Lista_F *lista);
 Lista_C* LerTXTConc();
 void LibertarConcelhos(Lista_C *lista);
+void ListarConcelhosPorDistrito(Lista_D *listadistritos,Lista_C *listaConcelhos, int idDistrito);
+char* ObterNomeDistrito(Lista_D *listaDistritos, int idDistrito);
 Lista_D* LerTXTDist();
 void LibertarDistritos(Lista_D *lista);
-void LibertarListaChaves_P(Lista_Chaves_P *lista);
+void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito);
+
+void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
+
+
+
+
+
+
+void LiberarListaPessoas(ListaPessoa *lista);
+void LiberarListaChaves_P(Lista_Chaves_P *lista);
 
 
 
 
 void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
-int lerDistritos(const char* nome_arquivo, Distrito **distritos);
-int lerConcelhos(const char* nome_arquivo, Concelho **Concelhos);
+
 
 #endif // PESSOA_H_INCLUDED
