@@ -118,11 +118,20 @@ PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
 //int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias);
 
-int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas);  //idade maxima de todos os requisitantes
-//float CalcularIdadeMedia(PESSOA** listaPessoas, int tamanhoListaPessoas); //idade media de todos os requisitantes
-//int IdadeComMaisRequisitantes(PESSOA** listaPessoas, int tamanhoListaPessoas); //idade com mais requisitantes
-//int NumeroPessoasIdadeSuperiorX(PESSOA** listaPessoas, int tamanhoListaPessoas, int x); //numero de pessoas cuja a idade superior a x
+int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa);  //idade maxima de todos os requisitantes
 
+float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa); //idade media de todos os requisitantes
+int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
+int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite); //numero de pessoas cuja a idade superior a x
+
+
+
+//
+// TESTAR DEPOIS ESTAS FUNCOES depois de fazer as requisiçoes
+//
+void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas sem requisições
+void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas com requisiçao
+char* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa); //sobrenome mais usado nas requisiçoes
 
 Lista_F* LerTXT();
 void LibertarFreguesias(Lista_F *lista);

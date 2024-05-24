@@ -140,7 +140,13 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
         printf("1- Adicionar Pessoa\n");
         printf("2- Pesquisar Pessoa por Nome\n");
         printf("3- Listar Pessoas\n");
-        printf("4 - Determinar idade máxima de todos os requisitantes\n");
+        printf("4 - Determinar idade maxima de todos os requisitantes\n");
+        printf("5 - Determinar idade media de todos os requisitantes\n");
+        printf("6 - Determinar idade com mais requisitantes\n");
+        printf("7 - Determinar numero de pessoas com idade superior a X\n");
+        printf("8 - Listar pessoas sem requisicoes\n");
+        printf("9 - Listar pessoas com requisicoes\n");
+        printf("10 - Sobrenome mais usado pelos requisitantes\n");
         printf("0- Voltar\n");
         opPessoa = LerInteiro("Qual a opcao? ");
 
@@ -199,6 +205,51 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
                         }
                     }
                 } while (opOrganizarPessoa != 0);
+                break;
+            }
+            case 4: {
+                int idadeMaxima = CalcularIdadeMaxima(listaChavesPessoa);
+                printf("A idade maxima de todos os requisitantes e: %d anos\n", idadeMaxima);
+                break;
+            }
+            case 5: {
+                //  idade média
+                float idadeMedia = CalcularIdadeMedia(listaChavesPessoa);
+                printf("A idade media de todos os requisitantes e: %.2f anos\n", idadeMedia);
+                break;
+            }
+            case 6: {
+                //  idade com mais requisitantes
+                int idadeMaisRequisitada = IdadeComMaisRequisitantes(listaChavesPessoa);
+                if (idadeMaisRequisitada != -1) {
+                    printf("A idade com mais requisitantes e: %d anos\n", idadeMaisRequisitada);
+                } else {
+                    printf("Nenhuma idade encontrada.\n");
+                }
+                break;
+            }
+            case 7: {
+                // contar pessoas com idade superior a X
+                int idadeLimite = LerInteiro("Digite a idade limite: ");
+                int numPessoas = ContarPessoasComIdadeSuperiorA(listaChavesPessoa, idadeLimite);
+                printf("O numero de pessoas com idade superior a %d anos e: %d\n", idadeLimite, numPessoas);
+                break;
+            }
+            case 8: {
+                ListarPessoasSemRequisicoes(listaChavesPessoa);
+                break;
+            }
+            case 9: {
+                ListarPessoasComRequisicao(listaChavesPessoa);
+                break;
+            }
+            case 10: {
+                char* sobrenomeMaisUsado = SobrenomeMaisUsado(listaChavesPessoa);
+                if (sobrenomeMaisUsado != NULL) {
+                    printf("O sobrenome mais comum nas requisições e: %s\n", sobrenomeMaisUsado);
+                } else {
+                    printf("Nenhuma requisição encontrada.\n");
+                }
                 break;
             }
 

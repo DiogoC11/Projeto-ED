@@ -44,11 +44,6 @@ void DestruirRequisicao(REQUISICAO *P);
 
 
 
-//void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas sem requisições
-//void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas com requisiçao
-//char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //sobrenome mais usado nas requisiçoes
-//numero de pessoas do distrito x, com o nome/apelido y
-
 //devolver livro requisitado
 //listar livros requisitados
 #endif // REQUISICAO_H_INCLUDED
