@@ -44,21 +44,20 @@ typedef struct {
 typedef struct Distrito {
     int ID_DIST;
     char *nome;
-    Lista_C *Conc; // Lista de concelhos associados ao distrito
-    int NEL; // Número de concelhos associados
+    Lista_C *Conc;
 } Distrito;
 
-// Estrutura para Elemento de Distrito na Lista
 typedef struct ElementoD {
     Distrito *Info;
     struct ElementoD *Prox;
 } ElementoD;
 
-// Estrutura para Lista de Distritos
 typedef struct {
     int num_Distritos;
     ElementoD *Inicio;
 } Lista_D;
+
+
 // Pessoa
 
 typedef struct{
@@ -104,6 +103,7 @@ ListaPessoa *criarListaP();
 ElementoP *criarElementoP(PESSOA *P);
 NO_CHAVE_P *criarNoChave(char chave);
 Lista_Chaves_P *criarListaChave ();
+
 void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) ;
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
@@ -140,7 +140,8 @@ void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
 
 
 
-void LibertarListaChaves_P(Lista_Chaves_P *lista);
+void LiberarListaPessoas(ListaPessoa *lista);
+void LiberarListaChaves_P(Lista_Chaves_P *lista);
 
 
 

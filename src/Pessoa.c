@@ -152,7 +152,7 @@ int compararIdFreguesia(const void* a, const void* b) {
 }
 
 // Função para organizar a lista de pessoas por nome / freguesia
-void *OrganizarPorNome(Lista_Chaves_P *L, int op) {
+ListaPessoa *ListaOrganizada(Lista_Chaves_P *L, int op) {
     if (!L) return NULL;
 
     // coletar todas as pessoas
@@ -348,7 +348,7 @@ Lista_F* LerTXT() {
         novo_elemento->freguesia = nova_freg;
         novo_elemento->prox = lista->Inicio;
         lista->Inicio = novo_elemento;
-        printf("Novo elemento: ID: %s,ID_DIST :%d, ID_CONC: %d, Nome: %s\n", novo_elemento->freguesia->ID,novo_elemento->freguesia->ID_DIST,novo_elemento->freguesia->ID_CONC ,novo_elemento->freguesia->nome);
+        //printf("Novo elemento: ID: %s,ID_DIST :%d, ID_CONC: %d, Nome: %s\n", novo_elemento->freguesia->ID,novo_elemento->freguesia->ID_DIST,novo_elemento->freguesia->ID_CONC ,novo_elemento->freguesia->nome);
         lista->num_Freguesias++;
     }
 
@@ -391,7 +391,7 @@ Lista_C* LerTXTConc() {
         return NULL;
     }
 
-    printf("Arquivo aberto com sucesso.\n");
+    //printf("Arquivo aberto com sucesso.\n");
 
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         // Extrair os IDs DIST e CONC da linha (uso de ASCII)
@@ -528,7 +528,6 @@ Lista_D* LerTXTDist() {
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
         }
-        novo_distrito->NEL = 0; // Inicialmente, nenhum concelho associado
 
         // Criar um novo elemento para a lista de distritos e alocar memória
         ElementoD *novo_elemento = malloc(sizeof(ElementoD));
@@ -555,16 +554,27 @@ Lista_D* LerTXTDist() {
 }
 
 
+void LiberarListaPessoas(ListaPessoa *lista) {
+    ElementoP *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoP *temp = atual;
+        atual = atual->proximo;
+        free(temp->pessoa->dataNascimento);
+        free(temp->pessoa);
+        free(temp);
+    }
+    free(lista);
+}
+
 void LiberarListaChaves_P(Lista_Chaves_P *lista) {
     NO_CHAVE_P *atual = lista->Inicio;
     while (atual != NULL) {
         NO_CHAVE_P *temp = atual;
         atual = atual->Prox;
-        // Se houver dados associados ao nó, libere-os aqui
-        // Exemplo: LiberarListaPessoa(temp->DADOS);
-        free(temp); // Libera o próprio nó
+        LiberarListaPessoas(temp->DADOS);
+        free(temp);
     }
-    free(lista); // Libera a estrutura de lista
+    free(lista);
 }
 
 

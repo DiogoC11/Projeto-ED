@@ -11,11 +11,12 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
         printf("\n--- Menu de Operacoes de Livros ---\n");
         printf("1- Adicionar Livro\n");
         printf("2- Listar Livros\n");
-        printf("3- Pesquisar Livro por ISBN\n");
-        printf("4- Encontrar Livro Mais Recente\n");
-        printf("5- Encontrar Livro Mais Requisitado\n");
-        printf("6- Encontrar Area Mais Requisitada\n");
-        printf("7- Destruir Livro\n");
+        printf("3- Encontrar area com mais livros\n");
+        printf("4- Pesquisar Livro por ISBN\n");
+        printf("5- Encontrar Livro Mais Recente\n");
+        printf("6- Encontrar Livro Mais Requisitado\n");
+        printf("7- Encontrar Area Mais Requisitada\n");
+        printf("8- Destruir Livro\n");
         printf("0- Voltar\n");
         opLivro = LerInteiro("Qual a opcao? ");
 
@@ -31,7 +32,8 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                     AdicionarLivro(novoElemento, listaChavesLivro);
                     //free(novoElemento);
                 }else{
-                    printf("\nErro: Livro nao adicionado.\n");
+                    printf("\nLivro nao foi adicionado.\n");
+
                     free(novoLivro);
                 }
                 break;
@@ -41,7 +43,12 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 ListarLivros( listaChavesLivro);
                 break;
             }
-            case 3: {
+            case 3:{
+                //Encontrar area com mais livros
+                NO_CHAVE_L *areaMaisLivros = AreaMaisLivros(listaChavesLivro);
+                printf("\nArea com mais livros: %s (numero de livros: %d)\n",areaMaisLivros->categoria, areaMaisLivros->DADOS->num_Livros);
+            }
+            case 4: {
                 // Pesquisar Livro por ISBN
                 char ISBN[14];
                 do {
@@ -60,7 +67,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 }
                 break;
             }
-            case 4: {
+            case 5: {
                 // Encontrar Livro Mais Recente
                 LIVRO *livroMaisRecente = LivroMaisRecente(listaChavesLivro);
                 if (livroMaisRecente != NULL) {
@@ -71,30 +78,28 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 }
                 break;
             }
-            case 5:{
+            case 6:{
                 // Encontrar Livro Mais Requisitado
                 LIVRO *livroMaisRequisitado = LivroMaisRequisitado(listaChavesLivro);
                 if(livroMaisRequisitado != NULL){
                     printf("\nLivro mais requisitado:\n");
                     MostrarLivro(livroMaisRequisitado);
                 }else{
-                    printf("\nErro: Nenhum livro disponivel.\n");
+                    printf("\nNao existe livros requisitados.\n");
                 }
 
                 break;
             }
-            case 6:{
+            case 7:{
                 // Encontrar Area Mais Requisitada
                 NO_CHAVE_L *areaMaisRequisitada = AreaMaisRequisitada(listaChavesLivro);
                 if(areaMaisRequisitada != NULL){
-                    printf("\nArea mais requisitado:\n");
-                    printf("Area: %s\n", areaMaisRequisitada->categoria);
-                    printf("Quantidade de Requisicoes: %d\n", areaMaisRequisitada->quant_requisicaoN);
+                    printf("\nArea mais requisitada: %s\n (numero de requisicoes: %d)\n", areaMaisRequisitada->categoria, areaMaisRequisitada->quant_requisicaoN);
                 }else{
-                    printf("\nErro: Nenhum livro disponivel.\n");
+                    printf("\nNao existe livros requisitados\n");
                 }
             }
-            case 7: {
+            case 8: {
                 //Destruir Livro
                 char ISBN[14];
                 do {
@@ -167,6 +172,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
                 break;
             }
             case 3: {
+                ListaPessoa *listaPessoas;
                 int opOrganizarPessoa = 0;
                 do {
                     printf("\nComo deseja organizar a lista: \n");
@@ -178,15 +184,15 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
 
                     switch (opOrganizarPessoa) {
                         case 1: {
-                            OrganizarPorNome(listaChavesPessoa, 0); // Ordenar por primeiro nome
+                            listaPessoas = OrganizarPorNome(listaChavesPessoa, 0); // Ordenar por primeiro nome
                             break;
                         }
                         case 2: {
-                            OrganizarPorNome(listaChavesPessoa, 1); // Ordenar por último nome
+                             listaPessoas = OrganizarPorNome(listaChavesPessoa, 1); // Ordenar por último nome
                             break;
                         }
                         case 3: {
-                            OrganizarPorNome(listaChavesPessoa, 2); // Ordenar por ID de freguesia
+                            listaPessoas = OrganizarPorNome(listaChavesPessoa, 2); // Ordenar por ID de freguesia
                             break;
                         }
                         case 0: {
@@ -197,6 +203,9 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
                             printf("Opcao nao implementada\n");
                             break;
                         }
+                    }
+                    for(int i = 0; i < listaPessoas->num_Pessoas; i++){
+                        MostrarPessoa(listaPessoas->Inicio->pessoa);
                     }
                 } while (opOrganizarPessoa != 0);
                 break;
@@ -215,72 +224,14 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
     } while (opPessoa != 0);
 }
 
-
-
-                /*
-                case 3: {
-                    opPessoa = 0;
-                    printf("\nComo deseja organizar a lista: \n");
-                    printf("1- Primeiro Nome\n");
-                    printf("2- Ultimo Nome\n");
-                    printf("3- ID Freguesia\n");
-                    printf("0- Voltar\n");
-                    opPessoa = LerInteiro("Qual a opcao? ");
-                    do{
-                        switch (opPessoa) {
-                            case 1: {
-                                OrganizarPorNome(listaChavesPessoa,opPessoa);
-                                break;
-                            }
-                            case 2:{
-                                OrganizarPorNome(listaChavesPessoa,opPessoa);
-                                break;
-                            }
-                            case 3:{
-                                //organizar por id freguesia
-                                break;
-                            }
-                            case 0: {
-                                printf("Voltando para o menu Pessoas...\n");
-                                break;
-                            }
-                            default: {
-                                printf("Opcao nao implementada\n");
-                                break;
-                            }
-                        }
-                    }while(opPessoa != 0);
-                    break;
-                }
-                case 0:
-                    printf("Voltando para o menu geral...\n");
-                    break;
-                default:
-                    printf("Opcao nao implementada\n");
-                    break;
-            }
-        } while (opPessoa != 0);
-    }
-    */
-
-
 //Menu Requisiçoes
 void menuRequisicoes(ListaRequisicoes *listaRequisicoes){
     int opRequisicao;
     do {
         printf("\n--- Menu Requisicoes ---\n");
         printf("1- Fazer Requisicao\n");
-        printf("2- Livros Mais Requisitados\n");
+        printf("2- Devolver Livro\n");
         printf("3- Devolucao de Livro Requisitado\n");
-        printf("4- Area Mais Requisitada\n");
-        printf("5- Verificar Requisitante\n");
-        printf("6- Idade Maxima dos Requisitantes\n");
-        printf("7- Media de Idades dos Requisitantes\n");
-        printf("8- Idade com mais Requisitantes\n");
-        printf("9- Lista Pessoas Nao Requisitantes\n");
-        printf("10- Listar Requisitantes com Livro Requisitado\n");
-        printf("11- Sobrenome mais Comum Requisitantes\n");
-        printf("12- Pesquisar Apelido/Nome por Distrito/Concelho\n");
         printf("0- Sair\n");
         opRequisicao = LerInteiro("Qual a opcao? ");
 
@@ -291,24 +242,6 @@ void menuRequisicoes(ListaRequisicoes *listaRequisicoes){
                 break;
             case 3:
                 break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
             case 0:
                 break;
             default:
@@ -318,14 +251,13 @@ void menuRequisicoes(ListaRequisicoes *listaRequisicoes){
 }
 
 // Menu geral
-void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPessoas) {
+void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPessoas, ListaRequisicoes *ListaRequisicoes) {
     int opGeral;
     do {
         printf("\n--- Menu Geral ---\n");
         printf("1- Operacoes de Livro\n");
         printf("2- Operacoes de Pessoas\n");
         printf("3- Operacoes de Requisicoes\n");
-        printf("4- testar funcoes");
         printf("0- Sair\n");
         opGeral = LerInteiro("Qual a opcao? ");
 
@@ -341,10 +273,7 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
                 break;
             }
             case 3:
-                //Menu de Operaçoes de Requisições
-                break;
-            case 4:
-
+                menuRequisicoes(ListaRequisicoes);
                 break;
             case 0:
                 printf("Saindo...\n");
@@ -362,6 +291,7 @@ int main() {
     // Criar listas para livros e pessoas
     Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
+    ListaRequisicoes *listaRequisicoes = criarListaR();
 
     Lista_F *ListaF= LerTXT();
     Lista_C *ListaC= LerTXTConc();
@@ -371,7 +301,7 @@ int main() {
 
 
     // Executar o menu geral
-    menuGeral(listaChavesLivro, listaChavesPessoa);
+    menuGeral(listaChavesLivro, listaChavesPessoa, listaRequisicoes);
 
     //Fregs
 
