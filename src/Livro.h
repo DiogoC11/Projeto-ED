@@ -48,7 +48,7 @@ int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C);
 int ListarLivros(Lista_Chaves_L *C);
 LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn);
 LIVRO *LivroMaisRecente(Lista_Chaves_L * L);
-void AreaMaisLivros(Lista_Chaves_L *C);
+NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C);
 
 //funcoes hashing-----------------------------------------------------------------------
 Lista_Chaves_L *CriarListaChaves();

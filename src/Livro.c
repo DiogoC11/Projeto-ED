@@ -207,10 +207,10 @@ LIVRO *LivroMaisRecente(Lista_Chaves_L *L) {
 }
 
 
-void AreaMaisLivros(Lista_Chaves_L *C) {
+NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C) {
     if (!C || C->num_chaves == 0) {
         printf("\nErro: Lista de Chaves vazia ou não inicializada.\n");
-        return;
+        return NULL;
     }
     NO_CHAVE_L *Area = C->Inicio;
     NO_CHAVE_L *Inicio = C->Inicio;
@@ -220,7 +220,7 @@ void AreaMaisLivros(Lista_Chaves_L *C) {
         }
         Inicio = Inicio->Prox;
     }
-    printf("A area com mais livros na biblioteca é: %s\n", Area->categoria);
+    return Area;
 }
 
 Lista_Chaves_L *CriarListaChaves(){
