@@ -127,7 +127,6 @@ int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com ma
 int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite); //numero de pessoas cuja a idade superior a x
 
 
-
 //
 // TESTAR DEPOIS ESTAS FUNCOES depois de fazer as requisiçoes
 //

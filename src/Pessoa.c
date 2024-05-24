@@ -595,7 +595,6 @@ int verificarIDArquivo(char *idRequisitante) {
 }
 
 
-
 Lista_F* LerTXT() {
     FILE *arquivo;
     char linha[100];

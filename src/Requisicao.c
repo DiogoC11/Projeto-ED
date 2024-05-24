@@ -45,7 +45,6 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
 
 
 
-
 // Funções 24/05 || test me
 // Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
 int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
