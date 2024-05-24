@@ -293,11 +293,10 @@ int main() {
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
     ListaRequisicoes *listaRequisicoes = criarListaR();
 
-    //Lista_F *ListaF= LerTXT();
-    //Lista_C *ListaC= LerTXTConc();
+    Lista_F *ListaF= LerTXT();
+    Lista_C *ListaC= LerTXTConc();
     Lista_D *listaDistritos = LerTXTDist();
-    //ListarConcelhosPorDistrito(listaDistritos,ListaC, 2);
-    //Lista_D *listaDistritos = LerTXTDist();
+    ListarConcelhosPorDistrito(listaDistritos,ListaC, 2);
     ListarDistritosPorID(listaDistritos, 4);
 
 
