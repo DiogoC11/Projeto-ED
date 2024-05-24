@@ -26,7 +26,7 @@ LIVRO *CriarLivro(char *ISBN, char *_nome, char *_area, int _anoPublicacao, char
     P->Autor = (char *) malloc(strlen(_autor + 1)*sizeof(char));
     strcpy(P->Autor,_autor);
     P->Disponivel = 0;
-    P->quant_requisicao = 0;
+    P->quant_requisicaoL = 0;
     return P;
 }
 
@@ -104,7 +104,7 @@ void MostrarLivro(LIVRO *P)
     }else{
         strcpy(disponivel,"SIM");
     }
-    printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Quantidade de vezes requisitado: %d", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel,P->quant_requisicao);
+    printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Quantidade de vezes requisitado: %d", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel,P->quant_requisicaoL);
 }
 void DestruirLivro(LIVRO *P)
 {

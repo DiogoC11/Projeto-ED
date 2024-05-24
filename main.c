@@ -308,7 +308,9 @@ int main() {
     Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
 
-    Lista_F *ListaF= LerTXT();
+    //Lista_F *ListaF= LerTXT();
+    //Lista_C *ListaC= LerTXTConc();
+    Lista_D *ListaD= LerTXTDist();
 
 
     // Executar o menu geral
@@ -320,7 +322,7 @@ int main() {
 
     // Liberar memória alocada para as listas de livros e pessoas
     LiberarListaChaves_L(listaChavesLivro);
-    LiberarListaChaves_P(listaChavesPessoa);
+    //LibertarListaChaves_P(listaChavesPessoa);
 
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }

@@ -267,7 +267,7 @@ Lista_F* LerTXT() {
         if (sscanf(linha, "%2d%2d%2s %[^\n]", &id_dist, &id_conc, ID, nome) != 4) {
             printf("Erro ao ler os dados da linha.\n");
             fclose(arquivo);
-            LiberarFreguesias(lista); // Supondo que isso libera a memória da lista
+            LibertarFreguesias(lista); // Supondo que isso libera a memória da lista
             return NULL;
         }
 
@@ -278,7 +278,7 @@ Lista_F* LerTXT() {
         if (nova_freg == NULL) {
             printf("Erro ao alocar memória para nova_freg.\n");
             fclose(arquivo);
-            LiberarFreguesias(lista); // Supondo que isso libera a memória da lista
+            LibertarFreguesias(lista); // Supondo que isso libera a memória da lista
             return NULL;
         }
 
@@ -293,7 +293,7 @@ Lista_F* LerTXT() {
         if (novo_elemento == NULL) {
             printf("Erro ao alocar memória para novo_elemento.\n");
             fclose(arquivo);
-            LiberarFreguesias(lista); // Supondo que isso libera a memória da lista
+            LibertarFreguesias(lista); // Supondo que isso libera a memória da lista
             free(nova_freg);
             return NULL;
         }
@@ -312,7 +312,7 @@ Lista_F* LerTXT() {
 
 
 // Função para liberar a memória da lista de freguesias
-void LiberarFreguesias(Lista_F *lista) {
+void LibertarFreguesias(Lista_F *lista) {
     ElementoF *atual = lista->Inicio;
     while (atual != NULL) {
         ElementoF *temp = atual;
@@ -324,71 +324,195 @@ void LiberarFreguesias(Lista_F *lista) {
     lista->num_Freguesias = 0;
 }
 
-Conselho* LerTXTConc() {
+
+
+// Função para ler os concelhos a partir de um arquivo
+Lista_C* LerTXTConc() {
     FILE *arquivo;
     char linha[100];
-    Conselho *concelhos = NULL;
-
-    arquivo = fopen("./Base de Dados/concelhos.txt", "r");
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+    Lista_C *lista = (Lista_C *)malloc(sizeof(Lista_C));
+    if (lista == NULL) {
+        printf("Erro ao alocar memória para a lista de concelhos.\n");
         return NULL;
     }
+    lista->num_Concelhos = 0;
+    lista->Inicio = NULL;
+
+    arquivo = fopen("../data/recursos/conselhos.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        free(lista);
+        return NULL;
+    }
+
+    printf("Arquivo aberto com sucesso.\n");
 
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         // Extrair os IDs DIST e CONC da linha (uso de ASCII)
         int id_dist = (linha[0] - '0') * 10 + (linha[1] - '0');
         int id_conc = (linha[2] - '0') * 10 + (linha[3] - '0');
 
-        // Encontrar o início do nome do concelho (após os 6 primeiros caracteres)
-        int inicio_nome = 5;
-
-        // Copiar o nome do concelho para uma nova string
+        // Encontrar o início do nome do concelho (após os 5 primeiros caracteres)
         char nome[50];
-        strncpy(nome, linha + inicio_nome, sizeof(nome) - 1); // Copia o nome
+        strncpy(nome, linha + 5, sizeof(nome) - 1); // Copia o nome
         nome[sizeof(nome) - 1] = '\0'; // Adiciona o caractere nulo ao final
 
-        // Alocar memória para o novo concelho
-        Conselho *novo_conc = malloc(sizeof(Conselho));
+        // Remover o caractere de nova linha, se houver
+        nome[strcspn(nome, "\n")] = 0;
+
+        // Criar um novo concelho e alocar memória
+        Concelho *novo_conc = (Concelho *)malloc(sizeof(Concelho));
         if (novo_conc == NULL) {
             printf("Erro ao alocar memória para novo_conc.\n");
             fclose(arquivo);
-            LiberarConcelhos(concelhos); // Supondo que isso libera a memória da lista de concelhos
+            LibertarConcelhos(lista);
             return NULL;
         }
 
-        // Alocar memória para a estrutura CONCELHO dentro de novo_conc
-        novo_conc->freguesias = NULL; // Inicializa a lista de freguesias como NULL
+        // Preencher os campos do concelho
         novo_conc->ID_DIST = id_dist;
         novo_conc->ID_CONC = id_conc;
-        strncpy(novo_conc->nome, nome, sizeof(novo_conc->nome));
+        strncpy(novo_conc->nome, nome, sizeof(novo_conc->nome) - 1);
+        novo_conc->nome[sizeof(novo_conc->nome) - 1] = '\0';
+        novo_conc->freguesias = NULL; // Inicialmente sem freguesias
 
-        // Adicionar novo_conc à lista de concelhos
-        ElementoC *novo_elemento = malloc(sizeof(ElementoC));
+        // Criar um novo elemento para a lista de concelhos e alocar memória
+        ElementoC *novo_elemento = (ElementoC *)malloc(sizeof(ElementoC));
         if (novo_elemento == NULL) {
             printf("Erro ao alocar memória para novo_elemento.\n");
             fclose(arquivo);
-            LiberarConcelhos(concelhos); // Supondo que isso libera a memória da lista de concelhos
+            LibertarConcelhos(lista);
             free(novo_conc);
             return NULL;
         }
-        novo_elemento->conselho = novo_conc;
-        novo_elemento->prox = concelhos;
-        concelhos = novo_elemento;
+
+        // Preencher o elemento com o novo concelho
+        novo_elemento->concelho = novo_conc;
+        novo_elemento->prox = lista->Inicio;
+        lista->Inicio = novo_elemento;
+        lista->num_Concelhos++;
+
+        printf("Novo concelho adicionado: ID_DIST=%d, ID_CONC=%d, Nome=%s\n", id_dist, id_conc, nome);
+    }
+
+    fclose(arquivo);
+    return lista;
+}
+void LibertarConcelhos(Lista_C *lista) {
+    ElementoC *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoC *temp = atual;
+        atual = atual->prox;
+        free(temp->concelho);
+        free(temp);
+    }
+    free(lista);
+}
+
+
+void LibertarDistritos(Lista_D *lista) {
+    ElementoD *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoD *temp = atual;
+        atual = atual->Prox;
+        free(temp->Info->nome); // Libera o nome do distrito
+        free(temp->Info->Conc); // Libera a lista de concelhos associados ao distrito
+        free(temp->Info); // Libera a estrutura do distrito
+        free(temp); // Libera o elemento da lista
+    }
+    free(lista); // Libera a lista de distritos
+}
+
+
+Lista_D* LerTXTDist() {
+    FILE *arquivo;
+    char linha[109];
+    Lista_D *distritos = malloc(sizeof(Lista_D)); // Aloca memória para a estrutura Lista_D
+    if (distritos == NULL) {
+        printf("Erro ao alocar memória para a lista de distritos.\n");
+        return NULL;
+    }
+
+    // Inicializa distritos
+    distritos->num_Distritos = 0;
+    distritos->Inicio = NULL;
+
+    arquivo = fopen("../data/recursos/distritios.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        free(distritos); // Libera a memória alocada para a lista de distritos
+        return NULL;
+    }
+
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Extrair o ID do distrito
+        int id_dist = (linha[0] - '0') * 10 + (linha[1] - '0');
+
+        // Encontrar o início do nome do distrito (após os 3 primeiros caracteres)
+        char *nome = strdup(linha + 3); // Copia o nome do distrito (aloca e copia)
+
+        // Remover o caractere de nova linha, se houver
+        nome[strcspn(nome, "\n")] = '\0';
+
+        // Verifica a alocação de memória para o nome
+        if (nome == NULL) {
+            printf("Erro ao alocar memória para o nome do distrito.\n");
+            fclose(arquivo);
+            free(distritos); // Libera a memória alocada para a lista de distritos
+            return NULL;
+        }
+
+        // Alocar memória para a nova estrutura Distrito
+        Distrito *novo_distrito = malloc(sizeof(Distrito));
+        if (novo_distrito == NULL) {
+            printf("Erro ao alocar memória para novo distrito.\n");
+            fclose(arquivo);
+            free(nome); // Libera a memória alocada para o nome do distrito
+            free(distritos); // Libera a memória alocada para a lista de distritos
+            return NULL;
+        }
+
+        // Inicializar a lista de concelhos associados ao distrito
+        Lista_C *lista_concelhos = malloc(sizeof(Lista_C));
+        if (lista_concelhos == NULL) {
+            printf("Erro ao alocar memória para lista de concelhos.\n");
+            fclose(arquivo);
+            free(nome); // Libera a memória alocada para o nome do distrito
+            free(novo_distrito); // Libera a memória alocada para a estrutura Distrito
+            free(distritos); // Libera a memória alocada para a lista de distritos
+            return NULL;
+        }
+        lista_concelhos->num_Concelhos = 0;
+        lista_concelhos->Inicio = NULL;
+        novo_distrito->Conc = lista_concelhos;
+
+        // Preencher os campos do distrito
+        novo_distrito->ID_DIST = id_dist;
+        novo_distrito->nome = nome;
+        novo_distrito->NEL = 0; // Inicialmente, nenhum concelho associado
+
+        // Criar um novo elemento para a lista de distritos e alocar memória
+        ElementoD *novo_elemento = malloc(sizeof(ElementoD));
+        if (novo_elemento == NULL) {
+            printf("Erro ao alocar memória para novo_elemento.\n");
+            fclose(arquivo);
+            free(nome); // Libera a memória alocada para o nome do distrito
+            free(novo_distrito); // Libera a memória alocada para a estrutura Distrito
+            free(lista_concelhos); // Libera a memória alocada para a lista de concelhos
+            free(distritos); // Libera a memória alocada para a lista de distritos
+            return NULL;
+        }
+
+        // Preencher o elemento com o novo distrito
+        novo_elemento->Info = novo_distrito;
+        novo_elemento->Prox = distritos->Inicio;
+        distritos->Inicio = novo_elemento;
+        distritos->num_Distritos++;
     }
 
     fclose(arquivo);
 
-    return concelhos;
-}
-
-void LiberarConcelhos(ElementoC *inicio) {
-    while (inicio != NULL) {
-        ElementoC *prox = inicio->prox;
-        free(inicio->conselho); // Libera o concelho
-        free(inicio); // Libera o elemento da lista
-        inicio = prox; // Avança para o próximo elemento
-    }
+    return distritos;
 }
 
 
@@ -447,18 +571,18 @@ int lerDistritos(const char* nome_arquivo, Distrito **distritos) {
     return num_distritos;
 }
 
-// Função para ler conselhos de um arquivo
-int lerConselhos(const char* nome_arquivo, Conselho **conselhos) {
+// Função para ler Concelhos de um arquivo
+int lerConcelhos(const char* nome_arquivo, Concelho **Concelhos) {
     FILE *file = fopen(nome_arquivo, "r");
     if (!file) return -1;
-    int num_conselhos;
-    fscanf(file, "%d", &num_conselhos);
-    *conselhos = (Conselho *)malloc(num_conselhos * sizeof(Conselho));
-    for (int i = 0; i < num_conselhos; i++) {
-        fscanf(file, "%s %s", (*conselhos)[i].codigo, (*conselhos)[i].nome);
+    int num_Concelhos;
+    fscanf(file, "%d", &num_Concelhos);
+    *Concelhos = (Concelho *)malloc(num_Concelhos * sizeof(Concelho));
+    for (int i = 0; i < num_Concelhos; i++) {
+        fscanf(file, "%s %s", (*Concelhos)[i].codigo, (*Concelhos)[i].nome);
     }
     fclose(file);
-    return num_conselhos;
+    return num_Concelhos;
 }*/
 
 void LiberarListaChaves_P(Lista_Chaves_P *lista) {
