@@ -17,8 +17,8 @@ typedef struct{
 typedef struct
 {
     int ID;
-    //ptPESSOA *Pessoa;
-    //LIVRO *Livro;
+    ptPESSOA *Pessoa;
+    LIVRO *Livro;
     DATA_Req *Data_Requisicao;
 }REQUISICAO;
 
@@ -37,11 +37,10 @@ ListaRequisicoes *criarListaR();
 ElementoR *criarElementoR(REQUISICAO *R);
 void MostrarRequisicao(REQUISICAO *P);
 void DestruirRequisicao(REQUISICAO *P);
-//int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY);
+int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY);
 void returnRequestedBook(Lista_Chaves_L *bookList, char *ISBN);
 void listRequestedBooks(Lista_Chaves_L *bookList);
-//REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C);
-
+REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C);
 
 //void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas sem requisições
 //void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas com requisiçao

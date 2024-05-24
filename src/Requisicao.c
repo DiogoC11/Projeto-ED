@@ -208,7 +208,7 @@ char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanh
 
 // Funções 24/05 || test me
 // Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
-/*int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
+int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
     int count = 0;
     NO_CHAVE_P *current = peopleList->Inicio;
     while (current != NULL) {
@@ -227,7 +227,7 @@ char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanh
     }
     return count;
 }
-*/
+
 // Função para devolver um livro solicitado
 void returnRequestedBook(Lista_Chaves_L *bookList, char *ISBN) {
     NO_CHAVE_L *current = bookList->Inicio;
@@ -280,7 +280,7 @@ NO_CHAVE_L *searchNO_CHAVE_L(Lista_Chaves_L *L, char *isbn) {
     return NULL;
 }
 
-/*REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
+REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
     REQUISICAO *R = (REQUISICAO *)malloc(sizeof(REQUISICAO));
     if(!R) return NULL;
     R->ID = _id;
@@ -292,4 +292,4 @@ NO_CHAVE_L *searchNO_CHAVE_L(Lista_Chaves_L *L, char *isbn) {
     R->Data_Requisicao = (DATA_Req *)malloc(sizeof(DATA_Req));
     if(!R->Data_Requisicao) return NULL;
     return R;
-}*/
+}
