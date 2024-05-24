@@ -310,7 +310,7 @@ int main() {
 
     //Lista_F *ListaF= LerTXT();
     //Lista_C *ListaC= LerTXTConc();
-    Lista_D *ListaD= LerTXTDist();
+    //Lista_D *listaDistritos = LerTXTDist();
 
 
     // Executar o menu geral

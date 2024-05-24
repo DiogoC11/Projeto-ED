@@ -305,8 +305,8 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
     REQUISICAO *R = (REQUISICAO *)malloc(sizeof(REQUISICAO));
     if(!R) return NULL;
     R->ID = _id;
-    R->Pessoa = (ptPESSOA *) P;
-    R->Livro = L;
+    //R->Pessoa = (ptPESSOA *) P;
+    //R->Livro = L;
     L->quant_requisicaoL += 1;
     NO_CHAVE_L *myBook = searchNO_CHAVE_L(C, L->ISBN);
     myBook->quant_requisicaoN += 1;

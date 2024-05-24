@@ -302,7 +302,7 @@ Lista_F* LerTXT() {
         novo_elemento->freguesia = nova_freg;
         novo_elemento->prox = lista->Inicio;
         lista->Inicio = novo_elemento;
-        printf("Novo elemento: ID: %s, Nome: %s\n", novo_elemento->freguesia->ID, novo_elemento->freguesia->nome);
+        printf("Novo elemento: ID: %s,ID_DIST :%d, ID_CONC: %d, Nome: %s\n", novo_elemento->freguesia->ID,novo_elemento->freguesia->ID_DIST,novo_elemento->freguesia->ID_CONC ,novo_elemento->freguesia->nome);
         lista->num_Freguesias++;
     }
 
@@ -423,10 +423,9 @@ void LibertarDistritos(Lista_D *lista) {
     free(lista); // Libera a lista de distritos
 }
 
-
 Lista_D* LerTXTDist() {
     FILE *arquivo;
-    char linha[109];
+    char linha[100]; // Aumentei o tamanho da linha para garantir que seja suficiente para ler cada linha
     Lista_D *distritos = malloc(sizeof(Lista_D)); // Aloca memória para a estrutura Lista_D
     if (distritos == NULL) {
         printf("Erro ao alocar memória para a lista de distritos.\n");
@@ -446,49 +445,43 @@ Lista_D* LerTXTDist() {
 
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         // Extrair o ID do distrito
-        int id_dist = (linha[0] - '0') * 10 + (linha[1] - '0');
+        int id_dist;
+        sscanf(linha, "%d", &id_dist);
 
-        // Encontrar o início do nome do distrito (após os 3 primeiros caracteres)
-        char *nome = strdup(linha + 3); // Copia o nome do distrito (aloca e copia)
-
-        // Remover o caractere de nova linha, se houver
-        nome[strcspn(nome, "\n")] = '\0';
-
-        // Verifica a alocação de memória para o nome
+        // Encontrar o início do nome do distrito (após o ID e a tabulação)
+        char *nome = strchr(linha, '\t');
         if (nome == NULL) {
-            printf("Erro ao alocar memória para o nome do distrito.\n");
+            printf("Erro ao ler o nome do distrito.\n");
             fclose(arquivo);
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
         }
+
+        // Avança para o próximo caractere após a tabulação
+        nome++;
+
+        // Remover o caractere de nova linha, se houver
+        nome[strcspn(nome, "\n")] = '\0';
 
         // Alocar memória para a nova estrutura Distrito
         Distrito *novo_distrito = malloc(sizeof(Distrito));
         if (novo_distrito == NULL) {
             printf("Erro ao alocar memória para novo distrito.\n");
             fclose(arquivo);
-            free(nome); // Libera a memória alocada para o nome do distrito
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
         }
 
-        // Inicializar a lista de concelhos associados ao distrito
-        Lista_C *lista_concelhos = malloc(sizeof(Lista_C));
-        if (lista_concelhos == NULL) {
-            printf("Erro ao alocar memória para lista de concelhos.\n");
+        // Preencher os campos do distrito
+        novo_distrito->ID_DIST = id_dist;
+        novo_distrito->nome = strdup(nome); // Copia o nome do distrito (aloca e copia)
+        if (novo_distrito->nome == NULL) {
+            printf("Erro ao alocar memória para o nome do distrito.\n");
             fclose(arquivo);
-            free(nome); // Libera a memória alocada para o nome do distrito
             free(novo_distrito); // Libera a memória alocada para a estrutura Distrito
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
         }
-        lista_concelhos->num_Concelhos = 0;
-        lista_concelhos->Inicio = NULL;
-        novo_distrito->Conc = lista_concelhos;
-
-        // Preencher os campos do distrito
-        novo_distrito->ID_DIST = id_dist;
-        novo_distrito->nome = nome;
         novo_distrito->NEL = 0; // Inicialmente, nenhum concelho associado
 
         // Criar um novo elemento para a lista de distritos e alocar memória
@@ -496,9 +489,7 @@ Lista_D* LerTXTDist() {
         if (novo_elemento == NULL) {
             printf("Erro ao alocar memória para novo_elemento.\n");
             fclose(arquivo);
-            free(nome); // Libera a memória alocada para o nome do distrito
             free(novo_distrito); // Libera a memória alocada para a estrutura Distrito
-            free(lista_concelhos); // Libera a memória alocada para a lista de concelhos
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
         }
@@ -508,12 +499,14 @@ Lista_D* LerTXTDist() {
         novo_elemento->Prox = distritos->Inicio;
         distritos->Inicio = novo_elemento;
         distritos->num_Distritos++;
+       // printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
     }
 
     fclose(arquivo);
 
     return distritos;
 }
+
 
 
 
