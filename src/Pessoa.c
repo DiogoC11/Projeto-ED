@@ -566,3 +566,35 @@ void LiberarListaChaves_P(Lista_Chaves_P *lista) {
     }
     free(lista); // Libera a estrutura de lista
 }
+
+
+
+
+void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho) {
+    ElementoC *atualConcelho = listaConcelhos->Inicio;
+    while (atualConcelho != NULL) {
+        if (atualConcelho->concelho->ID_CONC == idConcelho) {
+            // Encontrou o concelho correspondente ao ID especificado
+            printf("Freguesias do concelho %s:\n", atualConcelho->concelho->nome);
+
+            // Verifica se há freguesias associadas ao concelho
+            if (atualConcelho->concelho->freguesias != NULL && atualConcelho->concelho->freguesias->Inicio != NULL) {
+                ElementoF *atualFreguesia = atualConcelho->concelho->freguesias->Inicio;
+                while (atualFreguesia != NULL) {
+                    printf("- %s\n", atualFreguesia->freguesia->nome);
+                    atualFreguesia = atualFreguesia->prox;
+                }
+            } else {
+                printf("Nenhuma freguesia encontrada para este concelho.\n");
+            }
+            return; // Termina a função após listar as freguesias
+        }
+        atualConcelho = atualConcelho->prox;
+    }
+    // Se não encontrar o concelho correspondente ao ID especificado
+    printf("Concelho com ID %d não encontrado.\n", idConcelho);
+}
+
+
+
+

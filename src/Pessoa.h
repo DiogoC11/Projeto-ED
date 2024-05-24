@@ -134,13 +134,20 @@ Lista_C* LerTXTConc();
 void LibertarConcelhos(Lista_C *lista);
 Lista_D* LerTXTDist();
 void LibertarDistritos(Lista_D *lista);
+
+void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
+
+
+
+
+
+
 void LibertarListaChaves_P(Lista_Chaves_P *lista);
 
 
 
 
 void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
-int lerDistritos(const char* nome_arquivo, Distrito **distritos);
-int lerConcelhos(const char* nome_arquivo, Concelho **Concelhos);
+
 
 #endif // PESSOA_H_INCLUDED
