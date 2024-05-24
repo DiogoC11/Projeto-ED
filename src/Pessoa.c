@@ -438,7 +438,7 @@ Lista_C* LerTXTConc() {
         lista->Inicio = novo_elemento;
         lista->num_Concelhos++;
 
-        printf("Novo concelho adicionado: ID_DIST=%d, ID_CONC=%d, Nome=%s\n", id_dist, id_conc, nome);
+        //printf("Novo concelho adicionado: ID_DIST=%d, ID_CONC=%d, Nome=%s\n", id_dist, id_conc, nome);
     }
 
     fclose(arquivo);
@@ -545,7 +545,8 @@ Lista_D* LerTXTDist() {
         novo_elemento->Prox = distritos->Inicio;
         distritos->Inicio = novo_elemento;
         distritos->num_Distritos++;
-       // printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
+       //printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
+
     }
 
     fclose(arquivo);
@@ -553,76 +554,6 @@ Lista_D* LerTXTDist() {
     return distritos;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-// Função para ler freguesias de um arquivo
-/*int lerFreguesias(const char* nome_arquivo, Freguesia **freguesias) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return -1;
-    int num_freguesias;
-    fscanf(file, "%d", &num_freguesias);
-    *freguesias = (Freguesia *)malloc(num_freguesias * sizeof(Freguesia));
-    for (int i = 0; i < num_freguesias; i++) {
-        fscanf(file, "%s %s", (*freguesias)[i].codigo, (*freguesias)[i].nome);
-    }
-    fclose(file);
-    return num_freguesias;
-}
-
-// Função para ler pessoas de um arquivo
-
-void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return;
-    while (!feof(file)) {
-        char primeiroNome[30], ultimoNome[30];
-        int dia, mes, ano, ID;
-        fscanf(file, "%d %s %s %d %d %d", &ID, primeiroNome, ultimoNome, &dia, &mes, &ano);
-        PESSOA *pessoa = CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano);
-        pessoa->ID = ID;
-        ElementoP *elemento = criarElementoP(pessoa);
-        AdicionarPessoa(, elemento);
-    }
-    fclose(file);
-}
-
-
-// Função para ler distritos de um arquivo
-int lerDistritos(const char* nome_arquivo, Distrito **distritos) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return -1;
-    int num_distritos;
-    fscanf(file, "%d", &num_distritos);
-    *distritos = (Distrito *)malloc(num_distritos * sizeof(Distrito));
-    for (int i = 0; i < num_distritos; i++) {
-        fscanf(file, "%s %s", (*distritos)[i].codigo, (*distritos)[i].nome);
-    }
-    fclose(file);
-    return num_distritos;
-}
-
-// Função para ler Concelhos de um arquivo
-int lerConcelhos(const char* nome_arquivo, Concelho **Concelhos) {
-    FILE *file = fopen(nome_arquivo, "r");
-    if (!file) return -1;
-    int num_Concelhos;
-    fscanf(file, "%d", &num_Concelhos);
-    *Concelhos = (Concelho *)malloc(num_Concelhos * sizeof(Concelho));
-    for (int i = 0; i < num_Concelhos; i++) {
-        fscanf(file, "%s %s", (*Concelhos)[i].codigo, (*Concelhos)[i].nome);
-    }
-    fclose(file);
-    return num_Concelhos;
-}*/
 
 void LiberarListaChaves_P(Lista_Chaves_P *lista) {
     NO_CHAVE_P *atual = lista->Inicio;
