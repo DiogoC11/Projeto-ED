@@ -3,7 +3,7 @@
 #include "Biblioteca.h"
 #include <stdio.h>
 #include "Livro.h"
-
+/*
 void escreverLivroNoFicheiro(FILE *ficheiro, LIVRO *livro) {
     ficheiro = fopen("livros.txt", "a");
     if (ficheiro == NULL) {
@@ -68,3 +68,4 @@ PESSOA *PesquisarRequisitante(BIBLIOTECA *B, int cod)
     fclose(F_Logs);
     return NULL;
 }
+ */

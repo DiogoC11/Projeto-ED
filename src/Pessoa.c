@@ -1,3 +1,4 @@
+#include <time.h>
 #include "Pessoa.h"
 
 // Função para criar uma pessoa
@@ -143,16 +144,25 @@ int compararUltimoNome(const void *a, const void *b) {
     return strcmp(pessoaA->UltimoNome, pessoaB->UltimoNome);
 }
 
-// Função para organizar a lista de pessoas por nome
+// Função para comparar por id_freguesia
+int compararIdFreguesia(const void* a, const void* b) {
+    PESSOA* p1 = *(PESSOA**)a;
+    PESSOA* p2 = *(PESSOA**)b;
+    return strcmp(p1->freguesia->ID, p2->freguesia->ID);
+}
+
+// Função para organizar a lista de pessoas por nome / freguesia
 void *OrganizarPorNome(Lista_Chaves_P *L, int op) {
     if (!L) return NULL;
-    // Coletando todas as pessoas em uma array
+
+    // coletar todas as pessoas
     int totalPessoas = 0;
     NO_CHAVE_P *N = L->Inicio;
     while (N != NULL) {
         totalPessoas += N->DADOS->num_Pessoas;
         N = N->Prox;
     }
+
     PESSOA **pessoasArray = (PESSOA **)malloc(totalPessoas * sizeof(PESSOA *));
     int index = 0;
     N = L->Inicio;
@@ -164,13 +174,25 @@ void *OrganizarPorNome(Lista_Chaves_P *L, int op) {
         }
         N = N->Prox;
     }
-    // Ordenando a array
-    if (op == 0) {
-        qsort(pessoasArray, totalPessoas, sizeof(PESSOA *), compararPrimeiroNome);
-    } else {
-        qsort(pessoasArray, totalPessoas, sizeof(PESSOA *), compararUltimoNome);
+
+    // ordenar por opçao
+    switch (op) {
+        case 0:
+            qsort(pessoasArray, totalPessoas, sizeof(PESSOA *), compararPrimeiroNome);
+            break;
+        case 1:
+            qsort(pessoasArray, totalPessoas, sizeof(PESSOA *), compararUltimoNome);
+            break;
+        case 2:
+            qsort(pessoasArray, totalPessoas, sizeof(PESSOA *), compararIdFreguesia);
+            break;
+        default:
+            printf("Opcao de ordenacao invalida.\n");
+            free(pessoasArray);
+            return NULL;
     }
-    // Imprimindo as pessoas ordenadas
+
+    // mostrar as pessoas ordenadas
     printf("Pessoas ordenadas:\n");
     for (int i = 0; i < totalPessoas; i++) {
         MostrarPessoa(pessoasArray[i]);
@@ -178,6 +200,7 @@ void *OrganizarPorNome(Lista_Chaves_P *L, int op) {
     free(pessoasArray);
     return NULL;
 }
+
 
 // Função para listar pessoas
 void *ListarPessoas(Lista_Chaves_P *L) {
@@ -193,6 +216,29 @@ void *ListarPessoas(Lista_Chaves_P *L) {
     }
     return NULL;
 }
+
+
+//  Determinar a idade máxima de todos os requisitantes;
+int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas) {
+    time_t t = time(NULL); // retorna o tempo atual
+    struct tm today = *localtime(&t); // isto converte o tempo atual numa estrutura tm que representa a data e hora do local atual
+    int idadeMaxima = 0;
+
+    for (int i = 0; i < tamanhoListaPessoas; i++) {
+        DATANASC *dataNascimento = listaPessoas[i]->dataNascimento; // ver data de nasc da pessoa atual
+        int anos = today.tm_year + 1900 - dataNascimento->ano; // calcular idade
+
+        // ver se a pessoa ja fez anos nesse ano
+        if (today.tm_mon + 1 < dataNascimento->mes || (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+            anos--; // se o mes de nasc for depois do mes atual / o mesmo mes mas o dia de nasc depois entao ainda tem -1 ano
+        }
+        if (anos > idadeMaxima) {
+            idadeMaxima = anos;
+        }
+    }
+    return idadeMaxima;
+}
+
 
 // Função para mostrar dados de uma pessoa
 void MostrarPessoa(PESSOA *P) {

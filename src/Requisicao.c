@@ -1,8 +1,6 @@
 #include <stdbool.h>
 #include <time.h>
 #include "Requisicao.h"
-#include "Pessoa.h"
-
 
 ListaRequisicoes *criarListaR(){
     ListaRequisicoes *L = (ListaRequisicoes *)malloc(sizeof(ListaRequisicoes));
@@ -45,7 +43,7 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
 
 
 // Listar pessoas SEM requisição
-void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
+/*void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
     printf("Pessoas sem nenhuma requisicao:\n");
 
     for (int i = 0; i < tamanhoListaPessoas; i++) {
@@ -53,10 +51,10 @@ void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, 
             MostrarPessoa(listaPessoas[i]);
         }
     }
-}
+}*/
 
 //Listar pessoas COM requisições
-void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
+/*void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
     printf("Pessoas com alguma requisicao:\n");
 
     for (int i = 0; i < tamanhoListaPessoas; i++) {
@@ -65,27 +63,8 @@ void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, 
         }
     }
 }
+*/
 
-//  Determinar a idade máxima de todos os requisitantes;
-int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas) {
-    time_t t = time(NULL); // retorna o tempo atual
-    struct tm today = *localtime(&t); // isto converte o tempo atual numa estrutura tm que representa a data e hora do local atual
-    int idadeMaxima = 0;
-
-    for (int i = 0; i < tamanhoListaPessoas; i++) {
-        DATANASC *dataNascimento = listaPessoas[i]->dataNascimento; // ver data de nasc da pessoa atual
-        int anos = today.tm_year + 1900 - dataNascimento->ano; // calcular idade
-
-        // ver se a pessoa ja fez anos nesse ano
-        if (today.tm_mon + 1 < dataNascimento->mes || (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
-            anos--; // se o mes de nasc for depois do mes atual / o mesmo mes mas o dia de nasc depois entao ainda tem -1 ano
-        }
-        if (anos > idadeMaxima) {
-            idadeMaxima = anos;
-        }
-    }
-    return idadeMaxima;
-}
 
 
 //idade media de todos os requisitantes
@@ -227,28 +206,28 @@ char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanh
     return sobrenomeMaisUsado;
 }
 
- // Funções 24/05 || test me
- // Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
- int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
-     int count = 0;
-     NO_CHAVE_P *current = peopleList->Inicio;
-     while (current != NULL) {
-         ElementoP *personElement = current->DADOS->Inicio;
-         while (personElement != NULL) {
-             PESSOA *person = personElement->pessoa;
-             char districtID[10];
-             sprintf(districtID, "%d", person->freguesia->ID_DIST);
-             if (strcmp(districtID, districtX) == 0 &&
-                 (strcmp(person->PrimeiroNome, nameY) == 0 || strcmp(person->UltimoNome, nameY) == 0)) {
-                 count++;
-             }
-             personElement = personElement->proximo;
-         }
-         current = current->Prox;
-     }
-     return count;
- }
-
+// Funções 24/05 || test me
+// Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
+/*int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
+    int count = 0;
+    NO_CHAVE_P *current = peopleList->Inicio;
+    while (current != NULL) {
+        ElementoP *personElement = current->DADOS->Inicio;
+        while (personElement != NULL) {
+            PESSOA *person = personElement->pessoa;
+            char districtID[10];
+            sprintf(districtID, "%d", person->freguesia->ID_DIST);
+            if (strcmp(districtID, districtX) == 0 &&
+                (strcmp(person->PrimeiroNome, nameY) == 0 || strcmp(person->UltimoNome, nameY) == 0)) {
+                count++;
+            }
+            personElement = personElement->proximo;
+        }
+        current = current->Prox;
+    }
+    return count;
+}
+*/
 // Função para devolver um livro solicitado
 void returnRequestedBook(Lista_Chaves_L *bookList, char *ISBN) {
     NO_CHAVE_L *current = bookList->Inicio;
@@ -301,16 +280,16 @@ NO_CHAVE_L *searchNO_CHAVE_L(Lista_Chaves_L *L, char *isbn) {
     return NULL;
 }
 
-REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
+/*REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
     REQUISICAO *R = (REQUISICAO *)malloc(sizeof(REQUISICAO));
     if(!R) return NULL;
     R->ID = _id;
-    //R->Pessoa = (ptPESSOA *) P;
-    //R->Livro = L;
+    R->Pessoa = (ptPESSOA *) P;
+    R->Livro = L;
     L->quant_requisicaoL += 1;
     NO_CHAVE_L *myBook = searchNO_CHAVE_L(C, L->ISBN);
     myBook->quant_requisicaoN += 1;
     R->Data_Requisicao = (DATA_Req *)malloc(sizeof(DATA_Req));
     if(!R->Data_Requisicao) return NULL;
     return R;
-}
+}*/

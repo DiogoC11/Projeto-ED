@@ -140,6 +140,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
         printf("1- Adicionar Pessoa\n");
         printf("2- Pesquisar Pessoa por Nome\n");
         printf("3- Listar Pessoas\n");
+        printf("4 - Determinar idade máxima de todos os requisitantes\n");
         printf("0- Voltar\n");
         opPessoa = LerInteiro("Qual a opcao? ");
 
@@ -166,25 +167,26 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
                 break;
             }
             case 3: {
-                opPessoa = 0;
-                printf("\nComo deseja organizar a lista: \n");
-                printf("1- Primeiro Nome\n");
-                printf("2- Ultimo Nome\n");
-                printf("3- ID Freguesia\n");
-                printf("0- Voltar\n");
-                opPessoa = LerInteiro("Qual a opcao? ");
-                do{
-                    switch (opPessoa) {
+                int opOrganizarPessoa = 0;
+                do {
+                    printf("\nComo deseja organizar a lista: \n");
+                    printf("1- Primeiro Nome\n");
+                    printf("2- Ultimo Nome\n");
+                    printf("3- ID Freguesia\n");
+                    printf("0- Voltar\n");
+                    opOrganizarPessoa = LerInteiro("Qual a opcao? ");
+
+                    switch (opOrganizarPessoa) {
                         case 1: {
-                            OrganizarPorNome(listaChavesPessoa,opPessoa);
+                            OrganizarPorNome(listaChavesPessoa, 0); // Ordenar por primeiro nome
                             break;
                         }
-                        case 2:{
-                            OrganizarPorNome(listaChavesPessoa,opPessoa);
+                        case 2: {
+                            OrganizarPorNome(listaChavesPessoa, 1); // Ordenar por último nome
                             break;
                         }
-                        case 3:{
-                            //organizar por id freguesia
+                        case 3: {
+                            OrganizarPorNome(listaChavesPessoa, 2); // Ordenar por ID de freguesia
                             break;
                         }
                         case 0: {
@@ -196,18 +198,71 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
                             break;
                         }
                     }
-                }while(opPessoa != 0);
+                } while (opOrganizarPessoa != 0);
                 break;
             }
-            case 0:
+
+
+            case 0: {
                 printf("Voltando para o menu geral...\n");
                 break;
-            default:
+            }
+            default: {
                 printf("Opcao nao implementada\n");
                 break;
+            }
         }
     } while (opPessoa != 0);
 }
+
+
+
+                /*
+                case 3: {
+                    opPessoa = 0;
+                    printf("\nComo deseja organizar a lista: \n");
+                    printf("1- Primeiro Nome\n");
+                    printf("2- Ultimo Nome\n");
+                    printf("3- ID Freguesia\n");
+                    printf("0- Voltar\n");
+                    opPessoa = LerInteiro("Qual a opcao? ");
+                    do{
+                        switch (opPessoa) {
+                            case 1: {
+                                OrganizarPorNome(listaChavesPessoa,opPessoa);
+                                break;
+                            }
+                            case 2:{
+                                OrganizarPorNome(listaChavesPessoa,opPessoa);
+                                break;
+                            }
+                            case 3:{
+                                //organizar por id freguesia
+                                break;
+                            }
+                            case 0: {
+                                printf("Voltando para o menu Pessoas...\n");
+                                break;
+                            }
+                            default: {
+                                printf("Opcao nao implementada\n");
+                                break;
+                            }
+                        }
+                    }while(opPessoa != 0);
+                    break;
+                }
+                case 0:
+                    printf("Voltando para o menu geral...\n");
+                    break;
+                default:
+                    printf("Opcao nao implementada\n");
+                    break;
+            }
+        } while (opPessoa != 0);
+    }
+    */
+
 
 //Menu Requisiçoes
 void menuRequisicoes(ListaRequisicoes *listaRequisicoes){

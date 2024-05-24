@@ -110,6 +110,7 @@ void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) ;
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);
+int compararIdFreguesia(const void* a, const void* b);
 void *OrganizarPorNome(Lista_Chaves_P *L, int op);
 void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
@@ -119,6 +120,12 @@ int verificarIDArquivo(char *idRequisitante);
 //listar distritos pelo id distrito
 //listar concelhos de id do distrito
 //listar freguesias de id do concelho
+
+
+int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas);  //idade maxima de todos os requisitantes
+//float CalcularIdadeMedia(PESSOA** listaPessoas, int tamanhoListaPessoas); //idade media de todos os requisitantes
+//int IdadeComMaisRequisitantes(PESSOA** listaPessoas, int tamanhoListaPessoas); //idade com mais requisitantes
+//int NumeroPessoasIdadeSuperiorX(PESSOA** listaPessoas, int tamanhoListaPessoas, int x); //numero de pessoas cuja a idade superior a x
 
 
 Lista_F* LerTXT();
