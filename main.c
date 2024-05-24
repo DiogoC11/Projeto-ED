@@ -184,15 +184,15 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
 
                     switch (opOrganizarPessoa) {
                         case 1: {
-                            listaPessoas = OrganizarPorNome(listaChavesPessoa, 0); // Ordenar por primeiro nome
+//                            listaPessoas = OrganizarPorNome(listaChavesPessoa, 0); // Ordenar por primeiro nome
                             break;
                         }
                         case 2: {
-                             listaPessoas = OrganizarPorNome(listaChavesPessoa, 1); // Ordenar por último nome
+//                             listaPessoas = OrganizarPorNome(listaChavesPessoa, 1); // Ordenar por último nome
                             break;
                         }
                         case 3: {
-                            listaPessoas = OrganizarPorNome(listaChavesPessoa, 2); // Ordenar por ID de freguesia
+//                            listaPessoas = OrganizarPorNome(listaChavesPessoa, 2); // Ordenar por ID de freguesia
                             break;
                         }
                         case 0: {
@@ -293,9 +293,12 @@ int main() {
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
     ListaRequisicoes *listaRequisicoes = criarListaR();
 
-    Lista_F *ListaF= LerTXT();
-    Lista_C *ListaC= LerTXTConc();
+    //Lista_F *ListaF= LerTXT();
+    //Lista_C *ListaC= LerTXTConc();
+    Lista_D *listaDistritos = LerTXTDist();
+    //ListarConcelhosPorDistrito(listaDistritos,ListaC, 2);
     //Lista_D *listaDistritos = LerTXTDist();
+    ListarDistritosPorID(listaDistritos, 4);
 
 
 

@@ -456,18 +456,34 @@ void LibertarConcelhos(Lista_C *lista) {
 }
 
 
-void LibertarDistritos(Lista_D *lista) {
-    ElementoD *atual = lista->Inicio;
-    while (atual != NULL) {
-        ElementoD *temp = atual;
-        atual = atual->Prox;
-        free(temp->Info->nome); // Libera o nome do distrito
-        free(temp->Info->Conc); // Libera a lista de concelhos associados ao distrito
-        free(temp->Info); // Libera a estrutura do distrito
-        free(temp); // Libera o elemento da lista
+char* ObterNomeDistrito(Lista_D *listaDistritos, int idDistrito) {
+    ElementoD *atualDistrito = listaDistritos->Inicio;
+    while (atualDistrito != NULL) {
+        if (atualDistrito->Info->ID_DIST == idDistrito) {
+            // Encontrou o distrito correspondente ao ID especificado
+            return atualDistrito->Info->nome;
+        }
+        atualDistrito = atualDistrito->Prox;
     }
-    free(lista); // Libera a lista de distritos
+    // Se não encontrar o distrito correspondente ao ID especificado, retorna NULL
+    return NULL;
 }
+
+void ListarConcelhosPorDistrito(Lista_D *listadistritos,Lista_C *listaConcelhos, int idDistrito) {
+    ElementoC *atualConcelho = listaConcelhos->Inicio;
+    printf("ID do Distrito: %d\nNome: %s\n", idDistrito, ObterNomeDistrito(listadistritos,idDistrito) );
+    while (atualConcelho != NULL) {
+        if (atualConcelho->concelho->ID_DIST == idDistrito) {
+            // Encontrou o concelho correspondente ao ID do distrito especificado
+            printf("ID do Concelho: %d\nNome: %s\n",
+                   atualConcelho->concelho->ID_CONC, atualConcelho->concelho->nome);
+        }
+        atualConcelho = atualConcelho->prox;
+    }
+}
+
+
+
 
 Lista_D* LerTXTDist() {
     FILE *arquivo;
@@ -552,6 +568,36 @@ Lista_D* LerTXTDist() {
 
     return distritos;
 }
+
+void LibertarDistritos(Lista_D *lista) {
+    ElementoD *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoD *temp = atual;
+        atual = atual->Prox;
+        free(temp->Info->nome); // Libera o nome do distrito
+        free(temp->Info->Conc); // Libera a lista de concelhos associados ao distrito
+        free(temp->Info); // Libera a estrutura do distrito
+        free(temp); // Libera o elemento da lista
+    }
+    free(lista); // Libera a lista de distritos
+}
+
+void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito) {
+    ElementoD *atualDistrito = listaDistritos->Inicio;
+    while (atualDistrito != NULL) {
+        if (atualDistrito->Info->ID_DIST == idDistrito) {
+            // Encontrou o distrito correspondente ao ID especificado
+            printf("Distrito encontrado:\n");
+            printf("ID: %d\nNome: %s\n", atualDistrito->Info->ID_DIST, atualDistrito->Info->nome);
+            return; // Termina a função após encontrar o distrito
+        }
+        atualDistrito = atualDistrito->Prox;
+    }
+    // Se não encontrar o distrito correspondente ao ID especificado
+    printf("Distrito com ID %d não encontrado.\n", idDistrito);
+}
+
+
 
 
 void LiberarListaPessoas(ListaPessoa *lista) {
