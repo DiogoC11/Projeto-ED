@@ -42,11 +42,6 @@ void returnRequestedBook(Lista_Chaves_L *bookList, char *ISBN);
 void listRequestedBooks(Lista_Chaves_L *bookList);
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C);
 
-//void ListarPessoasSemRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas sem requisições
-//void ListarPessoasComRequisicao(PESSOA** listaPessoas, int tamanhoListaPessoas, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //lista de pessoas com requisiçao
-//char* SobrenomeMaisUsadoNasRequisicoes(REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes); //sobrenome mais usado nas requisiçoes
-//numero de pessoas do distrito x, com o nome/apelido y
-
 //devolver livro requisitado
 //listar livros requisitados
 #endif // REQUISICAO_H_INCLUDED

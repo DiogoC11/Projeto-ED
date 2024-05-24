@@ -218,28 +218,6 @@ void *ListarPessoas(Lista_Chaves_P *L) {
 }
 
 
-//  Determinar a idade máxima de todos os requisitantes;
-int CalcularIdadeMaxima(PESSOA** listaPessoas, int tamanhoListaPessoas) {
-    time_t t = time(NULL); // retorna o tempo atual
-    struct tm today = *localtime(&t); // isto converte o tempo atual numa estrutura tm que representa a data e hora do local atual
-    int idadeMaxima = 0;
-
-    for (int i = 0; i < tamanhoListaPessoas; i++) {
-        DATANASC *dataNascimento = listaPessoas[i]->dataNascimento; // ver data de nasc da pessoa atual
-        int anos = today.tm_year + 1900 - dataNascimento->ano; // calcular idade
-
-        // ver se a pessoa ja fez anos nesse ano
-        if (today.tm_mon + 1 < dataNascimento->mes || (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
-            anos--; // se o mes de nasc for depois do mes atual / o mesmo mes mas o dia de nasc depois entao ainda tem -1 ano
-        }
-        if (anos > idadeMaxima) {
-            idadeMaxima = anos;
-        }
-    }
-    return idadeMaxima;
-}
-
-
 // Função para mostrar dados de uma pessoa
 void MostrarPessoa(PESSOA *P) {
     if (!P) return;
@@ -251,6 +229,337 @@ void MostrarPessoa(PESSOA *P) {
     }
     printf("Número de Requisições: %d\n", P->numero_requisicoes);
 }
+
+
+//  Determinar a idade máxima de todos os requisitantes;
+int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa) {
+    if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
+        return 0; // Lista vazia
+    }
+
+    time_t t = time(NULL);
+    struct tm today;
+    localtime_s(&today, &t);
+
+    int idadeMaxima = 0;
+
+    NO_CHAVE_P *noChaveAtual = listaChavesPessoa->Inicio;
+    while (noChaveAtual != NULL) {
+        ListaPessoa *listaPessoaAtual = noChaveAtual->DADOS;
+        if (listaPessoaAtual == NULL || listaPessoaAtual->Inicio == NULL) {
+            noChaveAtual = noChaveAtual->Prox;
+            continue; // Lista de pessoas está vazia, passa para a próxima chave
+        }
+
+        ElementoP *atual = listaPessoaAtual->Inicio;
+        while (atual != NULL) {
+            if (atual->pessoa == NULL || atual->pessoa->dataNascimento == NULL) {
+                printf("Erro: Pessoa ou data de nascimento é NULL.\n");
+                atual = atual->proximo;
+                continue;
+            }
+
+            PESSOA *pessoaAtual = atual->pessoa;
+            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            int anos = today.tm_year + 1900 - dataNascimento->ano;
+
+            if (today.tm_mon + 1 < dataNascimento->mes ||
+                (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+                anos--;
+            }
+
+            if (anos > idadeMaxima) {
+                idadeMaxima = anos;
+            }
+
+            atual = atual->proximo;
+        }
+
+        noChaveAtual = noChaveAtual->Prox;
+    }
+
+    return idadeMaxima;
+}
+
+//Idade Média
+float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa) {
+    if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
+        return 0.0; // Lista vazia
+    }
+
+    time_t t = time(NULL);
+    struct tm today;
+    localtime_s(&today, &t);
+
+    float totalIdade = 0.0;
+    int countPessoas = 0;
+
+    NO_CHAVE_P *noChaveAtual = listaChavesPessoa->Inicio;
+    while (noChaveAtual != NULL) {
+        ListaPessoa *listaPessoaAtual = noChaveAtual->DADOS;
+        if (listaPessoaAtual == NULL || listaPessoaAtual->Inicio == NULL) {
+            noChaveAtual = noChaveAtual->Prox;
+            continue; // Lista de pessoas está vazia, passa para a próxima chave
+        }
+
+        ElementoP *atual = listaPessoaAtual->Inicio;
+        while (atual != NULL) {
+            if (atual->pessoa == NULL || atual->pessoa->dataNascimento == NULL) {
+                printf("Erro: Pessoa ou data de nascimento é NULL.\n");
+                atual = atual->proximo;
+                continue;
+            }
+
+            PESSOA *pessoaAtual = atual->pessoa;
+            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            int anos = today.tm_year + 1900 - dataNascimento->ano;
+
+            if (today.tm_mon + 1 < dataNascimento->mes ||
+                (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+                anos--;
+            }
+
+            totalIdade += anos;
+            countPessoas++;
+
+            atual = atual->proximo;
+        }
+
+        noChaveAtual = noChaveAtual->Prox;
+    }
+
+    if (countPessoas == 0) {
+        return 0.0; // evitar divisão por zero
+    }
+
+    return totalIdade / countPessoas;
+}
+
+// idade com mais requisitantes
+int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa) {
+    if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
+        return -1; // Lista vazia
+    }
+
+    // supostamente nng tem mais do que 120 anos
+    int maxIdade = 120;
+    int contadorIdades[121] = {0}; // Array para contar quantiade de pessoas por idade
+
+    time_t t = time(NULL);
+    struct tm today;
+    localtime_s(&today, &t);
+
+    NO_CHAVE_P *noChaveAtual = listaChavesPessoa->Inicio;
+    while (noChaveAtual != NULL) {
+        ListaPessoa *listaPessoaAtual = noChaveAtual->DADOS;
+        if (listaPessoaAtual == NULL || listaPessoaAtual->Inicio == NULL) {
+            noChaveAtual = noChaveAtual->Prox;
+            continue; // Lista de pessoas está vazia, passa para a próxima chave
+        }
+
+        ElementoP *atual = listaPessoaAtual->Inicio;
+        while (atual != NULL) {
+            if (atual->pessoa == NULL || atual->pessoa->dataNascimento == NULL) {
+                printf("Erro: Pessoa ou data de nascimento é NULL.\n");
+                atual = atual->proximo;
+                continue;
+            }
+
+            PESSOA *pessoaAtual = atual->pessoa;
+            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            int anos = today.tm_year + 1900 - dataNascimento->ano;
+
+            if (today.tm_mon + 1 < dataNascimento->mes ||
+                (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+                anos--;
+            }
+
+            if (anos >= 0 && anos <= maxIdade) {
+                contadorIdades[anos]++;
+            }
+
+            atual = atual->proximo;
+        }
+
+        noChaveAtual = noChaveAtual->Prox;
+    }
+
+    int idadeMaisRequisitada = -1;
+    int maxRequisicoes = 0;
+    for (int i = 0; i <= maxIdade; i++) {
+        if (contadorIdades[i] > maxRequisicoes) {
+            maxRequisicoes = contadorIdades[i];
+            idadeMaisRequisitada = i;
+        }
+    }
+
+    return idadeMaisRequisitada;
+}
+
+// contar pessoas com idade maior que x
+int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite) {
+    if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
+        return 0; // Lista vazia
+    }
+
+    int contador = 0;
+
+    time_t t = time(NULL);
+    struct tm today;
+    localtime_s(&today, &t);
+
+    NO_CHAVE_P *noChaveAtual = listaChavesPessoa->Inicio;
+    while (noChaveAtual != NULL) {
+        ListaPessoa *listaPessoaAtual = noChaveAtual->DADOS;
+        if (listaPessoaAtual == NULL || listaPessoaAtual->Inicio == NULL) {
+            noChaveAtual = noChaveAtual->Prox;
+            continue; // Lista de pessoas está vazia, passa para a próxima chave
+        }
+
+        ElementoP *atual = listaPessoaAtual->Inicio;
+        while (atual != NULL) {
+            if (atual->pessoa == NULL || atual->pessoa->dataNascimento == NULL) {
+                printf("Erro: Pessoa ou data de nascimento é NULL.\n");
+                atual = atual->proximo;
+                continue;
+            }
+
+            PESSOA *pessoaAtual = atual->pessoa;
+            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            int anos = today.tm_year + 1900 - dataNascimento->ano;
+
+            if (today.tm_mon + 1 < dataNascimento->mes ||
+                (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
+                anos--;
+            }
+
+            if (anos > idadeLimite) {
+                contador++;
+            }
+
+            atual = atual->proximo;
+        }
+
+        noChaveAtual = noChaveAtual->Prox;
+    }
+
+    return contador;
+}
+
+
+// listar pessoas sem requisiçoes
+void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa) {
+    NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
+    int encontrou = 0;
+
+    while (chaveAtual != NULL) {
+        ElementoP *pessoaAtual = chaveAtual->DADOS->Inicio;
+
+        while (pessoaAtual != NULL) {
+            if (pessoaAtual->pessoa->numero_requisicoes == 0) {
+                encontrou = 1;
+                printf("Nome: %s %s\n", pessoaAtual->pessoa->PrimeiroNome, pessoaAtual->pessoa->UltimoNome);
+                printf("ID: %d\n", pessoaAtual->pessoa->ID);
+                printf("Data de Nascimento: %02d/%02d/%04d\n", pessoaAtual->pessoa->dataNascimento->dia,
+                       pessoaAtual->pessoa->dataNascimento->mes,
+                       pessoaAtual->pessoa->dataNascimento->ano);
+                printf("\n");
+            }
+            pessoaAtual = pessoaAtual->proximo;
+        }
+        chaveAtual = chaveAtual->Prox;
+    }
+
+    if (!encontrou) {
+        printf("Nenhuma pessoa sem requisições encontrada.\n");
+    }
+}
+
+
+// Listar pessoa com requisição
+void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa) {
+    NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
+    int encontrou = 0;
+
+    while (chaveAtual != NULL) {
+        ElementoP *pessoaAtual = chaveAtual->DADOS->Inicio;
+
+        while (pessoaAtual != NULL) {
+            if (pessoaAtual->pessoa->numero_requisicoes > 0) {
+                encontrou = 1;
+                printf("Nome: %s %s\n", pessoaAtual->pessoa->PrimeiroNome, pessoaAtual->pessoa->UltimoNome);
+                printf("ID: %d\n", pessoaAtual->pessoa->ID);
+                printf("Data de Nascimento: %02d/%02d/%04d\n", pessoaAtual->pessoa->dataNascimento->dia,
+                       pessoaAtual->pessoa->dataNascimento->mes,
+                       pessoaAtual->pessoa->dataNascimento->ano);
+                printf("Número de Requisições: %d\n", pessoaAtual->pessoa->numero_requisicoes);
+                printf("\n");
+            }
+            pessoaAtual = pessoaAtual->proximo;
+        }
+        chaveAtual = chaveAtual->Prox;
+    }
+
+    if (!encontrou) {
+        printf("Nenhuma pessoa com requisições encontrada.\n");
+    }
+}
+
+// Sobrenome mais usado nas pessoas com requisiçoes
+char* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
+    // Inicializar array para armazenar os sobrenomes e contadores
+#define MAX_SOBRENOMES 100
+    char sobrenomes[MAX_SOBRENOMES][50];
+    int contadores[MAX_SOBRENOMES] = {0};
+    int indice = 0;
+
+    // Percorrer todas as pessoas com requisições
+    NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
+    while (chaveAtual != NULL) {
+        ElementoP *pessoaAtual = chaveAtual->DADOS->Inicio;
+        while (pessoaAtual != NULL) {
+            if (pessoaAtual->pessoa->numero_requisicoes > 0) {
+                // ver o sobrenome da pessoa
+                char* ultimoNome = pessoaAtual->pessoa->UltimoNome;
+
+                // ver se o sobrenome já está na lista de sobrenomes
+                int i;
+                int encontrado = 0;
+                for (i = 0; i < indice; i++) {
+                    if (strcmp(sobrenomes[i], ultimoNome) == 0) {
+                        encontrado = 1;
+                        break;
+                    }
+                }
+
+                // Se o sobrenome não estiver na lista, adicioná-lo
+                if (!encontrado) {
+                    strcpy(sobrenomes[indice], ultimoNome);
+                    indice++;
+                }
+
+                // Incrementar o contador para esse sobrenome
+                contadores[i]++;
+            }
+            pessoaAtual = pessoaAtual->proximo;
+        }
+        chaveAtual = chaveAtual->Prox;
+    }
+
+    // Encontrar o sobrenome com o maior contador
+    int maiorContador = 0;
+    char* sobrenomeMaisComum = NULL;
+    for (int i = 0; i < indice; i++) {
+        if (contadores[i] > maiorContador) {
+            maiorContador = contadores[i];
+            sobrenomeMaisComum = sobrenomes[i];
+        }
+    }
+
+    // Retornar o sobrenome mais comum
+    return sobrenomeMaisComum;
+}
+
 
 // Função para buscar pessoa por ID
 PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id) {
@@ -284,7 +593,6 @@ int verificarIDArquivo(char *idRequisitante) {
     fclose(arquivo);
     return 0;
 }
-
 
 
 Lista_F* LerTXT() {
