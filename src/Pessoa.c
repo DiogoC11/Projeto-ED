@@ -1021,6 +1021,13 @@ ElementoC* cria_elemento_concelho(Concelho *concelho) {
     return novo_elem;
 }
 
+ElementoF* cria_elemento_freguesia(Freguesia *freguesia) {
+    ElementoF *novo_elem = (ElementoF *)malloc(sizeof(ElementoF));
+    novo_elem->freguesia = freguesia;
+    novo_elem->prox = NULL;
+    return novo_elem;
+}
+
 void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito) {
     ElementoD *atualDistrito = listaDistrito->Inicio;
     Distrito *distrito = NULL;
@@ -1046,4 +1053,76 @@ void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito) {
     }
 }
 
+void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_freguesias) {
+    if (lista_concelhos == NULL || lista_freguesias == NULL) {
+        return;
+    }
+
+    ElementoC *current_concelho_elem = lista_concelhos->Inicio;
+
+    // Percorrer todos os concelhos
+    while (current_concelho_elem != NULL) {
+        Concelho *current_concelho = current_concelho_elem->concelho;
+
+        // Inicializar a lista de freguesias do concelho, se ainda não estiver inicializada
+        if (current_concelho->freguesias == NULL) {
+            current_concelho->freguesias = (Lista_F *)malloc(sizeof(Lista_F));
+            current_concelho->freguesias->num_Freguesias = 0;
+            current_concelho->freguesias->Inicio = NULL;
+        }
+
+        ElementoF *current_freguesia_elem = lista_freguesias->Inicio;
+
+        // Percorrer todas as freguesias
+        while (current_freguesia_elem != NULL) {
+            Freguesia *current_freguesia = current_freguesia_elem->freguesia;
+
+            // Comparar IDs
+            if (current_freguesia->ID_CONC == current_concelho->ID_CONC && current_freguesia->ID_DIST == current_concelho->ID_DIST) {
+                // Criar um novo elemento para a lista de freguesias do concelho
+                ElementoF *novo_elem_freguesia = (ElementoF *)malloc(sizeof(ElementoF));
+                novo_elem_freguesia->freguesia = current_freguesia;
+                novo_elem_freguesia->prox = current_concelho->freguesias->Inicio;
+
+                // Adicionar o novo elemento no início da lista de freguesias do concelho
+                current_concelho->freguesias->Inicio = novo_elem_freguesia;
+                current_concelho->freguesias->num_Freguesias++;
+            }
+
+            // Avançar para a próxima freguesia na lista
+            current_freguesia_elem = current_freguesia_elem->prox;
+        }
+
+        // Avançar para o próximo concelho na lista
+        current_concelho_elem = current_concelho_elem->prox;
+    }
+}
+
+void mostra_freguesias_do_concelho(int id_concelho, Lista_C *listaConcelhos) {
+    ElementoC *atualConcelho = listaConcelhos->Inicio;
+    Concelho *concelho = NULL;
+
+    // Procurar o concelho com o ID correspondente
+    while (atualConcelho != NULL) {
+        if (id_concelho == atualConcelho->concelho->ID_CONC) {
+            concelho = atualConcelho->concelho;
+            break;
+        }
+        atualConcelho = atualConcelho->prox;
+    }
+
+    if (concelho == NULL || concelho->freguesias == NULL) {
+        printf("Concelho ou lista de freguesias não está inicializada.\n");
+        return;
+    }
+
+    printf("Freguesias do Concelho %s:\n", concelho->nome);
+    ElementoF *current_freguesia_elem = concelho->freguesias->Inicio;
+
+    // Percorrer todas as freguesias do concelho
+    while (current_freguesia_elem != NULL) {
+        printf("- %s\n", current_freguesia_elem->freguesia->nome);
+        current_freguesia_elem = current_freguesia_elem->prox;
+    }
+}
 

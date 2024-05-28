@@ -145,7 +145,9 @@ void LibertarDistritos(Lista_D *lista);
 void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito);
 void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
 void associa_concelhos_a_distritos(Lista_D *lista_distritos, Lista_C *lista_concelhos);
+void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_freguesias);
 void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito);
+void mostra_freguesias_do_concelho(int id_concelho, Lista_C *listaConcelhos);
 
 
 
