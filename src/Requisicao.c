@@ -146,3 +146,41 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
 
     return R;
 }
+
+void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *NIF) {
+    if (listaRequisicoes == NULL || listaChavesPessoa == NULL || NIF == NULL) {
+        printf("Listas ou NIF inválido(s).\n");
+        return;
+    }
+
+    PESSOA *pessoa = NULL;
+    NO_CHAVE_P *chavePessoa = listaChavesPessoa->Inicio;
+    while (chavePessoa != NULL) {
+        ElementoP *elementoPessoa = chavePessoa->DADOS->Inicio;
+        while(elementoPessoa != NULL){
+            if (strcmp(elementoPessoa->pessoa->NIF, NIF) == 0) {
+                pessoa = elementoPessoa->pessoa;
+                break;
+            }
+            elementoPessoa = elementoPessoa->proximo;
+        }
+        chavePessoa = chavePessoa->Prox;
+    }
+    if (pessoa == NULL) {
+        printf("Pessoa com NIF %s não encontrada.\n", NIF);
+        return;
+    }
+
+    printf("Requisições de %s (NIF: %s):\n", pessoa->NOME, NIF);
+    ElementoR *atual = listaRequisicoes->Inicio;
+    int a = 1;
+    while (atual != NULL) {
+        if (strcmp(atual->requisicao->Pessoa->NIF, NIF) == 0) {
+            printf("Requisição %d:\n",a);
+            printf("Livro: %s\n", atual->requisicao->Livro->NOME);
+            printf("Data de Requisição: %d/%d/%d\n", atual->requisicao->Data_Requisicao->dia, atual->requisicao->Data_Requisicao->mes, atual->requisicao->Data_Requisicao->ano);
+        }
+        a++;
+        atual = atual->proximo;
+    }
+}

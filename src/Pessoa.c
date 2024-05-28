@@ -5,39 +5,77 @@
 // Função para criar uma pessoa
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano, char *NIF, Freguesia *freguesia){
     PESSOA *P = (PESSOA *)malloc(sizeof(PESSOA));
+    if (P == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA PESSOA\n");
+        return NULL;
+    }
+
     P->PrimeiroNome = (char *)malloc((strlen(primeiroNome) + 1) * sizeof(char));
+    if (P->PrimeiroNome == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA PrimeiroNome\n");
+        free(P);
+        return NULL;
+    }
     strcpy(P->PrimeiroNome, primeiroNome);
+
     P->UltimoNome = (char *)malloc((strlen(ultimoNome) + 1) * sizeof(char));
+    if (P->UltimoNome == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA UltimoNome\n");
+        free(P->PrimeiroNome);
+        free(P);
+        return NULL;
+    }
     strcpy(P->UltimoNome, ultimoNome);
+
     P->NOME = (char *)malloc((strlen(primeiroNome) + strlen(ultimoNome) + 2) * sizeof(char)); // +2 para espaço e '\0'
+    if (P->NOME == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA NOME\n");
+        free(P->PrimeiroNome);
+        free(P->UltimoNome);
+        free(P);
+        return NULL;
+    }
     strcpy(P->NOME, primeiroNome);
     strcat(P->NOME, " ");
     strcat(P->NOME, ultimoNome);
+
     P->NIF = (char *)malloc((strlen(NIF) + 1) * sizeof(char));
+    if (P->NIF == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA NIF\n");
+        free(P->PrimeiroNome);
+        free(P->UltimoNome);
+        free(P->NOME);
+        free(P);
+        return NULL;
+    }
     strcpy(P->NIF, NIF);
+
     P->freguesia = freguesia;
-    P->dataNascimento->dia = dia;
-    P->dataNascimento->mes = mes;
-    P->dataNascimento->ano = ano;
-    P->numero_requisicoes = 0;
-    if(P->NOME == NULL || P->NIF == NULL || P->PrimeiroNome == NULL || P->UltimoNome == NULL || P->dataNascimento == NULL || P->freguesia == NULL || P == NULL){
+
+    P->dataNascimento = (data *)malloc(sizeof(data));
+    if (P->dataNascimento == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA dataNascimento\n");
         free(P->PrimeiroNome);
         free(P->UltimoNome);
         free(P->NOME);
         free(P->NIF);
-        free(P->dataNascimento);
-        free(P->freguesia);
         free(P);
-        printf("\nERRO AO ALOCAR MEMORIA PARA PESSOA\n");
         return NULL;
     }
+    P->dataNascimento->dia = dia;
+    P->dataNascimento->mes = mes;
+    P->dataNascimento->ano = ano;
+
+    P->numero_requisicoes = 0;
+
     return P;
 }
 
+
 // Função para pedir dados de uma pessoa
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) {
-    int dia, mes, ano, id_dist, id_conc, id_freguesia;
-    char primeiroNome[30], ultimoNome[30], NIF[10];
+    int dia, mes, ano, id_dist, id_conc;
+    char primeiroNome[30], ultimoNome[30], NIF[10], id_freg[4];
     Freguesia *freguesia;
     printf("\nAdicionar Pessoa:\n");
     do{
@@ -101,8 +139,8 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
             }
         }
     }while(dia < 1 || dia > 31);
+    ListarDistritos(D);
     do{
-        ListarDistritos(D);
         printf("\nEscolha o seu Distrito: ");
         scanf("%d", &id_dist);
         limparBuffer();
@@ -110,8 +148,8 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
             printf("\nErro: Distrito nao encontrado.\n");
         }
     }while(ProcurarDistritoPorID(D, id_dist) == NULL);
+    MostraConcelhosDistrito(id_dist, D);
     do{
-        MostraConcelhosDistrito(id_dist, D);
         printf("\nEscolha o seu Concelho: ");
         scanf("%d", &id_conc);
         limparBuffer();
@@ -119,17 +157,20 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
             printf("\nErro: Concelho nao encontrado.\n");
         }
     }while(ProcurarConcelhoPorID(C, id_conc, id_dist) == NULL);
+    MostraFreguesiasConcelho(id_conc, C);
     do{
-        MostraFreguesiasConcelho(id_conc, D);
-        printf("\nEscolha a sua Freguesia: ");
-        scanf("%d", &id_freguesia);
-        limparBuffer();
-        if(ProcurarFreguesiaPorID(F, id_freguesia, id_conc, id_dist) == NULL){
+        do {
+            printf("\nEscolha a sua Freguesia: ");
+            lerString(id_freg, sizeof(id_freg));
+            if (strlen(id_freg) != 3) {
+                printf("\nErro: Introduza um ID valido.\n");
+            }
+        }while(strlen(id_freg) != 3);
+        freguesia = ProcurarFreguesiaPorID(F,id_freg,id_conc,id_dist);
+        if(freguesia == NULL){
             printf("\nErro: Freguesia nao encontrada.\n");
         }
-    }while(ProcurarFreguesiaPorID(F, id_freguesia, id_conc, id_dist) == NULL);
-    freguesia = ProcurarFreguesiaPorID(F, id_freguesia, id_conc, id_dist);
-
+    }while(freguesia == NULL);
     return CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano, NIF, freguesia);
 }
 
@@ -1195,19 +1236,31 @@ Distrito *ProcurarDistritoPorID(Lista_D *listaDistritos, int id) {
 }
 
 Concelho *ProcurarConcelhoPorID(Lista_C *listaConcelhos, int id_conc, int id_dist) {
-    if (!listaConcelhos) {
-        return NULL;
-    }
+    if (!listaConcelhos) return NULL;
 
-    ElementoD *atual = listaConcelhos->Inicio;
+    ElementoC *atual = listaConcelhos->Inicio;
     while (atual != NULL) {
-        Concelho *concelho = atual->Info;
+        Concelho *concelho = atual->concelho;
         if (concelho && concelho->ID_CONC == id_dist && concelho->ID_CONC == id_conc ) {
             return concelho;
         }
-        atual = atual->Prox;
+        atual = atual->prox;
     }
 
+    return NULL;
+}
+
+Freguesia *ProcurarFreguesiaPorID(Lista_F *listafreguesias, char *id_freg, int id_conc, int id_dist){
+    if(!listafreguesias) return NULL;
+
+    ElementoF *atual = listafreguesias->Inicio;
+    while(atual != NULL){
+        Freguesia *freguesia = atual->freguesia;
+        if(freguesia && strcmp(freguesia->ID,id_freg) == 0 && freguesia->ID_DIST == id_dist && freguesia->ID_CONC == id_conc){
+            return freguesia;
+        }
+        atual = atual->prox;
+    }
     return NULL;
 }
 
@@ -1322,41 +1375,4 @@ int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_con
     return count;
 }
 
-void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *NIF) {
-    if (listaRequisicoes == NULL || listaChavesPessoa == NULL || NIF == NULL) {
-        printf("Listas ou NIF inválido(s).\n");
-        return;
-    }
 
-    PESSOA *pessoa = NULL;
-    NO_CHAVE_P *chavePessoa = listaChavesPessoa->Inicio;
-    while (chavePessoa != NULL) {
-        ElementoP *elementoPessoa = chavePessoa->DADOS->Inicio;
-        while(elementoPessoa != NULL){
-            if (strcmp(elementoPessoa->pessoa->NIF, NIF) == 0) {
-                pessoa = elementoPessoa->pessoa;
-                break;
-            }
-            elementoPessoa = elementoPessoa->proximo;
-        }
-        chavePessoa = chavePessoa->Prox;
-    }
-    if (pessoa == NULL) {
-        printf("Pessoa com NIF %s não encontrada.\n", NIF);
-        return;
-    }
-
-    printf("Requisições de %s (NIF: %s):\n", pessoa->NOME, NIF);
-    ElementoR *atual = listaRequisicoes->Inicio;
-    int a = 1;
-    while (atual != NULL) {
-        if (strcmp(atual->requisicao->Pessoa->NIF, NIF) == 0) {
-            printf("Requisição %d:\n",a);
-            printf("Livro: %s\n", atual->requisicao->Livro->NOME);
-            printf("Data de Requisição: %d/%d/%d\n", atual->requisicao->Data_Requisicao->dia, atual->requisicao->Data_Requisicao->mes, atual->requisicao->Data_Requisicao->ano);
-            printf("\n");
-        }
-        a++;
-        atual = atual->proximo;
-    }
-}
