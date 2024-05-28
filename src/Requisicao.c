@@ -167,3 +167,95 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
 
     return R;
 }
+
+//TESTAR
+
+// Função para adicionar uma requisição a uma pessoa
+void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes) {
+    char nif[50];
+    char isbn[14];
+
+    // Pedir NIF da pessoa
+    printf("Digite o NIF da pessoa: ");
+    scanf("%s", nif);
+
+    // encontrar pessoa pelo NIF inserido
+    PESSOA *pessoa = PesquisarPessoaPorNIF(listaChavesPessoa, nif);
+    if (pessoa == NULL) {
+        printf("Pessoa com NIF %s não encontrada.\n", nif);
+        return;
+    }
+
+    // Pedir ISBN do livro
+    printf("Digite o ISBN do livro: ");
+    scanf("%s", isbn);
+
+    // encontrar livro pelo ISBN inserido
+    LIVRO *livro = PesquisarLivroPorISBN(listaChavesLivro, isbn);
+    if (livro == NULL) {
+        printf("Livro com ISBN %s não encontrado.\n", isbn);
+        return;
+    }
+
+    // criar requisição
+    REQUISICAO *novaRequisicao = (REQUISICAO *)malloc(sizeof(REQUISICAO));
+    if (!novaRequisicao) {
+        printf("Erro ao alocar memória para a nova requisição.\n");
+        return;
+    }
+
+    novaRequisicao->ID = listaRequisicoes->num_Requisicoes + 1; // criar ID da requisição
+    novaRequisicao->Pessoa = pessoa;
+    novaRequisicao->Livro = livro;
+
+    // por a data na requisiçao (data atual)
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    novaRequisicao->Data_Requisicao = (data *)malloc(sizeof(data));
+    novaRequisicao->Data_Requisicao->dia = tm.tm_mday;
+    novaRequisicao->Data_Requisicao->mes = tm.tm_mon + 1;
+    novaRequisicao->Data_Requisicao->ano = tm.tm_year + 1900;
+
+    // atualizar contadores
+    pessoa->numero_requisicoes++;
+    livro->quant_requisicaoL++;
+
+    // adicionar a nova requisição na lista
+    ElementoR *novoElementoR = (ElementoR *)malloc(sizeof(ElementoR));
+    if (!novoElementoR) {
+        printf("Erro ao alocar memória para o novo elemento de requisição.\n");
+        free(novaRequisicao->Data_Requisicao);
+        free(novaRequisicao);
+        return;
+    }
+
+    novoElementoR->requisicao = novaRequisicao;
+    novoElementoR->proximo = listaRequisicoes->Inicio;
+    listaRequisicoes->Inicio = novoElementoR;
+    listaRequisicoes->num_Requisicoes++;
+
+    printf("Requisição adicionada com sucesso!\n");
+}
+
+
+// Função para libertar a memória alocada para a lista de requisições
+void LibertarListaRequisicoes(ListaRequisicoes *lista) {
+    if (!lista) return;
+
+    ElementoR *atual = lista->Inicio;
+    while (atual != NULL) {
+        ElementoR *proximo = atual->proximo;
+
+        // libertar a memória associada à requisição
+        DestruirRequisicao(atual->requisicao);
+
+        // libertar o elemento atual
+        free(atual);
+
+        // Avançar para o próximo elemento
+        atual = proximo;
+    }
+
+    // libertar a estrutura da lista
+    free(lista);
+}

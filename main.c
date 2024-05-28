@@ -277,7 +277,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
 }
 
 //Menu Requisiçoes
-void menuRequisicoes(ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaChavesLivros){
+void menuRequisicoes(Lista_Chaves_P *listaPessoas, ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaChavesLivros){
     int opRequisicao;
     char isbn[14];
     do {
@@ -290,7 +290,8 @@ void menuRequisicoes(ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaCh
 
         switch (opRequisicao) {
             case 1:
-                //Adicionar Requisicao
+                //TESTE
+                AdicionarRequisicao(listaPessoas, listaChavesLivros, listaRequisicoes);
                 break;
             case 2:
                 //pedir isbn do livro
@@ -332,7 +333,7 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
                 break;
             }
             case 3:
-                menuRequisicoes(ListaRequisicoes, ListaChavesLivros);
+                menuRequisicoes(ListaChavesPessoas, ListaRequisicoes, ListaChavesLivros);
                 break;
             case 0:
                 printf("Saindo...\n");
@@ -358,7 +359,7 @@ int main() {
     //ListarConcelhosPorDistrito(listaDistritos,ListaC, 2);
     //ListarDistritosPorID(listaDistritos, 10);
     associa_concelhos_a_distritos(listaDistritos, ListaC);
-    mostra_concelhos_do_distrito(5,listaDistritos);
+    //mostra_concelhos_do_distrito(5,listaDistritos);
     associa_freguesias_a_concelhos(ListaC, ListaF);
     mostra_freguesias_do_concelho(4, ListaC);
 
@@ -376,6 +377,9 @@ int main() {
     // Liberar memória alocada para as listas de livros e pessoas
     //LiberarListaChaves_L(listaChavesLivro);
     //LibertarListaChaves_P(listaChavesPessoa);
+
+    //TESTE
+    LibertarListaRequisicoes(listaRequisicoes);
 
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }

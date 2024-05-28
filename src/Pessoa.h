@@ -136,6 +136,7 @@ void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa); //lista de 
 void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas com requisiçao
 char* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa); //sobrenome mais usado nas requisiçoes
 
+
 Lista_F* LerTXT();
 void LibertarFreguesias(Lista_F *lista);
 Lista_C* LerTXTConc();

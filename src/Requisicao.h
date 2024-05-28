@@ -40,5 +40,12 @@ void ListaLivrosRequisitados(ListaRequisicoes *bookList);
 
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C);
 
+
+//TESTAR
+void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes);
+void LibertarListaRequisicoes(ListaRequisicoes *lista);
+
+
+
 #endif // REQUISICAO_H_INCLUDED
 
