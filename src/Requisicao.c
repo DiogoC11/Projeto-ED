@@ -43,27 +43,6 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
     return false; // senao retorna false
 }
 
-// Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
-int ContarPessoas(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
-    int count = 0;
-    NO_CHAVE_P *current = peopleList->Inicio;
-    while (current != NULL) {
-        ElementoP *personElement = current->DADOS->Inicio;
-        while (personElement != NULL) {
-            PESSOA *person = personElement->pessoa;
-            char districtID[10];
-            sprintf(districtID, "%d", person->freguesia->ID_DIST);
-            if (strcmp(districtID, districtX) == 0 &&
-                (strcmp(person->PrimeiroNome, nameY) == 0 || strcmp(person->UltimoNome, nameY) == 0)) {
-                count++;
-            }
-            personElement = personElement->proximo;
-        }
-        current = current->Prox;
-    }
-    return count;
-}
-
 // Função para devolver um livro solicitado
 int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISBN) {
     if (!bookList || !reqList || !ISBN) {
@@ -105,7 +84,7 @@ int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISB
                     atualReq = atualReq->proximo;
                 }
 
-                printf("Requisição para o livro com ISBN %s não encontrada.\n", ISBN);
+                printf("Requisição com o livro de ISBN %s não encontrada.\n", ISBN);
                 return 0;
             }
             elementoLivro = elementoLivro->proximo;
@@ -118,7 +97,7 @@ int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISB
 }
 
 // Função para listar livros solicitados
-void listaLivrosRequisitados(ListaRequisicoes *listaRequisicoes) {
+void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes) {
     if (!listaRequisicoes || listaRequisicoes->num_Requisicoes == 0) {
         printf("Não há requisições.\n");
         return;
