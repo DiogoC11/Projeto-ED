@@ -128,7 +128,13 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
     L->quant_requisicaoL += 1;
     NO_CHAVE_L *myBook = searchNO_CHAVE_L(C, L->ISBN);
     myBook->quant_requisicaoN += 1;
-    R->Data_Requisicao = (DATA_Req *)malloc(sizeof(DATA_Req));
-    if(!R->Data_Requisicao) return NULL;
+
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    R->Data_Requisicao = (data *)malloc(sizeof(data));
+    R->Data_Requisicao->dia = tm.tm_mday;
+    R->Data_Requisicao->mes = tm.tm_mon + 1;
+    R->Data_Requisicao->ano = tm.tm_year + 1900;
+
     return R;
 }

@@ -8,18 +8,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct{
-    int dia;
-    int mes;
-    int ano;
-}DATA_Req;
+
 
 typedef struct
 {
     int ID;
     ptPESSOA *Pessoa;
     LIVRO *Livro;
-    DATA_Req *Data_Requisicao;
+    data *Data_Requisicao;
 }REQUISICAO;
 
 typedef struct elementoR{

@@ -41,15 +41,15 @@ typedef struct {
     ElementoC *Inicio;
 } Lista_C;
 
-typedef struct Distrito {
+typedef struct {
     int ID_DIST;
     char *nome;
     Lista_C *Conc;
 } Distrito;
 
-typedef struct ElementoD {
+typedef struct elementoD {
     Distrito *Info;
-    struct ElementoD *Prox;
+    struct elementoD *Prox;
 } ElementoD;
 
 typedef struct {
@@ -64,14 +64,14 @@ typedef struct{
     int dia;
     int mes;
     int ano;
-}DATANASC;
+}data;
 
 typedef struct{
     char *PrimeiroNome;
     char *UltimoNome;
     char *NOME;
     int ID;
-    DATANASC *dataNascimento;
+    data *dataNascimento;
     Freguesia *freguesia;
     int numero_requisicoes;
 }PESSOA, *ptPESSOA;
@@ -143,9 +143,9 @@ char* ObterNomeDistrito(Lista_D *listaDistritos, int idDistrito);
 Lista_D* LerTXTDist();
 void LibertarDistritos(Lista_D *lista);
 void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito);
-
 void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
-
+void associa_concelhos_a_distritos(Lista_D *lista_distritos, Lista_C *lista_concelhos);
+void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito);
 
 
 

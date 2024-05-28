@@ -12,7 +12,7 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int 
     strcpy(P->NOME, primeiroNome);
     strcat(P->NOME, " ");
     strcat(P->NOME, ultimoNome);
-    P->dataNascimento = (DATANASC *)malloc(sizeof(DATANASC));
+    P->dataNascimento = (data *)malloc(sizeof(data));
     P->dataNascimento->dia = dia;
     P->dataNascimento->mes = mes;
     P->dataNascimento->ano = ano;
@@ -260,7 +260,7 @@ int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa) {
             }
 
             PESSOA *pessoaAtual = atual->pessoa;
-            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            data *dataNascimento = pessoaAtual->dataNascimento;
             int anos = today.tm_year + 1900 - dataNascimento->ano;
 
             if (today.tm_mon + 1 < dataNascimento->mes ||
@@ -311,7 +311,7 @@ float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa) {
             }
 
             PESSOA *pessoaAtual = atual->pessoa;
-            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            data *dataNascimento = pessoaAtual->dataNascimento;
             int anos = today.tm_year + 1900 - dataNascimento->ano;
 
             if (today.tm_mon + 1 < dataNascimento->mes ||
@@ -366,7 +366,7 @@ int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa) {
             }
 
             PESSOA *pessoaAtual = atual->pessoa;
-            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            data *dataNascimento = pessoaAtual->dataNascimento;
             int anos = today.tm_year + 1900 - dataNascimento->ano;
 
             if (today.tm_mon + 1 < dataNascimento->mes ||
@@ -425,7 +425,7 @@ int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeL
             }
 
             PESSOA *pessoaAtual = atual->pessoa;
-            DATANASC *dataNascimento = pessoaAtual->dataNascimento;
+            data *dataNascimento = pessoaAtual->dataNascimento;
             int anos = today.tm_year + 1900 - dataNascimento->ano;
 
             if (today.tm_mon + 1 < dataNascimento->mes ||
@@ -681,6 +681,7 @@ void LibertarFreguesias(Lista_F *lista) {
 
 
 // Função para ler os concelhos a partir de um arquivo
+//colocar para ler as freguesias nos concelhos correspondentes
 Lista_C* LerTXTConc() {
     FILE *arquivo;
     char linha[100];
@@ -745,7 +746,6 @@ Lista_C* LerTXTConc() {
         novo_elemento->prox = lista->Inicio;
         lista->Inicio = novo_elemento;
         lista->num_Concelhos++;
-
         //printf("Novo concelho adicionado: ID_DIST=%d, ID_CONC=%d, Nome=%s\n", id_dist, id_conc, nome);
     }
 
@@ -792,7 +792,7 @@ void ListarConcelhosPorDistrito(Lista_D *listadistritos,Lista_C *listaConcelhos,
 
 
 
-
+//colocar para ler os concelhos nos respetivos distritos
 Lista_D* LerTXTDist() {
     FILE *arquivo;
     char linha[100]; // Aumentei o tamanho da linha para garantir que seja suficiente para ler cada linha
@@ -853,6 +853,8 @@ Lista_D* LerTXTDist() {
             return NULL;
         }
 
+        //lerconcelho(id_distr);
+
         // Criar um novo elemento para a lista de distritos e alocar memória
         ElementoD *novo_elemento = malloc(sizeof(ElementoD));
         if (novo_elemento == NULL) {
@@ -869,7 +871,6 @@ Lista_D* LerTXTDist() {
         distritos->Inicio = novo_elemento;
         distritos->num_Distritos++;
        //printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
-
     }
 
     fclose(arquivo);
@@ -959,6 +960,90 @@ void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho) {
     printf("Concelho com ID %d não encontrado.\n", idConcelho);
 }
 
+void associa_concelhos_a_distritos(Lista_D *lista_distritos, Lista_C *lista_concelhos) {
+    if (lista_distritos == NULL || lista_concelhos == NULL) {
+        return;
+    }
 
+    ElementoD *current_distrito_elem = lista_distritos->Inicio;
+
+    // Percorrer todos os distritos
+    while (current_distrito_elem != NULL) {
+        Distrito *current_distrito = current_distrito_elem->Info;
+
+        // Inicializar a lista de concelhos do distrito, se ainda não estiver inicializada
+        if (current_distrito->Conc == NULL) {
+            current_distrito->Conc = (Lista_C *)malloc(sizeof(Lista_C));
+            current_distrito->Conc->num_Concelhos = 0;
+            current_distrito->Conc->Inicio = NULL;
+        }
+
+        ElementoC *current_concelho_elem = lista_concelhos->Inicio;
+
+        // Percorrer todos os concelhos
+        while (current_concelho_elem != NULL) {
+            Concelho *current_concelho = current_concelho_elem->concelho;
+
+            // Comparar IDs
+            if (current_concelho->ID_DIST == current_distrito->ID_DIST) {
+                // Criar um novo elemento para a lista de concelhos do distrito
+                ElementoC *novo_elem_concelho = (ElementoC *)malloc(sizeof(ElementoC));
+                novo_elem_concelho->concelho = current_concelho;
+                novo_elem_concelho->prox = current_distrito->Conc->Inicio;
+
+                // Adicionar o novo elemento no início da lista de concelhos do distrito
+                current_distrito->Conc->Inicio = novo_elem_concelho;
+                current_distrito->Conc->num_Concelhos++;
+            }
+
+            // Avançar para o próximo concelho na lista
+            current_concelho_elem = current_concelho_elem->prox;
+        }
+
+        // Avançar para o próximo distrito na lista
+        current_distrito_elem = current_distrito_elem->Prox;
+    }
+}
+
+// Funções auxiliares para criação e adição de elementos nas listas (não requeridas mas úteis para testes)
+
+ElementoD* cria_elemento_distrito(Distrito *distrito) {
+    ElementoD *novo_elem = (ElementoD *)malloc(sizeof(ElementoD));
+    novo_elem->Info = distrito;
+    novo_elem->Prox = NULL;
+    return novo_elem;
+}
+
+ElementoC* cria_elemento_concelho(Concelho *concelho) {
+    ElementoC *novo_elem = (ElementoC *)malloc(sizeof(ElementoC));
+    novo_elem->concelho = concelho;
+    novo_elem->prox = NULL;
+    return novo_elem;
+}
+
+void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito) {
+    ElementoD *atualDistrito = listaDistrito->Inicio;
+    Distrito *distrito = NULL;
+    while(atualDistrito != NULL){
+        if(id_distrito == atualDistrito->Info->ID_DIST){
+            distrito = atualDistrito->Info;
+            break;
+        }
+        atualDistrito = atualDistrito->Prox;
+    }
+    if (distrito == NULL || distrito->Conc == NULL) {
+        printf("Distrito ou lista de concelhos não está inicializada.\n");
+        return;
+    }
+
+    printf("Concelhos do Distrito %s:\n", distrito->nome);
+    ElementoC *current_concelho_elem = distrito->Conc->Inicio;
+
+    // Percorrer todos os concelhos do distrito
+    while (current_concelho_elem != NULL) {
+        printf("- %s\n", current_concelho_elem->concelho->nome);
+        current_concelho_elem = current_concelho_elem->prox;
+    }
+}
 
 

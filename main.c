@@ -345,11 +345,14 @@ int main() {
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
     ListaRequisicoes *listaRequisicoes = criarListaR();
 
-    Lista_F *ListaF= LerTXT();
+    //Lista_F *ListaF= LerTXT();
     Lista_C *ListaC= LerTXTConc();
     Lista_D *listaDistritos = LerTXTDist();
-    ListarConcelhosPorDistrito(listaDistritos,ListaC, 2);
-    ListarDistritosPorID(listaDistritos, 4);
+    //ListarConcelhosPorDistrito(listaDistritos,ListaC, 2);
+    //ListarDistritosPorID(listaDistritos, 10);
+    associa_concelhos_a_distritos(listaDistritos, ListaC);
+    mostra_concelhos_do_distrito(5,listaDistritos);
+
 
 
 
