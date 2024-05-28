@@ -33,12 +33,12 @@ ListaRequisicoes *criarListaR();
 ElementoR *criarElementoR(REQUISICAO *R);
 void MostrarRequisicao(REQUISICAO *P);
 void DestruirRequisicao(REQUISICAO *P);
+
 int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY);
-void returnRequestedBook(Lista_Chaves_L *bookList, char *ISBN);
-void listRequestedBooks(Lista_Chaves_L *bookList);
+int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISBN);
+void ListaLivrosRequisitados(ListaRequisicoes *bookList);
+
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C);
 
-//devolver livro requisitado
-//listar livros requisitados
 #endif // REQUISICAO_H_INCLUDED
 

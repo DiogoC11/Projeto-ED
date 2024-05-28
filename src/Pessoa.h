@@ -71,6 +71,7 @@ typedef struct{
     char *UltimoNome;
     char *NOME;
     int ID;
+    char *NIF;
     data *dataNascimento;
     Freguesia *freguesia;
     int numero_requisicoes;
@@ -97,8 +98,8 @@ typedef struct{
     NO_CHAVE_P *Inicio;
 }Lista_Chaves_P;
 
-PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano);
-PESSOA *PedirDadosPessoa();
+PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano, char *NIF, Freguesia *freguesia);
+PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D);
 ListaPessoa *criarListaP();
 ElementoP *criarElementoP(PESSOA *P);
 NO_CHAVE_P *criarNoChave(char chave);
@@ -106,6 +107,7 @@ Lista_Chaves_P *criarListaChave ();
 
 void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) ;
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
+void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);
 int compararIdFreguesia(const void* a, const void* b);
@@ -146,9 +148,10 @@ void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito);
 void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
 void associa_concelhos_a_distritos(Lista_D *lista_distritos, Lista_C *lista_concelhos);
 void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_freguesias);
-void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito);
+void MostraConcelhosDistrito(int id_distrito, Lista_D *listaDistrito);
 void mostra_freguesias_do_concelho(int id_concelho, Lista_C *listaConcelhos);
-
+void ListarDistritos(Lista_D *listaDistritos);
+Distrito* ProcurarDistritoPorID(Lista_D *listaDistritos, int id);
 
 
 

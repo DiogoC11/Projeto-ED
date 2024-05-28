@@ -1,5 +1,6 @@
 #include <time.h>
 #include "Pessoa.h"
+#include "Uteis.h"
 
 // Função para criar uma pessoa
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano) {
@@ -22,22 +23,86 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int 
 }
 
 // Função para pedir dados de uma pessoa
-PESSOA *PedirDadosPessoa() {
-    int dia, mes, ano;
-    char primeiroNome[30], ultimoNome[30];
+PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D) {
+    int dia, mes, ano, id;
+    char primeiroNome[30], ultimoNome[30], NIF[10];
+    Freguesia freguesia;
     printf("\nAdicionar Pessoa:\n");
-    printf("Primeiro Nome: ");
-    scanf("%s", primeiroNome);
-    printf("Ultimo Nome: ");
-    scanf("%s", ultimoNome);
+    do{
+        printf("\nNIF: ");
+        scanf("%s", NIF);
+        limparBuffer();
+        if (strlen(NIF) != 9) {
+            printf("\nErro: O NIF tem de ter 9 digitos.(%d)\n", strlen(NIF));
+        } else if (PesquisarPessoaPorNIF(P,NIF) != NULL) {
+            printf("\nErro: O NIF inserido ja existe.\n");
+        }
+    }while(strlen(NIF) != 9 || PesquisarPessoaPorNIF(P,NIF) != NULL);
+
+    do {
+        printf("Primeiro Nome: ");
+        lerString(primeiroNome, sizeof(primeiroNome));
+        if (!strlen(primeiroNome)) {
+            printf("\nErro: O primeiro nome e muito pequeno\n");
+        }
+    }while(!strlen(primeiroNome));
+
+    do {
+        printf("Ultimo Nome: ");
+        lerString(ultimoNome, sizeof(ultimoNome));
+        if (!strlen(ultimoNome)) {
+            printf("\nErro: O ultimo nome e muito pequeno\n");
+        }
+    }while(!strlen(primeiroNome));
+
     printf("Data de nascimento:\n");
-    printf("Dia: ");
-    scanf("%d", &dia);
-    printf("Mês: ");
-    scanf("%d", &mes);
-    printf("Ano: ");
-    scanf("%d", &ano);
-    return CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano);
+
+    do {
+        printf("Ano: ");
+        scanf("%d", &ano);
+        limparBuffer();
+        if (ano < 1900 || ano > 2024) {
+            printf("\nErro: Ano invalido.\n");
+        }
+    }while(ano < 1900 || ano > 2024);
+
+    do{
+        printf("Mês: ");
+        scanf("%d", &mes);
+        limparBuffer();
+        if (mes < 1 || mes > 12) {
+            printf("\nErro: Mês invalido.\n");
+        }
+    }while(mes < 1 || mes > 12);
+
+    do {
+        printf("Dia: ");
+        scanf("%d", &dia);
+        limparBuffer();
+        if(mes == 2){
+            if(dia < 1 || dia > 29){
+                printf("\nErro: Dia invalido.\n");
+            }
+        }else{
+            if (dia < 1 || dia > 31) {
+                printf("\nErro: Dia invalido.\n");
+            }
+        }
+    }while(dia < 1 || dia > 31);
+    do{
+        printf("Escolha o seu Distrito: ");
+        ListarDistritos(D);
+        scanf("%d", &id);
+        limparBuffer();
+        if(ProcurarDistritoPorID(D, id) == NULL){
+            printf("\nErro: Distrito nao encontrado.\n");
+        }
+    }while(ProcurarDistritoPorID(D, id) == NULL);
+    do{
+        printf("Escolha o seu Concelho: ");
+
+    }while
+    return CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano, nif);
 }
 
 // Função para criar uma lista de pessoas
@@ -122,6 +187,22 @@ void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
         ElementoP *E = N->DADOS->Inicio;
         while (E != NULL) {
             if (strcmp(E->pessoa->NOME, nome) == 0) {
+                return E->pessoa;
+            }
+            E = E->proximo;
+        }
+        N = N->Prox;
+    }
+    return NULL;
+}
+
+void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif) {
+    if (!L || !nif) return NULL;
+    NO_CHAVE_P *N = L->Inicio;
+    while (N != NULL) {
+        ElementoP *E = N->DADOS->Inicio;
+        while (E != NULL) {
+            if (strcmp(E->pessoa->NIF, nif) == 0) {
                 return E->pessoa;
             }
             E = E->proximo;
@@ -906,6 +987,22 @@ void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito) {
     printf("Distrito com ID %d não encontrado.\n", idDistrito);
 }
 
+void ListarDistritos(Lista_D *listaDistritos) {
+    if (!listaDistritos || listaDistritos->num_Distritos == 0) {
+        printf("Não há distritos.\n");
+        return;
+    }
+
+    ElementoD *atual = listaDistritos->Inicio;
+    while (atual != NULL) {
+        Distrito *distrito = atual->Info;
+        if (distrito) {
+            printf("%s (ID: %d)\n", distrito->nome, distrito->ID_DIST);
+        }
+        atual = atual->Prox;
+    }
+}
+
 
 
 
@@ -1028,11 +1125,11 @@ ElementoF* cria_elemento_freguesia(Freguesia *freguesia) {
     return novo_elem;
 }
 
-void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito) {
+void MostraConcelhosDistrito(int id_distrito, Lista_D *listaDistrito) {
     ElementoD *atualDistrito = listaDistrito->Inicio;
     Distrito *distrito = NULL;
-    while(atualDistrito != NULL){
-        if(id_distrito == atualDistrito->Info->ID_DIST){
+    while (atualDistrito != NULL) {
+        if (id_distrito == atualDistrito->Info->ID_DIST) {
             distrito = atualDistrito->Info;
             break;
         }
@@ -1051,6 +1148,20 @@ void mostra_concelhos_do_distrito(int id_distrito, Lista_D *listaDistrito) {
         printf("- %s\n", current_concelho_elem->concelho->nome);
         current_concelho_elem = current_concelho_elem->prox;
     }
+}
+Distrito* ProcurarDistritoPorID(Lista_D *listaDistritos, int id) {
+    if (!listaDistritos) {
+        return NULL;
+    }
+    ElementoD *atual = listaDistritos->Inicio;
+    while (atual != NULL) {
+        Distrito *distrito = atual->Info;
+        if (distrito && distrito->ID_DIST == id) {
+            return distrito;
+        }
+        atual = atual->Prox;
+    }
+    return NULL;
 }
 
 void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_freguesias) {

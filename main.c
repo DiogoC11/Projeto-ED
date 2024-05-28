@@ -158,7 +158,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
         switch (opPessoa) {
             case 1: {
                 //Adicionar Pessoa
-                PESSOA *novaPessoa = PedirDadosPessoa();
+                PESSOA *novaPessoa = PedirDadosPessoa(listaChavesPessoa);
                 MostrarPessoa(novaPessoa);
                 ElementoP *novoElemento = criarElementoP(novaPessoa);
                 AdicionarPessoa(listaChavesPessoa , novoElemento);
@@ -277,26 +277,33 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa) {
 }
 
 //Menu Requisiçoes
-void menuRequisicoes(ListaRequisicoes *listaRequisicoes){
+void menuRequisicoes(ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaChavesLivros){
     int opRequisicao;
+    char isbn[14];
     do {
         printf("\n--- Menu Requisicoes ---\n");
         printf("1- Fazer Requisicao\n");
         printf("2- Devolver Livro\n");
-        printf("3- Devolucao de Livro Requisitado\n");
+        printf("3- Listar Livros requisitados\n");
         printf("0- Sair\n");
         opRequisicao = LerInteiro("Qual a opcao? ");
 
         switch (opRequisicao) {
             case 1:
+                //Adicionar Requisicao
                 break;
             case 2:
+                //pedir isbn do livro
+                DevolverLivro(listaChavesLivros, listaRequisicoes, isbn);
                 break;
             case 3:
+                ListaLivrosRequisitados(listaRequisicoes);
                 break;
             case 0:
+                printf("A voltar...\n");
                 break;
             default:
+                printf("Erro: Opcao nao implementada.\n");
                 break;
         }
     } while (opRequisicao != 0);
@@ -325,7 +332,7 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
                 break;
             }
             case 3:
-                menuRequisicoes(ListaRequisicoes);
+                menuRequisicoes(ListaRequisicoes, ListaChavesLivros);
                 break;
             case 0:
                 printf("Saindo...\n");
@@ -367,7 +374,7 @@ int main() {
     printf("\nA sair da biblioteca...\n");
 
     // Liberar memória alocada para as listas de livros e pessoas
-    LiberarListaChaves_L(listaChavesLivro);
+    //LiberarListaChaves_L(listaChavesLivro);
     //LibertarListaChaves_P(listaChavesPessoa);
 
     return EXIT_SUCCESS; // ou EXIT_FAILURE

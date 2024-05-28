@@ -43,11 +43,8 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
     return false; // senao retorna false
 }
 
-
-
-// Funções 24/05 || test me
 // Função para mostrar o número de pessoas do distrito X com nome/sobrenome Y
-int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
+int ContarPessoas(Lista_Chaves_P *peopleList, char *districtX, char *nameY) {
     int count = 0;
     NO_CHAVE_P *current = peopleList->Inicio;
     while (current != NULL) {
@@ -68,37 +65,69 @@ int countPeopleFromDistrictWithName(Lista_Chaves_P *peopleList, char *districtX,
 }
 
 // Função para devolver um livro solicitado
-void returnRequestedBook(Lista_Chaves_L *bookList, char *ISBN) {
-    NO_CHAVE_L *current = bookList->Inicio;
-    while (current != NULL) {
-        ElementoL *bookElement = current->DADOS->Inicio;
-        while (bookElement != NULL) {
-            LIVRO *book = bookElement->livro;
-            if (strcmp(book->ISBN, ISBN) == 0) {
-                book->Disponivel = 1;
-                printf("O livro com ISBN %s foi devolvido.\n", ISBN);
-                return;
-            }
-            bookElement = bookElement->proximo;
-        }
-        current = current->Prox;
+int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISBN) {
+    if (!bookList || !reqList || !ISBN) {
+        printf("Parâmetros inválidos.\n");
+        return 0;
     }
+
+    // Encontrar o livro na lista de livros e marcar como disponível
+    NO_CHAVE_L *categoriaLivro = bookList->Inicio;
+    while (categoriaLivro != NULL) {
+        ElementoL *elementoLivro = categoriaLivro->DADOS->Inicio;
+        while (elementoLivro != NULL) {
+            LIVRO *livro = elementoLivro->livro;
+            if (strcmp(livro->ISBN, ISBN) == 0) {
+                livro->Disponivel = 1;
+
+                // Encontrar e remover a requisição correspondente na lista de requisições
+                ElementoR *proximo = NULL;
+                ElementoR *atualReq = reqList->Inicio;
+                while (atualReq != NULL) {
+                    if (strcmp(atualReq->requisicao->Livro->ISBN, ISBN) == 0) {
+                        if (proximo == NULL) {
+                            reqList->Inicio = atualReq->proximo;
+                        } else {
+                            proximo->proximo = atualReq->proximo;
+                        }
+
+                        // Liberar a memória associada à requisição
+                        free(atualReq->requisicao->Data_Requisicao);
+                        free(atualReq->requisicao);
+                        free(atualReq);
+
+                        reqList->num_Requisicoes--;
+
+                        printf("O livro com ISBN %s foi devolvido e a requisição removida.\n", ISBN);
+                        return 1;
+                    }
+                    proximo = atualReq;
+                    atualReq = atualReq->proximo;
+                }
+
+                printf("Requisição para o livro com ISBN %s não encontrada.\n", ISBN);
+                return 0;
+            }
+            elementoLivro = elementoLivro->proximo;
+        }
+        categoriaLivro = categoriaLivro->Prox;
+    }
+
     printf("Livro com ISBN %s não encontrado.\n", ISBN);
+    return 0;
 }
 
 // Função para listar livros solicitados
-void listRequestedBooks(Lista_Chaves_L *bookList) {
-    NO_CHAVE_L *current = bookList->Inicio;
-    while (current != NULL) {
-        ElementoL *bookElement = current->DADOS->Inicio;
-        while (bookElement != NULL) {
-            LIVRO *book = bookElement->livro;
-            if (book->Disponivel == 0) {
-                MostrarLivro(book);
-            }
-            bookElement = bookElement->proximo;
-        }
-        current = current->Prox;
+void listaLivrosRequisitados(ListaRequisicoes *listaRequisicoes) {
+    if (!listaRequisicoes || listaRequisicoes->num_Requisicoes == 0) {
+        printf("Não há requisições.\n");
+        return;
+    }
+    ElementoR *atual = listaRequisicoes->Inicio;
+    printf("\nLivros Requisitados: \n");
+    while (atual != NULL) {
+        MostrarLivro(atual->requisicao->Livro);
+        atual = atual->proximo;
     }
 }
 
