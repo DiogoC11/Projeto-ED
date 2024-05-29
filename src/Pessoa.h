@@ -1,7 +1,6 @@
 #ifndef PESSOA_H_INCLUDED
 #define PESSOA_H_INCLUDED
 #include "Livro.h"
-#include "Requisicao.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -116,7 +115,6 @@ float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa); //idade media de to
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
 int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite); //numero de pessoas cuja a idade superior a x
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
-void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *NIF);
 void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas sem requisições
 void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas com requisiçao
 char *SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa); //sobrenome mais usado nas requisiçoes
@@ -129,8 +127,8 @@ int compararUltimoNome(const void *a, const void *b);
 int compararIdFreguesia(const void* a, const void* b);
 void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
-//PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
-//int verificarIDArquivo(char *idRequisitante);
+PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
+int verificarIDArquivo(char *idRequisitante);
 
 //freguesias
 
@@ -139,7 +137,7 @@ void LibertarFreguesias(Lista_F *lista);
 void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
 void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_freguesias);
 void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos);
-Freguesia* ProcurarFreguesiaPorID(Lista_F *listaFreguesias, int id_freg, int id_conc, int id_dist);
+Freguesia* ProcurarFreguesiaPorID(Lista_F *listaFreguesias, char *id_freg, int id_conc, int id_dist);
 
 
 //concelhos

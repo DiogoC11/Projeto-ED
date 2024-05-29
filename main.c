@@ -431,19 +431,14 @@ int main() {
     //mostra_freguesias_do_concelho(4, ListaC);
 
 
-
-
-
     // Executar o menu geral
     menuGeral(listaChavesLivro, listaChavesPessoa, listaRequisicoes, listaD, ListaC, ListaF);
-
-    //Fregs
 
     printf("\nA sair da biblioteca...\n");
 
     // Liberar memória alocada para as listas de livros e pessoas
     //LiberarListaChaves_L(listaChavesLivro);
-    //LibertarListaChaves_P(listaChavesPessoa);
+    LiberarListaChaves_P(listaChavesPessoa);
 
     //TESTE
     LibertarListaRequisicoes(listaRequisicoes);

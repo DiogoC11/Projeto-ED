@@ -10,13 +10,14 @@
 
 
 
-typedef struct
-{
+
+typedef struct {
     int ID;
-    ptPESSOA *Pessoa;
+    PESSOA *Pessoa;
     LIVRO *Livro;
     data *Data_Requisicao;
-}REQUISICAO;
+} REQUISICAO;
+
 
 typedef struct elementoR{
     REQUISICAO *requisicao;
@@ -38,6 +39,7 @@ void DestruirRequisicao(REQUISICAO *P);
 //funcoes principais
 int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISBN);
 void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes);
+void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *NIF);
 
 
 
