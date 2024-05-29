@@ -333,8 +333,8 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
     } while (opPessoa != 0);
 }
 
-//Menu Requisiçoes
-void menuRequisicoes(ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaChavesLivros){
+//Menu Requisiçoes//
+void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaChavesLivros){
     int opRequisicao, id_dist, id_conc,id;
     char *isbn, *nome;
     do {
@@ -349,7 +349,7 @@ void menuRequisicoes(ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaCh
             case 1:
                 //adicionar requisicao
                 //TESTE
-                AdicionarRequisicao(listaPessoas, listaChavesLivros, listaRequisicoes);
+                AdicionarRequisicao(ListaPessoas, listaChavesLivros, listaRequisicoes);
                 break;
             case 2:
                 do {

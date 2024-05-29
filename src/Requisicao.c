@@ -149,7 +149,7 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
 
 //TESTAR
 
-// Função para adicionar uma requisição a uma pessoa
+// Função para adicionar uma requisição a uma pessoa//
 void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes) {
     char nif[50];
     char isbn[14];
@@ -217,7 +217,7 @@ void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *list
 }
 
 
-// Função para libertar a memória alocada para a lista de requisições
+// Função para libertar a memória alocada para a lista de requisições//
 void LibertarListaRequisicoes(ListaRequisicoes *lista) {
     if (!lista) return;
 
