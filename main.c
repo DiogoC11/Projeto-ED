@@ -425,9 +425,9 @@ int main() {
     Lista_D *listaD = LerTXTDist();
     //ListarConcelhosPorDistrito(listaDistritos,ListaC, 2);
     //ListarDistritosPorID(listaDistritos, 10);
-    //associa_concelhos_a_distritos(listaDistritos, ListaC);
+    associa_concelhos_a_distritos(listaD, ListaC);
     //mostra_concelhos_do_distrito(5,listaDistritos);
-    //associa_freguesias_a_concelhos(ListaC, ListaF);
+    associa_freguesias_a_concelhos(ListaC, ListaF);
     //mostra_freguesias_do_concelho(4, ListaC);
 
 

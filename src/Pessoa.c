@@ -1241,7 +1241,7 @@ Concelho *ProcurarConcelhoPorID(Lista_C *listaConcelhos, int id_conc, int id_dis
     ElementoC *atual = listaConcelhos->Inicio;
     while (atual != NULL) {
         Concelho *concelho = atual->concelho;
-        if (concelho && concelho->ID_CONC == id_dist && concelho->ID_CONC == id_conc ) {
+        if (concelho && concelho->ID_DIST == id_dist && concelho->ID_CONC == id_conc ) {
             return concelho;
         }
         atual = atual->prox;
