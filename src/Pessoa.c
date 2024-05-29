@@ -175,7 +175,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     return CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano, NIF, freguesia);
 }
 
-// Função para criar uma lista de pessoas
+// Função para criar uma lista de pessoas/
 ListaPessoa *criarListaP() {
     ListaPessoa *L = (ListaPessoa *)malloc(sizeof(ListaPessoa));
     if (!L) return NULL;

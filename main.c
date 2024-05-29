@@ -138,7 +138,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
     } while (opLivro != 0);
 }
 
-// Menu de operações de pessoas
+// Menu de operações de pessoas/
 void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista_F *F, ListaRequisicoes *listaRequisicoes){
     int opPessoa;
     do {

@@ -99,7 +99,7 @@ typedef struct{
     NO_CHAVE_P *Inicio;
 }Lista_Chaves_P;
 
-//criar pessoa
+//criar pessoa/
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano, char *NIF, Freguesia *freguesia);
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F);
 ListaPessoa *criarListaP();
