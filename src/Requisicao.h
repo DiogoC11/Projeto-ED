@@ -43,7 +43,7 @@ void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P
 
 
 
-//TESTAR//
+//TESTAR///
 void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes);
 void LibertarListaRequisicoes(ListaRequisicoes *lista);
 

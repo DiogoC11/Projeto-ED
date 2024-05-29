@@ -333,7 +333,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
     } while (opPessoa != 0);
 }
 
-//Menu Requisiçoes//
+//Menu Requisiçoes///
 void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaChavesLivros){
     int opRequisicao, id_dist, id_conc,id;
     char *isbn, *nome;

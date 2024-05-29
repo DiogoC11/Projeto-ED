@@ -217,7 +217,7 @@ void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *list
 }
 
 
-// Função para libertar a memória alocada para a lista de requisições//
+// Função para libertar a memória alocada para a lista de requisições///
 void LibertarListaRequisicoes(ListaRequisicoes *lista) {
     if (!lista) return;
 
