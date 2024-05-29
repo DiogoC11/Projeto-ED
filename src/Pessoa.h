@@ -1,3 +1,4 @@
+
 #ifndef PESSOA_H_INCLUDED
 #define PESSOA_H_INCLUDED
 #include "Livro.h"
@@ -11,6 +12,7 @@ typedef struct {
     int ID_DIST;
     int ID_CONC;
     char ID[3];
+    char ID_Todo[7];
     char nome[50];
 } Freguesia;
 
@@ -131,12 +133,12 @@ PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
 
 //freguesias
-
+void ListarFreguesias(Lista_F *listaFreguesias);
 Lista_F* LerTXT();
 void LibertarFreguesias(Lista_F *lista);
 void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
 void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_freguesias);
-void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos);
+void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos,int id_distrito);
 Freguesia* ProcurarFreguesiaPorID(Lista_F *listaFreguesias, char *id_freg, int id_conc, int id_dist);
 
 

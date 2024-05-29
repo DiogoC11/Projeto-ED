@@ -75,8 +75,8 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int 
 // Função para pedir dados de uma pessoa
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) {
     int dia, mes, ano, id_dist, id_conc;
-    char primeiroNome[30], ultimoNome[30], NIF[10], id_freg[4];
-    Freguesia *freguesia;
+    char primeiroNome[30], ultimoNome[30], NIF[10], id_freg[7];
+    Freguesia *freguesia = NULL;
     printf("\nAdicionar Pessoa:\n");
     do{
         printf("\nNIF: ");
@@ -108,7 +108,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     printf("Data de nascimento:\n");
 
     do {
-        printf("Ano: ");
+        printf("  Ano: ");
         scanf("%d", &ano);
         limparBuffer();
         if (ano < 1900 || ano > 2024) {
@@ -117,7 +117,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     }while(ano < 1900 || ano > 2024);
 
     do{
-        printf("Mês: ");
+        printf("  Mês: ");
         scanf("%d", &mes);
         limparBuffer();
         if (mes < 1 || mes > 12) {
@@ -126,7 +126,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     }while(mes < 1 || mes > 12);
 
     do {
-        printf("Dia: ");
+        printf("  Dia: ");
         scanf("%d", &dia);
         limparBuffer();
         if(mes == 2){
@@ -138,7 +138,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
                 printf("\nErro: Dia invalido.\n");
             }
         }
-    }while(dia < 1 || dia > 31);
+    }while (mes == 2 && (dia < 1 || dia > 29) || (mes != 2 && (dia < 1 || dia > 31)));
     ListarDistritos(D);
     do{
         printf("\nEscolha o seu Distrito: ");
@@ -157,18 +157,19 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
             printf("\nErro: Concelho nao encontrado.\n");
         }
     }while(ProcurarConcelhoPorID(C, id_conc, id_dist) == NULL);
-    MostraFreguesiasConcelho(id_conc, C);
+    MostraFreguesiasConcelho(id_conc, C, id_dist);
     do{
         do {
             printf("\nEscolha a sua Freguesia: ");
             lerString(id_freg, sizeof(id_freg));
-            if (strlen(id_freg) != 3) {
+            if (strlen(id_freg) != 2) {
                 printf("\nErro: Introduza um ID valido.\n");
             }
-        }while(strlen(id_freg) != 3);
-        freguesia = ProcurarFreguesiaPorID(F,id_freg,id_conc,id_dist);
-        if(freguesia == NULL){
+        }while(strlen(id_freg) != 2);
+        if(ProcurarFreguesiaPorID(F,id_freg,id_conc,id_dist) == NULL){
             printf("\nErro: Freguesia nao encontrada.\n");
+        }else{
+            freguesia = ProcurarFreguesiaPorID(F,id_freg,id_conc,id_dist);
         }
     }while(freguesia == NULL);
     return CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano, NIF, freguesia);
@@ -374,10 +375,8 @@ void MostrarPessoa(PESSOA *P) {
     printf("\nNome: %s\n", P->NOME);
     printf("NIF: %s\n", P->NIF);
     printf("Data de Nascimento: %d/%d/%d\n", P->dataNascimento->dia, P->dataNascimento->mes, P->dataNascimento->ano);
-    if (P->freguesia != NULL) {
-        printf("Freguesia: %s\n", P->freguesia->nome);
-    }
-    printf("Número de Requisições: %d\n", P->numero_requisicoes);
+    printf("Freguesia: %s (ID: %s)\n", P->freguesia->nome, P->freguesia->ID_Todo);
+    printf("Numero de Requisicoes: %d\n", P->numero_requisicoes);
 }
 
 
@@ -768,6 +767,7 @@ Lista_F* LerTXT() {
         // Extrair ID_DIST, ID_CONC e nome da linha
         int id_dist, id_conc;
         char ID[7]; // Aumente para 3 para permitir o caractere nulo
+        char ID_Todo[7];
         char nome[50];
         if (sscanf(linha, "%2d%2d%2s %[^\n]", &id_dist, &id_conc, ID, nome) != 4) {
             printf("Erro ao ler os dados da linha.\n");
@@ -776,7 +776,7 @@ Lista_F* LerTXT() {
             return NULL;
         }
 
-
+        sprintf(ID_Todo, "%02d%02d%2s", id_dist, id_conc, ID);
 
         // Criar uma nova freguesia e alocar memória
         Freguesia *nova_freg = (Freguesia *)malloc(sizeof(Freguesia));
@@ -791,6 +791,7 @@ Lista_F* LerTXT() {
         sprintf(nova_freg->ID, "%s", ID); // Você pode copiar diretamente o ID
         nova_freg->ID_CONC = id_conc; // Não precisa usar sprintf para inteiros
         nova_freg->ID_DIST = id_dist; // Não precisa usar sprintf para inteiros
+        sprintf(nova_freg->ID_Todo, "%s", ID_Todo); // Você pode copiar diretamente o ID
         strcpy(nova_freg->nome, nome); // Copia o nome da freguesia
 
         // Criar um novo elemento para a lista de freguesias e alocar memória
@@ -1021,7 +1022,7 @@ Lista_D* LerTXTDist() {
         novo_elemento->Prox = distritos->Inicio;
         distritos->Inicio = novo_elemento;
         distritos->num_Distritos++;
-       //printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
+        //printf("Distrito: %s , ID: %d\n",novo_distrito->nome,novo_distrito->ID_DIST);
     }
 
     fclose(arquivo);
@@ -1071,6 +1072,23 @@ void ListarDistritos(Lista_D *listaDistritos) {
             printf("- %s (ID: %d)\n", distrito->nome, distrito->ID_DIST);
         }
         atual = atual->Prox;
+    }
+}
+
+void ListarFreguesias(Lista_F *listaFreguesias) {
+    if (!listaFreguesias || listaFreguesias->num_Freguesias == 0) {
+        printf("Não há freguesias.\n");
+        return;
+    }
+
+    ElementoF *atual = listaFreguesias->Inicio;
+    printf("\nFreguesias: \n");
+    while (atual != NULL) {
+        Freguesia *distrito = atual->freguesia;
+        if (distrito) {
+            printf("- %s (ID: %d, %d, %s)\n", distrito->nome, distrito->ID_DIST, distrito->ID_CONC, distrito->ID);
+        }
+        atual = atual->prox;
     }
 }
 
@@ -1269,53 +1287,53 @@ void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_fre
         return;
     }
 
-    ElementoC *current_concelho_elem = lista_concelhos->Inicio;
+    ElementoC *ElementoConcelho = lista_concelhos->Inicio;
 
     // Percorrer todos os concelhos
-    while (current_concelho_elem != NULL) {
-        Concelho *current_concelho = current_concelho_elem->concelho;
+    while (ElementoConcelho != NULL) {
+        Concelho *atualConcelho = ElementoConcelho->concelho;
 
         // Inicializar a lista de freguesias do concelho, se ainda não estiver inicializada
-        if (current_concelho->freguesias == NULL) {
-            current_concelho->freguesias = (Lista_F *)malloc(sizeof(Lista_F));
-            current_concelho->freguesias->num_Freguesias = 0;
-            current_concelho->freguesias->Inicio = NULL;
+        if (atualConcelho->freguesias == NULL) {
+            atualConcelho->freguesias = (Lista_F *)malloc(sizeof(Lista_F));
+            atualConcelho->freguesias->num_Freguesias = 0;
+            atualConcelho->freguesias->Inicio = NULL;
         }
 
-        ElementoF *current_freguesia_elem = lista_freguesias->Inicio;
+        ElementoF *ElementoFreguesias = lista_freguesias->Inicio;
 
         // Percorrer todas as freguesias
-        while (current_freguesia_elem != NULL) {
-            Freguesia *current_freguesia = current_freguesia_elem->freguesia;
+        while (ElementoFreguesias != NULL) {
+            Freguesia *atualFreguesia = ElementoFreguesias->freguesia;
 
             // Comparar IDs
-            if (current_freguesia->ID_CONC == current_concelho->ID_CONC && current_freguesia->ID_DIST == current_concelho->ID_DIST) {
+            if (atualFreguesia->ID_DIST == atualConcelho->ID_DIST && atualFreguesia->ID_CONC == atualConcelho->ID_CONC) {
                 // Criar um novo elemento para a lista de freguesias do concelho
                 ElementoF *novo_elem_freguesia = (ElementoF *)malloc(sizeof(ElementoF));
-                novo_elem_freguesia->freguesia = current_freguesia;
-                novo_elem_freguesia->prox = current_concelho->freguesias->Inicio;
+                novo_elem_freguesia->freguesia = atualFreguesia;
+                novo_elem_freguesia->prox = atualConcelho->freguesias->Inicio;
 
                 // Adicionar o novo elemento no início da lista de freguesias do concelho
-                current_concelho->freguesias->Inicio = novo_elem_freguesia;
-                current_concelho->freguesias->num_Freguesias++;
+                atualConcelho->freguesias->Inicio = novo_elem_freguesia;
+                atualConcelho->freguesias->num_Freguesias++;
             }
 
             // Avançar para a próxima freguesia na lista
-            current_freguesia_elem = current_freguesia_elem->prox;
+            ElementoFreguesias = ElementoFreguesias->prox;
         }
 
         // Avançar para o próximo concelho na lista
-        current_concelho_elem = current_concelho_elem->prox;
+        ElementoConcelho = ElementoConcelho->prox;
     }
 }
 
-void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos) {
+void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos, int id_distrito) {
     ElementoC *atualConcelho = listaConcelhos->Inicio;
     Concelho *concelho = NULL;
 
     // Procurar o concelho com o ID correspondente
     while (atualConcelho != NULL) {
-        if (id_concelho == atualConcelho->concelho->ID_CONC) {
+        if (id_concelho == atualConcelho->concelho->ID_CONC && id_distrito == atualConcelho->concelho->ID_DIST) {
             concelho = atualConcelho->concelho;
             break;
         }
@@ -1327,7 +1345,7 @@ void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos) {
         return;
     }
 
-    printf("Freguesias do Concelho %s:\n", concelho->nome);
+    printf("\nFreguesias do Concelho %s:\n", concelho->nome);
     ElementoF *current_freguesia_elem = concelho->freguesias->Inicio;
 
     // Percorrer todas as freguesias do concelho
@@ -1374,5 +1392,3 @@ int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_con
     }
     return count;
 }
-
-
