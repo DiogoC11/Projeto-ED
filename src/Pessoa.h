@@ -100,6 +100,7 @@ typedef struct{
 }Lista_Chaves_P;
 
 //criar pessoa/
+ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias);
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano, char *NIF, Freguesia *freguesia);
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F);
 ListaPessoa *criarListaP();
@@ -112,7 +113,6 @@ void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) ;
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome);
 void ListaOrganizada(Lista_Chaves_P *L, int op);
 int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa);  //idade maxima de todos os requisitantes
-
 float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa); //idade media de todos os requisitantes
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
 int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite); //numero de pessoas cuja a idade superior a x
@@ -131,6 +131,9 @@ void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
 PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
 int verificarIDArquivo(char *idRequisitante);
+void MostrarPessoas(Lista_Chaves_P *listaChaves);
+Lista_Chaves_P *OrganizarListaPessoaPorChave(ListaPessoa *listaPessoa);
+void AdicionarPessoaNaLista(ListaPessoa *lista, PESSOA *pessoa);
 
 //freguesias
 void ListarFreguesias(Lista_F *listaFreguesias);
@@ -168,6 +171,7 @@ Distrito* ProcurarDistritoPorID(Lista_D *listaDistritos, int id);
 //funcoes apagar
 void LiberarListaPessoas(ListaPessoa *lista);
 void LiberarListaChaves_P(Lista_Chaves_P *lista);
+void LiberarPessoa(PESSOA *pessoa);
 
 void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
 

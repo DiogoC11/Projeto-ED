@@ -157,6 +157,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
         printf("12 - Determinar numero de pessoas de um Distrito/Concelho pelo nome/apelido\n");
         printf("0 - Voltar\n");
         opPessoa = LerInteiro("Qual a opcao? ");
+        limparBuffer();
 
         switch (opPessoa) {
             case 1: {
@@ -171,13 +172,8 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 //Pesquisar pessoa pelo nome
                 char nome[50];
                 printf("Digite o nome da Pessoa a pesquisar: ");
-                scanf("%49s", nome);
-                PESSOA *PessoaEncontrada = PesquisarPesssoaPorNome(listaChavesPessoa, nome);
-                if (PessoaEncontrada != NULL) {
-                    MostrarPessoa(PessoaEncontrada);
-                } else {
-                    printf("Pessoa com Nome %s nao encontrado.\n", nome);
-                }
+                lerString(nome, sizeof(nome));
+                PesquisarPesssoaPorNome(listaChavesPessoa, nome);
                 break;
             }
             case 3: {
@@ -205,16 +201,13 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                             break;
                         }
                         case 0: {
-                            printf("Voltando para o menu Pessoas...\n");
+                            printf("\nVoltando para o menu Pessoas...\n");
                             break;
                         }
                         default: {
-                            printf("Opcao nao implementada\n");
+                            printf("\nOpcao nao implementada.\n");
                             break;
                         }
-                    }
-                    for(int i = 0; i < listaPessoas->num_Pessoas; i++){
-                        MostrarPessoa(listaPessoas->Inicio->pessoa);
                     }
                 } while (opOrganizarPessoa != 0);
                 break;
@@ -431,6 +424,10 @@ int main() {
     associa_freguesias_a_concelhos(ListaC, ListaF);
     //MostraFreguesiasConcelho(2, ListaC, 5);
     //ListarFreguesias(ListaF);
+
+    ListaPessoa *listaPessoas = LerRequisitantesTXT(ListaF);
+    listaChavesPessoa = OrganizarListaPessoaPorChave(listaPessoas);
+    //MostrarPessoas(listaChavesPessoa);
 
     // Executar o menu geral
     menuGeral(listaChavesLivro, listaChavesPessoa, listaRequisicoes, listaD, ListaC, ListaF);

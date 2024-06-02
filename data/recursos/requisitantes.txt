@@ -2408,7 +2408,7 @@
 004812564	Clarice Calado Castanheira Barros	19-10-1953	080608
 397724323	Alzinda Pinto Dias Carmona Real	30-10-1956	130319
 524822214	Cristiana Pires Ferraz Martins Mendes	20-04-1966	180508
-424105059	Luis Mora Amado Andrade Brito	1979-05-15	100933
+424105059	Luis Mora Amado Andrade Brito	15-05-1979	100933
 209752131	Catarina Cunha Peres Proenca Estrela	18-08-1970	131107
 363674344	Duarte Amado Seixas Eanes	29-12-1952	011304
 522861501	Carla Pires Leal Real Cipriano	09-09-1951	090114
@@ -3504,7 +3504,7 @@
 302903977	Ricardo Aguiar Cabral Lopes Rego	26-07-1956	141602
 578619121	Ana Pinheiro Lobato Azevedo	12-11-1995	160716
 512948074	Rita Paredes Moura Ferreira Pinheiro	06-01-1971	031258
-571480898	Joana Tinoco Rosado Pinto Vivas	03-12-1951	13111
+571480898	Joana Tinoco Rosado Pinto Vivas	03-12-1951	131101
 780144592	Celina Real Leal Mateus Leao	29-06-1964	030515
 434210871	Eduardo Dias Antunes Andrade Baptista	21-01-1970	090747
 600671965	Odete Paredes Amorim Nascimento Cabral	14-11-1989	182409
@@ -4941,7 +4941,7 @@
 176340270	Dulce Mourao Almeida Pires Rego	11-04-1951	040728
 746731516	Basilio Rego Tinoco Eanes Carrico	14-04-1950	060407
 129617932	Bruno Carmona Moreno Arouca	13-11-1966	170603
-167138248	Carmo Domingos Vivas Cipriano Silva	23/11/2001	141818
+167138248	Carmo Domingos Vivas Cipriano Silva	23-11-2001	141818
 318991090	Carina Andrade Carrico Belchior Azevedo	11-04-1996	180528
 933984338	Dulcineia Almada Castanheira Nogueira Tinoco	25-08-1978	160718
 300967627	Marisa Moreno Carmona Proenca Pinheiro	08-04-1987	180110
@@ -6706,7 +6706,6 @@
 137331219	Vitor Lobato Carrico Barros Castro	08-02-1958	040909
 500105702	Ana Nunes Macedo Carrasco Dias	06-06-1952	050434
 354279488	Dina Antunes Martins Quadros	10-12-1978	110501
-465970883	Clotilde Eanes Soeiro Arouca	26-12-1991	081803
 797650150	Claudio Calheiros Real Matos Pacheco	03-02-1993	030407
 936787316	Celino Carreira Carmona Pinto	27-04-1998	182306
 067924741	Francisca Andrade Moreira Coelho Queiros	20-04-1960	050311
@@ -8429,7 +8428,7 @@
 076375822	Ana Carmona Ferro Macedo	05-10-1965	160756
 290877863	Catarina Mateus Paredes Mora Nascimento	27-03-1986	010312
 437718479	Dora Martins Rocha Pires Soeiro	16-02-1970	160820
-462278579	Bruna Dias Valbom Belchior Brito	04-set-1959	150506
+462278579	Bruna Dias Valbom Belchior Brito	04-09-1959	150506
 247019557	Carla Santos Castro Carrasco Amora	24-05-1981	131616
 100514315	Soraia Caiado Dinis Pires Castanheira	26-11-1976	030268
 780878921	Duarte Domingos Valbom Rosado Eanes	11-09-1957	160803

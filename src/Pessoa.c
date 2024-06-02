@@ -1,4 +1,5 @@
 #include <time.h>
+#include <ctype.h>
 #include "Pessoa.h"
 #include "Uteis.h"
 
@@ -251,19 +252,30 @@ void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) {
 
 // Função para pesquisar uma pessoa pelo nome
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
-    if (!L) return NULL;
+    printf("Lista de pessoas com nome %s:\n", nome);
+    if (L->Inicio == NULL || L->num_chaves == 0) {
+        printf("\nErro: Lista vazia\n");
+        return NULL;
+    }
+    int a = 0;
     NO_CHAVE_P *N = L->Inicio;
     while (N != NULL) {
         ElementoP *E = N->DADOS->Inicio;
         while (E != NULL) {
-            if (strcmp(E->pessoa->NOME, nome) == 0) {
-                return E->pessoa;
+            if (strstr(E->pessoa->PrimeiroNome, nome) != NULL ||
+                strstr(E->pessoa->UltimoNome, nome) != NULL ||
+                strstr(E->pessoa->NOME, nome) != NULL) {
+                printf("\nPessoa encontrada:\n");
+                MostrarPessoa(E->pessoa);
+                a = 1;
             }
             E = E->proximo;
         }
         N = N->Prox;
     }
-    return NULL;
+    if(a == 0){
+        printf("\nNenhuma pessoa encontrada.\n");
+    }
 }
 
 void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif) {
@@ -344,6 +356,10 @@ void ListaOrganizada(Lista_Chaves_P *L, int op) {
     }
 
     // mostrar as pessoas ordenadas
+    if(pessoasArray == NULL){
+        printf("Erro: Array de pessoas vazio.\n");
+        return;
+    }
     printf("Pessoas ordenadas:\n");
     for (int i = 0; i < totalPessoas; i++) {
         MostrarPessoa(pessoasArray[i]);
@@ -1391,4 +1407,197 @@ int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_con
         atual = atual->Prox;
     }
     return count;
+}
+
+ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
+    FILE *arquivo;
+    char linha[200];
+    ListaPessoa *lista = (ListaPessoa *)malloc(sizeof(ListaPessoa));
+    if (lista == NULL) {
+        printf("Erro ao alocar memória para a lista de pessoas.\n");
+        return NULL;
+    }
+    lista->num_Pessoas = 0;
+    lista->Inicio = NULL;
+
+    arquivo = fopen("../data/recursos/requisitantes.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        free(lista);
+        return NULL;
+    }
+
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        // Extrair NIF, nome, data de nascimento e ID da freguesia da linha
+        char NIF[10], primeiroNome[50], ultimoNome[50], nome[100], id_freg_todo[7], id_freg[3];
+        int dia, mes, ano, id_dist, id_conc;
+        Freguesia *freg;
+
+        // Use sscanf para extrair dados da linha
+        if (sscanf(linha, "%9s %[^0-9] %d-%d-%d %6s", NIF, nome, &dia, &mes, &ano, id_freg_todo) != 6) {
+            printf("Erro ao ler os dados da linha: %s\n", linha);
+            fclose(arquivo);
+            LiberarListaPessoas(lista);
+            return NULL;
+        }
+
+        // Encontrar o primeiro nome e o último nome
+        sscanf(nome, "%s", primeiroNome);
+
+        // Encontrar a última ocorrência de um espaço
+        char *lastSpace = strrchr(nome, ' ');
+        if (lastSpace != NULL) {
+            strcpy(ultimoNome, lastSpace + 1);
+        } else {
+            strcpy(ultimoNome, "");
+        }
+
+
+        // Extrair id_dist, id_conc e id_freg do id_freg_todo
+        sscanf(id_freg_todo, "%2d%2d%2s", &id_dist, &id_conc, id_freg);
+
+        // Debugging prints
+        //printf("Lendo linha: %s\n", linha);
+        //printf("NIF: %s, Primeiro Nome: %s, Ultimo Nome: %s, Data: %02d-%02d-%04d, ID_Freg_Todo: %s\n",
+        //       NIF, primeiroNome, ultimoNome, dia, mes, ano, id_freg_todo);
+        //printf("ID_DIST: %d, ID_CONC: %d, ID_FREG: %s\n", id_dist, id_conc, id_freg);
+
+        freg = ProcurarFreguesiaPorID(listaFreguesias, id_freg, id_conc, id_dist);
+        if (freg == NULL) {
+            printf("Freguesia não encontrada para ID_DIST: %d, ID_CONC: %d, ID_FREG: %s, NIF: %s\n", id_dist, id_conc, id_freg, NIF);
+            fclose(arquivo);
+            LiberarListaPessoas(lista);
+            return NULL;
+        }
+
+        // Criar uma nova pessoa e alocar memória
+        PESSOA *nova_pessoa = CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano, NIF, freg);
+        if (nova_pessoa == NULL) {
+            printf("Erro ao alocar memória para nova_pessoa.\n");
+            fclose(arquivo);
+            LiberarListaPessoas(lista);
+            return NULL;
+        }
+
+        // Criar um novo elemento para a lista de pessoas e alocar memória
+        ElementoP *novo_elemento = (ElementoP *)malloc(sizeof(ElementoP));
+        if (novo_elemento == NULL) {
+            printf("Erro ao alocar memória para novo_elemento.\n");
+            fclose(arquivo);
+            LiberarListaPessoas(lista);
+            LiberarPessoa(nova_pessoa);
+            return NULL;
+        }
+
+        // Preencher o elemento com a nova pessoa
+        novo_elemento->pessoa = nova_pessoa;
+        novo_elemento->proximo = lista->Inicio;
+        lista->Inicio = novo_elemento;
+        lista->num_Pessoas++;
+    }
+
+    fclose(arquivo);
+    return lista;
+}
+
+void MostrarPessoas(Lista_Chaves_P *listaChaves) {
+    if (listaChaves == NULL) {
+        printf("Lista de chaves está vazia.\n");
+        return;
+    }
+
+    NO_CHAVE_P *chaveAtual = listaChaves->Inicio;
+    while (chaveAtual != NULL) {
+        printf("Chave: %c\n", chaveAtual->Key);
+
+        ListaPessoa *listaPessoas = chaveAtual->DADOS;
+        ElementoP *atual = listaPessoas->Inicio;
+        while (atual != NULL) {
+            printf("NIF: %s, Nome: %s, Data de Nascimento: %02d-%02d-%04d\n",
+                   atual->pessoa->NIF, atual->pessoa->NOME,
+                   atual->pessoa->dataNascimento->dia, atual->pessoa->dataNascimento->mes,
+                   atual->pessoa->dataNascimento->ano);
+            atual = atual->proximo;
+        }
+        chaveAtual = chaveAtual->Prox;
+    }
+}
+
+void LiberarPessoa(PESSOA *pessoa) {
+    if (pessoa) {
+        free(pessoa->PrimeiroNome);
+        free(pessoa->UltimoNome);
+        free(pessoa->NOME);
+        free(pessoa->NIF);
+        free(pessoa->dataNascimento);
+        free(pessoa);
+    }
+}
+
+Lista_Chaves_P *OrganizarListaPessoaPorChave(ListaPessoa *listaPessoa) {
+    if (!listaPessoa || listaPessoa->num_Pessoas == 0) {
+        return NULL;
+    }
+
+    Lista_Chaves_P *listaChaves = (Lista_Chaves_P *)malloc(sizeof(Lista_Chaves_P));
+    if (!listaChaves) {
+        printf("Erro ao alocar memória para listaChaves.\n");
+        return NULL;
+    }
+    listaChaves->num_chaves = 0;
+    listaChaves->Inicio = NULL;
+
+    ElementoP *atualPessoa = listaPessoa->Inicio;
+    while (atualPessoa != NULL) {
+        char chave = toupper(atualPessoa->pessoa->PrimeiroNome[0]);
+        NO_CHAVE_P *atualChave = listaChaves->Inicio;
+        NO_CHAVE_P *chaveAnterior = NULL;
+
+        while (atualChave != NULL && atualChave->Key < chave) {
+            chaveAnterior = atualChave;
+            atualChave = atualChave->Prox;
+        }
+
+        if (atualChave == NULL || atualChave->Key != chave) {
+            NO_CHAVE_P *novaChave = (NO_CHAVE_P *)malloc(sizeof(NO_CHAVE_P));
+            if (!novaChave) {
+                printf("Erro ao alocar memória para novaChave.\n");
+                return NULL;
+            }
+            novaChave->Key = chave;
+            novaChave->DADOS = (ListaPessoa *)malloc(sizeof(ListaPessoa));
+            if (!novaChave->DADOS) {
+                printf("Erro ao alocar memória para novaChave->DADOS.\n");
+                return NULL;
+            }
+            novaChave->DADOS->num_Pessoas = 0;
+            novaChave->DADOS->Inicio = NULL;
+            novaChave->Prox = atualChave;
+
+            if (chaveAnterior == NULL) {
+                listaChaves->Inicio = novaChave;
+            } else {
+                chaveAnterior->Prox = novaChave;
+            }
+            listaChaves->num_chaves++;
+            atualChave = novaChave;
+        }
+
+        AdicionarPessoaNaLista(atualChave->DADOS, atualPessoa->pessoa);
+        atualPessoa = atualPessoa->proximo;
+    }
+
+    return listaChaves;
+}
+
+void AdicionarPessoaNaLista(ListaPessoa *lista, PESSOA *pessoa) {
+    ElementoP *novoElemento = (ElementoP *)malloc(sizeof(ElementoP));
+    if (!novoElemento) {
+        printf("Erro ao alocar memória para novoElemento.\n");
+        return;
+    }
+    novoElemento->pessoa = pessoa;
+    novoElemento->proximo = lista->Inicio;
+    lista->Inicio = novoElemento;
+    lista->num_Pessoas++;
 }
