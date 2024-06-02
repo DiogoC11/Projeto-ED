@@ -25,7 +25,8 @@ LIVRO *CriarLivro(char *ISBN, char *_nome, char *_area, int _anoPublicacao, char
     strcpy(P->ISBN,ISBN);
     P->Autor = (char *) malloc(strlen(_autor + 1)*sizeof(char));
     strcpy(P->Autor,_autor);
-    P->Disponivel = 0;
+    P->Disponivel = 1;
+    P->Requisitado = 0;
     P->quant_requisicaoL = 0;
     return P;
 }
@@ -124,15 +125,21 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
 void MostrarLivro(LIVRO *P)
 {
     char disponivel[4];
+    char requisitado[4];
     if(P->Disponivel ){
         strcpy(disponivel,"NAO");
     }else{
         strcpy(disponivel,"SIM");
     }
-    if(P->quant_requisicaoL > 0){
-        printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Quantidade de vezes requisitado: %d\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel,P->quant_requisicaoL);
+    if(P->Requisitado ){
+        strcpy(requisitado,"NAO");
     }else{
-        printf("\nLivro: \n ISBN: %s\n Titulo: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n", P->ISBN, P->NOME, P->AREA, P->Autor, P->anoPublicacao,disponivel);
+        strcpy(requisitado,"SIM");
+    }
+    if(P->quant_requisicaoL > 0){
+        printf("\nTitulo: %s\n ISBN: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Requisitado? %s\n Quantidade de vezes requisitado: %d\n", P->NOME, P->ISBN, P->AREA, P->Autor, P->anoPublicacao,disponivel,requisitado,P->quant_requisicaoL);
+    }else{
+        printf("\nTitulo: %s\n ISBN: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Requisitado? %s\n",P->NOME , P->ISBN, P->AREA, P->Autor, P->anoPublicacao,disponivel, requisitado);
     }
 }
 void DestruirLivro(LIVRO *P)
@@ -257,11 +264,11 @@ NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C) {
 LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C){
     if(!C || C->Inicio == NULL) return NULL;
     NO_CHAVE_L *N = C->Inicio;
-    ElementoL *E = C->Inicio->DADOS->Inicio;
     LIVRO *maisRequisitado = NULL;
     while (N != NULL){
+        ElementoL *E = C->Inicio->DADOS->Inicio;
         while(E != NULL){
-            if(maisRequisitado == NULL || E->livro->Disponivel > maisRequisitado->Disponivel){
+            if(maisRequisitado == NULL || E->livro->quant_requisicaoL > maisRequisitado->quant_requisicaoL){
                 maisRequisitado = E->livro;
             }
             E = E->proximo;
@@ -324,4 +331,20 @@ void LiberarListaChaves_L(Lista_Chaves_L *lista) {
         free(temp);
     }
     free(lista);
+}
+
+NO_CHAVE_L* ProcurarNoChavePorLivro(LIVRO *livro, Lista_Chaves_L *listaChaves) {
+    if (livro == NULL || listaChaves == NULL) {
+        return NULL;
+    }
+
+    NO_CHAVE_L *atual = listaChaves->Inicio;
+    while (atual != NULL) {
+        if (strcmp(atual->categoria, livro->AREA) == 0) {
+            return atual;
+        }
+        atual = atual->Prox;
+    }
+
+    return NULL; // Se não encontrar, retorna NULL
 }

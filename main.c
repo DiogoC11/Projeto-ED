@@ -27,14 +27,13 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 // Adicionar Livro
                 LIVRO *novoLivro = PedirDadosLivro(listaChavesLivro);
                 MostrarLivro(novoLivro);
-                confirm = LerInteiro("\nDeseja adicionar o livro? (1-Sim, 0-Nao) ");
+                printf("Deseja adicionar o livro? (1-Sim, 0-Nao) ");
+                scanf("%d", &confirm);
                 if(confirm == 1) {
                     ElementoL *novoElemento = criar_elementoL(novoLivro);
                     AdicionarLivro(novoElemento, listaChavesLivro);
-                    //free(novoElemento);
                 }else{
                     printf("\nLivro nao foi adicionado.\n");
-
                     free(novoLivro);
                 }
                 break;
@@ -112,19 +111,19 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                     }
                 } while ( strlen(ISBN) != 13);
                 LIVRO *livroDestruir = PesquisarLivroPorISBN(listaChavesLivro, (char *) ISBN);
-                if (livroDestruir != NULL) {
+                if (livroDestruir != NULL || !livroDestruir->Disponivel || livroDestruir->Requisitado) {
                     MostrarLivro(livroDestruir);
                     do {
                         confirm = LerInteiro("\nDeseja destruir o livro? (1-Sim, 0-Nao) ");
                         if (confirm == 1) {
-                            livroDestruir->Disponivel = 1;
-                            printf("O livro de ISBN %s foi destruido.", ISBN);
+                            livroDestruir->Disponivel = 0;
+                            printf("O livro de ISBN %s está agora indisponivel.", ISBN);
                         }else if (confirm == 0) {
                             printf("Livro nao foi destruido.\n");
                         }
                     }while(confirm != 0 && confirm != 1);
                 } else {
-                    printf("Nenhum livro disponível.\n");
+                    printf("Nenhum livro disponível ou livro foi requisitado.\n");
                 }
                 break;
             }
@@ -140,7 +139,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
 
 // Menu de operações de pessoas/
 void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista_F *F, ListaRequisicoes *listaRequisicoes){
-    int opPessoa;
+    int opPessoa, confirm;
     do {
         printf("\n--- Menu de Operacoes de Pessoa ---\n");
         printf("1 - Adicionar Pessoa\n");
@@ -164,9 +163,24 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 //Adicionar Pessoa
                 PESSOA *novaPessoa = PedirDadosPessoa(listaChavesPessoa, D, C, F);
                 MostrarPessoa(novaPessoa);
-                ElementoP *novoElemento = criarElementoP(novaPessoa);
-                AdicionarPessoa(listaChavesPessoa , novoElemento);
-                break;
+                printf("Deseja adicionar a pessoa? (1-Sim, 0-Nao) ");
+                scanf("%d", &confirm);
+                switch (confirm) {
+                    case 1: {
+                        ElementoP *novoElemento = criarElementoP(novaPessoa);
+                        AdicionarPessoa(listaChavesPessoa , novoElemento);
+                        break;
+                    }
+                    case 2: {
+                        printf("Pessoa nao foi adicionada.\n");
+                        LiberarPessoa(novaPessoa);
+                        break;
+                    }
+                    default: {
+                        printf("\nErro: Opcao invalida.\n");
+                        break;
+                    }
+                }
             }
             case 2: {
                 //Pesquisar pessoa pelo nome
@@ -214,20 +228,20 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
             }
             case 4: {
                 int idadeMaxima = CalcularIdadeMaxima(listaChavesPessoa);
-                printf("A idade maxima de todos os requisitantes e: %d anos\n", idadeMaxima);
+                printf("\nA idade maxima de todos os requisitantes e: %d anos\n", idadeMaxima);
                 break;
             }
             case 5: {
                 //  idade média
                 float idadeMedia = CalcularIdadeMedia(listaChavesPessoa);
-                printf("A idade media de todos os requisitantes e: %.2f anos\n", idadeMedia);
+                printf("\nA idade media de todos os requisitantes e: %.2f anos\n", idadeMedia);
                 break;
             }
             case 6: {
                 // contar pessoas com idade superior a X
-                int idadeLimite = LerInteiro("Digite a idade limite: ");
+                int idadeLimite = LerInteiro("\nDigite a idade limite: ");
                 int numPessoas = ContarPessoasComIdadeSuperiorA(listaChavesPessoa, idadeLimite);
-                printf("O numero de pessoas com idade superior a %d anos e: %d\n", idadeLimite, numPessoas);
+                printf("\nO numero de pessoas com idade superior a %d anos e: %d\n", idadeLimite, numPessoas);
                 break;
 
             }
@@ -235,25 +249,25 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 //  idade com mais requisitantes
                 int idadeMaisRequisitada = IdadeComMaisRequisitantes(listaChavesPessoa);
                 if (idadeMaisRequisitada != -1) {
-                    printf("A idade com mais requisitantes e: %d anos\n", idadeMaisRequisitada);
+                    printf("\nA idade com mais requisitantes e: %d anos\n", idadeMaisRequisitada);
                 } else {
-                    printf("Nenhuma idade encontrada.\n");
+                    printf("\nErro: Nenhuma idade encontrada.\n");
                 }
                 break;
             }
             case 8:{
-                char *NIF;
+                char *ID;
                 do{
-                    printf("\nNIF: ");
-                    scanf("%s", NIF);
+                    printf("\nID: ");
+                    scanf("%s", ID);
                     limparBuffer();
-                    if (strlen(NIF) != 9) {
-                        printf("\nErro: O NIF tem de ter 9 digitos.(%d)\n", strlen(NIF));
-                    } else if (PesquisarPessoaPorNIF(listaChavesPessoa,NIF) == NULL) {
+                    if (strlen(ID) != 9) {
+                        printf("\nErro: O NIF tem de ter 9 digitos.(%d)\n", strlen(ID));
+                    } else if (buscarPessoaPorID(listaChavesPessoa,ID) == NULL) {
                         printf("\nErro: O NIF inserido nao existe.\n");
                     }
-                }while(strlen(NIF) != 9 || PesquisarPessoaPorNIF(listaChavesPessoa,NIF) == NULL);
-                MostrarRequisicoesPorNIF(listaRequisicoes, listaChavesPessoa, NIF);
+                }while(strlen(ID) != 9 || buscarPessoaPorID(listaChavesPessoa,ID) == NULL);
+                MostrarRequisicoesPorID(listaRequisicoes, listaChavesPessoa, ID);
                 break;
             }
             case 9: {
@@ -265,17 +279,17 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 break;
             }
             case 11: {
-                char* sobrenomeMaisUsado = SobrenomeMaisUsado(listaChavesPessoa);
+                ResultadoSobrenome* sobrenomeMaisUsado = SobrenomeMaisUsado(listaChavesPessoa);
                 if (sobrenomeMaisUsado != NULL) {
-                    printf("O sobrenome mais comum nas requisições e: %s\n", sobrenomeMaisUsado);
+                    printf("O sobrenome mais comum nos requisitantes e: %s (%d pessoas)\n", sobrenomeMaisUsado->sobrenome, sobrenomeMaisUsado->contagem);
                 } else {
-                    printf("Nenhuma requisição encontrada.\n");
+                    printf("Nenhum requisitante encontrada.\n");
                 }
                 break;
             }
             case 12: {
-                char *nome = "", *apelido = "", op;
-                int id_dist, id_conc = 0,id;
+                char *nome = NULL, *apelido = NULL, op;
+                int id_dist , id_conc = 0, contagem = 0;
                 do{
                     ListarDistritos(D);
                     printf("\nEscolha um Distrito: ");
@@ -298,7 +312,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 }while(id_conc != 0 && ProcurarConcelhoPorID(C, id_conc, id_dist) == NULL);
                 //pedir nome/apelido
                 do {
-                    printf("Pretende procurar por nome ou apelido? (1-Nome, 2-Apelido): ");
+                    printf("\nPretende procurar por nome ou apelido? (1-Nome, 2-Apelido): ");
                     scanf("%d", &op);
                     limparBuffer();
                     if(op != 1 && op != 2){
@@ -306,13 +320,36 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                     }
                 }while(op != 1 && op != 2);
                 if(op == 1) {
-                    printf("Insira o nome: ");
+                    nome = (char *)malloc(sizeof(char) * 20);
+                    if (nome == NULL) {
+                        printf("Erro: Falha ao alocar memória para o nome.\n");
+                        free(nome);
+                        break;
+                    }
+                    printf("\nInsira o nome: ");
                     scanf("%s", nome);
+                    contagem = ContarPessoasDeUmLocal(listaChavesPessoa, id_dist, id_conc, nome, apelido);
+                    if(id_conc == 0) {
+                        printf("\nO numero de pessoas de nome %s no Distrito %s e: %d\n", nome, ObterNomeDistrito(D, id_dist), contagem);
+                    }else {
+                        printf("\nO numero de pessoas de nome %s no Distrito %s e Concelho %s e: %d\n", nome, ObterNomeDistrito(D, id_dist), ProcurarConcelhoPorID(C,id_conc,id_dist)->nome, contagem);
+                    }
                 }else{
-                    printf("Insira o apelido: ");
+                    apelido = (char *)malloc(sizeof(char) * 20);
+                    if (apelido == NULL) {
+                        printf("Erro: Falha ao alocar memória para o nome.\n");
+                        free(apelido);
+                        break;
+                    }
+                    printf("\nInsira o apelido: ");
                     scanf("%s", apelido);
+                    contagem = ContarPessoasDeUmLocal(listaChavesPessoa, id_dist, id_conc, nome, apelido);
+                    if(id_conc == 0) {
+                        printf("\nO numero de pessoas de Apelido %s no Distrito %s e: %d\n", apelido, ObterNomeDistrito(D, id_dist), contagem);
+                    }else {
+                        printf("\nO numero de pessoas de Apelido %s no Distrito %s e Concelho %s e: %d\n", apelido, ObterNomeDistrito(D, id_dist), ProcurarConcelhoPorID(C,id_conc,id_dist)->nome, contagem);
+                    }
                 }
-                ContarPessoasDeUmLocal(listaChavesPessoa, id_dist, id_conc, nome, apelido);
                 break;
             }
             case 0: {
@@ -328,9 +365,9 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
 }
 
 //Menu Requisiçoes///
-void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaChavesLivros){
-    int opRequisicao, id_dist, id_conc,id;
-    char *isbn, *nome;
+void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaLivros){
+    int opRequisicao, id_dist, id_conc, confirm;
+    char *isbn, *nome, *ID;
     do {
         printf("\n--- Menu Requisicoes ---\n");
         printf("1- Fazer Requisicao\n");
@@ -341,22 +378,47 @@ void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequis
 
         switch (opRequisicao) {
             case 1:
-                //adicionar requisicao
-                //TESTE
-                AdicionarRequisicao(ListaPessoas, listaChavesLivros, listaRequisicoes);
+                REQUISICAO *novaRequisicao = AdicionarRequisicao(ListaPessoas, listaLivros, listaRequisicoes);
+                MostrarRequisicao(novaRequisicao);
+                printf("Deseja adicionar a requisicao? (1-Sim, 0-Nao) ");
+                scanf("%d", &confirm);
+                switch (confirm) {
+                    case 1: {
+                        ElementoR *novoElemento = criarElementoR(novaRequisicao);
+                        InserirRequisicaoNaLista(listaRequisicoes, novoElemento, listaLivros, ListaPessoas);
+                        break;
+                    }
+                    case 2: {
+                        printf("Requisicao nao foi adicionada.\n");
+                        LiberarRequisicao(novaRequisicao);
+                        break;
+                    }
+                    default: {
+                        printf("\nErro: Opcao invalida.\n");
+                        break;
+                    }
+                }
+
                 break;
             case 2:
                 do {
+                    printf("Digite o ID da pessoa: ");
+                    scanf("%s", ID);
+                    if (buscarPessoaPorID(ListaPessoas, ID)) {
+                        printf("\nErro: Pessoa com ID: %s nao encontrada.\n", ID);
+                    }
+                }while(buscarPessoaPorID(ListaPessoas,ID));
+                printf("Pessoa encontrada: %s \n", buscarPessoaPorID(ListaPessoas,ID)->NOME);
+                do {
                     printf("\nISBN: ");
                     scanf("%s", isbn);
-                    limparBuffer();
                     if (strlen(isbn) != 13) {
                         printf("\nErro: O ISBN tem de ter 13 digitos.(%d)\n", strlen(isbn));
-                    } else if (PesquisarLivroPorISBN(listaChavesLivros, isbn) == NULL) {
+                    } else if (PesquisarLivroPorISBN(listaLivros, isbn) == NULL) {
                         printf("\nErro: O ISBN inserido nao existe.\n");
                     }
-                } while ( strlen(isbn) != 13 || PesquisarLivroPorISBN(listaChavesLivros, isbn) != NULL);
-                DevolverLivro(listaChavesLivros, listaRequisicoes, isbn);
+                } while ( strlen(isbn) != 13 || PesquisarLivroPorISBN(listaLivros, isbn) != NULL);
+                DevolverLivro(listaLivros, listaRequisicoes, isbn, ID);
                 break;
             case 3:
                 ListarLivrosRequisitados(listaRequisicoes);

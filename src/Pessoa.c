@@ -1,10 +1,11 @@
+#define MAX_SOBRENOMES 100
 #include <time.h>
 #include <ctype.h>
 #include "Pessoa.h"
 #include "Uteis.h"
 
 // Função para criar uma pessoa
-PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano, char *NIF, Freguesia *freguesia){
+PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, int mes, int ano,char *id, Freguesia *freguesia){
     PESSOA *P = (PESSOA *)malloc(sizeof(PESSOA));
     if (P == NULL) {
         printf("\nERRO AO ALOCAR MEMORIA PARA PESSOA\n");
@@ -27,29 +28,21 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int 
         return NULL;
     }
     strcpy(P->UltimoNome, ultimoNome);
-
-    P->NOME = (char *)malloc((strlen(primeiroNome) + strlen(ultimoNome) + 2) * sizeof(char)); // +2 para espaço e '\0'
-    if (P->NOME == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA NOME\n");
-        free(P->PrimeiroNome);
-        free(P->UltimoNome);
-        free(P);
-        return NULL;
+    if(Nome != NULL){
+        P->NOME = (char *)malloc((strlen(Nome) + 1) * sizeof(char));
+        if (P->NOME == NULL) {
+            printf("\nERRO AO ALOCAR MEMORIA PARA NOME\n");
+            free(P->PrimeiroNome);
+            free(P->UltimoNome);
+            free(P);
+            return NULL;
+        }
+        strcpy(P->NOME, Nome);
+    }else {
+        strcpy(P->NOME, primeiroNome);
+        strcat(P->NOME, " ");
+        strcat(P->NOME, ultimoNome);
     }
-    strcpy(P->NOME, primeiroNome);
-    strcat(P->NOME, " ");
-    strcat(P->NOME, ultimoNome);
-
-    P->NIF = (char *)malloc((strlen(NIF) + 1) * sizeof(char));
-    if (P->NIF == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA NIF\n");
-        free(P->PrimeiroNome);
-        free(P->UltimoNome);
-        free(P->NOME);
-        free(P);
-        return NULL;
-    }
-    strcpy(P->NIF, NIF);
 
     P->freguesia = freguesia;
 
@@ -59,7 +52,6 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int 
         free(P->PrimeiroNome);
         free(P->UltimoNome);
         free(P->NOME);
-        free(P->NIF);
         free(P);
         return NULL;
     }
@@ -67,28 +59,61 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int 
     P->dataNascimento->mes = mes;
     P->dataNascimento->ano = ano;
 
+    P->ID = (char *)malloc((strlen(id) + 1) * sizeof(char));
+    if (P->ID == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA ID\n");
+        free(P->PrimeiroNome);
+        free(P->UltimoNome);
+        free(P->NOME);
+        free(P->dataNascimento);
+        free(P);
+        return NULL;
+    }
+    strcpy(P->ID, id);
+
     P->numero_requisicoes = 0;
 
     return P;
 }
 
+char *GerarIDPessoa(Lista_Chaves_P *L) {
+    char *id = (char *)malloc(10 * sizeof(char));
+    if (id == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA ID\n");
+        return NULL;
+    }
+    srand(time(NULL));
+
+    for(int i = 0; i < 9; i++) {
+        id[i] = Aleatorio() + '0';
+    }
+
+    int soma = 0;
+    for(int i = 0; i < 8; i++) {
+        soma += id[i] - '0';
+    }
+    int ultimoDigito = (10 - (soma % 10)) % 10;
+
+    id[8] = '0' + ultimoDigito;
+    id[9] = '\0';
+
+    /*
+    if(L != NULL) {
+        NO_CHAVE_P *P = L->Inicio;
+        while (P != NULL) {
+            if(P->DADOS != NULL && P->DADOS.)
+        }
+    }
+    */
+    return id;
+}
 
 // Função para pedir dados de uma pessoa
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) {
     int dia, mes, ano, id_dist, id_conc;
-    char primeiroNome[30], ultimoNome[30], NIF[10], id_freg[7];
+    char primeiroNome[30], ultimoNome[30], id_freg[7], *id;
     Freguesia *freguesia = NULL;
     printf("\nAdicionar Pessoa:\n");
-    do{
-        printf("\nNIF: ");
-        scanf("%s", NIF);
-        limparBuffer();
-        if (strlen(NIF) != 9) {
-            printf("\nErro: O NIF tem de ter 9 digitos.(%d)\n", strlen(NIF));
-        } else if (PesquisarPessoaPorNIF(P,NIF) != NULL) {
-            printf("\nErro: O NIF inserido ja existe.\n");
-        }
-    }while(strlen(NIF) != 9 || PesquisarPessoaPorNIF(P,NIF) != NULL);
 
     do {
         printf("Primeiro Nome: ");
@@ -173,7 +198,12 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
             freguesia = ProcurarFreguesiaPorID(F,id_freg,id_conc,id_dist);
         }
     }while(freguesia == NULL);
-    return CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano, NIF, freguesia);
+    id = GerarIDPessoa(P);
+    if(id == NULL) {
+        printf("\nErro: ID nao foi criado.\n");
+        return NULL;
+    }
+    return CriarPessoa(primeiroNome, ultimoNome, NULL, dia, mes, ano,id, freguesia);
 }
 
 // Função para criar uma lista de pessoas/
@@ -262,6 +292,7 @@ void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
     while (N != NULL) {
         ElementoP *E = N->DADOS->Inicio;
         while (E != NULL) {
+            //printf("NOME: %s, Primeiro Nome: %s, Ultimo Nome: %s, Nome completo: %s \n", nome, E->pessoa->PrimeiroNome, E->pessoa->UltimoNome, E->pessoa->NOME);
             if (strstr(E->pessoa->PrimeiroNome, nome) != NULL ||
                 strstr(E->pessoa->UltimoNome, nome) != NULL ||
                 strstr(E->pessoa->NOME, nome) != NULL) {
@@ -278,7 +309,7 @@ void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
     }
 }
 
-void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif) {
+/*void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif) {
     if (!L || !nif) return NULL;
     NO_CHAVE_P *N = L->Inicio;
     while (N != NULL) {
@@ -293,6 +324,7 @@ void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif) {
     }
     return NULL;
 }
+*/
 
 // Função para comparar nomes
 int compararPrimeiroNome(const void *a, const void *b) {
@@ -389,7 +421,7 @@ void *ListarPessoas(Lista_Chaves_P *L) {
 void MostrarPessoa(PESSOA *P) {
     if (!P) return;
     printf("\nNome: %s\n", P->NOME);
-    printf("NIF: %s\n", P->NIF);
+    printf("ID: %s\n", P->ID);
     printf("Data de Nascimento: %d/%d/%d\n", P->dataNascimento->dia, P->dataNascimento->mes, P->dataNascimento->ano);
     printf("Freguesia: %s (ID: %s)\n", P->freguesia->nome, P->freguesia->ID_Todo);
     printf("Numero de Requisicoes: %d\n", P->numero_requisicoes);
@@ -432,7 +464,7 @@ int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa) {
                 (today.tm_mon + 1 == dataNascimento->mes && today.tm_mday < dataNascimento->dia)) {
                 anos--;
             }
-
+            printf("IDADE MAX: %d IDADE:\n", idadeMaxima, anos);
             if (anos > idadeMaxima) {
                 idadeMaxima = anos;
             }
@@ -624,10 +656,11 @@ void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa) {
             if (pessoaAtual->pessoa->numero_requisicoes == 0) {
                 encontrou = 1;
                 printf("Nome: %s %s\n", pessoaAtual->pessoa->PrimeiroNome, pessoaAtual->pessoa->UltimoNome);
-                printf("NIF: %s\n", pessoaAtual->pessoa->NIF);
+                printf("ID: %s\n", pessoaAtual->pessoa->ID);
                 printf("Data de Nascimento: %02d/%02d/%04d\n", pessoaAtual->pessoa->dataNascimento->dia,
                        pessoaAtual->pessoa->dataNascimento->mes,
                        pessoaAtual->pessoa->dataNascimento->ano);
+                printf("Freguesia: %s (ID: %d)\n", pessoaAtual->pessoa->freguesia->nome, pessoaAtual->pessoa->freguesia->ID_Todo);
                 printf("\n");
             }
             pessoaAtual = pessoaAtual->proximo;
@@ -653,11 +686,12 @@ void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa) {
             if (pessoaAtual->pessoa->numero_requisicoes > 0) {
                 encontrou = 1;
                 printf("Nome: %s %s\n", pessoaAtual->pessoa->PrimeiroNome, pessoaAtual->pessoa->UltimoNome);
-                printf("ID: %d\n", pessoaAtual->pessoa->NIF);
+                printf("ID: %s\n", pessoaAtual->pessoa->ID);
                 printf("Data de Nascimento: %02d/%02d/%04d\n", pessoaAtual->pessoa->dataNascimento->dia,
                        pessoaAtual->pessoa->dataNascimento->mes,
                        pessoaAtual->pessoa->dataNascimento->ano);
                 printf("Número de Requisições: %d\n", pessoaAtual->pessoa->numero_requisicoes);
+                printf("Freguesia: %s (ID: %d)\n", pessoaAtual->pessoa->freguesia->nome, pessoaAtual->pessoa->freguesia->ID_Todo);
                 printf("\n");
             }
             pessoaAtual = pessoaAtual->proximo;
@@ -670,70 +704,97 @@ void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa) {
     }
 }
 
-// Sobrenome mais usado nas pessoas com requisiçoes
-char* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
-    // Inicializar array para armazenar os sobrenomes e contadores
-#define MAX_SOBRENOMES 100
-    char sobrenomes[MAX_SOBRENOMES][50];
-    int contadores[MAX_SOBRENOMES] = {0};
-    int indice = 0;
+ResultadoSobrenome* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
+    if(!listaChavesPessoa || !listaChavesPessoa->Inicio) return NULL;
 
-    // Percorrer todas as pessoas com requisições
     NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
+    int ContadorNomes = 0;
+    int capacidade = 10;
+    char **nomes = (char **)malloc(capacidade * sizeof(char *));
+    int *contagem = (int *)calloc(capacidade, sizeof(int));
+    if (!nomes || !contagem) {
+        printf("Erro ao alocar memória.\n");
+        return NULL;
+    }
+
     while (chaveAtual != NULL) {
         ElementoP *pessoaAtual = chaveAtual->DADOS->Inicio;
         while (pessoaAtual != NULL) {
-            if (pessoaAtual->pessoa->numero_requisicoes > 0) {
-                // ver o sobrenome da pessoa
-                char* ultimoNome = pessoaAtual->pessoa->UltimoNome;
+            char *nome = pessoaAtual->pessoa->UltimoNome;
+            int found = 0;
 
-                // ver se o sobrenome já está na lista de sobrenomes
-                int i;
-                int encontrado = 0;
-                for (i = 0; i < indice; i++) {
-                    if (strcmp(sobrenomes[i], ultimoNome) == 0) {
-                        encontrado = 1;
-                        break;
+            for (int i = 0; i < ContadorNomes; i++) {
+                if (strcmp(nomes[i], nome) == 0) {
+                    contagem[i]++;
+                    found = 1;
+                    break;
+                }
+            }
+
+            if (!found) {
+                if (ContadorNomes == capacidade) {
+                    capacidade *= 2;
+                    nomes = (char **)realloc(nomes, capacidade * sizeof(char *));
+                    contagem = (int *)realloc(contagem, capacidade * sizeof(int));
+                    if (!nomes || !contagem) {
+                        printf("Erro ao realocar memória.\n");
+                        free(nomes);
+                        free(contagem);
+                        return NULL;
                     }
                 }
-
-                // Se o sobrenome não estiver na lista, adicioná-lo
-                if (!encontrado) {
-                    strcpy(sobrenomes[indice], ultimoNome);
-                    indice++;
-                }
-
-                // Incrementar o contador para esse sobrenome
-                contadores[i]++;
+                nomes[ContadorNomes] = strdup(nome);
+                contagem[ContadorNomes] = 1;
+                ContadorNomes++;
             }
+
             pessoaAtual = pessoaAtual->proximo;
         }
         chaveAtual = chaveAtual->Prox;
     }
 
-    // Encontrar o sobrenome com o maior contador
-    int maiorContador = 0;
-    char* sobrenomeMaisComum = NULL;
-    for (int i = 0; i < indice; i++) {
-        if (contadores[i] > maiorContador) {
-            maiorContador = contadores[i];
-            sobrenomeMaisComum = sobrenomes[i];
+    int maiorContagem = 0;
+    char *sobrenomeMaisUsado = NULL;
+
+    for (int i = 0; i < ContadorNomes; i++) {
+        if (contagem[i] > maiorContagem) {
+            maiorContagem = contagem[i];
+            sobrenomeMaisUsado = nomes[i];
         }
     }
 
-    // Retornar o sobrenome mais comum
-    return sobrenomeMaisComum;
+    ResultadoSobrenome *resultado = (ResultadoSobrenome *)malloc(sizeof(ResultadoSobrenome));
+    if (!resultado) {
+        printf("Erro ao alocar memória para o resultado.\n");
+        for (int i = 0; i < ContadorNomes; i++) {
+            free(nomes[i]);
+        }
+        free(nomes);
+        free(contagem);
+        return NULL;
+    }
+
+    resultado->sobrenome = sobrenomeMaisUsado ? strdup(sobrenomeMaisUsado) : NULL;
+    resultado->contagem = maiorContagem;
+
+    for (int i = 0; i < ContadorNomes; i++) {
+        free(nomes[i]);
+    }
+    free(nomes);
+    free(contagem);
+
+    return resultado;
 }
 
 
 // Função para buscar pessoa por ID
-/*PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id) {
+PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, char *id) {
     if (!L) return NULL;
     NO_CHAVE_P *N = L->Inicio;
     while (N != NULL) {
         ElementoP *E = N->DADOS->Inicio;
         while (E != NULL) {
-            if (E->pessoa->ID == id) {
+            if (strcmp(E->pessoa->ID, id) == 0) {
                 return E->pessoa;
             }
             E = E->proximo;
@@ -742,10 +803,10 @@ char* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
     }
     return NULL;
 }
-*/
+
 
 // Função para verificar ID no arquivo
-/*int verificarIDArquivo(char *idRequisitante) {
+int verificarIDArquivo(char *idRequisitante) {
     FILE *arquivo = fopen("Ids.txt", "r");
     if (!arquivo) return 0;
     char linha[20];
@@ -758,7 +819,7 @@ char* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
     }
     fclose(arquivo);
     return 0;
-}*/
+}
 
 
 Lista_F* LerTXT() {
@@ -1380,28 +1441,16 @@ int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_con
         ElementoP *ElementoPessoa = atual->DADOS->Inicio;
         while (ElementoPessoa != NULL) {
             PESSOA *pessoa = ElementoPessoa->pessoa;
-            if(id_conc == 0){
-                if(apelido == ""){
-                    if(pessoa->freguesia->ID_DIST == id_dist && strcmp(pessoa->PrimeiroNome, nome) == 0){
-                        count++;
-                    }
-                }else if(nome == ""){
-                    if(pessoa->freguesia->ID_DIST == id_dist && strcmp(pessoa->UltimoNome, apelido) == 0){
-                        count++;
-                    }
-                }
 
-            }else{
-                if(apelido == ""){
-                    if(pessoa->freguesia->ID_DIST == id_dist && pessoa->freguesia->ID_CONC == id_conc && strcmp(pessoa->PrimeiroNome, nome) == 0){
-                        count++;
-                    }
-                }else if(nome == ""){
-                    if(pessoa->freguesia->ID_DIST == id_dist && pessoa->freguesia->ID_CONC == id_conc && strcmp(pessoa->UltimoNome, apelido) == 0){
-                        count++;
-                    }
-                }
+            int condicao_Dist = pessoa->freguesia->ID_DIST == id_dist;
+            int condicao_Conc = id_conc == 0 || pessoa->freguesia->ID_CONC == id_conc;
+            int condicao_Nome = (nome == NULL || strcmp(pessoa->PrimeiroNome, nome) == 0);
+            int condicao_Apelido = (apelido == NULL || strcmp(pessoa->UltimoNome, apelido) == 0);
+
+            if (condicao_Dist && condicao_Conc && condicao_Nome && condicao_Apelido) {
+                count++;
             }
+
             ElementoPessoa = ElementoPessoa->proximo;
         }
         atual = atual->Prox;
@@ -1429,22 +1478,22 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
 
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         // Extrair NIF, nome, data de nascimento e ID da freguesia da linha
-        char NIF[10], primeiroNome[50], ultimoNome[50], nome[100], id_freg_todo[7], id_freg[3];
+        char ID[10], primeiroNome[50], ultimoNome[50], nome[100], id_freg_todo[7], id_freg[3];
         int dia, mes, ano, id_dist, id_conc;
         Freguesia *freg;
 
         // Use sscanf para extrair dados da linha
-        if (sscanf(linha, "%9s %[^0-9] %d-%d-%d %6s", NIF, nome, &dia, &mes, &ano, id_freg_todo) != 6) {
+        if (sscanf(linha, "%s %[^0-9] %d-%d-%d %6s", ID, nome, &dia, &mes, &ano, id_freg_todo) != 6) {
             printf("Erro ao ler os dados da linha: %s\n", linha);
             fclose(arquivo);
             LiberarListaPessoas(lista);
             return NULL;
         }
 
-        // Encontrar o primeiro nome e o último nome
+        // Encontrar o primeiro nome
         sscanf(nome, "%s", primeiroNome);
 
-        // Encontrar a última ocorrência de um espaço
+        // Encontrar a última ocorrência de um espaço para ultimo nome
         char *lastSpace = strrchr(nome, ' ');
         if (lastSpace != NULL) {
             strcpy(ultimoNome, lastSpace + 1);
@@ -1457,21 +1506,21 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
         sscanf(id_freg_todo, "%2d%2d%2s", &id_dist, &id_conc, id_freg);
 
         // Debugging prints
-        //printf("Lendo linha: %s\n", linha);
-        //printf("NIF: %s, Primeiro Nome: %s, Ultimo Nome: %s, Data: %02d-%02d-%04d, ID_Freg_Todo: %s\n",
-        //       NIF, primeiroNome, ultimoNome, dia, mes, ano, id_freg_todo);
-        //printf("ID_DIST: %d, ID_CONC: %d, ID_FREG: %s\n", id_dist, id_conc, id_freg);
+        /*printf("Lendo linha: %s\n", linha);
+        printf("ID: %s, Primeiro Nome: %s, Ultimo Nome: %s, Data: %02d-%02d-%04d, ID_Freg_Todo: %s\n",
+               ID, primeiroNome, ultimoNome, dia, mes, ano, id_freg_todo);
+        printf("ID_DIST: %d, ID_CONC: %d, ID_FREG: %s\n", id_dist, id_conc, id_freg);*/
 
         freg = ProcurarFreguesiaPorID(listaFreguesias, id_freg, id_conc, id_dist);
         if (freg == NULL) {
-            printf("Freguesia não encontrada para ID_DIST: %d, ID_CONC: %d, ID_FREG: %s, NIF: %s\n", id_dist, id_conc, id_freg, NIF);
+            printf("Freguesia não encontrada para ID_DIST: %d, ID_CONC: %d, ID_FREG: %s, ID: %s\n", id_dist, id_conc, id_freg, ID);
             fclose(arquivo);
             LiberarListaPessoas(lista);
             return NULL;
         }
 
         // Criar uma nova pessoa e alocar memória
-        PESSOA *nova_pessoa = CriarPessoa(primeiroNome, ultimoNome, dia, mes, ano, NIF, freg);
+        PESSOA *nova_pessoa = CriarPessoa(primeiroNome, ultimoNome, nome, dia, mes, ano, ID, freg);
         if (nova_pessoa == NULL) {
             printf("Erro ao alocar memória para nova_pessoa.\n");
             fclose(arquivo);
@@ -1513,8 +1562,8 @@ void MostrarPessoas(Lista_Chaves_P *listaChaves) {
         ListaPessoa *listaPessoas = chaveAtual->DADOS;
         ElementoP *atual = listaPessoas->Inicio;
         while (atual != NULL) {
-            printf("NIF: %s, Nome: %s, Data de Nascimento: %02d-%02d-%04d\n",
-                   atual->pessoa->NIF, atual->pessoa->NOME,
+            printf("ID: %s, Nome: %s, Data de Nascimento: %02d-%02d-%04d\n",
+                   atual->pessoa->ID, atual->pessoa->NOME,
                    atual->pessoa->dataNascimento->dia, atual->pessoa->dataNascimento->mes,
                    atual->pessoa->dataNascimento->ano);
             atual = atual->proximo;
@@ -1528,8 +1577,9 @@ void LiberarPessoa(PESSOA *pessoa) {
         free(pessoa->PrimeiroNome);
         free(pessoa->UltimoNome);
         free(pessoa->NOME);
-        free(pessoa->NIF);
+        free(pessoa->ID);
         free(pessoa->dataNascimento);
+        free(pessoa->freguesia);
         free(pessoa);
     }
 }

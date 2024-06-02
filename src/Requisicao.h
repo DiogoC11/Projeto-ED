@@ -16,6 +16,7 @@ typedef struct {
     PESSOA *Pessoa;
     LIVRO *Livro;
     data *Data_Requisicao;
+    int Entregue;
 } REQUISICAO;
 
 
@@ -30,23 +31,26 @@ typedef struct {
 }ListaRequisicoes, *ptListaR;
 
 //criar REQUISICAO
-REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C);
+REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L);
 ListaRequisicoes *criarListaR();
 ElementoR *criarElementoR(REQUISICAO *R);
+void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros, Lista_Chaves_P *listaPessoas);
 void MostrarRequisicao(REQUISICAO *P);
 void DestruirRequisicao(REQUISICAO *P);
 
 //funcoes principais
-int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISBN);
+void DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISBN, char *ID);
 void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes);
-void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *NIF);
+void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *ID);
 
 
 
 //TESTAR///
-void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes);
+REQUISICAO *AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes);
 void LibertarListaRequisicoes(ListaRequisicoes *lista);
 
+//funcoes apagar
+void LiberarRequisicao(REQUISICAO *R);
 
 
 #endif // REQUISICAO_H_INCLUDED

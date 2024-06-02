@@ -13,6 +13,7 @@ typedef struct
     int anoPublicacao;
     char *Autor;
     int Disponivel;
+    int Requisitado;
     int quant_requisicaoL;
 }LIVRO;
 
@@ -57,6 +58,9 @@ LIVRO *LivroMaisRecente(Lista_Chaves_L * L);
 LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C);
 NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C);
 void DestruirLivro(LIVRO *P);
+
+//funcoes secundarias
+NO_CHAVE_L* ProcurarNoChavePorLivro(LIVRO *livro, Lista_Chaves_L *listaChaves);
 
 //apagar
 void LiberarListaLivros(ListaLivro *lista);

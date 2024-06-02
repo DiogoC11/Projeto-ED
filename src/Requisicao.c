@@ -2,6 +2,7 @@
 #include <time.h>
 #include "Requisicao.h"
 #include "Pessoa.h"
+#include "Uteis.h"
 
 
 ListaRequisicoes *criarListaR(){
@@ -22,8 +23,13 @@ ElementoR *criarElementoR(REQUISICAO *R){
 void MostrarRequisicao(REQUISICAO *R)
 {
     printf("REQ ID = %d\n", R->ID);
-    //MostrarPessoa(R->Pessoa);
-    //MostrarLivro(R->Livro);
+    printf("Nome da Pessoa = %s (ID: %s)\n", R->Pessoa->NOME, R->Pessoa->ID);
+    printf("Nome do Livro = %s (ISBN: %s)\n", R->Livro->NOME, R->Livro->ISBN);
+    if(R->Entregue) {
+        printf("Entregue = Sim\n");
+    }else {
+        printf("Entregue = Nao\n");
+    }
 }
 void DestruirRequisicao(REQUISICAO *R)
 {
@@ -44,10 +50,10 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
 }
 
 // Função para devolver um livro solicitado
-int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISBN) {
-    if (!bookList || !reqList || !ISBN) {
+void DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *ListaRequisicao, char *ISBN, char *ID) {
+    if (!bookList || !ListaRequisicao || !ISBN) {
         printf("Parâmetros inválidos.\n");
-        return 0;
+        return;
     }
 
     // Encontrar o livro na lista de livros e marcar como disponível
@@ -57,35 +63,22 @@ int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISB
         while (elementoLivro != NULL) {
             LIVRO *livro = elementoLivro->livro;
             if (strcmp(livro->ISBN, ISBN) == 0) {
-                livro->Disponivel = 1;
-
                 // Encontrar e remover a requisição correspondente na lista de requisições
-                ElementoR *proximo = NULL;
-                ElementoR *atualReq = reqList->Inicio;
+                ElementoR *atualReq = ListaRequisicao->Inicio;
                 while (atualReq != NULL) {
-                    if (strcmp(atualReq->requisicao->Livro->ISBN, ISBN) == 0) {
-                        if (proximo == NULL) {
-                            reqList->Inicio = atualReq->proximo;
-                        } else {
-                            proximo->proximo = atualReq->proximo;
-                        }
-
+                    if (strcmp(atualReq->requisicao->Livro->ISBN, ISBN) == 0 && strcmp(atualReq->requisicao->Pessoa->ID,ID) == 0 ) {
                         // Liberar a memória associada à requisição
-                        free(atualReq->requisicao->Data_Requisicao);
-                        free(atualReq->requisicao);
-                        free(atualReq);
-
-                        reqList->num_Requisicoes--;
-
-                        printf("O livro com ISBN %s foi devolvido e a requisição removida.\n", ISBN);
-                        return 1;
+                        atualReq->requisicao->Entregue = 1;
+                        livro->Requisitado = 0;
+                        ListaRequisicao->num_Requisicoes--;
+                        printf("O livro com ISBN %s foi devolvido e a requisição dada como entregue.\n", ISBN);
+                        return;
                     }
-                    proximo = atualReq;
                     atualReq = atualReq->proximo;
                 }
 
-                printf("Requisição com o livro de ISBN %s não encontrada.\n", ISBN);
-                return 0;
+                printf("\nErro: Requisição com o livro de ISBN %s não encontrada.\n", ISBN);
+                return;
             }
             elementoLivro = elementoLivro->proximo;
         }
@@ -93,7 +86,7 @@ int DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *ISB
     }
 
     printf("Livro com ISBN %s não encontrado.\n", ISBN);
-    return 0;
+    return;
 }
 
 // Função para listar livros solicitados
@@ -105,7 +98,9 @@ void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes) {
     ElementoR *atual = listaRequisicoes->Inicio;
     printf("\nLivros Requisitados: \n");
     while (atual != NULL) {
-        MostrarLivro(atual->requisicao->Livro);
+        if(!atual->requisicao->Entregue) {
+            MostrarLivro(atual->requisicao->Livro);
+        }
         atual = atual->proximo;
     }
 }
@@ -127,15 +122,32 @@ NO_CHAVE_L *searchNO_CHAVE_L(Lista_Chaves_L *L, char *isbn) {
     return NULL;
 }
 
-REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
+REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L){
     REQUISICAO *R = (REQUISICAO *)malloc(sizeof(REQUISICAO));
-    if(!R) return NULL;
+    if (R == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA REQUISICAO\n");
+        return NULL;
+    }
     R->ID = _id;
-    //R->Pessoa = (ptPESSOA *) P;
-    //R->Livro = L;
-    L->quant_requisicaoL += 1;
-    NO_CHAVE_L *myBook = searchNO_CHAVE_L(C, L->ISBN);
-    myBook->quant_requisicaoN += 1;
+
+    R->Pessoa = (PESSOA *)malloc(sizeof(PESSOA));
+    if (R->Pessoa== NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA PESSOA\n");
+        free(R->Pessoa);
+        free(R);
+        return NULL;
+    }
+    R->Pessoa = P;
+
+    R->Livro = (LIVRO *)malloc(sizeof(LIVRO));
+    if (R->Pessoa== NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA LIVRO\n");
+        free(R->Livro);
+        free(R->Pessoa);
+        free(R);
+        return NULL;
+    }
+    R->Livro = L;
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -144,76 +156,45 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L, Lista_Chaves_L *C){
     R->Data_Requisicao->mes = tm.tm_mon + 1;
     R->Data_Requisicao->ano = tm.tm_year + 1900;
 
+    R->Entregue = 0;
+
     return R;
 }
 
 //TESTAR
 
 // Função para adicionar uma requisição a uma pessoa//
-void AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes) {
-    char nif[50];
+REQUISICAO *AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes) {
+    char ID[10];
     char isbn[14];
-
+    PESSOA *pessoa = NULL;
+    LIVRO *livro = NULL;
     // Pedir NIF da pessoa
-    printf("Digite o NIF da pessoa: ");
-    scanf("%s", nif);
-
-    // encontrar pessoa pelo NIF inserido
-    PESSOA *pessoa = PesquisarPessoaPorNIF(listaChavesPessoa, nif);
-    if (pessoa == NULL) {
-        printf("Pessoa com NIF %s não encontrada.\n", nif);
-        return;
-    }
+    do {
+        printf("Digite o ID da pessoa: ");
+        scanf("%s", ID);
+        limparBuffer();
+        // encontrar pessoa pelo NIF inserido
+        pessoa = buscarPessoaPorID(listaChavesPessoa, ID);
+        if (pessoa == NULL) {
+            printf("Pessoa com ID: %s nao encontrada.\n", ID);
+        }
+    }while(pessoa == NULL);
+    printf("Pessoa encontrada: %s \n", pessoa->NOME);
 
     // Pedir ISBN do livro
-    printf("Digite o ISBN do livro: ");
-    scanf("%s", isbn);
+    do {
+        printf("Digite o ISBN do livro: ");
+        scanf("%s", isbn);
+        // encontrar livro pelo ISBN inserido
+        livro = PesquisarLivroPorISBN(listaChavesLivro, isbn);
+        if (livro == NULL || !livro->Disponivel || livro->Requisitado) {
+            printf("\nErro: Livro com ISBN %s nao encontrado ou indisponivel ou já foi requisitado.\n", isbn);
+        }
+    }while(livro == NULL);
+    printf("Livro encontrado: %s\n", livro->NOME);
 
-    // encontrar livro pelo ISBN inserido
-    LIVRO *livro = PesquisarLivroPorISBN(listaChavesLivro, isbn);
-    if (livro == NULL) {
-        printf("Livro com ISBN %s não encontrado.\n", isbn);
-        return;
-    }
-
-    // criar requisição
-    REQUISICAO *novaRequisicao = (REQUISICAO *)malloc(sizeof(REQUISICAO));
-    if (!novaRequisicao) {
-        printf("Erro ao alocar memória para a nova requisição.\n");
-        return;
-    }
-
-    novaRequisicao->ID = listaRequisicoes->num_Requisicoes + 1; // criar ID da requisição
-    novaRequisicao->Pessoa = pessoa;
-    novaRequisicao->Livro = livro;
-
-    // por a data na requisiçao (data atual)
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    novaRequisicao->Data_Requisicao = (data *)malloc(sizeof(data));
-    novaRequisicao->Data_Requisicao->dia = tm.tm_mday;
-    novaRequisicao->Data_Requisicao->mes = tm.tm_mon + 1;
-    novaRequisicao->Data_Requisicao->ano = tm.tm_year + 1900;
-
-    // atualizar contadores
-    pessoa->numero_requisicoes++;
-    livro->quant_requisicaoL++;
-
-    // adicionar a nova requisição na lista
-    ElementoR *novoElementoR = (ElementoR *)malloc(sizeof(ElementoR));
-    if (!novoElementoR) {
-        printf("Erro ao alocar memória para o novo elemento de requisição.\n");
-        free(novaRequisicao->Data_Requisicao);
-        free(novaRequisicao);
-        return;
-    }
-
-    novoElementoR->requisicao = novaRequisicao;
-    novoElementoR->proximo = listaRequisicoes->Inicio;
-    listaRequisicoes->Inicio = novoElementoR;
-    listaRequisicoes->num_Requisicoes++;
-
-    printf("Requisição adicionada com sucesso!\n");
+    return CriarRequisicao(listaRequisicoes->num_Requisicoes + 1, pessoa, livro);
 }
 
 
@@ -240,8 +221,8 @@ void LibertarListaRequisicoes(ListaRequisicoes *lista) {
 }
 
 
-void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *NIF) {
-    if (listaRequisicoes == NULL || listaChavesPessoa == NULL || NIF == NULL) {
+void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *ID) {
+    if (listaRequisicoes == NULL || listaChavesPessoa == NULL || ID == NULL) {
         printf("Listas ou NIF inválido(s).\n");
         return;
     }
@@ -251,7 +232,7 @@ void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P
     while (chavePessoa != NULL) {
         ElementoP *elementoPessoa = chavePessoa->DADOS->Inicio;
         while(elementoPessoa != NULL){
-            if (strcmp(elementoPessoa->pessoa->NIF, NIF) == 0) {
+            if (strcmp(elementoPessoa->pessoa->ID, ID) == 0) {
                 pessoa = elementoPessoa->pessoa;
                 break;
             }
@@ -260,20 +241,64 @@ void MostrarRequisicoesPorNIF(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P
         chavePessoa = chavePessoa->Prox;
     }
     if (pessoa == NULL) {
-        printf("Pessoa com NIF %s não encontrada.\n", NIF);
+        printf("\nErro: Pessoa com ID %s não encontrada.\n", ID);
         return;
     }
 
-    printf("Requisições de %s (NIF: %s):\n", pessoa->NOME, NIF);
+    printf("\nRequisições de %s (ID: %s):\n", pessoa->NOME, pessoa->ID);
     ElementoR *atual = listaRequisicoes->Inicio;
     int a = 1;
     while (atual != NULL) {
-        if (strcmp(atual->requisicao->Pessoa->NIF, NIF) == 0) {
-            printf("Requisição %d:\n",a);
-            printf("Livro: %s\n", atual->requisicao->Livro->NOME);
-            printf("Data de Requisição: %d/%d/%d\n", atual->requisicao->Data_Requisicao->dia, atual->requisicao->Data_Requisicao->mes, atual->requisicao->Data_Requisicao->ano);
+        if (strcmp(atual->requisicao->Pessoa->ID, ID) == 0) {
+            printf(" Requisição %d:\n",a);
+            printf(" Livro: %s\n", atual->requisicao->Livro->NOME);
+            printf(" Data de Requisição: %d/%d/%d\n", atual->requisicao->Data_Requisicao->dia, atual->requisicao->Data_Requisicao->mes, atual->requisicao->Data_Requisicao->ano);
         }
         a++;
         atual = atual->proximo;
     }
+}
+
+void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros, Lista_Chaves_P *listaPessoas) {
+    LIVRO *livro = NULL;
+    PESSOA *pessoa = NULL;
+    if (listaRequisicoes == NULL || elemento == NULL) {
+        printf("Erro: Parâmetros inválidos.\n");
+        return;
+    }
+
+    if (listaRequisicoes->Inicio == NULL) {
+        listaRequisicoes->Inicio = elemento;
+    } else {
+        ElementoR *atual = listaRequisicoes->Inicio;
+        while (atual->proximo != NULL) {
+            atual = atual->proximo;
+        }
+        atual->proximo = elemento;
+    }
+
+    pessoa = buscarPessoaPorID(listaPessoas, elemento->requisicao->Pessoa->ID);
+    if(pessoa == NULL) {
+        printf("\nERROR: Pessoa nao encontrada\n");
+        return;
+    }
+    pessoa->numero_requisicoes++;
+
+    livro = PesquisarLivroPorISBN(listaLivros, elemento->requisicao->Livro->ISBN);
+    if(livro == NULL) {
+        printf("\nERROR: Livro nao encontrado\n");
+        return;
+    }
+    livro->Requisitado = 1;
+    livro->quant_requisicaoL ++;
+    ProcurarNoChavePorLivro(livro, listaLivros)->quant_requisicaoN++;
+    listaRequisicoes->num_Requisicoes++;
+    printf("\nRequisição adicionada com sucesso!\n");
+}
+
+void LiberarRequisicao(REQUISICAO *R){
+    free(R->Data_Requisicao);
+    free(R->Livro);
+    free(R->Pessoa);
+    free(R);
 }

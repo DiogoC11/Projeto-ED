@@ -4,14 +4,14 @@
 #include <intrin.h>
 #include "ctype.h"
 
-/*int Aleatorio(int min, int max){
-    return min + rand() % (max - min + 1);
+int Aleatorio(){
+    return rand() % 10;
 }
 
 int Factorial(int N){
     if (N == 0) return 1;
     return N * Factorial(N-1);
-}*/
+}
 
 int LerInteiro(char *txt){
     int x;

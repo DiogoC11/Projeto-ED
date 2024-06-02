@@ -72,7 +72,7 @@ typedef struct{
     char *PrimeiroNome;
     char *UltimoNome;
     char *NOME;
-    char *NIF;
+    char *ID;
     data *dataNascimento;
     Freguesia *freguesia;
     int numero_requisicoes;
@@ -99,9 +99,17 @@ typedef struct{
     NO_CHAVE_P *Inicio;
 }Lista_Chaves_P;
 
-//criar pessoa/
+//adicional
+
+typedef struct {
+    char *sobrenome;
+    int contagem;
+} ResultadoSobrenome;
+
+//criar pessoa
 ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias);
-PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, int dia, int mes, int ano, char *NIF, Freguesia *freguesia);
+PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, char *Nome, int dia, int mes, int ano, char *id, Freguesia *freguesia);
+char *GerarIDPessoa(Lista_Chaves_P *L);
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F);
 ListaPessoa *criarListaP();
 ElementoP *criarElementoP(PESSOA *P);
@@ -119,17 +127,17 @@ int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeL
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
 void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas sem requisições
 void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas com requisiçao
-char *SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa); //sobrenome mais usado nas requisiçoes
+ResultadoSobrenome *SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa); //sobrenome mais usado nas requisiçoes
 int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_conc, char *nome, char *apelido);
 
 //funcoes secundarias
-void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif);
+//void *PesquisarPessoaPorNIF(Lista_Chaves_P *L, char *nif);
 int compararPrimeiroNome(const void *a, const void *b);
 int compararUltimoNome(const void *a, const void *b);
 int compararIdFreguesia(const void* a, const void* b);
 void *ListarPessoas(Lista_Chaves_P *L);
 void MostrarPessoa(PESSOA *P);
-PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, int id);
+PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, char *id);
 int verificarIDArquivo(char *idRequisitante);
 void MostrarPessoas(Lista_Chaves_P *listaChaves);
 Lista_Chaves_P *OrganizarListaPessoaPorChave(ListaPessoa *listaPessoa);
@@ -173,7 +181,8 @@ void LiberarListaPessoas(ListaPessoa *lista);
 void LiberarListaChaves_P(Lista_Chaves_P *lista);
 void LiberarPessoa(PESSOA *pessoa);
 
-void lerArquivoPessoas(const char *nome_arquivo, ListaPessoa *listaPessoa);
+//funcoes guardar
+//void GuardarPessoas(ListaPessoa *listaPessoas);
 
 
 #endif // PESSOA_H_INCLUDED
