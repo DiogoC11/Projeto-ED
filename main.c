@@ -143,7 +143,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
     } while (opLivro != 0);
 }
 
-// Menu de operações de pessoas/
+// Menu de operações de pessoas
 void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista_F *F, ListaRequisicoes *listaRequisicoes){
     int opPessoa, confirm;
     do {
@@ -387,8 +387,9 @@ void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequis
         opRequisicao = LerInteiro("Qual a opcao? ");
 
         switch (opRequisicao) {
+            REQUISICAO *novaRequisicao;
             case 1:
-                REQUISICAO *novaRequisicao = AdicionarRequisicao(ListaPessoas, listaLivros, listaRequisicoes);
+                novaRequisicao = AdicionarRequisicao(ListaPessoas, listaLivros, listaRequisicoes);
                 MostrarRequisicao(novaRequisicao);
                 printf("Deseja adicionar a requisicao? (1-Sim, 0-Nao) ");
                 scanf("%d", &confirm);
