@@ -43,7 +43,6 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
         }
     }while(!strlen(nome));
 
-
     printf("\nArea do Livro: \n");
     do {
         NO_CHAVE_L *N = C->Inicio;
@@ -57,6 +56,7 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
         for (int i = 0; i < strlen(area); i++) {
         area[i] = toupper(area[i]);
         }
+        strcat(area, " ");
         if(area[0] == '0'){
             do{
                 printf("\nInsira a nova area: ");
@@ -64,9 +64,6 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
                 printf("\nDeseja adicionar a area %s? (1-Sim, 2-Nao): ", area);
                 scanf("%d", &op);
                 limparBuffer();
-                for (int i = 0; i < strlen(area); i++) {
-                    area[i] = toupper(area[i]);
-                }
                 switch (op) {
                     case 1:
                         if (!AdicionarChave(C, area)) {
@@ -83,10 +80,10 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
                         break;
                 }
             }while(op != 1 && op != 2);
-        }else if(!AreaExisteNaLista(C, area)){
+        }else if(AreaExisteNaLista(C, area) == 0){
                 printf("\nErro: A area inserida nao existe.\n");
         }
-    }while(!AreaExisteNaLista(C, area));
+    }while(AreaExisteNaLista(C, area) == 0);
     do {
         printf("\nAno de Publicacao: ");
         scanf("%d", &anoPublicacao);
@@ -272,7 +269,7 @@ LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C){
 NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C){
     if(!C || C->Inicio == NULL) return NULL;
     NO_CHAVE_L *N = C->Inicio;
-    NO_CHAVE_L *Area = NULL;
+    NO_CHAVE_L *Area = C->Inicio;
     while (N != NULL){
         if(N->quant_requisicaoN > 0){
             if(N->quant_requisicaoN > Area->quant_requisicaoN){
@@ -389,6 +386,7 @@ int AreaExisteNaLista(Lista_Chaves_L *listaChaves, const char *area) {
 
     NO_CHAVE_L *chaveAtual = listaChaves->Inicio;
     while (chaveAtual != NULL) {
+        printf("Comparando %s com %s\n", area, chaveAtual->categoria);
         if (strcmp(chaveAtual->categoria, area) == 0) {
             return 1;
         }
