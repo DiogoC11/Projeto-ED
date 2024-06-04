@@ -61,10 +61,15 @@ void DestruirLivro(LIVRO *P);
 
 //funcoes secundarias
 NO_CHAVE_L* ProcurarNoChavePorLivro(LIVRO *livro, Lista_Chaves_L *listaChaves);
+int isStringEmptyOrSpaces(const char *str);
+int AreaExisteNaLista(Lista_Chaves_L *listaChaves, const char *area);
 
 //apagar
 void LiberarListaLivros(ListaLivro *lista);
 void LiberarListaChaves_L(Lista_Chaves_L *lista);
 
+//guardar e ler
+void GuardarLivrosEmFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro);
+void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro);
 #endif // LIVRO_H_INCLUDED
 

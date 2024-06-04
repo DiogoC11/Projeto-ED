@@ -107,7 +107,6 @@ typedef struct {
 } ResultadoSobrenome;
 
 //criar pessoa
-ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias);
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome, char *Nome, int dia, int mes, int ano, char *id, Freguesia *freguesia);
 char *GerarIDPessoa(Lista_Chaves_P *L);
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F);
@@ -181,7 +180,8 @@ void LiberarListaPessoas(ListaPessoa *lista);
 void LiberarListaChaves_P(Lista_Chaves_P *lista);
 void LiberarPessoa(PESSOA *pessoa);
 
-//funcoes guardar
+//funcoes guardar e ler
+ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias);
 //void GuardarPessoas(ListaPessoa *listaPessoas);
 
 

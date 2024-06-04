@@ -35,7 +35,6 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
     char nome[50], area[50], autor[50], ISBN[14];
     int anoPublicacao, op;
     printf("\nCriar Livro: ");
-    NO_CHAVE_L *N = C->Inicio;
     do {
         printf("\nISBN: ");
         scanf("%s", ISBN);
@@ -58,9 +57,10 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
 
     printf("\nArea do Livro: \n");
     do {
+        NO_CHAVE_L *N = C->Inicio;
         printf("\nEscolha uma area: (0-Inserir nova area)\n");
         while(N != NULL){
-            printf("%s\n", N->categoria);
+            printf("- %s\n", N->categoria);
             N = N->Prox;
         }
         printf("\nInsira a area: ");
@@ -127,19 +127,19 @@ void MostrarLivro(LIVRO *P)
     char disponivel[4];
     char requisitado[4];
     if(P->Disponivel ){
-        strcpy(disponivel,"NAO");
-    }else{
         strcpy(disponivel,"SIM");
+    }else{
+        strcpy(disponivel,"NAO");
     }
     if(P->Requisitado ){
-        strcpy(requisitado,"NAO");
-    }else{
         strcpy(requisitado,"SIM");
+    }else{
+        strcpy(requisitado,"NAO");
     }
     if(P->quant_requisicaoL > 0){
-        printf("\nTitulo: %s\n ISBN: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Requisitado? %s\n Quantidade de vezes requisitado: %d\n", P->NOME, P->ISBN, P->AREA, P->Autor, P->anoPublicacao,disponivel,requisitado,P->quant_requisicaoL);
+        printf("\nTitulo: %s\n ISBN: %s \n Area: %s \n Ano de Publicacao: %d \n Autor: %s \n Disponivel? %s\n Requisitado? %s\n Quantidade de vezes requisitado: %d\n", P->NOME, P->ISBN, P->AREA, P->anoPublicacao, P->Autor,disponivel,requisitado,P->quant_requisicaoL);
     }else{
-        printf("\nTitulo: %s\n ISBN: %s \n Area: %s \n Autor: %s \n Ano de Publicacao: %d\n Disponivel? %s\n Requisitado? %s\n",P->NOME , P->ISBN, P->AREA, P->Autor, P->anoPublicacao,disponivel, requisitado);
+        printf("\nTitulo: %s\n ISBN: %s \n Area: %s \n Ano de Publicacao: %d \n Autor: %s \n Disponivel? %s\n Requisitado? %s\n",P->NOME , P->ISBN, P->AREA, P->anoPublicacao, P->Autor,disponivel, requisitado);
     }
 }
 void DestruirLivro(LIVRO *P)
@@ -184,12 +184,12 @@ int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C) {
                 //printf("\nLivro adicionado a biblioteca na categoria %s.\n", Inicio->categoria);
             }
             Inicio->DADOS->num_Livros++;
-            printf("\nO Livro foi adicionado a biblioteca.\n");
+            //printf("\nO Livro foi adicionado a biblioteca.\n");
             return 1;
         }
         Inicio = Inicio->Prox;
     }
-    printf("\nO Livro nao foi adicionado a biblioteca.\n");
+    //printf("\nO Livro nao foi adicionado a biblioteca.\n");
     return 0;
 }
 int ListarLivros(Lista_Chaves_L *C) {
@@ -212,8 +212,8 @@ int ListarLivros(Lista_Chaves_L *C) {
 LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn) {
     if(C->Inicio == NULL) return NULL;
     NO_CHAVE_L *N = C->Inicio;
-    ElementoL *E = C->Inicio->DADOS->Inicio;
     while (N != NULL){
+        ElementoL *E = N->DADOS->Inicio;
         while(E != NULL){
             if(strcmp(E->livro->ISBN,isbn) == 0){
                 return E->livro;
@@ -268,8 +268,10 @@ LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C){
     while (N != NULL){
         ElementoL *E = C->Inicio->DADOS->Inicio;
         while(E != NULL){
-            if(maisRequisitado == NULL || E->livro->quant_requisicaoL > maisRequisitado->quant_requisicaoL){
-                maisRequisitado = E->livro;
+            if(E->livro->quant_requisicaoL > 0){
+                if(maisRequisitado == NULL || E->livro->quant_requisicaoL > maisRequisitado->quant_requisicaoL){
+                    maisRequisitado = E->livro;
+                }
             }
             E = E->proximo;
         }
@@ -281,10 +283,12 @@ LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C){
 NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C){
     if(!C || C->Inicio == NULL) return NULL;
     NO_CHAVE_L *N = C->Inicio;
-    NO_CHAVE_L *Area = C->Inicio;
+    NO_CHAVE_L *Area = NULL;
     while (N != NULL){
-        if(N->quant_requisicaoN > Area->quant_requisicaoN){
-            Area = N;
+        if(N->quant_requisicaoN > 0){
+            if(N->quant_requisicaoN > Area->quant_requisicaoN){
+                Area = N;
+            }
         }
         N = N->Prox;
     }
@@ -301,6 +305,9 @@ Lista_Chaves_L *CriarListaChaves(){
 
 int *AdicionarChave(Lista_Chaves_L *L, char *categoria){
     if (!L) return 0;
+    for (int i = 0; i < strlen(categoria); i++) {
+        categoria[i] = toupper(categoria[i]);
+    }
     NO_CHAVE_L *chave = (NO_CHAVE_L *)malloc(sizeof(NO_CHAVE_L));
     strcpy(chave->categoria, categoria);
     chave->DADOS = criarListaL();
@@ -347,4 +354,147 @@ NO_CHAVE_L* ProcurarNoChavePorLivro(LIVRO *livro, Lista_Chaves_L *listaChaves) {
     }
 
     return NULL; // Se não encontrar, retorna NULL
+}
+
+void GuardarLivrosEmFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) {
+    FILE *ficheiro = fopen(nomeFicheiro, "w");
+    if (ficheiro == NULL) {
+        printf("Erro ao abrir o ficheiro %s\n", nomeFicheiro);
+        return;
+    }
+
+    NO_CHAVE_L *noChaveAtual = listaChaves->Inicio;
+    while (noChaveAtual != NULL) {
+        ElementoL *elementoAtual = noChaveAtual->DADOS->Inicio;
+        while (elementoAtual != NULL) {
+            LIVRO *livroAtual = elementoAtual->livro;
+            fprintf(ficheiro, "%s %s %s %d %s %d %d %d\n",
+                    livroAtual->NOME,
+                    livroAtual->ISBN,
+                    livroAtual->AREA,
+                    livroAtual->anoPublicacao,
+                    livroAtual->Autor,
+                    livroAtual->Disponivel,
+                    livroAtual->Requisitado,
+                    livroAtual->quant_requisicaoL);
+            elementoAtual = elementoAtual->proximo;
+        }
+        noChaveAtual = noChaveAtual->Prox;
+    }
+
+    fclose(ficheiro);
+}
+int isStringEmptyOrSpaces(const char *str) {
+    while (*str) {
+        if (!isspace((unsigned char)*str))
+            return 0;
+        str++;
+    }
+    return 1;
+}
+
+int AreaExisteNaLista(Lista_Chaves_L *listaChaves, const char *area) {
+    if (listaChaves == NULL || area == NULL) {
+        return 0;
+    }
+
+    NO_CHAVE_L *chaveAtual = listaChaves->Inicio;
+    while (chaveAtual != NULL) {
+        if (strcmp(chaveAtual->categoria, area) == 0) {
+            return 1;
+        }
+        chaveAtual = chaveAtual->Prox;
+    }
+
+    return 0;
+}
+
+void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) {
+    char linha[200];
+    FILE *ficheiro = fopen(nomeFicheiro, "r");
+    if (ficheiro == NULL) {
+        printf("Erro ao abrir o ficheiro %s\n", nomeFicheiro);
+        return;
+    }
+    while(fgets(linha, sizeof (linha), ficheiro) != NULL) {
+        char nome[50] = "", isbn[14], area[50] = "", autor[50] = "";
+        int anoPublicacao, disponivel, requisitado, quant_requisicaoL;
+
+        char *token = strtok(linha, " ");
+        while (token != NULL && !isdigit(token[0])) {
+            strcat(nome, token);
+            strcat(nome, " ");
+            token = strtok(NULL, " ");
+        }
+        if (isStringEmptyOrSpaces(nome)) {
+            printf("Erro: O nome está vazio ou contém apenas espaços. Pulando para a próxima linha.\n");
+            continue;
+        }
+
+        strcpy(isbn, token);
+        if (strlen(isbn) != 13) {
+            printf("Erro: O ISBN não tem 13 dígitos. Pulando para a próxima linha.\n");
+            continue;
+        }
+
+        token = strtok(NULL, " ");
+        while (token != NULL && !isdigit(token[0])) {
+            strcat(area, token);
+            strcat(area, " ");
+            token = strtok(NULL, " ");
+        }
+        if (isStringEmptyOrSpaces(area)) {
+            printf("Erro: A área está vazia ou contém apenas espaços. Pulando para a próxima linha.\n");
+            continue;
+        }
+
+        anoPublicacao = atoi(token);
+        if (anoPublicacao > 2024 || anoPublicacao < 1000) {
+            printf("Erro: O ano de publicação não é válido. Pulando para a próxima linha.\n");
+            continue;
+        }
+
+        token = strtok(NULL, " ");
+        while (token != NULL && !isdigit(token[0])) {
+            strcat(autor, token);
+            strcat(autor, " ");
+            token = strtok(NULL, " ");
+        }
+        if (isStringEmptyOrSpaces(autor)) {
+            printf("Erro: O autor está vazio ou contém apenas espaços. Pulando para a próxima linha.\n");
+            continue;
+        }
+
+        disponivel = atoi(token);
+        if(disponivel != 0 && disponivel != 1) {
+            printf("Erro: O valor de disponível %d não é válido. Pulando para a próxima linha.\n", disponivel);
+            continue;
+        }
+
+        token = strtok(NULL, " ");
+        requisitado = atoi(token);
+        if(requisitado != 0 && requisitado != 1) {
+            printf("Erro: O valor de requisitado %d não é válido. Pulando para a próxima linha.\n", requisitado);
+            continue;
+        }
+
+        token = strtok(NULL, " ");
+        quant_requisicaoL = atoi(token);
+        if(quant_requisicaoL < 0) {
+            printf("Erro: O valor da quantidade de requisicoes %d não é válido. Pulando para a próxima linha.\n", quant_requisicaoL);
+            continue;
+        }
+
+        LIVRO *novoLivro = CriarLivro(isbn, nome, area, anoPublicacao, autor);
+        novoLivro->Disponivel = disponivel;
+        novoLivro->Requisitado = requisitado;
+        novoLivro->quant_requisicaoL = quant_requisicaoL;
+        if(!AreaExisteNaLista(listaChaves, area)) {
+            AdicionarChave(listaChaves, area);
+        }
+        ElementoL *novoElemento = criar_elementoL(novoLivro);
+        AdicionarLivro(novoElemento, listaChaves);
+    }
+
+    fclose(ficheiro);
 }

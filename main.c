@@ -20,7 +20,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
         printf("8- Destruir Livro\n");
         printf("0- Voltar\n");
         opLivro = LerInteiro("Qual a opcao? ");
-
+        limparBuffer();
         //ola
         switch (opLivro) {
             case 1: {
@@ -31,7 +31,11 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 scanf("%d", &confirm);
                 if(confirm == 1) {
                     ElementoL *novoElemento = criar_elementoL(novoLivro);
-                    AdicionarLivro(novoElemento, listaChavesLivro);
+                    if(AdicionarLivro(novoElemento, listaChavesLivro)){
+                        printf("\nO Livro foi adicionado a biblioteca.\n");
+                    }else{
+                        printf("\nO Livro nao foi adicionado a biblioteca.\n");
+                    }
                 }else{
                     printf("\nLivro nao foi adicionado.\n");
                     free(novoLivro);
@@ -47,12 +51,13 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 //Encontrar area com mais livros
                 NO_CHAVE_L *areaMaisLivros = AreaMaisLivros(listaChavesLivro);
                 printf("\nArea com mais livros: %s (numero de livros: %d)\n",areaMaisLivros->categoria, areaMaisLivros->DADOS->num_Livros);
+                break;
             }
             case 4: {
                 // Pesquisar Livro por ISBN
                 char ISBN[14];
                 do {
-                    printf("\nISBN: ");
+                    printf("\nInsira o ISBN do Livro que pretende pesquisar: ");
                     scanf("%s", ISBN);
                     limparBuffer();
                     if (strlen(ISBN) != 13) {
@@ -96,14 +101,15 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 if(areaMaisRequisitada != NULL){
                     printf("\nArea mais requisitada: %s\n (numero de requisicoes: %d)\n", areaMaisRequisitada->categoria, areaMaisRequisitada->quant_requisicaoN);
                 }else{
-                    printf("\nNao existe livros requisitados\n");
+                    printf("\nNao existe livros requisitados.\n");
                 }
+                break;
             }
             case 8: {
                 //Destruir Livro
                 char ISBN[14];
                 do {
-                    printf("\nInsira o ISBN do livro: ");
+                    printf("\nInsira o ISBN do livro que pretende 'destruir': ");
                     scanf("%s", ISBN);
                     limparBuffer();
                     if (strlen(ISBN) != 13) {
@@ -117,7 +123,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                         confirm = LerInteiro("\nDeseja destruir o livro? (1-Sim, 0-Nao) ");
                         if (confirm == 1) {
                             livroDestruir->Disponivel = 0;
-                            printf("O livro de ISBN %s está agora indisponivel.", ISBN);
+                            printf("O livro de ISBN %s esta agora indisponivel.", ISBN);
                         }else if (confirm == 0) {
                             printf("Livro nao foi destruido.\n");
                         }
@@ -476,6 +482,7 @@ int main() {
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
     ListaRequisicoes *listaRequisicoes = criarListaR();
 
+    LerLivrosDoFicheiro(listaChavesLivro, "../data/livros.txt");
     Lista_F *ListaF= LerTXT();
     Lista_C *ListaC= LerTXTConc();
     Lista_D *listaD = LerTXTDist();
@@ -494,7 +501,6 @@ int main() {
     // Executar o menu geral
     menuGeral(listaChavesLivro, listaChavesPessoa, listaRequisicoes, listaD, ListaC, ListaF);
 
-    printf("\nA sair da biblioteca...\n");
 
     // Liberar memória alocada para as listas de livros e pessoas
     //LiberarListaChaves_L(listaChavesLivro);
@@ -503,5 +509,9 @@ int main() {
     //TESTE
     LibertarListaRequisicoes(listaRequisicoes);
 
+    //funcoes de gardar
+    GuardarLivrosEmFicheiro(listaChavesLivro, "../data/livros.txt");
+
+    printf("\nA sair da biblioteca...\n");
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }
