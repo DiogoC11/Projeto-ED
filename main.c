@@ -98,7 +98,7 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
             case 7:{
                 // Encontrar Area Mais Requisitada
                 NO_CHAVE_L *areaMaisRequisitada = AreaMaisRequisitada(listaChavesLivro);
-                if(areaMaisRequisitada != NULL){
+                if(areaMaisRequisitada != NULL && areaMaisRequisitada->quant_requisicaoN > 0){
                     printf("\nArea mais requisitada: %s\n (numero de requisicoes: %d)\n", areaMaisRequisitada->categoria, areaMaisRequisitada->quant_requisicaoN);
                 }else{
                     printf("\nNao existe livros requisitados.\n");

@@ -271,6 +271,7 @@ NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C){
     NO_CHAVE_L *N = C->Inicio;
     NO_CHAVE_L *Area = C->Inicio;
     while (N != NULL){
+        printf("\nQuantidade de requisicoes %d\n", N->quant_requisicaoN);
         if(N->quant_requisicaoN > 0){
             if(N->quant_requisicaoN > Area->quant_requisicaoN){
                 Area = N;
@@ -298,6 +299,7 @@ int *AdicionarChave(Lista_Chaves_L *L, char *categoria){
     strcpy(chave->categoria, categoria);
     chave->DADOS = criarListaL();
     chave->Prox = L->Inicio;
+    chave->quant_requisicaoN = 0;
     L->Inicio = chave;
     L->num_chaves ++;
     return (int *)1;
@@ -386,7 +388,6 @@ int AreaExisteNaLista(Lista_Chaves_L *listaChaves, const char *area) {
 
     NO_CHAVE_L *chaveAtual = listaChaves->Inicio;
     while (chaveAtual != NULL) {
-        printf("Comparando %s com %s\n", area, chaveAtual->categoria);
         if (strcmp(chaveAtual->categoria, area) == 0) {
             return 1;
         }
@@ -476,6 +477,10 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
         novoLivro->Disponivel = disponivel;
         novoLivro->Requisitado = requisitado;
         novoLivro->quant_requisicaoL = quant_requisicaoL;
+        /*MostrarLivro(novoLivro);
+        printf("disponivel %d\n", disponivel);
+        printf("requisitado %d\n", requisitado);
+        printf("quant_requisicaoL %d\n", quant_requisicaoL);*/
         if(!AreaExisteNaLista(listaChaves, area)) {
             AdicionarChave(listaChaves, area);
         }
