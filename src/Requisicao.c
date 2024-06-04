@@ -312,6 +312,7 @@ void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa, ListaRequisi
             if (!encontrou) {
                 MostrarPessoa(elementoPAtual->pessoa);
             }
+            elementoPAtual = elementoPAtual->proximo;
         }
         chaveAtual = chaveAtual->Prox;
     }

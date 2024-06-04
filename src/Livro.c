@@ -61,6 +61,7 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
             do{
                 printf("\nInsira a nova area: ");
                 scanf("%s", area);
+                strcat(area, " ");
                 printf("\nDeseja adicionar a area %s? (1-Sim, 2-Nao): ", area);
                 scanf("%d", &op);
                 limparBuffer();

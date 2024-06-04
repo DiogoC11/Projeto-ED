@@ -520,7 +520,7 @@ int main() {
 
     //funcoes de gardar
     GuardarLivrosEmFicheiro(listaChavesLivro, "../data/livros.txt");
-    GuardarPessoas(listaChavesPessoa, "../data/requisitantes.txt");
+    GuardarPessoas(listaChavesPessoa, "../data/recursos/requisitantes.txt");
 
     printf("\nA sair da biblioteca...\n");
     return EXIT_SUCCESS; // ou EXIT_FAILURE
