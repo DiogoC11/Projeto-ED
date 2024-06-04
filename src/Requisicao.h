@@ -2,7 +2,6 @@
 #define REQUISICAO_H_INCLUDED
 
 #include "Pessoa.h"
-#include "Biblioteca.h"
 #include "Livro.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,7 +33,7 @@ typedef struct {
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L);
 ListaRequisicoes *criarListaR();
 ElementoR *criarElementoR(REQUISICAO *R);
-void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros, Lista_Chaves_P *listaPessoas);
+void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros);
 void MostrarRequisicao(REQUISICAO *P);
 void DestruirRequisicao(REQUISICAO *P);
 
@@ -43,7 +42,9 @@ void DevolverLivro(Lista_Chaves_L *bookList, ListaRequisicoes *reqList, char *IS
 void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes);
 void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *ID);
 
-
+//funcoes secundarias
+void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa, ListaRequisicoes *listaRequisicoes);
+void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa, ListaRequisicoes *listaRequisicoes);
 
 //TESTAR///
 REQUISICAO *AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes);
@@ -54,4 +55,3 @@ void LiberarRequisicao(REQUISICAO *R);
 
 
 #endif // REQUISICAO_H_INCLUDED
-

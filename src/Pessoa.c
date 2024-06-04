@@ -71,7 +71,6 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
     }
     strcpy(P->ID, id);
 
-    P->numero_requisicoes = 0;
 
     return P;
 }
@@ -424,7 +423,6 @@ void MostrarPessoa(PESSOA *P) {
     printf("ID: %s\n", P->ID);
     printf("Data de Nascimento: %d/%d/%d\n", P->dataNascimento->dia, P->dataNascimento->mes, P->dataNascimento->ano);
     printf("Freguesia: %s (ID: %s)\n", P->freguesia->nome, P->freguesia->ID_Todo);
-    printf("Numero de Requisicoes: %d\n", P->numero_requisicoes);
 }
 
 
@@ -641,67 +639,6 @@ int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeL
     }
 
     return contador;
-}
-
-
-// listar pessoas sem requisiçoes
-void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa) {
-    NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
-    int encontrou = 0;
-
-    while (chaveAtual != NULL) {
-        ElementoP *pessoaAtual = chaveAtual->DADOS->Inicio;
-
-        while (pessoaAtual != NULL) {
-            if (pessoaAtual->pessoa->numero_requisicoes == 0) {
-                encontrou = 1;
-                printf("Nome: %s %s\n", pessoaAtual->pessoa->PrimeiroNome, pessoaAtual->pessoa->UltimoNome);
-                printf("ID: %s\n", pessoaAtual->pessoa->ID);
-                printf("Data de Nascimento: %02d/%02d/%04d\n", pessoaAtual->pessoa->dataNascimento->dia,
-                       pessoaAtual->pessoa->dataNascimento->mes,
-                       pessoaAtual->pessoa->dataNascimento->ano);
-                printf("Freguesia: %s (ID: %d)\n", pessoaAtual->pessoa->freguesia->nome, pessoaAtual->pessoa->freguesia->ID_Todo);
-                printf("\n");
-            }
-            pessoaAtual = pessoaAtual->proximo;
-        }
-        chaveAtual = chaveAtual->Prox;
-    }
-
-    if (!encontrou) {
-        printf("Nenhuma pessoa sem requisições encontrada.\n");
-    }
-}
-
-
-// Listar pessoa com requisição
-void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa) {
-    NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
-    int encontrou = 0;
-
-    while (chaveAtual != NULL) {
-        ElementoP *pessoaAtual = chaveAtual->DADOS->Inicio;
-
-        while (pessoaAtual != NULL) {
-            if (pessoaAtual->pessoa->numero_requisicoes > 0) {
-                encontrou = 1;
-                printf("Nome: %s %s\n", pessoaAtual->pessoa->PrimeiroNome, pessoaAtual->pessoa->UltimoNome);
-                printf("ID: %s\n", pessoaAtual->pessoa->ID);
-                printf("Data de Nascimento: %02d/%02d/%04d\n", pessoaAtual->pessoa->dataNascimento->dia,
-                       pessoaAtual->pessoa->dataNascimento->mes,
-                       pessoaAtual->pessoa->dataNascimento->ano);
-                printf("Número de Requisições: %d\n", pessoaAtual->pessoa->numero_requisicoes);
-                printf("Freguesia: %s (ID: %d)\n", pessoaAtual->pessoa->freguesia->nome, pessoaAtual->pessoa->freguesia->ID_Todo);
-                printf("\n");
-            }
-            pessoaAtual = pessoaAtual->proximo;
-        }
-        chaveAtual = chaveAtual->Prox;
-    }
-
-    if (!encontrou) {
-        printf("Nenhuma pessoa com requisições encontrada.\n");
-    }
 }
 
 ResultadoSobrenome* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
@@ -1650,4 +1587,30 @@ void AdicionarPessoaNaLista(ListaPessoa *lista, PESSOA *pessoa) {
     novoElemento->proximo = lista->Inicio;
     lista->Inicio = novoElemento;
     lista->num_Pessoas++;
+}
+
+void GuardarPessoas(Lista_Chaves_P *listaPessoas, const char *nomeFicheiro){
+    FILE *ficheiro = fopen(nomeFicheiro, "w");
+    if (!ficheiro) {
+        printf("Erro ao abrir o ficheiro %s.\n", nomeFicheiro);
+        return;
+    }
+
+    NO_CHAVE_P *atualChave = listaPessoas->Inicio;
+    while(atualChave != NULL){
+        ElementoP *elementoAtual = atualChave->DADOS->Inicio;
+        while(elementoAtual != NULL){
+            PESSOA *pessoa = elementoAtual->pessoa;
+            fprintf(ficheiro, "%s %s %d-%d-%d %s\n",
+                    pessoa->ID,
+                    pessoa->NOME,
+                    pessoa->dataNascimento->dia,
+                    pessoa->dataNascimento->mes,
+                    pessoa->dataNascimento->ano,
+                    pessoa->freguesia->ID);
+            elementoAtual = elementoAtual->proximo;
+        }
+        atualChave = atualChave->Prox;
+    }
+    fclose(ficheiro);
 }

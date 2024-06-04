@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <time.h>
 #include "Requisicao.h"
-#include "Pessoa.h"
 #include "Uteis.h"
 
 
@@ -42,9 +41,9 @@ void DestruirRequisicao(REQUISICAO *R)
 //Funcão para ver se a pessoa tem alguma requisiçao ou nao
 bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tamanhoListaRequisicoes) {
     for (int i = 0; i < tamanhoListaRequisicoes; i++) {
-       /* if (listaRequisicoes[i]->Pessoa == pessoa) {
-            return true; // se essa pessoa tiver alguma requisição retorna true
-        }*/
+        /* if (listaRequisicoes[i]->Pessoa == pessoa) {
+             return true; // se essa pessoa tiver alguma requisição retorna true
+         }*/
     }
     return false; // senao retorna false
 }
@@ -259,9 +258,8 @@ void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P 
     }
 }
 
-void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros, Lista_Chaves_P *listaPessoas) {
+void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros) {
     LIVRO *livro = NULL;
-    PESSOA *pessoa = NULL;
     if (listaRequisicoes == NULL || elemento == NULL) {
         printf("Erro: Parâmetros inválidos.\n");
         return;
@@ -276,13 +274,6 @@ void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Li
         }
         atual->proximo = elemento;
     }
-
-    pessoa = buscarPessoaPorID(listaPessoas, elemento->requisicao->Pessoa->ID);
-    if(pessoa == NULL) {
-        printf("\nERROR: Pessoa nao encontrada\n");
-        return;
-    }
-    pessoa->numero_requisicoes++;
 
     livro = PesquisarLivroPorISBN(listaLivros, elemento->requisicao->Livro->ISBN);
     if(livro == NULL) {
@@ -301,4 +292,56 @@ void LiberarRequisicao(REQUISICAO *R){
     free(R->Livro);
     free(R->Pessoa);
     free(R);
+}
+
+//Listar pessoa sem requisicao
+void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa, ListaRequisicoes *listaRequisicoes){
+    int encontrou = 0;
+
+    NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
+    while (chaveAtual != NULL) {
+        ElementoP *elementoPAtual = chaveAtual->DADOS->Inicio;
+        while (elementoPAtual != NULL) {
+            ElementoR *elementoRAtual = listaRequisicoes->Inicio;
+            while (elementoRAtual != NULL) {
+                if (strcmp(elementoRAtual->requisicao->Pessoa->ID, elementoPAtual->pessoa->ID) == 0) {
+                    encontrou = 1;
+                }
+                elementoRAtual = elementoRAtual->proximo;
+            }
+            if (!encontrou) {
+                MostrarPessoa(elementoPAtual->pessoa);
+            }
+        }
+        chaveAtual = chaveAtual->Prox;
+    }
+
+}
+
+// Listar pessoa com requisição
+void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa, ListaRequisicoes *listaRequisicoes) {
+    int encontrou = 0;
+
+    NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
+    while (chaveAtual != NULL) {
+        ElementoP *elementoPAtual = chaveAtual->DADOS->Inicio;
+        while(elementoPAtual != NULL) {
+            ElementoR *elementoRAtual = listaRequisicoes->Inicio;
+            while (elementoRAtual != NULL) {
+                if (strcmp(elementoRAtual->requisicao->Pessoa->ID, elementoPAtual->pessoa->ID) == 0) {
+                    encontrou = 1;
+                }
+                elementoRAtual = elementoRAtual->proximo;
+            }
+            if(encontrou) {
+                MostrarPessoa(elementoPAtual->pessoa);
+            }
+            elementoPAtual = elementoPAtual->proximo;
+        }
+        chaveAtual = chaveAtual->Prox;
+    }
+
+    if (!encontrou) {
+        printf("Nenhuma pessoa com requisições encontrada.\n");
+    }
 }

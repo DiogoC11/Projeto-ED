@@ -277,11 +277,11 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 break;
             }
             case 9: {
-                ListarPessoasSemRequisicoes(listaChavesPessoa);
+                ListarPessoasSemRequisicoes(listaChavesPessoa, listaRequisicoes);
                 break;
             }
             case 10: {
-                ListarPessoasComRequisicao(listaChavesPessoa);
+                ListarPessoasComRequisicao(listaChavesPessoa, listaRequisicoes);
                 break;
             }
             case 11: {
@@ -391,7 +391,7 @@ void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequis
                 switch (confirm) {
                     case 1: {
                         ElementoR *novoElemento = criarElementoR(novaRequisicao);
-                        InserirRequisicaoNaLista(listaRequisicoes, novoElemento, listaLivros, ListaPessoas);
+                        InserirRequisicaoNaLista(listaRequisicoes, novoElemento, listaLivros);
                         break;
                     }
                     case 2: {
@@ -511,7 +511,7 @@ int main() {
 
     //funcoes de gardar
     GuardarLivrosEmFicheiro(listaChavesLivro, "../data/livros.txt");
-
+    GuardarPessoas(listaChavesPessoa, "../data/requisitantes.txt");
     printf("\nA sair da biblioteca...\n");
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }

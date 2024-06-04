@@ -1,6 +1,6 @@
-
 #ifndef PESSOA_H_INCLUDED
 #define PESSOA_H_INCLUDED
+
 #include "Livro.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -75,7 +75,6 @@ typedef struct{
     char *ID;
     data *dataNascimento;
     Freguesia *freguesia;
-    int numero_requisicoes;
 }PESSOA, *ptPESSOA;
 
 typedef struct ElementoP{
@@ -124,8 +123,6 @@ float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa); //idade media de to
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
 int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite); //numero de pessoas cuja a idade superior a x
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
-void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas sem requisições
-void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa); //lista de pessoas com requisiçao
 ResultadoSobrenome *SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa); //sobrenome mais usado nas requisiçoes
 int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_conc, char *nome, char *apelido);
 
@@ -182,7 +179,7 @@ void LiberarPessoa(PESSOA *pessoa);
 
 //funcoes guardar e ler
 ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias);
-//void GuardarPessoas(ListaPessoa *listaPessoas);
+void GuardarPessoas(Lista_Chaves_P *listaPessoas, const char *nomeFicheiro);
 
 
 #endif // PESSOA_H_INCLUDED
