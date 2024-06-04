@@ -33,5 +33,15 @@ void lerString(char *str, int tamanho) {
         }
     }
 }
+void removeSpaces(char* input){
+    int count = 0;
+    int i;
+    for (i = 0; input[i]; i++) {
+        if (input[i] != ' ') {
+            input[count++] = input[i];
+        }
+    }
+    input[count] = '\0';
+}
 
 

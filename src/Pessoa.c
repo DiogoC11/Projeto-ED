@@ -4,6 +4,25 @@
 #include "Pessoa.h"
 #include "Uteis.h"
 
+char *trim(char *str) {
+    char *end;
+
+    // Trim leading space
+    while (isspace((unsigned char)*str)) str++;
+
+    if (*str == 0)  // All spaces?
+        return str;
+
+    // Trim trailing space
+    end = str + strlen(str) - 1;
+    while (end > str && isspace((unsigned char)*end)) end--;
+
+    // Write new null terminator character
+    end[1] = '\0';
+
+    return str;
+}
+
 // Função para criar uma pessoa
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, int mes, int ano,char *id, Freguesia *freguesia){
     PESSOA *P = (PESSOA *)malloc(sizeof(PESSOA));
@@ -1380,7 +1399,7 @@ int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_con
             int condicao_Conc = id_conc == 0 || pessoa->freguesia->ID_CONC == id_conc;
             int condicao_Nome = (nome == NULL || strcmp(pessoa->PrimeiroNome, nome) == 0);
             int condicao_Apelido = (apelido == NULL || strcmp(pessoa->UltimoNome, apelido) == 0);
-
+            printf("\nApelido: |%s| e apelido: |%s|\n", pessoa->UltimoNome, apelido);
             if (condicao_Dist && condicao_Conc && condicao_Nome && condicao_Apelido) {
                 count++;
             }
@@ -1391,6 +1410,7 @@ int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_con
     }
     return count;
 }
+
 
 ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
     FILE *arquivo;
@@ -1412,12 +1432,12 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
 
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         // Extrair NIF, nome, data de nascimento e ID da freguesia da linha
-        char ID[10], primeiroNome[50], ultimoNome[50], nome[100], id_freg_todo[7], id_freg[3];
+        char ID[10], primeiroNome[50] = "", ultimoNome[50] = "", nome[100], nome2[100], id_freg_todo[7], id_freg[3];
         int dia, mes, ano, id_dist, id_conc;
         Freguesia *freg;
 
         // Use sscanf para extrair dados da linha
-        if (sscanf(linha, "%s %[^0-9] %d-%d-%d %6s", ID, nome, &dia, &mes, &ano, id_freg_todo) != 6) {
+        if (sscanf(linha, "%s %[^0-9] %d-%d-%d %6s", ID, nome2, &dia, &mes, &ano, id_freg_todo) != 6) {
             printf("Erro ao ler os dados da linha: %s\n", linha);
             fclose(arquivo);
             LiberarListaPessoas(lista);
@@ -1425,23 +1445,28 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
         }
 
         // Encontrar o primeiro nome
-        sscanf(nome, "%s", primeiroNome);
+        strcpy(nome, nome2);
 
         // Encontrar a última ocorrência de um espaço para ultimo nome
-        char *lastSpace = strrchr(nome, ' ');
-        if (lastSpace != NULL) {
-            strcpy(ultimoNome, lastSpace + 1);
-        } else {
-            strcpy(ultimoNome, "");
-        }
 
+        char *token = strtok(nome, " ");
+        if (token != NULL) {
+            strcpy(primeiroNome, token);
+            char *ultimo = token;
+            while ((token = strtok(NULL, " ")) != NULL) {
+                ultimo = token;
+            }
+            strcpy(ultimoNome, ultimo);
+        }
+        char* temp = trim(ultimoNome);
+        strcpy(ultimoNome, temp);
 
         // Extrair id_dist, id_conc e id_freg do id_freg_todo
         sscanf(id_freg_todo, "%2d%2d%2s", &id_dist, &id_conc, id_freg);
 
         // Debugging prints
         /*printf("Lendo linha: %s\n", linha);
-        printf("ID: %s, Primeiro Nome: %s, Ultimo Nome: %s, Data: %02d-%02d-%04d, ID_Freg_Todo: %s\n",
+        printf("ID: %s, Primeiro Nome: %s, Ultimo Nome: |%s|, Data: %02d-%02d-%04d, ID_Freg_Todo: %s\n",
                ID, primeiroNome, ultimoNome, dia, mes, ano, id_freg_todo);
         printf("ID_DIST: %d, ID_CONC: %d, ID_FREG: %s\n", id_dist, id_conc, id_freg);*/
 

@@ -9,5 +9,6 @@ int Aleatorio();
 int LerInteiro(char *txt);
 void limparBuffer();
 void lerString(char *str, int tamanho);
+void removeSpaces(char* input);
 
 #endif //EXEM_PROJETO_UTEIS_H
