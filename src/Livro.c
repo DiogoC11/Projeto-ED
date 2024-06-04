@@ -2,17 +2,6 @@
 #include "ctype.h"
 #include "Uteis.h"
 
-// Função para encontrar o NO_CHAVE_L por uma KEY
-NO_CHAVE_L *encontrarNoChave(NO_CHAVE_L *noChave, char *chave) {
-    while (noChave != NULL) {
-        if (strcmp(noChave->categoria, chave) == 0) {
-            return noChave;
-        }
-        noChave = noChave->Prox;
-    }
-    return NULL;
-}
-
 LIVRO *CriarLivro(char *ISBN, char *_nome, char *_area, int _anoPublicacao, char *_autor)
 {
     LIVRO *P = (LIVRO *)malloc(sizeof(LIVRO));
@@ -94,10 +83,10 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
                         break;
                 }
             }while(op != 1 && op != 2);
-        }else if(encontrarNoChave(C->Inicio, area) == NULL){
+        }else if(!AreaExisteNaLista(C, area)){
                 printf("\nErro: A area inserida nao existe.\n");
         }
-    }while(encontrarNoChave(C->Inicio, area) == NULL);
+    }while(!AreaExisteNaLista(C, area));
     do {
         printf("\nAno de Publicacao: ");
         scanf("%d", &anoPublicacao);

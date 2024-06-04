@@ -169,24 +169,28 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 //Adicionar Pessoa
                 PESSOA *novaPessoa = PedirDadosPessoa(listaChavesPessoa, D, C, F);
                 MostrarPessoa(novaPessoa);
-                printf("Deseja adicionar a pessoa? (1-Sim, 0-Nao) ");
-                scanf("%d", &confirm);
-                switch (confirm) {
-                    case 1: {
-                        ElementoP *novoElemento = criarElementoP(novaPessoa);
-                        AdicionarPessoa(listaChavesPessoa , novoElemento);
-                        break;
+                do {
+                    printf("Deseja adicionar a pessoa? (1-Sim, 0-Nao) ");
+                    scanf("%d", &confirm);
+                    limparBuffer();
+                    switch (confirm) {
+                        case 1: {
+                            ElementoP *novoElemento = criarElementoP(novaPessoa);
+                            AdicionarPessoa(listaChavesPessoa, novoElemento);
+                            break;
+                        }
+                        case 2: {
+                            printf("Pessoa nao foi adicionada.\n");
+                            LiberarPessoa(novaPessoa);
+                            break;
+                        }
+                        default: {
+                            printf("\nErro: Opcao invalida.\n");
+                            break;
+                        }
                     }
-                    case 2: {
-                        printf("Pessoa nao foi adicionada.\n");
-                        LiberarPessoa(novaPessoa);
-                        break;
-                    }
-                    default: {
-                        printf("\nErro: Opcao invalida.\n");
-                        break;
-                    }
-                }
+                }while(confirm != 0 && confirm != 1);
+                break;
             }
             case 2: {
                 //Pesquisar pessoa pelo nome
@@ -444,24 +448,25 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
     int opGeral;
     do {
         printf("\n--- Menu Geral ---\n");
-        printf("1- Operacoes de Livro\n");
-        printf("2- Operacoes de Pessoas\n");
+        printf("1- Operacoes de Pessoas\n");
+        printf("2- Operacoes de Livros\n");
         printf("3- Operacoes de Requisicoes\n");
         printf("0- Sair\n");
         opGeral = LerInteiro("Qual a opcao? ");
 
         switch (opGeral) {
             case 1: {
-                // Menu de Operações de Livro
-                menuLivro(ListaChavesLivros);
-                break;
-            }
-            case 2: {
-                // Menu de Operações de Pessoa
+                // Menu de Operações de Pessoas
                 menuPessoa(ListaChavesPessoas, D, C, F, ListaRequisicoes);
                 break;
             }
+            case 2: {
+                // Menu de Operações de Livros
+                menuLivro(ListaChavesLivros);
+                break;
+            }
             case 3:
+                // Menu de Operações de Requisicoes
                 menuRequisicoes(ListaChavesPessoas, ListaRequisicoes, ListaChavesLivros);
                 break;
             case 0:
@@ -482,7 +487,10 @@ int main() {
     Lista_Chaves_P *listaChavesPessoa = criarListaChave();
     ListaRequisicoes *listaRequisicoes = criarListaR();
 
+    //ler livros
     LerLivrosDoFicheiro(listaChavesLivro, "../data/livros.txt");
+
+    //ler freguesias concelhos e distritos
     Lista_F *ListaF= LerTXT();
     Lista_C *ListaC= LerTXTConc();
     Lista_D *listaD = LerTXTDist();
@@ -494,6 +502,7 @@ int main() {
     //MostraFreguesiasConcelho(2, ListaC, 5);
     //ListarFreguesias(ListaF);
 
+    //ler pessoas
     ListaPessoa *listaPessoas = LerRequisitantesTXT(ListaF);
     listaChavesPessoa = OrganizarListaPessoaPorChave(listaPessoas);
     //MostrarPessoas(listaChavesPessoa);
@@ -512,6 +521,7 @@ int main() {
     //funcoes de gardar
     GuardarLivrosEmFicheiro(listaChavesLivro, "../data/livros.txt");
     GuardarPessoas(listaChavesPessoa, "../data/requisitantes.txt");
+
     printf("\nA sair da biblioteca...\n");
     return EXIT_SUCCESS; // ou EXIT_FAILURE
 }

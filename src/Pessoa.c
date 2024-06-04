@@ -28,21 +28,15 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
         return NULL;
     }
     strcpy(P->UltimoNome, ultimoNome);
-    if(Nome != NULL){
-        P->NOME = (char *)malloc((strlen(Nome) + 1) * sizeof(char));
-        if (P->NOME == NULL) {
-            printf("\nERRO AO ALOCAR MEMORIA PARA NOME\n");
-            free(P->PrimeiroNome);
-            free(P->UltimoNome);
-            free(P);
-            return NULL;
-        }
-        strcpy(P->NOME, Nome);
-    }else {
-        strcpy(P->NOME, primeiroNome);
-        strcat(P->NOME, " ");
-        strcat(P->NOME, ultimoNome);
+
+    P->NOME = (char *)malloc((strlen(Nome) + 1) * sizeof(char));
+    if (P->UltimoNome == NULL) {
+        printf("\nERRO AO ALOCAR MEMORIA PARA UltimoNome\n");
+        free(P->PrimeiroNome);
+        free(P);
+        return NULL;
     }
+    strcpy(P->NOME, Nome);
 
     P->freguesia = freguesia;
 
@@ -70,8 +64,6 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
         return NULL;
     }
     strcpy(P->ID, id);
-
-
     return P;
 }
 
@@ -110,7 +102,7 @@ char *GerarIDPessoa(Lista_Chaves_P *L) {
 // Função para pedir dados de uma pessoa
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) {
     int dia, mes, ano, id_dist, id_conc;
-    char primeiroNome[30], ultimoNome[30], id_freg[7], *id;
+    char primeiroNome[30], ultimoNome[30], nomeCompleto[100], id_freg[7], *id;
     Freguesia *freguesia = NULL;
     printf("\nAdicionar Pessoa:\n");
 
@@ -201,8 +193,13 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     if(id == NULL) {
         printf("\nErro: ID nao foi criado.\n");
         return NULL;
+    }else{
+        printf("gerei o ID (%s)\n", id);
     }
-    return CriarPessoa(primeiroNome, ultimoNome, NULL, dia, mes, ano,id, freguesia);
+    strcpy(nomeCompleto, primeiroNome);
+    strcat(nomeCompleto, " ");
+    strcat(nomeCompleto, ultimoNome);
+    return CriarPessoa(primeiroNome, ultimoNome, nomeCompleto, dia, mes, ano,id, freguesia);
 }
 
 // Função para criar uma lista de pessoas/
