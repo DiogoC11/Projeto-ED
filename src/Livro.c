@@ -416,13 +416,13 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
             token = strtok(NULL, " ");
         }
         if (isStringEmptyOrSpaces(nome)) {
-            printf("Erro: O nome está vazio ou contém apenas espaços. Pulando para a próxima linha.\n");
+            printf("Erro: O nome está vazio ou contém apenas espaços linha: %s (requisitantes.txt)\n", linha);
             continue;
         }
 
         strcpy(isbn, token);
         if (strlen(isbn) != 13) {
-            printf("Erro: O ISBN não tem 13 dígitos. Pulando para a próxima linha.\n");
+            printf("Erro: O ISBN não tem 13 dígitos linha: %s (requisitantes.txt)\n", linha);
             continue;
         }
 
@@ -433,13 +433,13 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
             token = strtok(NULL, " ");
         }
         if (isStringEmptyOrSpaces(area)) {
-            printf("Erro: A área está vazia ou contém apenas espaços. Pulando para a próxima linha.\n");
+            printf("Erro: A área está vazia ou contém apenas espaços linha: %s (requisitantes.txt)\n", linha);
             continue;
         }
 
         anoPublicacao = atoi(token);
         if (anoPublicacao > 2024 || anoPublicacao < 1000) {
-            printf("Erro: O ano de publicação não é válido. Pulando para a próxima linha.\n");
+            printf("Erro: O ano de publicação não é válido linha: %s (requisitantes.txt)\n", linha);
             continue;
         }
 
@@ -450,27 +450,27 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
             token = strtok(NULL, " ");
         }
         if (isStringEmptyOrSpaces(autor)) {
-            printf("Erro: O autor está vazio ou contém apenas espaços. Pulando para a próxima linha.\n");
+            printf("Erro: O autor está vazio ou contém apenas espaços linha: %s (requisitantes.txt)\n", linha);
             continue;
         }
 
         disponivel = atoi(token);
         if(disponivel != 0 && disponivel != 1) {
-            printf("Erro: O valor de disponível %d não é válido. Pulando para a próxima linha.\n", disponivel);
+            printf("Erro: O valor de disponível %d não é válido linha: %s (requisitantes.txt)\n", disponivel, linha);
             continue;
         }
 
         token = strtok(NULL, " ");
         requisitado = atoi(token);
         if(requisitado != 0 && requisitado != 1) {
-            printf("Erro: O valor de requisitado %d não é válido. Pulando para a próxima linha.\n", requisitado);
+            printf("Erro: O valor de requisitado %d não é válido linha: %s (requisitantes.txt)\n", requisitado, linha);
             continue;
         }
 
         token = strtok(NULL, " ");
         quant_requisicaoL = atoi(token);
         if(quant_requisicaoL < 0) {
-            printf("Erro: O valor da quantidade de requisicoes %d não é válido. Pulando para a próxima linha.\n", quant_requisicaoL);
+            printf("Erro: O valor da quantidade de requisicoes %d não é válido linha: %s (requisitantes.txt)\n", quant_requisicaoL, linha);
             continue;
         }
 

@@ -376,8 +376,9 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
 
 //Menu Requisiçoes///
 void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequisicoes, Lista_Chaves_L *listaLivros){
-    int opRequisicao, id_dist, id_conc, confirm;
-    char *isbn, *nome, *ID;
+    int opRequisicao, confirm;
+    char isbn[14], id[10];
+    LIVRO *livro;
     do {
         printf("\n--- Menu Requisicoes ---\n");
         printf("1- Fazer Requisicao\n");
@@ -390,13 +391,18 @@ void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequis
             REQUISICAO *novaRequisicao;
             case 1:
                 novaRequisicao = AdicionarRequisicao(ListaPessoas, listaLivros, listaRequisicoes);
+                if(novaRequisicao == NULL){
+                    break;
+                }
                 MostrarRequisicao(novaRequisicao);
-                printf("Deseja adicionar a requisicao? (1-Sim, 0-Nao) ");
+                printf("\nDeseja adicionar a requisicao? (1-Sim, 0-Nao)  ");
+                printf("\nOpcao: ");
                 scanf("%d", &confirm);
                 switch (confirm) {
                     case 1: {
                         ElementoR *novoElemento = criarElementoR(novaRequisicao);
                         InserirRequisicaoNaLista(listaRequisicoes, novoElemento, listaLivros);
+                        printf("\nRequisicao adicionada com sucesso!\n");
                         break;
                     }
                     case 2: {
@@ -413,32 +419,49 @@ void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequis
                 break;
             case 2:
                 do {
-                    printf("Digite o ID da pessoa: ");
-                    scanf("%s", ID);
-                    if (buscarPessoaPorID(ListaPessoas, ID)) {
-                        printf("\nErro: Pessoa com ID: %s nao encontrada.\n", ID);
+                    printf("\nDigite o ID da pessoa (0 - Voltar menu): ");
+                    scanf("%s", id);
+                    if(strcmp(id,"0") == 0){
+                        printf("\nA voltar para tras...\n");
+                        break;
+                    }else if (!buscarPessoaPorID(ListaPessoas, id)) {
+                        printf("\nErro: Pessoa com id: %s nao encontrada.\n", id);
+                    }else if(!VerificarPessoaRequisicao(id, listaRequisicoes)){
+                        printf("\nErro: A pessoa de id: %s nao tem requisicoes.\n");
+                        break;
                     }
-                }while(buscarPessoaPorID(ListaPessoas,ID));
-                printf("Pessoa encontrada: %s \n", buscarPessoaPorID(ListaPessoas,ID)->NOME);
-                do {
-                    printf("\nISBN: ");
-                    scanf("%s", isbn);
-                    if (strlen(isbn) != 13) {
-                        printf("\nErro: O ISBN tem de ter 13 digitos.(%d)\n", strlen(isbn));
-                    } else if (PesquisarLivroPorISBN(listaLivros, isbn) == NULL) {
-                        printf("\nErro: O ISBN inserido nao existe.\n");
+                }while(!buscarPessoaPorID(ListaPessoas,id));
+                if (strcmp(id, "0") != 0 && buscarPessoaPorID(ListaPessoas, id) != NULL) {
+                    printf("\nPessoa encontrada: %s \n", buscarPessoaPorID(ListaPessoas, id)->NOME );
+                    printf("\nLivros Requisitados: \n");
+                    MostrarLivrosRequisitados(id, listaRequisicoes);
+
+                    do {
+                        printf("\nISBN (0 - Voltar menu): ");
+                        scanf("%s", isbn);
+                        if(strcmp(isbn, "0") == 0){
+                            printf("\nA voltar para tras...\n");
+                            break;
+                        } else if (strlen(isbn) != 13) {
+                            printf("\nErro: O ISBN tem de ter 13 digitos.(%d)\n", (int)strlen(isbn));
+                        } else if (!(livro = PesquisarLivroRequisitadoPorISBN(id, isbn, listaRequisicoes))) {
+                            printf("\nErro: Nao tem um livro com ISBN: %s requisitado.\n", isbn);
+                        }
+                    } while (strlen(isbn) != 13 || livro == NULL);
+
+                    if(strcmp(isbn, "0") != 0 && livro != NULL) {
+                        DevolverLivro(listaRequisicoes, isbn, id);
                     }
-                } while ( strlen(isbn) != 13 || PesquisarLivroPorISBN(listaLivros, isbn) != NULL);
-                DevolverLivro(listaLivros, listaRequisicoes, isbn, ID);
+                }
                 break;
             case 3:
                 ListarLivrosRequisitados(listaRequisicoes);
                 break;
             case 0:
-                printf("A voltar...\n");
+                printf("\nA voltar...\n");
                 break;
             default:
-                printf("Erro: Opcao nao implementada.\n");
+                printf("\nErro: Opcao nao implementada.\n");
                 break;
         }
     } while (opRequisicao != 0);
@@ -483,13 +506,10 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
 int main() {
     printf("Projeto-Biblioteca-Versao-Base!\n");
 
-    // Criar listas para livros e pessoas
+    // Criar listas para livros, pessoas e requisicoes
     Lista_Chaves_L *listaChavesLivro = CriarListaChaves();
-    Lista_Chaves_P *listaChavesPessoa = criarListaChave();
     ListaRequisicoes *listaRequisicoes = criarListaR();
-
-    //ler livros
-    LerLivrosDoFicheiro(listaChavesLivro, "../data/livros.txt");
+    Lista_Chaves_P *listaChavesPessoa;
 
     //ler freguesias concelhos e distritos
     Lista_F *ListaF= LerTXT();
@@ -503,25 +523,28 @@ int main() {
     //MostraFreguesiasConcelho(2, ListaC, 5);
     //ListarFreguesias(ListaF);
 
+    //ler livros
+    LerLivrosDoFicheiro(listaChavesLivro, "../data/livros.txt");
+
     //ler pessoas
     ListaPessoa *listaPessoas = LerRequisitantesTXT(ListaF);
     listaChavesPessoa = OrganizarListaPessoaPorChave(listaPessoas);
     //MostrarPessoas(listaChavesPessoa);
 
+    //ler requisicoes
+    LerRequisicoes(listaRequisicoes, listaChavesPessoa, listaChavesLivro, "../data/requisicoes.txt");
+
     // Executar o menu geral
     menuGeral(listaChavesLivro, listaChavesPessoa, listaRequisicoes, listaD, ListaC, ListaF);
-
-
-    // Liberar memória alocada para as listas de livros e pessoas
-    //LiberarListaChaves_L(listaChavesLivro);
-    LiberarListaChaves_P(listaChavesPessoa);
-
-    //TESTE
-    LibertarListaRequisicoes(listaRequisicoes);
 
     //funcoes de gardar
     GuardarLivrosEmFicheiro(listaChavesLivro, "../data/livros.txt");
     GuardarPessoas(listaChavesPessoa, "../data/recursos/requisitantes.txt");
+    GuardarRequisicoes(listaRequisicoes,"../data/requisicoes.txt");
+
+    LiberarListaChaves_L(listaChavesLivro);
+    LiberarListaChaves_P(listaChavesPessoa);
+    LibertarListaRequisicoes(listaRequisicoes);
 
     printf("\nA sair da biblioteca...\n");
     return EXIT_SUCCESS; // ou EXIT_FAILURE
