@@ -126,22 +126,26 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     printf("\nAdicionar Pessoa:\n");
 
     do {
-        printf("Primeiro Nome: ");
+        printf("\nPrimeiro Nome: (0 - Voltar menu) ");
         lerString(primeiroNome, sizeof(primeiroNome));
-        if (!strlen(primeiroNome)) {
+        if(primeiroNome[0] == '0'){
+            return NULL;
+        }else if (!strlen(primeiroNome)) {
             printf("\nErro: O primeiro nome e muito pequeno\n");
         }
     }while(!strlen(primeiroNome));
 
     do {
-        printf("Ultimo Nome: ");
+        printf("\nUltimo Nome: ");
         lerString(ultimoNome, sizeof(ultimoNome));
-        if (!strlen(ultimoNome)) {
+        if(primeiroNome[0] == '0'){
+            return NULL;
+        }else if (!strlen(ultimoNome)) {
             printf("\nErro: O ultimo nome e muito pequeno\n");
         }
     }while(!strlen(primeiroNome));
 
-    printf("Data de nascimento:\n");
+    printf("\nData de nascimento:\n");
     do {
         do {
             printf("  Ano: ");
@@ -153,7 +157,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
         } while (ano < 1900 || ano > 2024);
 
         do {
-            printf("  Mês: ");
+            printf(" Mês: ");
             scanf("%d", &mes);
             limparBuffer();
             if (mes < 1 || mes > 12) {
@@ -162,19 +166,16 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
         } while (mes < 1 || mes > 12);
 
         do {
-            printf("  Dia: ");
+            printf(" Dia: ");
             scanf("%d", &dia);
             limparBuffer();
-            if (mes == 2) {
-                if (dia < 1 || dia > 29) {
-                    printf("\nErro: Dia invalido.\n");
-                }
-            } else {
-                if (dia < 1 || dia > 31) {
-                    printf("\nErro: Dia invalido.\n");
-                }
+            if (dia < 1 || dia > 31) {
+                printf("\nErro: Dia invalido.\n");
             }
-        } while (mes == 2 && (dia < 1 || dia > 29) || (mes != 2 && (dia < 1 || dia > 31)));
+        } while (dia < 1 || dia > 31 ) ;
+        if(validarData(dia,mes,ano) == 0){
+            printf("\nErro: Data invalida. Insira outra data que seja válida.\n");
+        }
     }while(validarData(dia,mes,ano) == 0);
     ListarDistritos(D);
     do{
@@ -213,8 +214,6 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     if(id == NULL) {
         printf("\nErro: ID nao foi criado.\n");
         return NULL;
-    }else{
-        printf("gerei o ID (%s)\n", id);
     }
     strcpy(nomeCompleto, primeiroNome);
     strcat(nomeCompleto, " ");
@@ -1416,10 +1415,12 @@ int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_con
 
 ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
     FILE *arquivo;
+    char texto[256];
     char linha[200];
     ListaPessoa *lista = (ListaPessoa *)malloc(sizeof(ListaPessoa));
     if (lista == NULL) {
-        printf("Erro ao alocar memória para a lista de pessoas.\n");
+        snprintf(texto, sizeof(texto), "\nErro ao alocar memória para a lista de pessoas. (LerRequisitantes)\n");
+        EscreverLogs(texto);
         return NULL;
     }
     lista->num_Pessoas = 0;
@@ -1427,7 +1428,8 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
 
     arquivo = fopen("../data/recursos/requisitantes.txt", "r");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+        snprintf(texto, sizeof(texto), "\nErro ao abrir o arquivo. (LerRequisitantes)\n");
+        EscreverLogs(texto);
         free(lista);
         return NULL;
     }
@@ -1440,7 +1442,8 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
 
         // Use sscanf para extrair dados da linha
         if (sscanf(linha, "%s %[^0-9] %d-%d-%d %6s", ID, nome2, &dia, &mes, &ano, id_freg_todo) != 6) {
-            printf("Erro ao ler os dados da linha: %s (requisitantes.txt)\n", linha);
+            snprintf(texto, sizeof(texto), "\nErro ao ler os dados da linha: %s (requisitantes.txt)\n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
@@ -1472,36 +1475,48 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
 
         //Verificar ID
         if(strlen(ID) != 9){
-            printf("\nErro: O ID %s nao e valido (requisitantes.txt)(Não tem 9 digitos) linha: %s\n", ID,linha);
+            snprintf(texto, sizeof(texto), "\nErro: O ID %s nao e valido (Não tem 9 digitos) (requisitantes.txt) linha: %s\n", ID,linha);
+            EscreverLogs(texto);
             continue;
         }else{
             int soma = 0;
             for(int i = 0; i < strlen(ID); i++){
                 if (!isdigit(ID[i])) {
+                    snprintf(texto, sizeof(texto), "\nErro: o ID %s nao e valido (Contem letras) (requisitantes.txt) linha: %s\n", ID, linha);
+                    EscreverLogs(texto);
                     printf("\nErro: o ID %s nao e valido (requisitantes.txt) (Contem letras) linha: %s\n", ID, linha);
                     continue;
                 }
                 soma += ID[i] - '0';
             }
             if(soma % 10 != 0){
-                printf("\nErro: O ID %s nao e valido (requisitantes.txt) (A soma nao e multiplo de 10) linha: %s\n", ID, linha);
+                snprintf(texto, sizeof(texto), "\nErro: O ID %s nao e valido (A soma nao e multiplo de 10) (requisitantes.txt) linha: %s\n", ID, linha);
+                EscreverLogs(texto);
                 continue;
             }
         }
 
-        //Verificar 
+        //Verificar Data
 
+        if(validarData(dia,mes,ano) == 0){
+            snprintf(texto, sizeof(texto), "\nErro: A data %d-%d-%d nao e valida (requisitantes.txt) linha: %s\n", dia, mes, ano, linha);
+            EscreverLogs(texto);
+            continue;
+        }
+
+        //Verificar FREG
         freg = ProcurarFreguesiaPorID(listaFreguesias, id_freg, id_conc, id_dist);
         if (freg == NULL) {
-            printf("Freguesia nao encontrada para ID_DIST: %d, ID_CONC: %d, ID_FREG: %s, ID_Requisitante: %s (requisitantes.txt) linha: %s .\n",
-                   id_dist, id_conc, id_freg, ID, linha);
+            snprintf(texto, sizeof(texto), "\nFreguesia nao encontrada para ID_DIST: %d, ID_CONC: %d, ID_FREG: %s (requisitantes.txt) linha: %s .\n", id_dist, id_conc, id_freg, linha);
+            EscreverLogs(texto);
             continue;
         }
 
         // Criar uma nova pessoa e alocar memória
         PESSOA *nova_pessoa = CriarPessoa(primeiroNome, ultimoNome, nome, dia, mes, ano, ID, freg);
         if (nova_pessoa == NULL) {
-            printf("Erro ao alocar memória para nova_pessoa. (requisitantes.txt)\n");
+            snprintf(texto, sizeof(texto), "\nErro ao alocar memória para nova_pessoa. (LerRequisitantes)\n");
+            EscreverLogs(texto);
             fclose(arquivo);
             LiberarListaPessoas(lista);
             return NULL;
@@ -1510,7 +1525,8 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
         // Criar um novo elemento para a lista de pessoas e alocar memória
         ElementoP *novo_elemento = (ElementoP *)malloc(sizeof(ElementoP));
         if (novo_elemento == NULL) {
-            printf("Erro ao alocar memória para novo_elemento. (requisitantes.txt)\n");
+            snprintf(texto, sizeof(texto), "\nErro ao alocar memória para novo_elemento. (LerRequisitantes)\n");
+            EscreverLogs(texto);
             fclose(arquivo);
             LiberarListaPessoas(lista);
             LiberarPessoa(nova_pessoa);
@@ -1523,7 +1539,6 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
         lista->Inicio = novo_elemento;
         lista->num_Pessoas++;
     }
-
     fclose(arquivo);
     return lista;
 }
@@ -1657,25 +1672,3 @@ void GuardarPessoas(Lista_Chaves_P *listaPessoas, const char *nomeFicheiro){
     fclose(ficheiro);
 }
 
-int validarData(int dia, int mes, int ano) {
-    if (ano < 1000 || ano > 2024) {
-        printf("Erro: Ano inválido %d.\n", ano);
-        return 0;
-    }
-    if (mes < 1 || mes > 12) {
-        printf("Erro: Mês inválido %d.\n", mes);
-        return 0;
-    }
-    int diasNoMes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-    // Ajuste para ano bissexto
-    if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
-        diasNoMes[1] = 29;
-    }
-
-    if (dia < 1 || dia > diasNoMes[mes - 1]) {
-        printf("Erro: Dia inválido %d para o mês %d.\n", dia, mes);
-        return 0;
-    }
-    return 1;
-}

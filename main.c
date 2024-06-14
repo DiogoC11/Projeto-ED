@@ -168,9 +168,14 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
             case 1: {
                 //Adicionar Pessoa
                 PESSOA *novaPessoa = PedirDadosPessoa(listaChavesPessoa, D, C, F);
+                if(novaPessoa == NULL){
+                    printf("\nA voltar para o menu...\n");
+                    break;
+                }
+                printf("\nNova Pessoa:\n");
                 MostrarPessoa(novaPessoa);
                 do {
-                    printf("Deseja adicionar a pessoa? (1-Sim, 0-Nao) ");
+                    printf("\nDeseja adicionar a pessoa? (1-Sim, 0-Nao) ");
                     scanf("%d", &confirm);
                     limparBuffer();
                     switch (confirm) {
@@ -195,8 +200,12 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
             case 2: {
                 //Pesquisar pessoa pelo nome
                 char nome[50];
-                printf("Digite o nome da Pessoa a pesquisar: ");
+                printf("\nDigite o nome da Pessoa a pesquisar (0 - Voltar menu): ");
                 lerString(nome, sizeof(nome));
+                if(nome[0] == '0'){
+                    printf("\nA voltar para o menu...\n");
+                    break;
+                }
                 PesquisarPesssoaPorNome(listaChavesPessoa, nome);
                 break;
             }
@@ -249,7 +258,11 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
             }
             case 6: {
                 // contar pessoas com idade superior a X
-                int idadeLimite = LerInteiro("\nDigite a idade limite: ");
+                int idadeLimite = LerInteiro("\nDigite a idade limite: (0 - Voltar menu)");
+                if(idadeLimite == 0){
+                    printf("\nA voltar para o menu...\n");
+                    break;
+                }
                 int numPessoas = ContarPessoasComIdadeSuperiorA(listaChavesPessoa, idadeLimite);
                 printf("\nO numero de pessoas com idade superior a %d anos e: %d\n", idadeLimite, numPessoas);
                 break;
@@ -268,10 +281,13 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
             case 8:{
                 char *ID;
                 do{
-                    printf("\nID: ");
+                    printf("\nID: (0 - Voltar menu)");
                     scanf("%s", ID);
                     limparBuffer();
-                    if (strlen(ID) != 9) {
+                    if(strcmp(ID,"0") == 0){
+                        printf("\nA voltar para o menu...\n");
+                        break;
+                    }else if (strlen(ID) != 9) {
                         printf("\nErro: O NIF tem de ter 9 digitos.(%d)\n", strlen(ID));
                     } else if (buscarPessoaPorID(listaChavesPessoa,ID) == NULL) {
                         printf("\nErro: O NIF inserido nao existe.\n");
@@ -302,8 +318,12 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 int id_dist , id_conc = 0, contagem = 0;
                 do{
                     ListarDistritos(D);
-                    printf("\nEscolha um Distrito: ");
+                    printf("\nEscolha um Distrito: (0 - Voltar menu)");
                     scanf("%d", &id_dist);
+                    if(id_dist == 0){
+                        printf("\nA voltar para o menu...\n");
+                        break;
+                    }
                     limparBuffer();
                     if(ProcurarDistritoPorID(D, id_dist) == NULL){
                         printf("\nErro: Distrito nao encontrado.\n");

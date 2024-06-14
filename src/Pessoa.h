@@ -138,7 +138,7 @@ int verificarIDArquivo(char *idRequisitante);
 void MostrarPessoas(Lista_Chaves_P *listaChaves);
 Lista_Chaves_P *OrganizarListaPessoaPorChave(ListaPessoa *listaPessoa);
 void AdicionarPessoaNaLista(ListaPessoa *lista, PESSOA *pessoa);
-int validarData(int dia, int mes, int ano);
+
 
 //freguesias
 void ListarFreguesias(Lista_F *listaFreguesias);

@@ -76,7 +76,7 @@ void DevolverLivro(ListaRequisicoes *ListaRequisicao,char *isbn, char *ID) {
 void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes) {
     int a = 0;
     if (!listaRequisicoes || listaRequisicoes->num_Requisicoes == 0) {
-        printf("Não há requisições.\n");
+        printf("Nao ha requisicoes.\n");
         return;
     }
     ElementoR *atual = listaRequisicoes->Inicio;
@@ -426,9 +426,11 @@ void GuardarRequisicoes(ListaRequisicoes *listaRequisicoes, const char *nomeFich
 
 ListaRequisicoes *LerRequisicoes(ListaRequisicoes *listaRequisicoes,Lista_Chaves_P *listaPessoas, Lista_Chaves_L *listaLivros, const char *nomeFicheiro){
     char linha[200];
+    char texto[256];
     FILE *ficheiro = fopen(nomeFicheiro, "r");
     if (ficheiro == NULL) {
-        printf("Erro ao abrir o ficheiro %s\n", nomeFicheiro);
+        snprintf(texto, sizeof(texto), "\nErro ao abrir o ficheiro %s (LerRequisicoes)\n", nomeFicheiro);
+        EscreverLogs(texto);
         return NULL;
     }
 
@@ -439,29 +441,33 @@ ListaRequisicoes *LerRequisicoes(ListaRequisicoes *listaRequisicoes,Lista_Chaves
         LIVRO *livro;
 
         if (sscanf(linha, "%s %s %d-%d-%d %d", id, isbn, &dia, &mes, &ano, &entregue) != 6) {
-            printf("Erro ao ler os dados da linha (requidicoes.txt): %s\n", linha);
+            snprintf(texto, sizeof(texto), "\nErro ao ler os dados da linha : %s (requisicoes.txt)\n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
         pessoa = buscarPessoaPorID(listaPessoas, id);
         if (pessoa == NULL) {
-            printf("Erro: Pessoa com ID %s não encontrada linha: %s (requidicoes.txt)\n", id, linha);
+            snprintf(texto, sizeof(texto), "\nErro: Pessoa com ID %s não encontrada (requisicoes.txt) linha: %s \n", id, linha);
+            EscreverLogs(texto);
             continue;
         }
 
         livro = PesquisarLivroPorISBN(listaLivros, isbn);
         if (livro == NULL) {
-            printf("Erro: Livro com ISBN %s não encontrado linha: %s (requidicoes.txt)\n", isbn,linha);
+            snprintf(texto, sizeof(texto), "\nErro: Livro com ISBN %s não encontrado (requisicoes.txt) linha: %s \n", isbn,linha);
+            EscreverLogs(texto);
             continue;
         }
-
         if(validarData(dia,mes,ano) == 0) {
-            printf("Erro: Data invalida linha: %s (requidicoes.txt)", linha);
+            snprintf(texto, sizeof(texto), "\nErro: Data invalida (requisicoes.txt) linha: %s \n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
         if(entregue != 0 && entregue != 1){
-            printf("Erro: valor de entregue invalido linha: %s (requidicoes.txt)", linha);
+            snprintf(texto, sizeof(texto), "\nErro: valor de entregue invalido (requisicoes.txt) linha: %s \n", linha);
+            EscreverLogs(texto);
             continue;
         }
 

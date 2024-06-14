@@ -400,9 +400,11 @@ int AreaExisteNaLista(Lista_Chaves_L *listaChaves, const char *area) {
 
 void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) {
     char linha[200];
+    char texto[256];
     FILE *ficheiro = fopen(nomeFicheiro, "r");
     if (ficheiro == NULL) {
-        printf("Erro ao abrir o ficheiro %s\n", nomeFicheiro);
+        snprintf(texto, sizeof(texto), "\nErro ao abrir o ficheiro %s (LerLivrosDoFicheiro)\n", nomeFicheiro);
+        EscreverLogs(texto);
         return;
     }
     while(fgets(linha, sizeof (linha), ficheiro) != NULL) {
@@ -416,13 +418,15 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
             token = strtok(NULL, " ");
         }
         if (isStringEmptyOrSpaces(nome)) {
-            printf("Erro: O nome está vazio ou contém apenas espaços linha: %s (requisitantes.txt)\n", linha);
+            snprintf(texto, sizeof(texto), "\nErro: O nome esta vazio ou contem apenas espaços linha: %s (livros.txt)\n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
         strcpy(isbn, token);
         if (strlen(isbn) != 13) {
-            printf("Erro: O ISBN não tem 13 dígitos linha: %s (requisitantes.txt)\n", linha);
+            snprintf(texto, sizeof(texto), "\nErro: O ISBN não tem 13 dígitos linha: %s (livros.txt)\n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
@@ -433,13 +437,15 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
             token = strtok(NULL, " ");
         }
         if (isStringEmptyOrSpaces(area)) {
-            printf("Erro: A área está vazia ou contém apenas espaços linha: %s (requisitantes.txt)\n", linha);
+            snprintf(texto, sizeof(texto), "\nErro: A área está vazia ou contém apenas espaços linha: %s (livros.txt)\n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
         anoPublicacao = atoi(token);
         if (anoPublicacao > 2024 || anoPublicacao < 1000) {
-            printf("Erro: O ano de publicação não é válido linha: %s (requisitantes.txt)\n", linha);
+            snprintf(texto, sizeof(texto), "\nErro: O ano de publicação não é válido linha: %s (livros.txt)\n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
@@ -450,27 +456,31 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
             token = strtok(NULL, " ");
         }
         if (isStringEmptyOrSpaces(autor)) {
-            printf("Erro: O autor está vazio ou contém apenas espaços linha: %s (requisitantes.txt)\n", linha);
+            snprintf(texto, sizeof(texto), "\nErro: O autor está vazio ou contém apenas espaços linha: %s (livros.txt)\n", linha);
+            EscreverLogs(texto);
             continue;
         }
 
         disponivel = atoi(token);
         if(disponivel != 0 && disponivel != 1) {
-            printf("Erro: O valor de disponível %d não é válido linha: %s (requisitantes.txt)\n", disponivel, linha);
+            snprintf(texto, sizeof(texto), "\nErro: O valor de disponível %d não é válido linha: %s (livros.txt)\n", disponivel, linha);
+            EscreverLogs(texto);
             continue;
         }
 
         token = strtok(NULL, " ");
         requisitado = atoi(token);
         if(requisitado != 0 && requisitado != 1) {
-            printf("Erro: O valor de requisitado %d não é válido linha: %s (requisitantes.txt)\n", requisitado, linha);
+            snprintf(texto, sizeof(texto), "\nErro: O valor de requisitado %d não é válido linha: %s (livros.txt)\n", requisitado, linha);
+            EscreverLogs(texto);
             continue;
         }
 
         token = strtok(NULL, " ");
         quant_requisicaoL = atoi(token);
         if(quant_requisicaoL < 0) {
-            printf("Erro: O valor da quantidade de requisicoes %d não é válido linha: %s (requisitantes.txt)\n", quant_requisicaoL, linha);
+            snprintf(texto, sizeof(texto), "\nErro: O valor da quantidade de requisicoes %d não é válido linha: %s (livros.txt)\n", quant_requisicaoL, linha);
+            EscreverLogs(texto);
             continue;
         }
 
@@ -491,3 +501,5 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
 
     fclose(ficheiro);
 }
+
+

@@ -10,5 +10,7 @@ int LerInteiro(char *txt);
 void limparBuffer();
 void lerString(char *str, int tamanho);
 void removeSpaces(char* input);
+void EscreverLogs(const char *mensagem);
+int validarData(int dia, int mes, int ano);
 
 #endif //EXEM_PROJETO_UTEIS_H
