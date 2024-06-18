@@ -121,7 +121,7 @@ char *GerarIDPessoa(Lista_Chaves_P *L) {
 // Função para pedir dados de uma pessoa
 PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) {
     int dia, mes, ano, id_dist, id_conc;
-    char primeiroNome[30], ultimoNome[30], nomeCompleto[100], id_freg[7], *id;
+    char primeiroNome[30], ultimoNome[30], nomeCompleto[100], id_freg[3], *id;
     Freguesia *freguesia = NULL;
     printf("\nAdicionar Pessoa:\n");
 
@@ -132,8 +132,10 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
             return NULL;
         }else if (!strlen(primeiroNome)) {
             printf("\nErro: O primeiro nome e muito pequeno\n");
+        }else if(contem_numero(primeiroNome)){
+            printf("\nErro: O nome nao pode conter numeros.\n");
         }
-    }while(!strlen(primeiroNome));
+    }while(!strlen(primeiroNome) || contem_numero(primeiroNome));
 
     do {
         printf("\nUltimo Nome: ");
@@ -142,8 +144,10 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
             return NULL;
         }else if (!strlen(ultimoNome)) {
             printf("\nErro: O ultimo nome e muito pequeno\n");
+        }else if(contem_numero(ultimoNome)){
+            printf("\nErro: O nome nao pode conter numeros.\n");
         }
-    }while(!strlen(primeiroNome));
+    }while(!strlen(primeiroNome) || contem_numero(ultimoNome));
 
     printf("\nData de nascimento:\n");
     do {
@@ -157,7 +161,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
         } while (ano < 1900 || ano > 2024);
 
         do {
-            printf(" Mês: ");
+            printf(" Mes: ");
             scanf("%d", &mes);
             limparBuffer();
             if (mes < 1 || mes > 12) {
@@ -200,8 +204,12 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
         do {
             printf("\nEscolha a sua Freguesia: ");
             lerString(id_freg, sizeof(id_freg));
-            if (strlen(id_freg) != 2) {
-                printf("\nErro: Introduza um ID valido.\n");
+            if (strlen(id_freg) == 1) {
+                id_freg[2] = '\0';
+                id_freg[1] = id_freg[0];
+                id_freg[0] = '0';
+            }else if(strlen(id_freg) != 2){
+                printf("\nErro: ID de freguesia invalido.\n");
             }
         }while(strlen(id_freg) != 2);
         if(ProcurarFreguesiaPorID(F,id_freg,id_conc,id_dist) == NULL){
@@ -297,12 +305,12 @@ void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) {
 
 // Função para pesquisar uma pessoa pelo nome
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
-    printf("Lista de pessoas com nome %s:\n", nome);
     if (L->Inicio == NULL || L->num_chaves == 0) {
         printf("\nErro: Lista vazia\n");
         return NULL;
     }
     int a = 0;
+    printf("Lista de pessoas com nome %s:\n", nome);
     NO_CHAVE_P *N = L->Inicio;
     while (N != NULL) {
         ElementoP *E = N->DADOS->Inicio;
@@ -1447,6 +1455,7 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
             continue;
         }
 
+
         // Encontrar o primeiro nome
         strcpy(nome, nome2);
 
@@ -1664,7 +1673,7 @@ void GuardarPessoas(Lista_Chaves_P *listaPessoas, const char *nomeFicheiro){
                     pessoa->dataNascimento->dia,
                     pessoa->dataNascimento->mes,
                     pessoa->dataNascimento->ano,
-                    pessoa->freguesia->ID);
+                    pessoa->freguesia->ID_Todo);
             elementoAtual = elementoAtual->proximo;
         }
         atualChave = atualChave->Prox;

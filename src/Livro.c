@@ -96,7 +96,7 @@ LIVRO *PedirDadosLivro(Lista_Chaves_L *C){
         }else if(isalpha(anoPublicacao)){
             printf("\nErro: Insira um numero inteiro.\n");
         }
-    }while( anoPublicacao>2024 || anoPublicacao<999);
+    }while( anoPublicacao>2024 || anoPublicacao<0);
 
     do{
         printf("\nAutor do Livro: ");
@@ -272,7 +272,6 @@ NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C){
     NO_CHAVE_L *N = C->Inicio;
     NO_CHAVE_L *Area = C->Inicio;
     while (N != NULL){
-        printf("\nQuantidade de requisicoes %d\n", N->quant_requisicaoN);
         if(N->quant_requisicaoN > 0){
             if(N->quant_requisicaoN > Area->quant_requisicaoN){
                 Area = N;
@@ -443,7 +442,7 @@ void LerLivrosDoFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) 
         }
 
         anoPublicacao = atoi(token);
-        if (anoPublicacao > 2024 || anoPublicacao < 1000) {
+        if (anoPublicacao > 2024 || anoPublicacao < 0) {
             snprintf(texto, sizeof(texto), "\nErro: O ano de publicação não é válido linha: %s (livros.txt)\n", linha);
             EscreverLogs(texto);
             continue;

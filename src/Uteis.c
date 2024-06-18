@@ -82,3 +82,13 @@ int validarData(int dia, int mes, int ano) {
     }
     return 1;
 }
+
+int contem_numero(char *array) {
+    while (*array) {
+        if (isdigit((unsigned char)*array)) {
+            return 1; // Contém número
+        }
+        array++;
+    }
+    return 0; // Não contém número
+}

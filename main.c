@@ -172,7 +172,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                     printf("\nA voltar para o menu...\n");
                     break;
                 }
-                printf("\nNova Pessoa:\n");
+                printf("\nNova Pessoa:");
                 MostrarPessoa(novaPessoa);
                 do {
                     printf("\nDeseja adicionar a pessoa? (1-Sim, 0-Nao) ");
@@ -210,6 +210,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 break;
             }
             case 3: {
+                //listar pessoas com filtro
                 ListaPessoa *listaPessoas;
                 int opOrganizarPessoa = 0;
                 do {
@@ -246,12 +247,13 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 break;
             }
             case 4: {
+                //calcular idade maxima
                 int idadeMaxima = CalcularIdadeMaxima(listaChavesPessoa);
                 printf("\nA idade maxima de todos os requisitantes e: %d anos\n", idadeMaxima);
                 break;
             }
             case 5: {
-                //  idade média
+                //calcular idade média
                 float idadeMedia = CalcularIdadeMedia(listaChavesPessoa);
                 printf("\nA idade media de todos os requisitantes e: %.2f anos\n", idadeMedia);
                 break;
@@ -279,6 +281,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 break;
             }
             case 8:{
+                //mostrar requisicoes por id
                 char *ID;
                 do{
                     printf("\nID: (0 - Voltar menu)");
@@ -297,14 +300,17 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 break;
             }
             case 9: {
+                //listar pessoas sem requisicoes
                 ListarPessoasSemRequisicoes(listaChavesPessoa, listaRequisicoes);
                 break;
             }
             case 10: {
+                //listar pessoas com requisicoes
                 ListarPessoasComRequisicao(listaChavesPessoa, listaRequisicoes);
                 break;
             }
             case 11: {
+                //pesquisar sobrenome mais comum
                 ResultadoSobrenome* sobrenomeMaisUsado = SobrenomeMaisUsado(listaChavesPessoa);
                 if (sobrenomeMaisUsado != NULL) {
                     printf("O sobrenome mais comum nos requisitantes e: %s (%d pessoas)\n", sobrenomeMaisUsado->sobrenome, sobrenomeMaisUsado->contagem);
@@ -314,6 +320,7 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                 break;
             }
             case 12: {
+                //contar pessoas de um distrito/concelho pelo nome/apelido
                 char *nome = NULL, *apelido = NULL, op;
                 int id_dist , id_conc = 0, contagem = 0;
                 do{
