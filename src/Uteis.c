@@ -16,8 +16,10 @@ int Factorial(int N){
 
 int LerInteiro(char *txt){
     int x;
-    printf("%s : ", txt);
-    scanf("%ld", &x);
+    while (!isdigit(x)){
+        printf("%s : ", txt);
+        scanf("%ld", &x);
+    }
     return x;
 }
 
@@ -46,6 +48,7 @@ void removeSpaces(char* input){
 }
 
 void EscreverLogs(const char *mensagem) {
+    //printf("Escrevi nos logs\n");
     FILE *logFile = fopen("../data/log.txt", "a");
     if (logFile != NULL) {
         fprintf(logFile, "%s\n", mensagem);
@@ -92,3 +95,4 @@ int contem_numero(char *array) {
     }
     return 0; // Não contém número
 }
+

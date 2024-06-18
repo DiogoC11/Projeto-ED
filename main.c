@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "src/Biblioteca.h"
-#include "src/Uteis.h"
 
 // Menu de operações de livros
 void menuLivro(Lista_Chaves_L *listaChavesLivro){
@@ -19,7 +18,8 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
         printf("7- Encontrar Area Mais Requisitada\n");
         printf("8- Destruir Livro\n");
         printf("0- Voltar\n");
-        opLivro = LerInteiro("Qual a opcao? ");
+        printf("Qual a opcao? ");
+        scanf("%d", &opLivro);
         limparBuffer();
         //ola
         switch (opLivro) {
@@ -120,7 +120,8 @@ void menuLivro(Lista_Chaves_L *listaChavesLivro){
                 if (livroDestruir != NULL || !livroDestruir->Disponivel || livroDestruir->Requisitado) {
                     MostrarLivro(livroDestruir);
                     do {
-                        confirm = LerInteiro("\nDeseja destruir o livro? (1-Sim, 0-Nao) ");
+                        printf("\nDeseja destruir o livro? (1-Sim, 0-Nao) ");
+                        scanf("%d", &confirm);
                         if (confirm == 1) {
                             livroDestruir->Disponivel = 0;
                             printf("O livro de ISBN %s esta agora indisponivel.", ISBN);
@@ -161,7 +162,8 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
         printf("11 - Sobrenome mais usado pelos requisitantes\n");
         printf("12 - Determinar numero de pessoas de um Distrito/Concelho pelo nome/apelido\n");
         printf("0 - Voltar\n");
-        opPessoa = LerInteiro("Qual a opcao? ");
+        printf("Qual a opcao? ");
+        scanf("%d", &opPessoa);
         limparBuffer();
 
         switch (opPessoa) {
@@ -219,7 +221,8 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
                     printf("2- Ultimo Nome\n");
                     printf("3- ID Freguesia\n");
                     printf("0- Voltar\n");
-                    opOrganizarPessoa = LerInteiro("Qual a opcao? ");
+                    printf("Qual a opcao? ");
+                    scanf("%d", &opOrganizarPessoa);
 
                     switch (opOrganizarPessoa) {
                         case 1: {
@@ -260,7 +263,9 @@ void menuPessoa(Lista_Chaves_P *listaChavesPessoa, Lista_D *D, Lista_C *C, Lista
             }
             case 6: {
                 // contar pessoas com idade superior a X
-                int idadeLimite = LerInteiro("\nDigite a idade limite: (0 - Voltar menu)");
+                int idadeLimite ;
+                printf("\nDigite a idade limite: (0 - Voltar menu)");
+                scanf("%d", &idadeLimite);
                 if(idadeLimite == 0){
                     printf("\nA voltar para o menu...\n");
                     break;
@@ -412,7 +417,8 @@ void menuRequisicoes(Lista_Chaves_P *ListaPessoas, ListaRequisicoes *listaRequis
         printf("2- Devolver Livro\n");
         printf("3- Listar Livros requisitados\n");
         printf("0- Sair\n");
-        opRequisicao = LerInteiro("Qual a opcao? ");
+        printf("Qual a opcao? ");
+        scanf("%d", &opRequisicao);
 
         switch (opRequisicao) {
             REQUISICAO *novaRequisicao;
@@ -503,8 +509,9 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
         printf("2- Operacoes de Livros\n");
         printf("3- Operacoes de Requisicoes\n");
         printf("0- Sair\n");
-        opGeral = LerInteiro("Qual a opcao? ");
-
+        printf("Qual a opcao? ");
+        scanf("%d", &opGeral);
+        limparBuffer();
         switch (opGeral) {
             case 1: {
                 // Menu de Operações de Pessoas
@@ -568,10 +575,13 @@ int main() {
     GuardarLivrosEmFicheiro(listaChavesLivro, "../data/livros.txt");
     GuardarPessoas(listaChavesPessoa, "../data/recursos/requisitantes.txt");
     GuardarRequisicoes(listaRequisicoes,"../data/requisicoes.txt");
+    GravarXML(listaChavesLivro, listaChavesPessoa, listaRequisicoes, listaD);
+    GravarTudoEMCSV(listaChavesLivro, listaChavesPessoa, listaRequisicoes, listaD);
 
     LiberarListaChaves_L(listaChavesLivro);
     LiberarListaChaves_P(listaChavesPessoa);
     LibertarListaRequisicoes(listaRequisicoes);
+    LibertarDistritos(listaD);
 
     printf("\nA sair da biblioteca...\n");
     return EXIT_SUCCESS; // ou EXIT_FAILURE

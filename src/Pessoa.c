@@ -858,15 +858,16 @@ Lista_F* LerTXT() {
 
 // Função para liberar a memória da lista de freguesias
 void LibertarFreguesias(Lista_F *lista) {
-    ElementoF *atual = lista->Inicio;
-    while (atual != NULL) {
-        ElementoF *temp = atual;
-        atual = atual->prox;
-        free(temp->freguesia);
-        free(temp);
+    if (lista == NULL) return;
+
+    ElementoF *atualF = lista->Inicio;
+    while (atualF != NULL) {
+        ElementoF *proxF = atualF->prox;
+        free(atualF->freguesia);
+        free(atualF);
+        atualF = proxF;
     }
-    lista->Inicio = NULL;
-    lista->num_Freguesias = 0;
+    free(lista);
 }
 
 
@@ -944,12 +945,15 @@ Lista_C* LerTXTConc() {
     return lista;
 }
 void LibertarConcelhos(Lista_C *lista) {
-    ElementoC *atual = lista->Inicio;
-    while (atual != NULL) {
-        ElementoC *temp = atual;
-        atual = atual->prox;
-        free(temp->concelho);
-        free(temp);
+    if (lista == NULL) return;
+
+    ElementoC *atualC = lista->Inicio;
+    while (atualC != NULL) {
+        ElementoC *proxC = atualC->prox;
+        LibertarFreguesias(atualC->concelho->freguesias); // Libera a lista de freguesias do concelho
+        free(atualC->concelho);                               // Libera a memória do concelho
+        free(atualC);                                         // Libera a memória do elemento
+        atualC = proxC;
     }
     free(lista);
 }
@@ -1070,16 +1074,18 @@ Lista_D* LerTXTDist() {
 }
 
 void LibertarDistritos(Lista_D *lista) {
-    ElementoD *atual = lista->Inicio;
-    while (atual != NULL) {
-        ElementoD *temp = atual;
-        atual = atual->Prox;
-        free(temp->Info->nome); // Libera o nome do distrito
-        free(temp->Info->Conc); // Libera a lista de concelhos associados ao distrito
-        free(temp->Info); // Libera a estrutura do distrito
-        free(temp); // Libera o elemento da lista
+    if (lista == NULL) return;
+
+    ElementoD *atualD = lista->Inicio;
+    while (atualD != NULL) {
+        ElementoD *proxD = atualD->Prox;
+        LibertarConcelhos(atualD->Info->Conc);
+        free(atualD->Info->nome);
+        free(atualD->Info);
+        free(atualD);
+        atualD = proxD;
     }
-    free(lista); // Libera a lista de distritos
+    free(lista);
 }
 
 /*void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito) {

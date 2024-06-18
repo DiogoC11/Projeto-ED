@@ -156,7 +156,6 @@ void LibertarConcelhos(Lista_C *lista);
 void ListarConcelhosPorDistrito(Lista_D *listadistritos,Lista_C *listaConcelhos, int idDistrito);
 char* ObterNomeDistrito(Lista_D *listaDistritos, int idDistrito);
 Lista_D* LerTXTDist();
-void LibertarDistritos(Lista_D *lista);
 void ListarDistritosPorID(Lista_D *listaDistritos, int idDistrito);
 void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho);
 void associa_concelhos_a_distritos(Lista_D *lista_distritos, Lista_C *lista_concelhos);

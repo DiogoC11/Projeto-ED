@@ -8,8 +8,10 @@
 #include "Livro.h"
 #include "Pessoa.h"
 #include "Requisicao.h"
+#include "Uteis.h"
 
-
+void GravarXML(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequisicoes * ListaR, Lista_D *LD);
+void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequisicoes * ListaR, Lista_D *LD);
 /*
 BIBLIOTECA *CriarBiblioteca(char *_nome, char *_logs);
 void ShowBiblioteca(BIBLIOTECA *B);
