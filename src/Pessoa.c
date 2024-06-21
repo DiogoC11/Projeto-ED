@@ -1462,8 +1462,8 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
             continue;
         }
 
-
-        // Encontrar o primeiro nome
+        rtrim(nome2);
+        // Gravar o primeiro nome
         strcpy(nome, nome2);
 
         // Encontrar a última ocorrência de um espaço para ultimo nome

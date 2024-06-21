@@ -13,5 +13,6 @@ void removeSpaces(char* input);
 void EscreverLogs(const char *mensagem);
 int validarData(int dia, int mes, int ano);
 int contem_numero(char *array);
+void rtrim(char *str);
 
 #endif //EXEM_PROJETO_UTEIS_H

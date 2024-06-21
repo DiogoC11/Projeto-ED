@@ -78,6 +78,11 @@ void GravarXML(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequisicoe
     if (nome[strlen(nome) - 1] == '\n') {
         nome[strlen(nome) - 1] = '\0';
     }
+
+    if (strlen(nome) == 0) {
+        strcpy(nome, "DADOS");
+    }
+
     char caminho[100];
     sprintf(caminho, "../XML/%s.xml", nome);
     FILE *arquivo = fopen(caminho, "w");

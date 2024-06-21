@@ -96,3 +96,10 @@ int contem_numero(char *array) {
     return 0; // Não contém número
 }
 
+void rtrim(char *str) {
+    int n = strlen(str);
+    while (n > 0 && isspace((unsigned char)str[n - 1])) {
+        str[n - 1] = '\0';
+        n--;
+    }
+}

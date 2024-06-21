@@ -1,5 +1,5 @@
-O burro  1234567890124 DRAMA  2001 Manuel Pires  1 1 11
-O Anao  1234567890125 COMEDIA  1998 Vitor Esteves  1 1 11
-O palhaco  1234567890122 COMEDIA  2024 Diogo Cardoso  1 0 0
-O rato  1234567890123 ACAO  2000 Joaquim dos Santos  1 1 1
 O bicho  1231231231231 HORROR  1980 Jose Augusto  1 0 0
+O rato  1234567890123 ACAO  2000 Joaquim dos Santos  1 1 1
+O Anao  1234567890125 COMEDIA  1998 Vitor Esteves  1 1 14
+O palhaco  1234567890122 COMEDIA  2024 Diogo Cardoso  1 0 0
+O burro  1234567890124 DRAMA  2001 Manuel Pires  1 1 14
