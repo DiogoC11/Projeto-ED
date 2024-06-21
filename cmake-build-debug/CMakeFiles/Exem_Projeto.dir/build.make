@@ -52,10 +52,10 @@ RM = "C:\Users\diogoacardoso\AppData\Local\JetBrains\CLion 2024.1.1\bin\cmake\wi
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\diogoacardoso\CLionProjects\Projeto-ED
+CMAKE_SOURCE_DIR = C:\Users\diogoacardoso\Documents\Projeto-ED
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Exem_Projeto.dir/depend.make
@@ -69,88 +69,88 @@ include CMakeFiles/Exem_Projeto.dir/progress.make
 include CMakeFiles/Exem_Projeto.dir/flags.make
 
 CMakeFiles/Exem_Projeto.dir/main.c.obj: CMakeFiles/Exem_Projeto.dir/flags.make
-CMakeFiles/Exem_Projeto.dir/main.c.obj: C:/Users/diogoacardoso/CLionProjects/Projeto-ED/main.c
+CMakeFiles/Exem_Projeto.dir/main.c.obj: C:/Users/diogoacardoso/Documents/Projeto-ED/main.c
 CMakeFiles/Exem_Projeto.dir/main.c.obj: CMakeFiles/Exem_Projeto.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Exem_Projeto.dir/main.c.obj"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/main.c.obj -MF CMakeFiles\Exem_Projeto.dir\main.c.obj.d -o CMakeFiles\Exem_Projeto.dir\main.c.obj -c C:\Users\diogoacardoso\CLionProjects\Projeto-ED\main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Exem_Projeto.dir/main.c.obj"
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/main.c.obj -MF CMakeFiles\Exem_Projeto.dir\main.c.obj.d -o CMakeFiles\Exem_Projeto.dir\main.c.obj -c C:\Users\diogoacardoso\Documents\Projeto-ED\main.c
 
 CMakeFiles/Exem_Projeto.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Exem_Projeto.dir/main.c.i"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\CLionProjects\Projeto-ED\main.c > CMakeFiles\Exem_Projeto.dir\main.c.i
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\Documents\Projeto-ED\main.c > CMakeFiles\Exem_Projeto.dir\main.c.i
 
 CMakeFiles/Exem_Projeto.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Exem_Projeto.dir/main.c.s"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\CLionProjects\Projeto-ED\main.c -o CMakeFiles\Exem_Projeto.dir\main.c.s
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\Documents\Projeto-ED\main.c -o CMakeFiles\Exem_Projeto.dir\main.c.s
 
 CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj: CMakeFiles/Exem_Projeto.dir/flags.make
-CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj: C:/Users/diogoacardoso/CLionProjects/Projeto-ED/src/Biblioteca.c
+CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj: C:/Users/diogoacardoso/Documents/Projeto-ED/src/Biblioteca.c
 CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj: CMakeFiles/Exem_Projeto.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.obj -c C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Biblioteca.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj"
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.obj -c C:\Users\diogoacardoso\Documents\Projeto-ED\src\Biblioteca.c
 
 CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.i"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Biblioteca.c > CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.i
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\Documents\Projeto-ED\src\Biblioteca.c > CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.i
 
 CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Exem_Projeto.dir/src/Biblioteca.c.s"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Biblioteca.c -o CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.s
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\Documents\Projeto-ED\src\Biblioteca.c -o CMakeFiles\Exem_Projeto.dir\src\Biblioteca.c.s
 
 CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj: CMakeFiles/Exem_Projeto.dir/flags.make
-CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj: C:/Users/diogoacardoso/CLionProjects/Projeto-ED/src/Livro.c
+CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj: C:/Users/diogoacardoso/Documents/Projeto-ED/src/Livro.c
 CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj: CMakeFiles/Exem_Projeto.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Livro.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Livro.c.obj -c C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Livro.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj"
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Livro.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Livro.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Livro.c.obj -c C:\Users\diogoacardoso\Documents\Projeto-ED\src\Livro.c
 
 CMakeFiles/Exem_Projeto.dir/src/Livro.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Exem_Projeto.dir/src/Livro.c.i"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Livro.c > CMakeFiles\Exem_Projeto.dir\src\Livro.c.i
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\Documents\Projeto-ED\src\Livro.c > CMakeFiles\Exem_Projeto.dir\src\Livro.c.i
 
 CMakeFiles/Exem_Projeto.dir/src/Livro.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Exem_Projeto.dir/src/Livro.c.s"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Livro.c -o CMakeFiles\Exem_Projeto.dir\src\Livro.c.s
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\Documents\Projeto-ED\src\Livro.c -o CMakeFiles\Exem_Projeto.dir\src\Livro.c.s
 
 CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj: CMakeFiles/Exem_Projeto.dir/flags.make
-CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj: C:/Users/diogoacardoso/CLionProjects/Projeto-ED/src/Pessoa.c
+CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj: C:/Users/diogoacardoso/Documents/Projeto-ED/src/Pessoa.c
 CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj: CMakeFiles/Exem_Projeto.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.obj -c C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Pessoa.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj"
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.obj -c C:\Users\diogoacardoso\Documents\Projeto-ED\src\Pessoa.c
 
 CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.i"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Pessoa.c > CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.i
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\Documents\Projeto-ED\src\Pessoa.c > CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.i
 
 CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Exem_Projeto.dir/src/Pessoa.c.s"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Pessoa.c -o CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.s
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\Documents\Projeto-ED\src\Pessoa.c -o CMakeFiles\Exem_Projeto.dir\src\Pessoa.c.s
 
 CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj: CMakeFiles/Exem_Projeto.dir/flags.make
-CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj: C:/Users/diogoacardoso/CLionProjects/Projeto-ED/src/Requisicao.c
+CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj: C:/Users/diogoacardoso/Documents/Projeto-ED/src/Requisicao.c
 CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj: CMakeFiles/Exem_Projeto.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.obj -c C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Requisicao.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj"
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.obj -c C:\Users\diogoacardoso\Documents\Projeto-ED\src\Requisicao.c
 
 CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.i"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Requisicao.c > CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.i
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\Documents\Projeto-ED\src\Requisicao.c > CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.i
 
 CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Exem_Projeto.dir/src/Requisicao.c.s"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Requisicao.c -o CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.s
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\Documents\Projeto-ED\src\Requisicao.c -o CMakeFiles\Exem_Projeto.dir\src\Requisicao.c.s
 
 CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj: CMakeFiles/Exem_Projeto.dir/flags.make
-CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj: C:/Users/diogoacardoso/CLionProjects/Projeto-ED/src/Uteis.c
+CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj: C:/Users/diogoacardoso/Documents/Projeto-ED/src/Uteis.c
 CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj: CMakeFiles/Exem_Projeto.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Uteis.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Uteis.c.obj -c C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Uteis.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj"
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Exem_Projeto.dir/src/Uteis.c.obj -MF CMakeFiles\Exem_Projeto.dir\src\Uteis.c.obj.d -o CMakeFiles\Exem_Projeto.dir\src\Uteis.c.obj -c C:\Users\diogoacardoso\Documents\Projeto-ED\src\Uteis.c
 
 CMakeFiles/Exem_Projeto.dir/src/Uteis.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Exem_Projeto.dir/src/Uteis.c.i"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Uteis.c > CMakeFiles\Exem_Projeto.dir\src\Uteis.c.i
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\diogoacardoso\Documents\Projeto-ED\src\Uteis.c > CMakeFiles\Exem_Projeto.dir\src\Uteis.c.i
 
 CMakeFiles/Exem_Projeto.dir/src/Uteis.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Exem_Projeto.dir/src/Uteis.c.s"
-	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\CLionProjects\Projeto-ED\src\Uteis.c -o CMakeFiles\Exem_Projeto.dir\src\Uteis.c.s
+	C:\Users\DIOGOA~1\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\diogoacardoso\Documents\Projeto-ED\src\Uteis.c -o CMakeFiles\Exem_Projeto.dir\src\Uteis.c.s
 
 # Object files for target Exem_Projeto
 Exem_Projeto_OBJECTS = \
@@ -174,7 +174,7 @@ Exem_Projeto.exe: CMakeFiles/Exem_Projeto.dir/build.make
 Exem_Projeto.exe: CMakeFiles/Exem_Projeto.dir/linkLibs.rsp
 Exem_Projeto.exe: CMakeFiles/Exem_Projeto.dir/objects1.rsp
 Exem_Projeto.exe: CMakeFiles/Exem_Projeto.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable Exem_Projeto.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable Exem_Projeto.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Exem_Projeto.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -186,6 +186,6 @@ CMakeFiles/Exem_Projeto.dir/clean:
 .PHONY : CMakeFiles/Exem_Projeto.dir/clean
 
 CMakeFiles/Exem_Projeto.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\diogoacardoso\CLionProjects\Projeto-ED C:\Users\diogoacardoso\CLionProjects\Projeto-ED C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug C:\Users\diogoacardoso\CLionProjects\Projeto-ED\cmake-build-debug\CMakeFiles\Exem_Projeto.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\diogoacardoso\Documents\Projeto-ED C:\Users\diogoacardoso\Documents\Projeto-ED C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug C:\Users\diogoacardoso\Documents\Projeto-ED\cmake-build-debug\CMakeFiles\Exem_Projeto.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Exem_Projeto.dir/depend
 

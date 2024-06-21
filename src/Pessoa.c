@@ -1145,12 +1145,13 @@ void LiberarListaPessoas(ListaPessoa *lista) {
     while (atual != NULL) {
         ElementoP *temp = atual;
         atual = atual->proximo;
-        free(temp->pessoa->dataNascimento);
-        free(temp->pessoa);
+        LiberarPessoa(temp->pessoa);
         free(temp);
     }
     free(lista);
 }
+
+
 
 void LiberarListaChaves_P(Lista_Chaves_P *lista) {
     NO_CHAVE_P *atual = lista->Inicio;
