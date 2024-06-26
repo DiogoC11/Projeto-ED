@@ -6,7 +6,10 @@
 
 ListaRequisicoes *criarListaR(){
     ListaRequisicoes *L = (ListaRequisicoes *)malloc(sizeof(ListaRequisicoes));
-    if(!L) return NULL;
+    if(!L) {
+        EscreverLogs("\nErro ao alocar memoria para lista de Requisicoes (criarListaR () )\n");
+        return NULL;
+    }
     L->num_Requisicoes = 0;
     L->Inicio = NULL;
     return L;
@@ -14,7 +17,10 @@ ListaRequisicoes *criarListaR(){
 
 ElementoR *criarElementoR(REQUISICAO *R){
     ElementoR *e = (ElementoR *)malloc(sizeof(ElementoR));
-    if(!e) return NULL;
+    if(!e) {
+        EscreverLogs("\nErro ao alocar memoria para elemento de requisicoes (criarElementoR () )\n");
+        return NULL;
+    }
     e->requisicao = R;
     e->proximo = NULL;
     return e;
@@ -51,7 +57,7 @@ bool PessoaTemRequisicao(PESSOA* pessoa, REQUISICAO** listaRequisicoes, int tama
 // Função para devolver um livro solicitado
 void DevolverLivro(ListaRequisicoes *ListaRequisicao,char *isbn, char *ID) {
     if (isbn == NULL || ListaRequisicao == NULL || ID == NULL) {
-        printf("Parametros invalidos.\n");
+        EscreverLogs("\nErro ao receber os parametros (DevolverLivro () )\n");
         return;
     }
     if(ListaRequisicao->num_Requisicoes == 0){
@@ -69,13 +75,15 @@ void DevolverLivro(ListaRequisicoes *ListaRequisicao,char *isbn, char *ID) {
         }
         atualReq = atualReq->proximo;
     }
-    printf("Livro com ISBN %s não encontrado.\n", atualReq->requisicao->Livro->ISBN);
+    printf("Livro com ISBN %s nao encontrado.\n", atualReq->requisicao->Livro->ISBN);
 }
 
 // Função para listar livros solicitados
 void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes) {
     int a = 0;
-    if (!listaRequisicoes || listaRequisicoes->num_Requisicoes == 0) {
+    if (!listaRequisicoes ) {
+        EscreverLogs("\nErro ao receber a lista de requisicoes (ListarLivrosRequisitados () )\n");
+    }else if( listaRequisicoes->num_Requisicoes == 0) {
         printf("Nao ha requisicoes.\n");
         return;
     }
@@ -115,14 +123,14 @@ NO_CHAVE_L *searchNO_CHAVE_L(Lista_Chaves_L *L, char *isbn) {
 REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L){
     REQUISICAO *R = (REQUISICAO *)malloc(sizeof(REQUISICAO));
     if (R == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA REQUISICAO\n");
+        EscreverLogs("\nErro ao alocar memoria para requisicao (CriarRequisicao () )\n");
         return NULL;
     }
     R->ID = _id;
 
     R->Pessoa = (PESSOA *)malloc(sizeof(PESSOA));
     if (R->Pessoa== NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA PESSOA\n");
+        EscreverLogs("\nErro ao alocar memoria para pessoa (CriarRequisicao () )\n");
         free(R->Pessoa);
         free(R);
         return NULL;
@@ -131,7 +139,7 @@ REQUISICAO *CriarRequisicao(int _id, PESSOA *P, LIVRO *L){
 
     R->Livro = (LIVRO *)malloc(sizeof(LIVRO));
     if (R->Pessoa== NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA LIVRO\n");
+        EscreverLogs("\nErro ao alocar memoria para livro (CriarRequisicao () )\n");
         free(R->Livro);
         free(R->Pessoa);
         free(R);
@@ -201,14 +209,17 @@ REQUISICAO *AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_
 
 // Função para libertar a memória alocada para a lista de requisições///
 void LibertarListaRequisicoes(ListaRequisicoes *lista) {
-    if (!lista) return;
+    if (!lista) {
+        EscreverLogs("\nErro ao receber lista de requisicoes (LibertarListaRequisicoes () )\n");
+        return;
+    }
 
     ElementoR *atual = lista->Inicio;
     while (atual != NULL) {
         ElementoR *proximo = atual->proximo;
 
         // libertar a memória associada à requisição
-        DestruirRequisicao(atual->requisicao);
+        LiberarRequisicao(atual->requisicao);
 
         // libertar o elemento atual
         free(atual);
@@ -224,6 +235,7 @@ void LibertarListaRequisicoes(ListaRequisicoes *lista) {
 
 void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *ID) {
     if (listaRequisicoes == NULL || listaChavesPessoa == NULL || ID == NULL) {
+        EscreverLogs("\nErro ao receber os parametros (MostrarRequisicoesPorID () )\n");
         printf("Listas ou NIF inválido(s).\n");
         return;
     }
@@ -253,7 +265,8 @@ void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P 
         if (strcmp(atual->requisicao->Pessoa->ID, ID) == 0) {
             printf(" Requisição %d:\n",a);
             printf(" Livro: %s\n", atual->requisicao->Livro->NOME);
-            printf(" Data de Requisição: %d/%d/%d\n", atual->requisicao->Data_Requisicao->dia, atual->requisicao->Data_Requisicao->mes, atual->requisicao->Data_Requisicao->ano);
+            printf(" Data de Requisição: %d/%d/%d\n", atual->requisicao->Data_Requisicao->dia,
+                   atual->requisicao->Data_Requisicao->mes, atual->requisicao->Data_Requisicao->ano);
         }
         a++;
         atual = atual->proximo;
@@ -263,7 +276,7 @@ void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P 
 void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros) {
     LIVRO *livro = NULL;
     if (listaRequisicoes == NULL || elemento == NULL) {
-        printf("Erro: Parametros invalidos.\n");
+        EscreverLogs("\nErro ao receber os parametros (InserirRequisicaoNaLista () )\n");
         return;
     }
 
@@ -350,7 +363,7 @@ void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa, ListaRequisic
 
 int VerificarPessoaRequisicao(char *id, ListaRequisicoes *listaRequisicoes){
     if (id == NULL || listaRequisicoes == NULL){
-        printf("\nErro: Parametros invalidos.\n");
+        EscreverLogs("\nErro ao receber os parametros (VerificarPessoaRequisicao () )\n");
         return 0;
     }else if(listaRequisicoes->num_Requisicoes == 0){
         printf("\nErro: Lista de requisiçoes vazia.\n");
@@ -368,7 +381,7 @@ int VerificarPessoaRequisicao(char *id, ListaRequisicoes *listaRequisicoes){
 
 void MostrarLivrosRequisitados(char *id, ListaRequisicoes *listaRequisicoes){
     if (id == NULL || listaRequisicoes == NULL){
-        printf("\nErro: Parametros invalidos.\n");
+        EscreverLogs("\nErro ao receber os parametros (MostrarLivrosRequisitados () )\n");
         return;
     }else if(listaRequisicoes->num_Requisicoes == 0){
         printf("\nErro: Lista de requisiçoes vazia.\n");
@@ -385,7 +398,7 @@ void MostrarLivrosRequisitados(char *id, ListaRequisicoes *listaRequisicoes){
 
 LIVRO *PesquisarLivroRequisitadoPorISBN( char *id, char *isbn, ListaRequisicoes *listaRequisicoes){
     if (id == NULL || isbn == NULL || listaRequisicoes == NULL){
-        printf("\nErro: Parametros invalidos.\n");
+        EscreverLogs("\nErro ao receber os parametros (PesquisarLivroRequisitadoPorISBN () )\n");
         return NULL;
     }else if(listaRequisicoes->num_Requisicoes == 0){
         printf("\nErro: Lista de requisiçoes vazia.\n");
@@ -404,8 +417,11 @@ LIVRO *PesquisarLivroRequisitadoPorISBN( char *id, char *isbn, ListaRequisicoes 
 }
 
 void GuardarRequisicoes(ListaRequisicoes *listaRequisicoes, const char *nomeFicheiro){
+    char mensagem[256];
     FILE *ficheiro = fopen(nomeFicheiro, "w");
     if (!ficheiro) {
+        snprintf(mensagem, sizeof(mensagem), "\nErro ao abrir o arquivo %s (GuardarRequisicoes() )\n", nomeFicheiro);
+        EscreverLogs(mensagem);
         printf("Erro ao abrir o ficheiro %s.\n", nomeFicheiro);
         return;
     }

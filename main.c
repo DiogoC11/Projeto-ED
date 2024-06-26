@@ -508,6 +508,7 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
         printf("1- Operacoes de Pessoas\n");
         printf("2- Operacoes de Livros\n");
         printf("3- Operacoes de Requisicoes\n");
+        printf("4- Calcular Memoria Ocupada\n");
         printf("0- Sair\n");
         printf("Qual a opcao? ");
         scanf("%d", &opGeral);
@@ -526,6 +527,10 @@ void menuGeral(Lista_Chaves_L *ListaChavesLivros, Lista_Chaves_P *ListaChavesPes
             case 3:
                 // Menu de Operações de Requisicoes
                 menuRequisicoes(ListaChavesPessoas, ListaRequisicoes, ListaChavesLivros);
+                break;
+            case 4:
+                //Calcular memoria ocupada
+                CalcularTotaldeMemoriaOcupada(ListaRequisicoes, ListaChavesPessoas, ListaChavesLivros, D);
                 break;
             case 0:
                 printf("Saindo...\n");

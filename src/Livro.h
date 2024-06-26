@@ -51,7 +51,7 @@ int *AdicionarChave(Lista_Chaves_L *L, char *categoria);
 
 //funcoes principais
 int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C);
-int ListarLivros(Lista_Chaves_L *C);
+void ListarLivros(Lista_Chaves_L *C);
 NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C);
 LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn);
 LIVRO *LivroMaisRecente(Lista_Chaves_L * L);
@@ -61,7 +61,6 @@ void DestruirLivro(LIVRO *P);
 
 //funcoes secundarias
 NO_CHAVE_L* ProcurarNoChavePorLivro(LIVRO *livro, Lista_Chaves_L *listaChaves);
-int isStringEmptyOrSpaces(const char *str);
 int AreaExisteNaLista(Lista_Chaves_L *listaChaves, const char *area);
 
 //apagar

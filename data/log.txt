@@ -1,8 +1,3 @@
 
-Erro ao abrir o arquivo de XML.
+Mostrou Memoria Ocupada
 
-CSV Gravados com Sucesso
-
-XML Gravado com Sucesso
-
-CSV Gravados com Sucesso

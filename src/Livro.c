@@ -5,15 +5,51 @@
 LIVRO *CriarLivro(char *ISBN, char *_nome, char *_area, int _anoPublicacao, char *_autor)
 {
     LIVRO *P = (LIVRO *)malloc(sizeof(LIVRO));
+    if (P == NULL) {
+        EscreverLogs("\nErro ao alocar memoria para livro (CriarLivro() ).\n");
+        return NULL;
+    }
+
     P->NOME = (char *)malloc((strlen(_nome) + 1)*sizeof(char));
+    if (P->NOME == NULL) {
+        EscreverLogs("\nErro ao alocar memoria para nome (CriarLivro() ).\n");
+        free(P);
+        return NULL;
+    }
     strcpy(P->NOME, _nome);
+
     P->AREA = (char *)malloc((strlen(_area) + 1)*sizeof(char));
+    if (P->AREA == NULL) {
+        EscreverLogs("\nErro ao alocar memoria para area (CriarLivro() ).\n");
+        free(P->NOME);
+        free(P);
+        return NULL;
+    }
     strcpy(P->AREA, _area);
+
     P->anoPublicacao = _anoPublicacao;
+
     P->ISBN = (char *) malloc(strlen(ISBN + 1)*sizeof(char));
+    if (P->ISBN == NULL) {
+        EscreverLogs("\nErro ao alocar memoria para ISBN (CriarLivro() ).\n");
+        free(P->NOME);
+        free(P->AREA);
+        free(P);
+        return NULL;
+    }
     strcpy(P->ISBN,ISBN);
+
     P->Autor = (char *) malloc(strlen(_autor + 1)*sizeof(char));
+    if (P->Autor == NULL) {
+        EscreverLogs("\nErro ao alocar memoria para Autor (CriarLivro() ).\n");
+        free(P->Autor);
+        free(P->NOME);
+        free(P->AREA);
+        free(P);
+        return NULL;
+    }
     strcpy(P->Autor,_autor);
+
     P->Disponivel = 1;
     P->Requisitado = 0;
     P->quant_requisicaoL = 0;
@@ -139,7 +175,10 @@ void DestruirLivro(LIVRO *P)
 }
 ListaLivro *criarListaL(){
     ListaLivro *L = (ListaLivro *) malloc(sizeof (ListaLivro));
-    if (!L) return NULL;
+    if (!L){
+        EscreverLogs("\nErro ao criar a lista de Livros.(criarLista() )\n");
+        return NULL;
+    }
     L->num_Livros = 0;
     L->Inicio = NULL;
     return L;
@@ -147,15 +186,24 @@ ListaLivro *criarListaL(){
 
 ElementoL *criar_elementoL(LIVRO *L){
     ElementoL *e = (ElementoL * ) malloc(sizeof (ElementoL));
-    if(!e) return NULL;
+    if(!e) {
+        EscreverLogs("\nErro ao criar elemento Livro (criarElemento() ).\n");
+        return NULL;
+    }
     e->livro = L;
     e->proximo = NULL;
     return e;
 }
 
 int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C) {
-    if (!C) return 0;
-    if (!E) return 0;
+    if (!C){
+        EscreverLogs("\nErro ao receber a lista de Livros (AdicionarLivro() ).\n");
+        return 0;
+    }
+    if (!E){
+        EscreverLogs("\nErro ao receber o elemento livro (AdicionarLivro() ).\n");
+        return 0;
+    }
     NO_CHAVE_L *Inicio = C->Inicio;
     while (Inicio != NULL) {
         if (strcmp(Inicio->categoria, E->livro->AREA) == 0) {
@@ -179,10 +227,13 @@ int AdicionarLivro(ElementoL *E, Lista_Chaves_L *C) {
     //printf("\nO Livro nao foi adicionado a biblioteca.\n");
     return 0;
 }
-int ListarLivros(Lista_Chaves_L *C) {
-    if (!C || C->num_chaves == 0) {
+void ListarLivros(Lista_Chaves_L *C) {
+    if (!C) {
+        EscreverLogs("\nErro ao receber a lista de Livros (ListarLivros() ).\n");
+        return;
+    }else if(C->num_chaves == 0){
         printf("\nErro: Lista de Livros vazia.\n");
-        return 1;
+        return;
     }
     printf("\nLista de Livros:\n");
     NO_CHAVE_L *N = C->Inicio;
@@ -194,10 +245,12 @@ int ListarLivros(Lista_Chaves_L *C) {
         }
         N = N->Prox;
     }
-    return 0;
 }
 LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn) {
-    if(C->Inicio == NULL) return NULL;
+    if(C->Inicio == NULL){
+        EscreverLogs("\nErro ao receber a lista de Livros (PesquisarLivroPorISBN() ).\n");
+        return NULL;
+    }
     NO_CHAVE_L *N = C->Inicio;
     while (N != NULL){
         ElementoL *E = N->DADOS->Inicio;
@@ -213,6 +266,10 @@ LIVRO *PesquisarLivroPorISBN(Lista_Chaves_L *C, char *isbn) {
     return NULL;
 }
 LIVRO *LivroMaisRecente(Lista_Chaves_L *L) {
+    if(!L){
+        EscreverLogs("\nErro ao receber a lista de Livros (LivroMaisRecente() ).\n");
+        return NULL;
+    }
     if (L->num_chaves == 0) {
         return NULL;
     }
@@ -233,7 +290,10 @@ LIVRO *LivroMaisRecente(Lista_Chaves_L *L) {
 
 
 NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C) {
-    if (!C || C->num_chaves == 0) {
+    if(!C){
+        EscreverLogs("\nErro ao receber a lista de Livros (AreaMaisLivros() ).\n");
+        return NULL;
+    }else if(C->num_chaves == 0) {
         printf("\nErro: Lista de Chaves vazia ou não inicializada.\n");
         return NULL;
     }
@@ -249,7 +309,10 @@ NO_CHAVE_L *AreaMaisLivros(Lista_Chaves_L *C) {
 }
 
 LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C){
-    if(!C || C->Inicio == NULL) return NULL;
+    if(!C || C->Inicio == NULL){
+        EscreverLogs("\nErro ao receber a lista de Livros (LivroMaisRequisitado() ).\n");
+        return NULL;
+    }
     NO_CHAVE_L *N = C->Inicio;
     LIVRO *maisRequisitado = NULL;
     while (N != NULL){
@@ -268,7 +331,10 @@ LIVRO *LivroMaisRequisitado(Lista_Chaves_L *C){
 }
 
 NO_CHAVE_L *AreaMaisRequisitada(Lista_Chaves_L *C){
-    if(!C || C->Inicio == NULL) return NULL;
+    if(!C || C->Inicio == NULL) {
+        EscreverLogs("\nErro ao receber a lista de Livros (AreaMaisRequisitada() ).\n");
+        return NULL;
+    }
     NO_CHAVE_L *N = C->Inicio;
     NO_CHAVE_L *Area = C->Inicio;
     while (N != NULL){
@@ -291,7 +357,10 @@ Lista_Chaves_L *CriarListaChaves(){
 }
 
 int *AdicionarChave(Lista_Chaves_L *L, char *categoria){
-    if (!L) return 0;
+    if (!L) {
+        EscreverLogs("\nErro ao receber a lista de Livros (AdicionarChave() ).\n");
+        return 0;
+    }
     for (int i = 0; i < strlen(categoria); i++) {
         categoria[i] = toupper(categoria[i]);
     }
@@ -330,6 +399,7 @@ void LiberarListaChaves_L(Lista_Chaves_L *lista) {
 
 NO_CHAVE_L* ProcurarNoChavePorLivro(LIVRO *livro, Lista_Chaves_L *listaChaves) {
     if (livro == NULL || listaChaves == NULL) {
+        EscreverLogs("\nErro ao receber os parametros (ProcurarNoChavePorLivro() ).\n");
         return NULL;
     }
 
@@ -345,9 +415,11 @@ NO_CHAVE_L* ProcurarNoChavePorLivro(LIVRO *livro, Lista_Chaves_L *listaChaves) {
 }
 
 void GuardarLivrosEmFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFicheiro) {
+    char mensagem[256];
     FILE *ficheiro = fopen(nomeFicheiro, "w");
     if (ficheiro == NULL) {
-        printf("Erro ao abrir o ficheiro %s\n", nomeFicheiro);
+        snprintf(mensagem, sizeof(mensagem), "\nErro ao abrir ficheiro %s (GuardarLivrosEmFicheiro()).\n", nomeFicheiro);
+        EscreverLogs(mensagem);
         return;
     }
 
@@ -372,17 +444,10 @@ void GuardarLivrosEmFicheiro(Lista_Chaves_L *listaChaves, const char *nomeFichei
 
     fclose(ficheiro);
 }
-int isStringEmptyOrSpaces(const char *str) {
-    while (*str) {
-        if (!isspace((unsigned char)*str))
-            return 0;
-        str++;
-    }
-    return 1;
-}
 
 int AreaExisteNaLista(Lista_Chaves_L *listaChaves, const char *area) {
     if (listaChaves == NULL || area == NULL) {
+        EscreverLogs("\nErro ao receber os parametros (AreaExisteNaLista() ).\n");
         return 0;
     }
 

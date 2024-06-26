@@ -122,7 +122,6 @@ int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa);  //idade maxima de t
 float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa); //idade media de todos os requisitantes
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
 int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite); //numero de pessoas cuja a idade superior a x
-int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa); //idade com mais requisitantes
 ResultadoSobrenome *SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa); //sobrenome mais usado nas requisiçoes
 int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_conc, char *nome, char *apelido);
 

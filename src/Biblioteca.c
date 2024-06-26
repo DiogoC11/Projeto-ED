@@ -87,7 +87,6 @@ void GravarXML(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequisicoe
     sprintf(caminho, "../XML/%s.xml", nome);
     FILE *arquivo = fopen(caminho, "w");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo de XML.\n");
         EscreverLogs("\nErro ao abrir o arquivo de XML.\n");
         return;
     }
@@ -198,7 +197,6 @@ void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequ
     // Write Livros
     arquivo = fopen("../CSV/Livros.csv", "w");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo Livros.csv.\n");
         EscreverLogs("\nErro ao abrir o arquivo Livros.csv.\n");
         return;
     }
@@ -206,7 +204,8 @@ void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequ
     while (P != NULL) {
         ElementoL *L = P->DADOS->Inicio;
         while (L != NULL){
-            fprintf(arquivo, "%s,%s,%s,%d,%s,%d,%d,%d\n", L->livro->ISBN, L->livro->NOME, L->livro->Autor, L->livro->anoPublicacao, L->livro->AREA, L->livro->quant_requisicaoL, L->livro->Disponivel, L->livro->Requisitado);
+            fprintf(arquivo, "%s,%s,%s,%d,%s,%d,%d,%d\n", L->livro->ISBN, L->livro->NOME, L->livro->Autor,
+                    L->livro->anoPublicacao, L->livro->AREA, L->livro->quant_requisicaoL, L->livro->Disponivel, L->livro->Requisitado);
             L = L->proximo;
         }
         P = P->Prox;
@@ -216,7 +215,6 @@ void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequ
     // Write Requisitantes
     arquivo = fopen("../CSV/Requisitantes.csv", "w");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo Requisitantes.csv.\n");
         EscreverLogs("\nErro ao abrir o arquivo Requisitantes.csv.\n");
         return;
     }
@@ -224,7 +222,8 @@ void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequ
     while (NO_P != NULL) {
         ElementoP *Pessoa = NO_P->DADOS->Inicio;
         while (Pessoa != NULL){
-            fprintf(arquivo, "%s,%s,%d/%d/%d,%s\n", Pessoa->pessoa->ID, Pessoa->pessoa->NOME, Pessoa->pessoa->dataNascimento->dia, Pessoa->pessoa->dataNascimento->mes, Pessoa->pessoa->dataNascimento->ano, Pessoa->pessoa->freguesia->nome);
+            fprintf(arquivo, "%s,%s,%d/%d/%d,%s\n", Pessoa->pessoa->ID, Pessoa->pessoa->NOME, Pessoa->pessoa->dataNascimento->dia,
+                    Pessoa->pessoa->dataNascimento->mes, Pessoa->pessoa->dataNascimento->ano, Pessoa->pessoa->freguesia->nome);
             Pessoa = Pessoa->proximo;
         }
         NO_P = NO_P->Prox;
@@ -234,13 +233,14 @@ void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequ
     // Write Requisicoes
     arquivo = fopen("../CSV/Requisicoes.csv", "w");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo Requisicoes.csv.\n");
         EscreverLogs("Erro ao abrir o arquivo Requisicoes.csv.\n");
         return;
     }
     ElementoR *Requisicao = ListaR->Inicio;
     while (Requisicao != NULL) {
-        fprintf(arquivo, "%d,%s,%s,%d/%d/%d,%d\n", Requisicao->requisicao->ID, Requisicao->requisicao->Pessoa->ID, Requisicao->requisicao->Livro->ISBN, Requisicao->requisicao->Data_Requisicao->dia, Requisicao->requisicao->Data_Requisicao->mes, Requisicao->requisicao->Data_Requisicao->ano,Requisicao->requisicao->Entregue);
+        fprintf(arquivo, "%d,%s,%s,%d/%d/%d,%d\n", Requisicao->requisicao->ID, Requisicao->requisicao->Pessoa->ID,
+                Requisicao->requisicao->Livro->ISBN, Requisicao->requisicao->Data_Requisicao->dia, Requisicao->requisicao->Data_Requisicao->mes,
+                Requisicao->requisicao->Data_Requisicao->ano,Requisicao->requisicao->Entregue);
         Requisicao = Requisicao->proximo;
     }
     fclose(arquivo);
@@ -248,7 +248,6 @@ void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequ
     // Write Distritos
     arquivo = fopen("../CSV/Distritos.csv", "w");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo Distritos.csv.\n");
         EscreverLogs("Erro ao abrir o arquivo Distritos.csv.\n");
         return;
     }
@@ -269,6 +268,56 @@ void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequ
     }
     fclose(arquivo);
 
-    EscreverLogs("CSV Gravados com Sucesso");
+    EscreverLogs("\nCSV Gravados com Sucesso\n");
+}
+
+
+void CalcularTotaldeMemoriaOcupada(ListaRequisicoes *LR,Lista_Chaves_P *LP,Lista_Chaves_L * LL,Lista_D * LD){
+    size_t total_memoria= 0;
+
+     ElementoR *R = LR->Inicio;
+    while(R != NULL){
+        total_memoria += sizeof(REQUISICAO);
+        R = R->proximo;
+    }
+
+    NO_CHAVE_P * noP = LP->Inicio;
+    while(noP != NULL){
+        ElementoP *P = noP->DADOS->Inicio;
+        while(P != NULL){
+            total_memoria += sizeof(PESSOA);
+            P = P->proximo;
+        }
+        noP = noP->Prox;
+    }
+
+    NO_CHAVE_L * noL = LL->Inicio;
+    while(noL != NULL){
+        ElementoL *L = noL->DADOS->Inicio;
+        while(L != NULL){
+            total_memoria += sizeof(LIVRO);
+            L = L->proximo;
+        }
+        noL = noL->Prox;
+    }
+
+    ElementoD * distrito = LD->Inicio;
+    while(distrito != NULL){
+        ElementoC *c = distrito->Info->Conc->Inicio;
+        while(c != NULL){
+            ElementoF *f = c->concelho->freguesias->Inicio;
+            while(f != NULL){
+                total_memoria += sizeof(Freguesia);
+                f = f->prox;
+            }
+            total_memoria += sizeof(Concelho);
+            c = c->prox;
+        }
+        total_memoria += sizeof(Distrito);
+        distrito = distrito->Prox;
+    }
+
+    printf("\nTotal Memoria: %zu bytes\n",total_memoria);
+    EscreverLogs("\nMemoria Calculada com sucesso\n");
 }
 

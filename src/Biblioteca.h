@@ -12,6 +12,9 @@
 
 void GravarXML(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequisicoes * ListaR, Lista_D *LD);
 void GravarTudoEMCSV(Lista_Chaves_L * ListaL, Lista_Chaves_P * ListaP, ListaRequisicoes * ListaR, Lista_D *LD);
+void CalcularTotaldeMemoriaOcupada(ListaRequisicoes *LR,Lista_Chaves_P *LP,Lista_Chaves_L * LL,Lista_D * LD);
+
+
 /*
 BIBLIOTECA *CriarBiblioteca(char *_nome, char *_logs);
 void ShowBiblioteca(BIBLIOTECA *B);

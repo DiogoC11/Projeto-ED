@@ -4,36 +4,19 @@
 #include "Pessoa.h"
 #include "Uteis.h"
 
-char *trim(char *str) {
-    char *end;
 
-    // Trim leading space
-    while (isspace((unsigned char)*str)) str++;
-
-    if (*str == 0)  // All spaces?
-        return str;
-
-    // Trim trailing space
-    end = str + strlen(str) - 1;
-    while (end > str && isspace((unsigned char)*end)) end--;
-
-    // Write new null terminator character
-    end[1] = '\0';
-
-    return str;
-}
 
 // Função para criar uma pessoa
 PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, int mes, int ano,char *id, Freguesia *freguesia){
     PESSOA *P = (PESSOA *)malloc(sizeof(PESSOA));
     if (P == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA PESSOA\n");
+        EscreverLogs("\nErro ao alocar memoria para pessoa.(CriarPessoa() )\n");
         return NULL;
     }
 
     P->PrimeiroNome = (char *)malloc((strlen(primeiroNome) + 1) * sizeof(char));
     if (P->PrimeiroNome == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA PrimeiroNome\n");
+        EscreverLogs("\nErro ao alocar memoria para primeiro nome.(CriarPessoa() )\n");
         free(P);
         return NULL;
     }
@@ -41,7 +24,7 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
 
     P->UltimoNome = (char *)malloc((strlen(ultimoNome) + 1) * sizeof(char));
     if (P->UltimoNome == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA UltimoNome\n");
+        EscreverLogs("\nErro ao alocar memoria para ultimo nome.(CriarPessoa() )\n");
         free(P->PrimeiroNome);
         free(P);
         return NULL;
@@ -49,8 +32,9 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
     strcpy(P->UltimoNome, ultimoNome);
 
     P->NOME = (char *)malloc((strlen(Nome) + 1) * sizeof(char));
-    if (P->UltimoNome == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA UltimoNome\n");
+    if (P->NOME == NULL) {
+        EscreverLogs("\nErro ao alocar memoria para nome.(CriarPessoa() )\n");
+        free(P->UltimoNome);
         free(P->PrimeiroNome);
         free(P);
         return NULL;
@@ -61,7 +45,7 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
 
     P->dataNascimento = (data *)malloc(sizeof(data));
     if (P->dataNascimento == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA dataNascimento\n");
+        EscreverLogs("\nErro ao alocar memoria para dataNascimento.(CriarPessoa() )\n");
         free(P->PrimeiroNome);
         free(P->UltimoNome);
         free(P->NOME);
@@ -74,7 +58,7 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
 
     P->ID = (char *)malloc((strlen(id) + 1) * sizeof(char));
     if (P->ID == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA ID\n");
+        EscreverLogs("\nErro ao alocar memoria para ID.(CriarPessoa() )\n");
         free(P->PrimeiroNome);
         free(P->UltimoNome);
         free(P->NOME);
@@ -89,7 +73,7 @@ PESSOA *CriarPessoa(char *primeiroNome, char *ultimoNome,char *Nome, int dia, in
 char *GerarIDPessoa(Lista_Chaves_P *L) {
     char *id = (char *)malloc(10 * sizeof(char));
     if (id == NULL) {
-        printf("\nERRO AO ALOCAR MEMORIA PARA ID\n");
+        EscreverLogs("\nErro ao alocar memoria para ID (GerarIDPessoa() ).\n");
         return NULL;
     }
     srand(time(NULL));
@@ -220,6 +204,7 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
     }while(freguesia == NULL);
     id = GerarIDPessoa(P);
     if(id == NULL) {
+        EscreverLogs("\nErro ao criar ID (PedirDadosPessoa() ).\n");
         printf("\nErro: ID nao foi criado.\n");
         return NULL;
     }
@@ -232,7 +217,10 @@ PESSOA *PedirDadosPessoa(Lista_Chaves_P *P, Lista_D *D, Lista_C *C, Lista_F *F) 
 // Função para criar uma lista de pessoas/
 ListaPessoa *criarListaP() {
     ListaPessoa *L = (ListaPessoa *)malloc(sizeof(ListaPessoa));
-    if (!L) return NULL;
+    if (!L) {
+        EscreverLogs("\nErro ao alocar memoria para lista  de pessoas (criarListaP() ).\n");
+        return NULL;
+    }
     L->num_Pessoas = 0;
     L->Inicio = NULL;
     return L;
@@ -241,7 +229,10 @@ ListaPessoa *criarListaP() {
 // Função para criar um elemento de pessoa
 ElementoP *criarElementoP(PESSOA *P) {
     ElementoP *e = (ElementoP *)malloc(sizeof(ElementoP));
-    if (!e) return NULL;
+    if (!e) {
+        EscreverLogs("\nErro ao alocar memoria para elemento pessoa (criarElementoP() ).\n");
+        return NULL;
+    }
     e->pessoa = P;
     e->proximo = NULL;
     return e;
@@ -254,6 +245,9 @@ NO_CHAVE_P *criarNoChave(char chave) {
         novoNoChave->Key = chave;
         novoNoChave->DADOS = criarListaP();
         novoNoChave->Prox = NULL;
+    }else{
+        EscreverLogs("\nErro ao alocar memoria para NO pessoa (criarNoChave() ).\n");
+        return NULL;
     }
     return novoNoChave;
 }
@@ -264,13 +258,19 @@ Lista_Chaves_P *criarListaChave() {
     if (novaLista != NULL) {
         novaLista->Inicio = NULL;
         novaLista->num_chaves = 0;
+    }else{
+        EscreverLogs("\nErro ao alocar memoria para lista chaves de pessoa (criarListaChave() ).\n");
+        return NULL;
     }
     return novaLista;
 }
 
 // Função para adicionar uma pessoa à lista de chaves
 void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) {
-    if (!C || !E) return NULL;
+    if (!C || !E) {
+        EscreverLogs("\nErro nos parametros recebidos (AdicionarPessoa() ).\n");
+        return NULL;
+    }
     int a = 0;
     NO_CHAVE_P *N = C->Inicio;
     for (int i = 0; i < C->num_chaves; i++) {
@@ -305,7 +305,10 @@ void *AdicionarPessoa(Lista_Chaves_P *C, ElementoP *E) {
 
 // Função para pesquisar uma pessoa pelo nome
 void *PesquisarPesssoaPorNome(Lista_Chaves_P *L, char *nome) {
-    if (L->Inicio == NULL || L->num_chaves == 0) {
+    if (L->Inicio == NULL){
+        EscreverLogs("\nErro nos parametros recebidos (PesquisarPesssoaPorNome() ).\n");
+        return NULL;
+    }else if(L->num_chaves == 0){
         printf("\nErro: Lista vazia\n");
         return NULL;
     }
@@ -371,7 +374,10 @@ int compararIdFreguesia(const void* a, const void* b) {
 
 // Função para organizar a lista de pessoas por nome / freguesia
 void ListaOrganizada(Lista_Chaves_P *L, int op) {
-    if (!L) return;
+    if (!L) {
+        EscreverLogs("\nErro ao receber a lista de pessoas (ListaOrganizada() ).\n");
+        return;
+    }
 
     // coletar todas as pessoas
     int totalPessoas = 0;
@@ -412,7 +418,7 @@ void ListaOrganizada(Lista_Chaves_P *L, int op) {
 
     // mostrar as pessoas ordenadas
     if(pessoasArray == NULL){
-        printf("Erro: Array de pessoas vazio.\n");
+        printf("Erro: Lista de pessoas vazia.\n");
         return;
     }
     printf("Pessoas ordenadas:\n");
@@ -426,7 +432,10 @@ void ListaOrganizada(Lista_Chaves_P *L, int op) {
 
 // Função para listar pessoas
 void *ListarPessoas(Lista_Chaves_P *L) {
-    if (!L) return NULL;
+    if (!L) {
+        EscreverLogs("\nErro ao receber a lista de pessoas (ListarPessoas() ).\n");
+        return NULL;
+    }
     NO_CHAVE_P *N = L->Inicio;
     while (N != NULL) {
         ElementoP *E = N->DADOS->Inicio;
@@ -453,6 +462,7 @@ void MostrarPessoa(PESSOA *P) {
 //  Determinar a idade máxima de todos os requisitantes;
 int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa) {
     if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
+        EscreverLogs("\nErro ao receber a lista de pessoas (CalcularIdadeMaxima() ).\n");
         return 0; // Lista vazia
     }
 
@@ -503,14 +513,15 @@ int CalcularIdadeMaxima(Lista_Chaves_P *listaChavesPessoa) {
 //Idade Média
 float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa) {
     if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
-        return 0.0; // Lista vazia
+        EscreverLogs("\nErro ao receber os parametros (CalcularIdadeMedia() ).\n");
+        return 0; // Lista vazia
     }
 
     time_t t = time(NULL);
     struct tm today;
     localtime_s(&today, &t);
 
-    float totalIdade = 0.0;
+    float totalIdade = 0;
     int countPessoas = 0;
 
     NO_CHAVE_P *noChaveAtual = listaChavesPessoa->Inicio;
@@ -548,7 +559,7 @@ float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa) {
     }
 
     if (countPessoas == 0) {
-        return 0.0; // evitar divisão por zero
+        return 0; // evitar divisão por zero
     }
 
     return totalIdade / countPessoas;
@@ -557,6 +568,7 @@ float CalcularIdadeMedia(Lista_Chaves_P *listaChavesPessoa) {
 // idade com mais requisitantes
 int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa) {
     if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
+        EscreverLogs("\nErro ao receber os parametros (IdadeComMaisRequisitantes() ).\n");
         return -1; // Lista vazia
     }
 
@@ -618,6 +630,7 @@ int IdadeComMaisRequisitantes(Lista_Chaves_P *listaChavesPessoa) {
 // contar pessoas com idade maior que x
 int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeLimite) {
     if (listaChavesPessoa == NULL || listaChavesPessoa->Inicio == NULL) {
+        EscreverLogs("\nErro ao receber os parametros (ContarPessoasComIdadeSuperiorA() ).\n");
         return 0; // Lista vazia
     }
 
@@ -666,7 +679,10 @@ int ContarPessoasComIdadeSuperiorA(Lista_Chaves_P *listaChavesPessoa, int idadeL
 }
 
 ResultadoSobrenome* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
-    if(!listaChavesPessoa || !listaChavesPessoa->Inicio) return NULL;
+    if(!listaChavesPessoa || !listaChavesPessoa->Inicio) {
+        EscreverLogs("\nErro ao receber os parametros (SobrenomeMaisUsado() ).\n");
+        return NULL;
+    }
 
     NO_CHAVE_P *chaveAtual = listaChavesPessoa->Inicio;
     int ContadorNomes = 0;
@@ -674,7 +690,7 @@ ResultadoSobrenome* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
     char **nomes = (char **)malloc(capacidade * sizeof(char *));
     int *contagem = (int *)calloc(capacidade, sizeof(int));
     if (!nomes || !contagem) {
-        printf("Erro ao alocar memória.\n");
+        EscreverLogs("\nErro ao alocar memoria (SobrenomeMaisUsado() ).\n");
         return NULL;
     }
 
@@ -698,7 +714,7 @@ ResultadoSobrenome* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
                     nomes = (char **)realloc(nomes, capacidade * sizeof(char *));
                     contagem = (int *)realloc(contagem, capacidade * sizeof(int));
                     if (!nomes || !contagem) {
-                        printf("Erro ao realocar memória.\n");
+                        EscreverLogs("\nErro ao alocar memoria (SobrenomeMaisUsado() ).\n");
                         free(nomes);
                         free(contagem);
                         return NULL;
@@ -726,7 +742,7 @@ ResultadoSobrenome* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
 
     ResultadoSobrenome *resultado = (ResultadoSobrenome *)malloc(sizeof(ResultadoSobrenome));
     if (!resultado) {
-        printf("Erro ao alocar memória para o resultado.\n");
+        EscreverLogs("\nErro ao alocar memoria para resultado (SobrenomeMaisUsado() ).\n");
         for (int i = 0; i < ContadorNomes; i++) {
             free(nomes[i]);
         }
@@ -750,7 +766,10 @@ ResultadoSobrenome* SobrenomeMaisUsado(Lista_Chaves_P *listaChavesPessoa) {
 
 // Função para buscar pessoa por ID
 PESSOA *buscarPessoaPorID(Lista_Chaves_P *L, char *id) {
-    if (!L) return NULL;
+    if (!L) {
+        EscreverLogs("\nErro ao receber a lista de pessoas (buscarPessoaPorID() ).\n");
+        return NULL;
+    }
     NO_CHAVE_P *N = L->Inicio;
     while (N != NULL) {
         ElementoP *E = N->DADOS->Inicio;
@@ -789,7 +808,7 @@ Lista_F* LerTXT() {
     char linha[100];
     Lista_F *lista = (Lista_F *)malloc(sizeof(Lista_F));
     if (lista == NULL) {
-        printf("Erro ao alocar memória para a lista de freguesias.\n");
+        EscreverLogs("\nErro ao alocar memória para a lista de freguesias (LerTXT() ).\n");
         return NULL;
     }
     lista->num_Freguesias = 0;
@@ -797,7 +816,7 @@ Lista_F* LerTXT() {
 
     arquivo = fopen("../data/recursos/freguesias.txt", "r");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+        EscreverLogs("\nErro ao abrir o arquivo (LerTXT() ).\n");
         free(lista);
         return NULL;
     }
@@ -808,8 +827,10 @@ Lista_F* LerTXT() {
         char ID[7]; // Aumente para 3 para permitir o caractere nulo
         char ID_Todo[7];
         char nome[50];
+        char mensagem[256];
         if (sscanf(linha, "%2d%2d%2s %[^\n]", &id_dist, &id_conc, ID, nome) != 4) {
-            printf("Erro ao ler os dados da linha.\n");
+            snprintf(mensagem, sizeof(mensagem), "\nErro ao ler os dados da linha %s (LerTXT() ).\n",linha);
+            EscreverLogs(mensagem);
             fclose(arquivo);
             LibertarFreguesias(lista); // Supondo que isso libera a memória da lista
             return NULL;
@@ -820,7 +841,8 @@ Lista_F* LerTXT() {
         // Criar uma nova freguesia e alocar memória
         Freguesia *nova_freg = (Freguesia *)malloc(sizeof(Freguesia));
         if (nova_freg == NULL) {
-            printf("Erro ao alocar memória para nova_freg.\n");
+            snprintf(mensagem, sizeof(mensagem), "\nErro ao alocar memória para nova_freg. linha %s (LerTXT() ).\n",linha);
+            EscreverLogs(mensagem);
             fclose(arquivo);
             LibertarFreguesias(lista); // Supondo que isso libera a memória da lista
             return NULL;
@@ -836,7 +858,8 @@ Lista_F* LerTXT() {
         // Criar um novo elemento para a lista de freguesias e alocar memória
         ElementoF *novo_elemento = (ElementoF *)malloc(sizeof(ElementoF));
         if (novo_elemento == NULL) {
-            printf("Erro ao alocar memória para novo_elemento.\n");
+            snprintf(mensagem, sizeof(mensagem), "\nErro ao alocar memória para novo_elemento. (LerTXT() ).\n");
+            EscreverLogs(mensagem);
             fclose(arquivo);
             LibertarFreguesias(lista); // Supondo que isso libera a memória da lista
             free(nova_freg);
@@ -858,7 +881,10 @@ Lista_F* LerTXT() {
 
 // Função para liberar a memória da lista de freguesias
 void LibertarFreguesias(Lista_F *lista) {
-    if (lista == NULL) return;
+    if (lista == NULL) {
+        EscreverLogs("\nErro ao receber a lista de freguesias (LibertarFreguesias() ).\n");
+        return;
+    }
 
     ElementoF *atualF = lista->Inicio;
     while (atualF != NULL) {
@@ -879,7 +905,7 @@ Lista_C* LerTXTConc() {
     char linha[100];
     Lista_C *lista = (Lista_C *)malloc(sizeof(Lista_C));
     if (lista == NULL) {
-        printf("Erro ao alocar memória para a lista de concelhos.\n");
+        EscreverLogs("\nErro ao alocar memória para a lista de concelhos (LerTXTConc() ).\n");
         return NULL;
     }
     lista->num_Concelhos = 0;
@@ -887,6 +913,7 @@ Lista_C* LerTXTConc() {
 
     arquivo = fopen("../data/recursos/conselhos.txt", "r");
     if (arquivo == NULL) {
+        EscreverLogs("\nErro ao abrir o arquivo (LerTXTConc() ).\n");
         printf("Erro ao abrir o arquivo.\n");
         free(lista);
         return NULL;
@@ -910,7 +937,7 @@ Lista_C* LerTXTConc() {
         // Criar um novo concelho e alocar memória
         Concelho *novo_conc = (Concelho *)malloc(sizeof(Concelho));
         if (novo_conc == NULL) {
-            printf("Erro ao alocar memória para novo_conc.\n");
+            EscreverLogs("\nErro ao alocar memória para novo_conc (LerTXTConc() ).\n");
             fclose(arquivo);
             LibertarConcelhos(lista);
             return NULL;
@@ -926,7 +953,7 @@ Lista_C* LerTXTConc() {
         // Criar um novo elemento para a lista de concelhos e alocar memória
         ElementoC *novo_elemento = (ElementoC *)malloc(sizeof(ElementoC));
         if (novo_elemento == NULL) {
-            printf("Erro ao alocar memória para novo_elemento.\n");
+            EscreverLogs("\nErro ao alocar memória para novo_elemento (LerTXTConc() ).\n");
             fclose(arquivo);
             LibertarConcelhos(lista);
             free(novo_conc);
@@ -945,7 +972,10 @@ Lista_C* LerTXTConc() {
     return lista;
 }
 void LibertarConcelhos(Lista_C *lista) {
-    if (lista == NULL) return;
+    if (lista == NULL) {
+        EscreverLogs("\nErro ao receber a lista de concelhos (LibertarConcelhos() ).\n");
+        return;
+    }
 
     ElementoC *atualC = lista->Inicio;
     while (atualC != NULL) {
@@ -991,9 +1021,10 @@ void ListarConcelhosPorDistrito(Lista_D *listadistritos,Lista_C *listaConcelhos,
 Lista_D* LerTXTDist() {
     FILE *arquivo;
     char linha[100]; // Aumentei o tamanho da linha para garantir que seja suficiente para ler cada linha
+    char mensagem[256];
     Lista_D *distritos = malloc(sizeof(Lista_D)); // Aloca memória para a estrutura Lista_D
     if (distritos == NULL) {
-        printf("Erro ao alocar memória para a lista de distritos.\n");
+        EscreverLogs("\nErro ao alocar memoria para a lista de distritos (LerTXTDist() ).\n");
         return NULL;
     }
 
@@ -1003,7 +1034,7 @@ Lista_D* LerTXTDist() {
 
     arquivo = fopen("../data/recursos/distritios.txt", "r");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+        EscreverLogs("\nErro ao abrir o arquivo (LerTXTDist() ).\n");
         free(distritos); // Libera a memória alocada para a lista de distritos
         return NULL;
     }
@@ -1016,7 +1047,8 @@ Lista_D* LerTXTDist() {
         // Encontrar o início do nome do distrito (após o ID e a tabulação)
         char *nome = strchr(linha, '\t');
         if (nome == NULL) {
-            printf("Erro ao ler o nome do distrito.\n");
+            snprintf(mensagem, sizeof(mensagem), "\nErro ao ler o nome do distrito: %s (livros.txt) (LerTXTDist ())\n", linha);
+            EscreverLogs(mensagem);
             fclose(arquivo);
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
@@ -1031,7 +1063,8 @@ Lista_D* LerTXTDist() {
         // Alocar memória para a nova estrutura Distrito
         Distrito *novo_distrito = malloc(sizeof(Distrito));
         if (novo_distrito == NULL) {
-            printf("Erro ao alocar memória para novo distrito.\n");
+            snprintf(mensagem, sizeof(mensagem), "\nErro ao alocar memoria para novo distrito: %s (livros.txt) (LerTXTDist () )\n", linha);
+            EscreverLogs(mensagem);
             fclose(arquivo);
             free(distritos); // Libera a memória alocada para a lista de distritos
             return NULL;
@@ -1041,7 +1074,8 @@ Lista_D* LerTXTDist() {
         novo_distrito->ID_DIST = id_dist;
         novo_distrito->nome = strdup(nome); // Copia o nome do distrito (aloca e copia)
         if (novo_distrito->nome == NULL) {
-            printf("Erro ao alocar memória para o nome do distrito.\n");
+            snprintf(mensagem, sizeof(mensagem), "\nErro ao alocar memoria para nome do distrito: %s (livros.txt) (LerTXTDist () )\n", linha);
+            EscreverLogs(mensagem);
             fclose(arquivo);
             free(novo_distrito); // Libera a memória alocada para a estrutura Distrito
             free(distritos); // Libera a memória alocada para a lista de distritos
@@ -1053,7 +1087,8 @@ Lista_D* LerTXTDist() {
         // Criar um novo elemento para a lista de distritos e alocar memória
         ElementoD *novo_elemento = malloc(sizeof(ElementoD));
         if (novo_elemento == NULL) {
-            printf("Erro ao alocar memória para novo_elemento.\n");
+            snprintf(mensagem, sizeof(mensagem), "\nErro ao alocar memoria para novo_elemento (LerTXTDist () )\n");
+            EscreverLogs(mensagem);
             fclose(arquivo);
             free(novo_distrito); // Libera a memória alocada para a estrutura Distrito
             free(distritos); // Libera a memória alocada para a lista de distritos
@@ -1074,7 +1109,10 @@ Lista_D* LerTXTDist() {
 }
 
 void LibertarDistritos(Lista_D *lista) {
-    if (lista == NULL) return;
+    if (lista == NULL) {
+        EscreverLogs("\nErro ao receber a lista de distritos (LibertarDistritos () )\n");
+        return;
+    }
 
     ElementoD *atualD = lista->Inicio;
     while (atualD != NULL) {
@@ -1105,7 +1143,7 @@ void LibertarDistritos(Lista_D *lista) {
 
 void ListarDistritos(Lista_D *listaDistritos) {
     if (!listaDistritos || listaDistritos->num_Distritos == 0) {
-        printf("Não há distritos.\n");
+        EscreverLogs("\nErro ao receber a lista de distritos (ListarDistritos () )\n");
         return;
     }
 
@@ -1122,7 +1160,7 @@ void ListarDistritos(Lista_D *listaDistritos) {
 
 void ListarFreguesias(Lista_F *listaFreguesias) {
     if (!listaFreguesias || listaFreguesias->num_Freguesias == 0) {
-        printf("Não há freguesias.\n");
+        EscreverLogs("\nErro ao receber a lista de freguesias (ListarFreguesias () )\n");
         return;
     }
 
@@ -1194,6 +1232,7 @@ void ListarFreguesiasPorConcelho(Lista_C *listaConcelhos, int idConcelho) {
 
 void associa_concelhos_a_distritos(Lista_D *lista_distritos, Lista_C *lista_concelhos) {
     if (lista_distritos == NULL || lista_concelhos == NULL) {
+        EscreverLogs("\nErro ao receber os parametros (associa_concelhos_a_distritos () )\n");
         return;
     }
 
@@ -1271,7 +1310,7 @@ void MostraConcelhosDistrito(int id_distrito, Lista_D *listaDistrito) {
         atualDistrito = atualDistrito->Prox;
     }
     if (distrito == NULL || distrito->Conc == NULL) {
-        printf("Distrito ou lista de concelhos não está inicializada.\n");
+        EscreverLogs("\nErro ao receber os parametros (MostraConcelhosDistrito () )\n");
         return;
     }
 
@@ -1286,6 +1325,7 @@ void MostraConcelhosDistrito(int id_distrito, Lista_D *listaDistrito) {
 }
 Distrito *ProcurarDistritoPorID(Lista_D *listaDistritos, int id) {
     if (!listaDistritos) {
+        EscreverLogs("\nErro ao receber a lista de distritos (ProcurarDistritoPorID () )\n");
         return NULL;
     }
     ElementoD *atual = listaDistritos->Inicio;
@@ -1300,7 +1340,10 @@ Distrito *ProcurarDistritoPorID(Lista_D *listaDistritos, int id) {
 }
 
 Concelho *ProcurarConcelhoPorID(Lista_C *listaConcelhos, int id_conc, int id_dist) {
-    if (!listaConcelhos) return NULL;
+    if (!listaConcelhos) {
+        EscreverLogs("\nErro ao receber a lista de concelhos (ProcurarConcelhoPorID () )\n");
+        return NULL;
+    }
 
     ElementoC *atual = listaConcelhos->Inicio;
     while (atual != NULL) {
@@ -1315,7 +1358,10 @@ Concelho *ProcurarConcelhoPorID(Lista_C *listaConcelhos, int id_conc, int id_dis
 }
 
 Freguesia *ProcurarFreguesiaPorID(Lista_F *listafreguesias, char *id_freg, int id_conc, int id_dist){
-    if(!listafreguesias) return NULL;
+    if(!listafreguesias) {
+        EscreverLogs("\nErro ao receber a lista de freguesias (ProcurarFreguesiaPorID () )\n");
+        return NULL;
+    }
 
     ElementoF *atual = listafreguesias->Inicio;
     while(atual != NULL){
@@ -1330,6 +1376,7 @@ Freguesia *ProcurarFreguesiaPorID(Lista_F *listafreguesias, char *id_freg, int i
 
 void associa_freguesias_a_concelhos(Lista_C *lista_concelhos, Lista_F *lista_freguesias) {
     if (lista_concelhos == NULL || lista_freguesias == NULL) {
+        EscreverLogs("\nErro ao receber os parametros (associa_freguesias_a_concelhos () )\n");
         return;
     }
 
@@ -1387,7 +1434,7 @@ void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos, int id_d
     }
 
     if (concelho == NULL || concelho->freguesias == NULL) {
-        printf("Concelho ou lista de freguesias não está inicializada.\n");
+        EscreverLogs("\nErro ao receber os parametros (MostraFreguesiasConcelho () )\n");
         return;
     }
 
@@ -1402,6 +1449,7 @@ void MostraFreguesiasConcelho(int id_concelho, Lista_C *listaConcelhos, int id_d
 }
 int ContarPessoasDeUmLocal(Lista_Chaves_P *listaPessoas, int id_dist, int id_conc, char *nome, char *apelido) {
     if(listaPessoas->num_chaves == 0 || id_dist < 0 || (nome == NULL && apelido == NULL)){
+        EscreverLogs("\nErro ao receber os parametros (ContarPessoasDeUmLocal () )\n");
         return 0;
     }
     int count = 0;
@@ -1561,7 +1609,7 @@ ListaPessoa *LerRequisitantesTXT(Lista_F *listaFreguesias) {
 
 void MostrarPessoas(Lista_Chaves_P *listaChaves) {
     if (listaChaves == NULL) {
-        printf("Lista de chaves está vazia.\n");
+        EscreverLogs("\nErro ao receber a lista de pessoas (MostrarPessoas () )\n");
         return;
     }
 
@@ -1596,11 +1644,13 @@ void LiberarPessoa(PESSOA *pessoa) {
 
 Lista_Chaves_P *OrganizarListaPessoaPorChave(ListaPessoa *listaPessoa) {
     if (!listaPessoa || listaPessoa->num_Pessoas == 0) {
+        EscreverLogs("\nErro ao receber a lista de pessoas (OrganizarListaPessoaPorChave () )\n");
         return NULL;
     }
 
     Lista_Chaves_P *listaChaves = (Lista_Chaves_P *)malloc(sizeof(Lista_Chaves_P));
     if (!listaChaves) {
+        EscreverLogs("\nErro ao alocar memoria para listaChaves (OrganizarListaPessoaPorChave () )\n");
         printf("Erro ao alocar memória para listaChaves.\n");
         return NULL;
     }
@@ -1621,13 +1671,13 @@ Lista_Chaves_P *OrganizarListaPessoaPorChave(ListaPessoa *listaPessoa) {
         if (atualChave == NULL || atualChave->Key != chave) {
             NO_CHAVE_P *novaChave = (NO_CHAVE_P *)malloc(sizeof(NO_CHAVE_P));
             if (!novaChave) {
-                printf("Erro ao alocar memória para novaChave.\n");
+                EscreverLogs("\nErro ao alocar memoria para novaChave (OrganizarListaPessoaPorChave () )\n");
                 return NULL;
             }
             novaChave->Key = chave;
             novaChave->DADOS = (ListaPessoa *)malloc(sizeof(ListaPessoa));
             if (!novaChave->DADOS) {
-                printf("Erro ao alocar memória para novaChave->DADOS.\n");
+                EscreverLogs("\nErro ao alocar memoria para novaChave->DADOS (OrganizarListaPessoaPorChave () )\n");
                 return NULL;
             }
             novaChave->DADOS->num_Pessoas = 0;
@@ -1653,7 +1703,7 @@ Lista_Chaves_P *OrganizarListaPessoaPorChave(ListaPessoa *listaPessoa) {
 void AdicionarPessoaNaLista(ListaPessoa *lista, PESSOA *pessoa) {
     ElementoP *novoElemento = (ElementoP *)malloc(sizeof(ElementoP));
     if (!novoElemento) {
-        printf("Erro ao alocar memória para novoElemento.\n");
+        EscreverLogs("\nErro ao alocar memoria para novoElemento (AdicionarPessoaNaLista () )\n");
         return;
     }
     novoElemento->pessoa = pessoa;
@@ -1664,8 +1714,10 @@ void AdicionarPessoaNaLista(ListaPessoa *lista, PESSOA *pessoa) {
 
 void GuardarPessoas(Lista_Chaves_P *listaPessoas, const char *nomeFicheiro){
     FILE *ficheiro = fopen(nomeFicheiro, "w");
+    char mensagem[256];
     if (!ficheiro) {
-        printf("Erro ao abrir o ficheiro %s.\n", nomeFicheiro);
+        snprintf(mensagem, sizeof(mensagem), "\nErro ao abrir o ficheiro %s (GuardarPessoas () )\n", nomeFicheiro);
+        EscreverLogs(mensagem);
         return;
     }
 

@@ -1,7 +1,3 @@
-//
-// Created by admin on 21/05/2024.
-//
-
 #ifndef EXEM_PROJETO_UTEIS_H
 #define EXEM_PROJETO_UTEIS_H
 
@@ -14,5 +10,6 @@ void EscreverLogs(const char *mensagem);
 int validarData(int dia, int mes, int ano);
 int contem_numero(char *array);
 void rtrim(char *str);
-
+int isStringEmptyOrSpaces(const char *str);
+char *trim(char *str);
 #endif //EXEM_PROJETO_UTEIS_H

@@ -35,12 +35,11 @@ ListaRequisicoes *criarListaR();
 ElementoR *criarElementoR(REQUISICAO *R);
 void InserirRequisicaoNaLista(ptListaR listaRequisicoes, ElementoR *elemento, Lista_Chaves_L *listaLivros);
 void MostrarRequisicao(REQUISICAO *P);
-void DestruirRequisicao(REQUISICAO *P);
 
 //funcoes principais
+REQUISICAO *AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes);
 void DevolverLivro(ListaRequisicoes *reqList,char *isbn, char *ID);
 void ListarLivrosRequisitados(ListaRequisicoes *listaRequisicoes);
-void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *ID);
 
 //funcoes secundarias
 void ListarPessoasSemRequisicoes(Lista_Chaves_P *listaChavesPessoa, ListaRequisicoes *listaRequisicoes);
@@ -48,12 +47,12 @@ void ListarPessoasComRequisicao(Lista_Chaves_P *listaChavesPessoa, ListaRequisic
 int VerificarPessoaRequisicao(char *id, ListaRequisicoes *listaRequisicoes);
 void MostrarLivrosRequisitados(char *id, ListaRequisicoes *listaRequisicoes);
 LIVRO *PesquisarLivroRequisitadoPorISBN( char *id, char *isbn, ListaRequisicoes *listaRequisicoes);
-
-REQUISICAO *AdicionarRequisicao(Lista_Chaves_P *listaChavesPessoa, Lista_Chaves_L *listaChavesLivro, ListaRequisicoes *listaRequisicoes);
-void LibertarListaRequisicoes(ListaRequisicoes *lista);
+void MostrarRequisicoesPorID(ListaRequisicoes *listaRequisicoes, Lista_Chaves_P *listaChavesPessoa, char *ID);
 
 //funcoes apagar
 void LiberarRequisicao(REQUISICAO *R);
+void LibertarListaRequisicoes(ListaRequisicoes *lista);
+
 
 //funcoes gravar e ler
 void GuardarRequisicoes(ListaRequisicoes *listaRequisicoes, const char *nomeFicheiro);
